@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+import os
 
 from os.path import abspath, dirname, join
 
@@ -30,7 +31,7 @@ ALLOWED_HOSTS = []
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend -
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = 'http://example.com'
+BASE_URL = 'http://python.ie'
 
 
 # Application definition
@@ -62,6 +63,8 @@ INSTALLED_APPS = (
     'wagtailnews',
     'core',
 
+    'meetups',
+
     'debug_toolbar',
 )
 
@@ -77,9 +80,39 @@ MIDDLEWARE_CLASSES = (
     'wagtail.wagtailredirects.middleware.RedirectMiddleware',
 )
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        'pythonie': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+    },
+}
+
 ROOT_URLCONF = 'pythonie.urls'
 WSGI_APPLICATION = 'pythonie.wsgi.application'
 
+MEETUP_KEY = os.getenv('MEETUP_KEY', '3d2473f5b72644530525e2240121b76')
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
@@ -94,7 +127,7 @@ DATABASES = {
 
 # PostgreSQL (Recommended, but requires the psycopg2 library and Postgresql development headers)
 # DATABASES = {
-#     'default': {
+# 'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
 #         'NAME': 'pythonie',
 #         'USER': 'postgres',

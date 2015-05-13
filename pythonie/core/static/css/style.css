@@ -1,0 +1,154 @@
+body {
+    background: #EAEFF2;
+    background-image: url("../images/header-background.png");
+    color: #333;
+    font-size: 16px;
+    font-family: "bree-serif",serif;
+    font-style: normal;
+    font-weight: 300; /* Bree Serif: 700 (bold), 400 (regular), 300 (light), 200 (thin); */
+}
+
+ul.unstyled, ol.unstyled {
+  margin-left: -40px;
+  list-style: none;
+
+}
+
+h1, h2{color:white;}
+.panel h1, .panel h2{color:black;}
+.thumbnail {margin-bottom:10px;}
+.centre-it{text-align:center;}
+/* HEADER */
+
+h2, h3, h4, h5, h6 {
+font-family: "bree",sans-serif;
+font-style: normal;
+font-weight: 400; /* Bree: 700 (bold), 400 (regular), 300 (light), 200 (thin) */
+}
+
+h1 {
+font-family: "bree",sans-serif;
+font-style: normal;
+font-weight: 700;
+}
+
+.list-group img {
+  width: 100%;
+  max-width: 183px;
+}
+
+#header h1{
+    font-size:32pt;
+    text-align:left;
+    word-wrap: break-word !important;
+    white-space:normal;
+    color:white;
+}
+
+#header h1 #pyhead{color: #336600;}
+#header h1 #iehead{color: #339900;}
+#header h1 #yearhead{color: #66cc33;}
+
+#header .well{margin-top:15px;}
+
+/* END HEADER */
+
+#blog {
+    max-height: 1200px;
+    overflow: auto;
+}
+
+/* RHS */
+section.about {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* END RHS */
+
+/* LHS */
+/* Call for actions */
+.announce.well{
+    background-color:#347286;
+    color:#fff;
+    border:#031634;
+    text-align: center;
+    font-size:12px;
+}
+/* END LHS */
+
+/* FOOTER */
+#footer{
+    color: white;
+    background:rgb(34, 34, 34);
+    padding:20px;
+}
+/* END FOOTER */
+
+.media.sponsors img {
+    max-width: 150px;
+}
+
+.blurb img {
+    margin: 10px;
+}
+
+#talklist .talk-panel {
+    min-height: 450px;
+}
+
+#talklist .talk-panel h3 img {
+    margin-right: 5px;
+}
+
+
+.keynotes .keynote {
+    min-height: 270px;
+}
+
+.speakers .speaker {
+    text-align: center;
+}
+
+.frontpage-announcement .item {
+    min-height: 120px;
+}
+
+.sponsor-list .sponsor .thumbnail:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+
+.sponsor-list .sponsor .thumbnail {
+    min-height: 195px;
+}
+
+.sponsor-list .sponsor img {
+    max-width: 140px;
+    max-height: 100px;
+}
+
+.sponsor .logo {
+    min-height: 85px;
+}
+
+.thumbnail .caption {
+    height: 60px;
+}
+
+.img-thumbnail {
+    border: none;
+}
+
+dt {
+    font-family: "bree",sans-serif;
+    font-style: normal;
+    font-weight: 400; /* Bree: 700 (bold), 400 (regular), 300 (light), 200 (thin) */
+}
+
+dd {
+    margin-left: 0.2em;
+}

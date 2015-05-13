@@ -1,3 +1,5 @@
+delorean
+colander
 beautifulsoup4==4.3.2
 Django==1.7.8
 django-appconf==1.0.1
