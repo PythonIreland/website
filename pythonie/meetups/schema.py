@@ -1,4 +1,12 @@
+from datetime import datetime
 import colander
+from delorean import Delorean
+from delorean.dates import UTC
+
+
+def int_to_datetime(value):
+    time = datetime.utcfromtimestamp(value / 1000)
+    return Delorean(time, timezone=UTC).shift("Europe/Dublin").datetime
 
 
 class Meetups(colander.MappingSchema):
@@ -19,9 +27,17 @@ class Meetups(colander.MappingSchema):
         class result(colander.MappingSchema):
             id = colander.SchemaNode(colander.String())
             event_url = colander.SchemaNode(colander.String())
-            announced = colander.SchemaNode(colander.Boolean())
             status = colander.SchemaNode(colander.String())
-            updated = colander.SchemaNode(colander.Integer())
+
+            created = colander.SchemaNode(
+                colander.Integer(), preparer=int_to_datetime)
+            updated = colander.SchemaNode(
+                colander.Integer(), preparer=int_to_datetime)
+            announced = colander.SchemaNode(colander.Boolean())
+
+            time = colander.SchemaNode(
+                colander.Integer(), preparer=int_to_datetime)
+            utc_offset = colander.SchemaNode(colander.Integer())
 
             @colander.instantiate()
             class group(colander.MappingSchema):
@@ -34,8 +50,6 @@ class Meetups(colander.MappingSchema):
                 group_lat = colander.SchemaNode(colander.Float())
                 created = colander.SchemaNode(colander.Integer())
 
-            time = colander.SchemaNode(colander.Integer())
-            utc_offset = colander.SchemaNode(colander.Integer())
 
             @colander.instantiate(missing=colander.drop)
             class venue(colander.MappingSchema):
@@ -52,7 +66,6 @@ class Meetups(colander.MappingSchema):
             headcount = colander.SchemaNode(colander.Integer())
             description = colander.SchemaNode(colander.String())
             visibility = colander.SchemaNode(colander.String())
-            created = colander.SchemaNode(colander.Integer())
             duration = colander.SchemaNode(colander.Integer(), missing=colander.drop)
 
             maybe_rsvp_count = colander.SchemaNode(colander.Integer())

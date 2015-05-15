@@ -32,7 +32,7 @@ def update():
     meetups = schema.Meetups()
     meetups = meetups.deserialize(meetup_data)
     log.info(meetups)
-    for result in meetups['results']:
+    for result in meetups.get('results'):
         # Check if the meetup exists
         meetup = models.Meetup.objects.filter(id=result['id']).first()
         if meetup:
@@ -40,6 +40,13 @@ def update():
                 log.info('Not updating existing meetup:{!r} as there is nothing to update'.format(meetup))
                 continue
         meetup = models.Meetup()
-        meetup.id = result.get_value('id')
-        meetup.announced = result.get_value('announced')
-        meetup.created = result.get_value('created')
+        meetup.id = result.get('id')
+        meetup.announced = result.get('announced')
+        meetup.created = result.get('created')
+        meetup.name = result.get('name')
+        meetup.description = result.get('description')
+        meetup.meetup_url = result.get('event_url')
+        meetup.time = result.get('time')
+        meetup.updated = result.get('updated')
+        meetup.save()
+
