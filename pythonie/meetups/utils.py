@@ -2,16 +2,20 @@ from datetime import datetime, timedelta
 import logging
 
 from django.conf import settings
+from pytz import UTC
 import requests
 from meetups import models, schema
-
 
 log = logging.getLogger(__name__)
 
 
-def update_needed():
-    an_hour_ago = datetime.now() - timedelta(hours=1)
-    last_checked = models.MeetupUpdate.objects.filter(models.MeetupUpdate.updated < an_hour_ago).exists()
+def update_not_needed():
+    """
+    Checks if we need to refresh the meetup events.
+    :return: True if a MeetupUpdate exists from the last hour. False otherwise
+    """
+    an_hour_ago = datetime.now(tz=UTC) - timedelta(hours=1)
+    last_checked = models.MeetupUpdate.objects.exclude(updated__lt=an_hour_ago).exists()
     return last_checked
 
 
@@ -22,6 +26,8 @@ def get_content(url, params=None):
 
 
 def update():
+    if update_not_needed():
+        return
     meetup_data = get_content(
         'https://api.meetup.com/2/events.html',
         params={'key': settings.MEETUP_KEY,
@@ -49,4 +55,6 @@ def update():
         meetup.time = result.get('time')
         meetup.updated = result.get('updated')
         meetup.save()
+        models.MeetupUpdate.tick()
+
 
