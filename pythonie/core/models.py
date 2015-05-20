@@ -13,6 +13,8 @@ from wagtailnews.models import NewsIndexMixin, AbstractNewsItem
 from wagtailnews.decorators import newsindex
 
 import logging
+from meetups.models import Meetup
+from meetups.utils import update
 
 log = logging.getLogger('pythonie')
 
@@ -56,7 +58,6 @@ class HomePage(Page):
     subpage_types = ['NewsIndex', 'HomePage']
 
     def segments_for_location(self, location):
-        log.info('Got segments')
         return self.homepage_segments.filter(segment__location=location)
 
     def segments_for_main(self):
@@ -69,7 +70,7 @@ class HomePage(Page):
     def menu_items():
         """ Get child pages of this HomePage which have 'show_in_menu' set to True and are published.
         """
-        return HomePage.objects.live().in_menu()
+        return Page.objects.live().in_menu()
 
     def news_items(self):
         news_index = NewsIndex.objects.child_of(self).first()
@@ -77,6 +78,11 @@ class HomePage(Page):
             return []
         news_items = news_index.newsitem_set.all()
         return news_items
+
+    def meetups(self):
+        update()
+        meetups = Meetup.objects.all()
+        return meetups
 
     def __str__(self):
         return self.title

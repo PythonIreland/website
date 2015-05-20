@@ -27,7 +27,9 @@ def get_content(url, params=None):
 
 def update():
     if update_not_needed():
+        log.info("Not updaing meetups")
         return
+    log.info("Updating meetups")
     meetup_data = get_content(
         'https://api.meetup.com/2/events.html',
         params={'key': settings.MEETUP_KEY,
@@ -51,9 +53,14 @@ def update():
         meetup.created = result.get('created')
         meetup.name = result.get('name')
         meetup.description = result.get('description')
-        meetup.meetup_url = result.get('event_url')
+        meetup.event_url = result.get('event_url')
         meetup.time = result.get('time')
         meetup.updated = result.get('updated')
+        meetup.rsvps = result.get('yes_rsvp_count')
+        meetup.maybe_rsvps = result.get('maybe_rsvp_count')
+        meetup.waitlist_count = result.get('waitlist_count')
+        meetup.status= result.get('status')
+        meetup.visibility= result.get('visibility')
         meetup.save()
         models.MeetupUpdate.tick()
 

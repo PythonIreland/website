@@ -33,10 +33,15 @@ class Meetup(models.Model):
     name = models.CharField(max_length=255, blank=False)
     description = models.TextField()
     announced = models.BooleanField(default=False)
-    meetup_url = models.URLField()
+    event_url = models.URLField()
 
     time = models.DateTimeField()
     created = models.DateTimeField()
     updated = models.DateTimeField()
 
     rsvps = models.IntegerField(default=0)
+    maybe_rsvps = models.IntegerField(default=0)
+    waitlist_count = models.IntegerField(default=0)
+
+    status = models.CharField(max_length=255, blank=False)
+    visibility = models.CharField(max_length=255, blank=False)

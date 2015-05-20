@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import django.utils.timezone
-import wagtail.wagtailcore.fields
 import wagtailnews.models
 import modelcluster.fields
+import django.utils.timezone
+import wagtail.wagtailcore.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HomePage',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, to='wagtailcore.Page', auto_created=True, serialize=False, primary_key=True)),
+                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True)),
             ],
             options={
                 'abstract': False,
@@ -28,9 +28,9 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HomePageSegment',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('sort_order', models.IntegerField(blank=True, null=True, editable=False)),
-                ('homepage', modelcluster.fields.ParentalKey(related_name='homepage_segments', to='core.HomePage')),
+                ('homepage', modelcluster.fields.ParentalKey(to='core.HomePage', related_name='homepage_segments')),
             ],
             options={
                 'verbose_name': 'Homepage Segment',
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NewsIndex',
             fields=[
-                ('page_ptr', models.OneToOneField(parent_link=True, to='wagtailcore.Page', auto_created=True, serialize=False, primary_key=True)),
+                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True)),
             ],
             options={
             },
@@ -50,7 +50,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NewsItem',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Published date')),
                 ('title', models.CharField(max_length=255)),
                 ('body', wagtail.wagtailcore.fields.RichTextField()),
@@ -65,10 +65,10 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='PageSegment',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
+                ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('title', models.CharField(max_length=255)),
                 ('body', wagtail.wagtailcore.fields.RichTextField()),
-                ('location', models.CharField(default='main', choices=[('main', 'Main section'), ('right', 'Right side'), ('left', 'Left side')], max_length=5)),
+                ('location', models.CharField(default='main', max_length=5, choices=[('main', 'Main section'), ('right', 'Right side'), ('left', 'Left side')])),
             ],
             options={
             },
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepagesegment',
             name='segment',
-            field=models.ForeignKey(related_name='homepage_segments', to='core.PageSegment'),
+            field=models.ForeignKey(to='core.PageSegment', related_name='homepage_segments'),
             preserve_default=True,
         ),
     ]

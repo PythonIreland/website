@@ -11,11 +11,29 @@ from meetups import utils
 from meetups.models import Meetup, MeetupUpdate
 from meetups.utils import update_not_needed
 
+description = '<p>We will be having a meetup in June. More details to follow.</p> <p>If you are ' \
+         'interested in speaking, please submit your details to\xa0<a ' \
+         'href="http://bit.ly/pyie-cfp-2015"><a href="http://bit.ly/pyie-cfp-2015" ' \
+         'class="linkified">http://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please ' \
+         'contact contact@python.ie.</p>'
+
 
 class MeetupModelTests(TestCase):
     def test_create_meetup(self):
         meetup = mommy.make(Meetup)
         self.assertIsNotNone(meetup.id)
+        self.assertIsNotNone(meetup.name)
+        self.assertIsNotNone(meetup.description)
+        self.assertIsNotNone(meetup.announced)
+        self.assertIsNotNone(meetup.event_url)
+        self.assertIsNotNone(meetup.time)
+        self.assertIsNotNone(meetup.created)
+        self.assertIsNotNone(meetup.updated)
+        self.assertIsNotNone(meetup.rsvps)
+        self.assertIsNotNone(meetup.maybe_rsvps)
+        self.assertIsNotNone(meetup.waitlist_count)
+        self.assertIsNotNone(meetup.status)
+        self.assertIsNotNone(meetup.visibility)
 
 
 class UtilsTests(TestCase):
@@ -23,15 +41,15 @@ class UtilsTests(TestCase):
         return {
             'results': [
                 {
-                    'maybe_rsvp_count': 0,
+                    'maybe_rsvp_count': 7,
                     'id': 'qwfbshytjbnb',
-                    'waitlist_count': 0,
+                    'waitlist_count': 11,
                     'yes_rsvp_count': 24,
                     'utc_offset': 3600000,
                     'visibility': 'public',
                     'announced': False,
                     'updated': 1431467590000,
-                    'description': '<p>We will be having a meetup in June. More details to follow.</p> <p>If you are interested in speaking, please submit your details to\xa0<a href="http://bit.ly/pyie-cfp-2015"><a href="http://bit.ly/pyie-cfp-2015" class="linkified">http://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please contact contact@python.ie.</p>',
+                    'description': description,
                     'name': 'Python Ireland meetup',
                     'event_url': 'http://www.meetup.com/pythonireland/events/221078098/',
                     'headcount': 0,
@@ -80,13 +98,26 @@ class UtilsTests(TestCase):
         utils.update()
         meetups = Meetup.objects.all()
         self.assertEqual(len(meetups), 1)
+
+        # Check all values are as expected
+        meetup = meetups[0]
         expected_datetime = datetime(
             year=2015, month=6, day=10, hour=17, minute=30, tzinfo=UTC)
-        self.assertEqual(meetups[0].time, expected_datetime)
-
+        self.assertEqual(meetup.time, expected_datetime)
         expected_datetime = datetime(
             year=2015, month=5, day=12, hour=21, minute=53, second=10, tzinfo=UTC)
-        self.assertEqual(meetups[0].updated, expected_datetime)
+        self.assertEqual(meetup.updated, expected_datetime)
+        expected_datetime = datetime(
+            year=2014, month=1, day=28, hour=20, minute=47, second=2, tzinfo=UTC)
+        self.assertEqual(meetup.created, expected_datetime)
+        self.assertEqual(meetup.rsvps, 24)
+        self.assertEqual(meetup.maybe_rsvps, 7)
+        self.assertEqual(meetup.waitlist_count, 11)
+        self.assertEqual(meetup.name, 'Python Ireland meetup')
+        self.assertEqual(meetup.description, description)
+        self.assertEqual(meetup.status, 'upcoming')
+        self.assertEqual(meetup.visibility, 'public')
+        self.assertEqual(meetup.event_url, 'http://www.meetup.com/pythonireland/events/221078098/')
 
         # We should have ticked the MeetupUpdate
         meetup_update = MeetupUpdate.objects.filter().get()
