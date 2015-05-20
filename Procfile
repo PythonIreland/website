@@ -1,1 +1,1 @@
-web: gunicorn pythonie.wsgi --log-file -
+web: gunicorn --chdir pythonie pythonie.wsgi --log-file -
