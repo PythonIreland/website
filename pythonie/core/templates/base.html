@@ -4,36 +4,53 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <title>{% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}{% block title_suffix %}{% endblock %}</title>
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>
+        {% block title %}{% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}{% endblock %}
+        {% block title_suffix %}{% endblock %}</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-        {% compress css %}
-            
-            <link rel="stylesheet" type="text/x-scss" href="{% static 'css/pythonie.scss' %}">
-        {% endcompress %}
+    {% compress css %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="stylesheet" type="text/x-scss" href="{% static 'css/pythonie.scss' %}">
+    {% endcompress %}
 
-        {% block extra_css %}
-            
-        {% endblock %}
-    </head>
+    {% block extra_css %}
 
-    <body class="{% block body_class %}{% endblock %}">
-        {% wagtailuserbar %}
+    {% endblock %}
 
-        {% block content %}{% endblock %}
+    <script type="text/javascript" src="//use.typekit.net/qgj1xay.js"></script>
+    <script type="text/javascript">try {
+        Typekit.load();
+    } catch (e) {
+    }</script>
+</head>
 
-        {% compress js %}
-            
-            <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
-        {% endcompress %}
+<body class="{% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
 
-        {% block extra_js %}
-            
-        {% endblock %}
-    </body>
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+{% block content %}{% endblock %}
+
+{% compress js %}
+
+    <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
+{% endcompress %}
+
+{% block basejs %}
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
+</body>
 </html>

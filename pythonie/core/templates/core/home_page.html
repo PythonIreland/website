@@ -1,13 +1,45 @@
 {% extends "base.html" %}
 
+{% load wagtailcore_tags %}
 {% load static core_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-    <h1>{{ self.title }}</h1>
 
-    <p>You can access the admin interface <a href="{% url 'wagtailadmin_home' %}">here</a> (make sure you have run "./manage.py createsuperuser" in the console first).
 
-    <p>If you haven't already given the documentation a read, head over to <a href="http://wagtail.readthedocs.org/">http://wagtail.readthedocs.org</a> to start building on Wagtail</p>
+    <div class="container">
+        <div class="row well">
+            <div class="col-md-8">
+                <div class="row">
+                    {% for segment in self.segments_for_main %}
+                        {% show_homepage_segment segment %}
+                    {% endfor %}
+                </div>
+                {% if self.news_items %}
+                    <div class="row">
+                        <div class="col-md-12" id="blog">
+                            {% for news_item in self.news_items %}
+                                <h3>{{ news_item.title }}</h3>
+                                {{ news_item.body|richtext }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    {% for meetup in self.meetups %}
+                        {% show_meetup meetup %}
+                    {% endfor %}
+                </div>
+                <div class="row">
+                    {% for segment in self.segments_for_right %}
+                        {% show_homepage_segment segment %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
