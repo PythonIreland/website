@@ -12,10 +12,10 @@ from meetups.models import Meetup, MeetupUpdate
 from meetups.utils import update_not_needed
 
 description = '<p>We will be having a meetup in June. More details to follow.</p> <p>If you are ' \
-         'interested in speaking, please submit your details to\xa0<a ' \
-         'href="http://bit.ly/pyie-cfp-2015"><a href="http://bit.ly/pyie-cfp-2015" ' \
-         'class="linkified">http://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please ' \
-         'contact contact@python.ie.</p>'
+              'interested in speaking, please submit your details to\xa0<a ' \
+              'href="http://bit.ly/pyie-cfp-2015"><a href="http://bit.ly/pyie-cfp-2015" ' \
+              'class="linkified">http://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please ' \
+              'contact contact@python.ie.</p>'
 
 
 class MeetupModelTests(TestCase):

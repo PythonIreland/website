@@ -59,9 +59,7 @@ def update():
         meetup.rsvps = result.get('yes_rsvp_count')
         meetup.maybe_rsvps = result.get('maybe_rsvp_count')
         meetup.waitlist_count = result.get('waitlist_count')
-        meetup.status= result.get('status')
-        meetup.visibility= result.get('visibility')
+        meetup.status = result.get('status')
+        meetup.visibility = result.get('visibility')
         meetup.save()
         models.MeetupUpdate.tick()
-
-
