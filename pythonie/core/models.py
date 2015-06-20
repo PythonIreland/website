@@ -81,7 +81,7 @@ class HomePage(Page):
 
     def meetups(self):
         update()
-        meetups = Meetup.objects.all()
+        meetups = Meetup.future_events()[:3]
         return meetups
 
     def __str__(self):

@@ -45,3 +45,11 @@ class Meetup(models.Model):
 
     status = models.CharField(max_length=255, blank=False)
     visibility = models.CharField(max_length=255, blank=False)
+
+    def __str__(self):
+        return self.name
+
+    @classmethod
+    def future_events(cls):
+        today = datetime.now()
+        return cls.objects.filter(time__gt=today)

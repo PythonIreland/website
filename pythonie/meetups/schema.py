@@ -21,7 +21,7 @@ class Meetups(colander.MappingSchema):
         total_count = colander.SchemaNode(colander.Integer())
         url = colander.SchemaNode(colander.String())
 
-    @colander.instantiate()
+    @colander.instantiate(missing=[])
     class results(colander.SequenceSchema):
         @colander.instantiate()
         class result(colander.MappingSchema):
