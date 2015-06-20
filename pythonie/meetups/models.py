@@ -46,6 +46,9 @@ class Meetup(models.Model):
     status = models.CharField(max_length=255, blank=False)
     visibility = models.CharField(max_length=255, blank=False)
 
+    class Meta:
+        ordering = ['time']
+
     def __str__(self):
         return self.name
 
