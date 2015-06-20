@@ -1,0 +1,11 @@
+machine:
+  python:
+    version: 3.4.3
+
+dependencies:
+  pre:
+    - pip install -r requirements-dev.txt
+
+test:
+  override:
+    - python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
