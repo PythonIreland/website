@@ -5,7 +5,7 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page, Orderable
+from wagtail.wagtailcore.models import Page, Orderable, Site
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
@@ -67,9 +67,10 @@ class HomePage(Page):
         return self.segments_for_location('right')
 
     def menu_items(self):
-        """ Get child pages of this Page which have 'show_in_menu' set to True and are published.
+        """ Get child HomePages of 'self' which have 'show_in_menu' = True and are published.
         """
-        return self.get_children().live().in_menu()
+        pages = HomePage.objects.child_of(self)
+        return pages.live().in_menu()
 
     def news_items(self):
         news_index = NewsIndex.objects.child_of(self).first()

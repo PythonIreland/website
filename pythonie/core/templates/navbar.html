@@ -1,4 +1,5 @@
 {% load wagtailcore_tags %}
+{% load core_tags %}
 
 <nav class="navbar navbar-default container" role="navigation">
     <div class="navbar-header">
@@ -12,8 +13,24 @@
     </div>
     <div class="collapse navbar-collapse navbar-responsive-collapse">
         <ul class="nav navbar-nav">
-            {% for item in self.menu_items %}
-                <li><a href="{% pageurl item  %}">{{ item }}</a></li>
+            {% root_page as homepage %}
+            <li><a href="{% pageurl homepage %}">Home</a></li>
+
+            {% for item in homepage.menu_items %}
+                {%  if item.menu_items %}
+                    {# We're in a dropdown #}
+                    <li class="dropdown">
+                        <a href="{% pageurl item %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ item }} <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% pageurl item %}">{{ item }}</a></li>
+                            {% for sub_item in item.get_children %}
+                            <li><a href="{% pageurl sub_item %}">{{ sub_item }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                {% else %}
+                    <li><a href="{% pageurl item  %}">{{ item }}</a></li>
+                {% endif %}
             {% endfor %}
         </ul>
     </div>
