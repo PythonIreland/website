@@ -19,7 +19,7 @@ PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'v08oyi0n%zcyidlp+cg2i$f0*0ir-qg12ty*ig66z2l*=d!%*p'  # TODO CHANGE ME
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -112,7 +112,7 @@ LOGGING = {
 ROOT_URLCONF = 'pythonie.urls'
 WSGI_APPLICATION = 'pythonie.wsgi.application'
 
-MEETUP_KEY = os.getenv('MEETUP_KEY', '3d2473f5b72644530525e2240121b76')
+MEETUP_KEY = os.getenv('MEETUP_KEY')
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
