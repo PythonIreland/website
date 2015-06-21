@@ -115,24 +115,28 @@ section.about {
     min-height: 120px;
 }
 
-.sponsor-list .sponsor .thumbnail:before {
-  content: '';
-  display: inline-block;
-  height: 100%;
-  vertical-align: middle;
-}
 
-.sponsor-list .sponsor .thumbnail {
-    min-height: 195px;
-}
 
 .sponsor-list .sponsor img {
     max-width: 140px;
     max-height: 100px;
 }
 
+.sponsor-list .sponsor {
+    padding-bottom: 0.5em
+}
+
+.sponsor-list {
+    list-style: none;
+    padding-left: 0em;
+}
+
 .sponsor .logo {
-    min-height: 85px;
+    float: left;
+    margin-right: 0.5em
+}
+
+.sponsor .name {
 }
 
 .thumbnail .caption {

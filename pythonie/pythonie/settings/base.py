@@ -64,6 +64,7 @@ INSTALLED_APPS = (
     'core',
 
     'meetups',
+    'sponsors',
 
     'debug_toolbar',
 )
