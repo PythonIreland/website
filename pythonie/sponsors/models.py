@@ -1,11 +1,6 @@
-from datetime import datetime, timedelta
 from django.db import models
-
 import logging
-from pytz import UTC
-
 from wagtail.wagtailimages.models import Image
-
 
 log = logging.getLogger('sponsor')
 
