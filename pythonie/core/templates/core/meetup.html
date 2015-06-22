@@ -1,3 +1,5 @@
+{% load wagtailimages_tags %}
+
 <div class="col-md-12">
     <h3>{{ meetup.name }}</h3>
 
@@ -7,4 +9,25 @@
     {% endif %}
     <p>{{ meetup.rsvps }} people are attending. <a href="{{ meetup.event_url }}">Click for more information and to
         RSVP</a></p>
+
+    {% if meetup.sponsors.count %}
+        <h5>Sponsors:</h5>
+        <div class="sponsor-list">
+            {% for sponsor in meetup.meetupsponsorrelationship_set.all %}
+            <div class="sponsor">
+
+                <div class="logo">
+                    {% image sponsor.sponsor.logo width-40 class="thumbnail" %}
+                </div>
+
+                <div class="name">{{ sponsor.sponsor.name }}</div>
+
+                {% if sponsor.note %}
+                <small class="caption">{{ sponsor.note }}</small>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 </div>

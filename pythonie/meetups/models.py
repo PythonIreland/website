@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 from django.db import models
 
+from sponsors.models import Sponsor
+
 import logging
 from pytz import UTC
 
@@ -27,6 +29,12 @@ class MeetupUpdate(models.Model):
         meetup_update.save(force_update=True, update_fields=['updated'])
 
 
+class MeetupSponsorRelationship(models.Model):
+    sponsor = models.ForeignKey(Sponsor)
+    meetup = models.ForeignKey('Meetup')
+    note = models.TextField(blank=True, default='')
+
+
 class Meetup(models.Model):
     id = models.CharField(max_length=100, primary_key=True)
 
@@ -34,6 +42,8 @@ class Meetup(models.Model):
     description = models.TextField()
     announced = models.BooleanField(default=False)
     event_url = models.URLField()
+
+    sponsors = models.ManyToManyField(Sponsor, through=MeetupSponsorRelationship, null=True, blank=True)
 
     time = models.DateTimeField()
     created = models.DateTimeField()
