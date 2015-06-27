@@ -16,7 +16,7 @@
             {% root_page as homepage %}
             <li><a href="{% pageurl homepage %}">Home</a></li>
 
-            {% for item in homepage.menu_items %}
+            {% for item in homepage.get_navigation_menu_items %}
                 {%  if item.menu_items %}
                     {# We're in a dropdown #}
                     <li class="dropdown">
