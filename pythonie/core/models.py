@@ -5,12 +5,17 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
 from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page, Orderable, Site
+from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
 from wagtail.wagtailsnippets.models import register_snippet
 
 from wagtailnews.models import NewsIndexMixin, AbstractNewsItem
 from wagtailnews.decorators import newsindex
+
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
+from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 import logging
 from meetups.models import Meetup
@@ -55,7 +60,7 @@ class HomePageSegment(Orderable, models.Model):
 
 
 class HomePage(Page):
-    subpage_types = ['NewsIndex', 'HomePage']
+    subpage_types = ['NewsIndex', 'HomePage', 'SimplePage']
 
     def segments_for_location(self, location):
         return self.homepage_segments.filter(segment__location=location)
@@ -69,7 +74,7 @@ class HomePage(Page):
     def menu_items(self):
         """ Get child HomePages of 'self' which have 'show_in_menu' = True and are published.
         """
-        pages = HomePage.objects.child_of(self)
+        pages = Page.objects.child_of(self)
         return pages.live().in_menu()
 
     def news_items(self):
@@ -87,11 +92,22 @@ class HomePage(Page):
     def __str__(self):
         return self.title
 
-
 HomePage.content_panels = HomePage.content_panels + [
     InlinePanel('homepage_segments', label='Homepage Segment'),
 ]
 
+
+class SimplePage(Page):
+    body = StreamField([
+        ('heading', blocks.CharBlock(classname="full title")),
+        ('paragraph', blocks.RichTextBlock()),
+        ('image', ImageChooserBlock()),
+    ])
+
+SimplePage.content_panels = [
+    FieldPanel('title', classname='full title'),
+    StreamFieldPanel('body'),
+]
 
 # The decorator registers this model as a news index
 @newsindex
