@@ -66,12 +66,6 @@ class HomePage(Page):
     def segments_for_right(self):
         return self.segments_for_location('right')
 
-    def menu_items(self):
-        """ Get child HomePages of 'self' which have 'show_in_menu' = True and are published.
-        """
-        pages = HomePage.objects.child_of(self)
-        return pages.live().in_menu()
-
     def news_items(self):
         news_index = NewsIndex.objects.child_of(self).first()
         if not news_index:
