@@ -55,7 +55,7 @@ class HomePageSegment(Orderable, models.Model):
 
 
 class HomePage(Page):
-    subpage_types = ['NewsIndex', 'HomePage']
+    # subpage_types = ['NewsIndex', 'HomePage']
 
     def segments_for_location(self, location):
         return self.homepage_segments.filter(segment__location=location)
@@ -69,7 +69,7 @@ class HomePage(Page):
     def menu_items(self):
         """ Get child HomePages of 'self' which have 'show_in_menu' = True and are published.
         """
-        pages = HomePage.objects.child_of(self)
+        pages = Page.objects.child_of(self)
         return pages.live().in_menu()
 
     def news_items(self):

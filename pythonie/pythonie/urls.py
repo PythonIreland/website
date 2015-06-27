@@ -17,8 +17,10 @@ urlpatterns = patterns('',
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^search/', include(wagtailsearch_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
+    url(r'^blog/', include('blog.urls')),
 
     url(r'', include(wagtail_urls)),
+
 )
 
 
