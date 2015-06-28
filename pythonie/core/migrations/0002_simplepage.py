@@ -10,7 +10,6 @@ import wagtail.wagtailcore.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailcore', '0015_auto_20150627_1412'),
         ('core', '0001_initial'),
     ]
 
