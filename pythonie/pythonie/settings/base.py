@@ -63,7 +63,7 @@ INSTALLED_APPS = (
     'wagtailnews',
     'core',
     'storages',
-    # 'blog',
+    'blog',
 
     'meetups',
     'sponsors',
