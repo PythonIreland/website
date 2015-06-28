@@ -133,6 +133,7 @@ class UtilsTests(TestCase):
         expected_datetime = datetime(
             year=2015, month=5, day=12, hour=21, minute=53, second=10, tzinfo=UTC)
         self.assertEqual(meetups[0].updated, expected_datetime)
+
         mock_get_content.return_value = self._second_result()
         MeetupUpdate._invalidate_meetup_update()  # Allow a another update so soon
         utils.update()
@@ -144,15 +145,19 @@ class UtilsTests(TestCase):
         self.assertEqual(meetups[0].updated, expected_datetime)
         self.assertEqual(meetups[0].name, "New name")
 
-        self.assertEqual(meetup.rsvps, 125)
+        self.assertEqual(meetups[0].rsvps, 125)
 
 
     @patch('meetups.utils.get_content')
     def test_update_second_run_too_soon(self, mock_get_content):
         mock_get_content.return_value = self._first_result()
         utils.update()
-        mock_get_content.return_value = self._second_result()
-        utils.update()  # updates only RSVPs
+        self.assertTrue(mock_get_content.called)
+
+        utils.update()
+        # doesn't call meetup API
+        self.assertEqual(mock_get_content.call_count, 1)
+
         meetups = Meetup.objects.all()
         self.assertEqual(len(meetups), 1)
 
@@ -160,17 +165,7 @@ class UtilsTests(TestCase):
             year=2015, month=5, day=12, hour=21, minute=53, second=10, tzinfo=UTC)
         self.assertEqual(meetups[0].updated, expected_datetime)
         self.assertEqual(meetups[0].name, "Python Ireland meetup")
-        # rsvps updated
-        self.assertEqual(meetup.rsvps, 125)
 
-    @patch('meetups.utils.get_content')
-    def test_update_second_run_no_update(self, mock_get_content):
-        mock_get_content.return_value = self._first_result()
-        utils.update()
-        mock_get_content.return_value = self._first_result()
-        utils.update()
-        meetups = Meetup.objects.all()
-        self.assertEqual(len(meetups), 1)
 
     @patch('meetups.utils.get_content')
     def test_update_second_run_add_one(self, mock_get_content):

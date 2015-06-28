@@ -1,11 +1,11 @@
-from datetime import datetime, timedelta
-import logging
+from datetime import timedelta
+from delorean import Delorean
+import requests
 
 from django.conf import settings
-from pytz import UTC
-import requests
 from meetups import models, schema
 
+import logging
 log = logging.getLogger(__name__)
 
 
@@ -14,7 +14,7 @@ def update_not_needed():
     Checks if we need to refresh the meetup events.
     :return: True if a MeetupUpdate exists from the last hour. False otherwise
     """
-    an_hour_ago = datetime.now(tz=UTC) - timedelta(hours=1)
+    an_hour_ago = Delorean().datetime - timedelta(hours=1)
     last_checked = models.MeetupUpdate.objects.exclude(updated__lt=an_hour_ago).exists()
     return last_checked
 

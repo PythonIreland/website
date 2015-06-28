@@ -30,7 +30,7 @@ class MeetupUpdate(models.Model):
         """ Invalidate the MeetupUpdate by making more than an hour ago
         """
         meetup_update = cls.objects.filter().get()
-        meetup_update.updated = datetime.now(tz=UTC) - timedelta(hours=1)
+        meetup_update.updated = Delorean().datetime - timedelta(hours=1)
         meetup_update.save(force_update=True, update_fields=['updated'])
 
 
