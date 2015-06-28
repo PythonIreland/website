@@ -14,18 +14,19 @@
         <h5>Sponsors:</h5>
         <div class="sponsor-list">
             {% for sponsor in meetup.meetupsponsorrelationship_set.all %}
-            <div class="sponsor clearfix">
+                <div class="sponsor clearfix">
 
-                <div class="logo">
-                    {% image sponsor.sponsor.logo width-80 class="thumbnail" %}
+                    <div class="col-md-4">
+                        {% image sponsor.sponsor.logo width-80 class="thumbnail" %}
+                    </div>
+                    <div class="col-md-8">
+                        <div class="name">{{ sponsor.sponsor.name }}</div>
+
+                        {% if sponsor.note %}
+                            <small class="caption">{{ sponsor.note }}</small>
+                        {% endif %}
+                    </div>
                 </div>
-
-                <div class="name">{{ sponsor.sponsor.name }}</div>
-
-                {% if sponsor.note %}
-                <small class="caption">{{ sponsor.note }}</small>
-                {% endif %}
-            </div>
             {% endfor %}
         </div>
     {% endif %}
