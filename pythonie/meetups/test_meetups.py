@@ -73,6 +73,7 @@ class UtilsTests(TestCase):
     def _second_result(self):
         first = self._first_result().copy()
         first['results'][0].update({'updated': 1431467600000})
+        first['results'][0].update({'yes_rsvp_count': 125})
         first['results'][0].update({'name': "New name"})
         return first
 
@@ -142,6 +143,9 @@ class UtilsTests(TestCase):
             year=2015, month=5, day=12, hour=21, minute=53, second=20, tzinfo=UTC)
         self.assertEqual(meetups[0].updated, expected_datetime)
         self.assertEqual(meetups[0].name, "New name")
+
+        self.assertEqual(meetup.rsvps, 125)
+
 
     @patch('meetups.utils.get_content')
     def test_update_second_run_too_soon(self, mock_get_content):
