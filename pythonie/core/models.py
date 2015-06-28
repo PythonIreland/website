@@ -19,13 +19,14 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 import logging
 from meetups.models import Meetup
-from meetups.utils import update
 
 log = logging.getLogger('pythonie')
 
 
 @register_snippet
 class PageSegment(models.Model):
+    """ This is a fixed text content
+    """
     title = models.CharField(max_length=255)
     body = RichTextField()
     location = models.CharField(
@@ -42,8 +43,9 @@ class PageSegment(models.Model):
     def __str__(self):
         return "{!s} on {!s}".format(self.title, self.homepage_segments.first())
 
-
 class HomePageSegment(Orderable, models.Model):
+    """ Pivot table to associate a HomePage to Segment snippets
+    """
     homepage = ParentalKey('HomePage', related_name='homepage_segments')
     segment = models.ForeignKey('PageSegment', related_name='homepage_segments')
 
@@ -57,7 +59,6 @@ class HomePageSegment(Orderable, models.Model):
 
     def __str__(self):
         return "{!s} Segment".format(self.homepage)
-
 
 class HomePage(Page):
     subpage_types = ['NewsIndex', 'HomePage', 'SimplePage']
@@ -83,11 +84,6 @@ class HomePage(Page):
             return []
         news_items = news_index.newsitem_set.all()
         return news_items
-
-    def meetups(self):
-        update()
-        meetups = Meetup.future_events()[:3]
-        return meetups
 
     def __str__(self):
         return self.title

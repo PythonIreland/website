@@ -2,6 +2,7 @@ from datetime import datetime, timedelta
 from django.db import models
 
 from sponsors.models import Sponsor
+from wagtail.wagtailsnippets.models import register_snippet
 
 import logging
 from pytz import UTC
@@ -35,6 +36,7 @@ class MeetupSponsorRelationship(models.Model):
     note = models.TextField(blank=True, default='')
 
 
+@register_snippet
 class Meetup(models.Model):
     id = models.CharField(max_length=100, primary_key=True)
 
@@ -66,3 +68,4 @@ class Meetup(models.Model):
     def future_events(cls):
         today = datetime.now()
         return cls.objects.filter(time__gt=today)
+

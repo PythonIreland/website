@@ -1,6 +1,8 @@
 from django import template
 from wagtail.wagtailcore.models import Site
 from core.models import HomePage
+from meetups.models import Meetup
+from meetups.utils import update
 
 register = template.Library()
 
@@ -11,11 +13,15 @@ def show_homepage_segment(homepage_segment):
         'segment': homepage_segment.segment
     }
 
-@register.inclusion_tag('core/meetup.html', takes_context=False)
-def show_meetup(meetup):
+
+@register.inclusion_tag('core/meetup.html', takes_context=True)
+def meetups(context):
+    update()
     return {
-        'meetup': meetup
+        'meetups': Meetup.future_events()[:3],
+        'request': context['request'],
     }
+
 
 @register.assignment_tag(takes_context=False)
 def root_page():

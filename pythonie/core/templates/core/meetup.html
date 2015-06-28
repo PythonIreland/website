@@ -1,5 +1,6 @@
 {% load wagtailimages_tags %}
 
+{% for meetup in meetups %}
 <div class="col-md-12">
     <h3>{{ meetup.name }}</h3>
 
@@ -32,3 +33,4 @@
     {% endif %}
 
 </div>
+{% endfor %}
