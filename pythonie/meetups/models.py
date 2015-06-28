@@ -11,10 +11,14 @@ log = logging.getLogger('meetups')
 
 
 class MeetupUpdate(models.Model):
+    """ Poor man's caching for meetups
+    """
     updated = models.DateTimeField(auto_now_add=True)
 
     @classmethod
     def tick(cls):
+        """ Record Datetime of latest Meetup update
+       """
         meetup_update = cls.objects.filter().first()
         now = datetime.now(tz=UTC)
         if not meetup_update:
@@ -24,13 +28,17 @@ class MeetupUpdate(models.Model):
 
     @classmethod
     def _invalidate_meetup_update(cls):
-        # Invalidate the MeetupUpdate by making more than an hour ago
+        """ Invalidate the MeetupUpdate by making more than an hour ago
+        """
         meetup_update = cls.objects.filter().get()
         meetup_update.updated = datetime.now(tz=UTC) - timedelta(hours=1)
         meetup_update.save(force_update=True, update_fields=['updated'])
 
 
 class MeetupSponsorRelationship(models.Model):
+    """ Qualify how sponsor helped what meetup
+    Pivot table for Sponsor M<-->M Meetup
+    """
     sponsor = models.ForeignKey(Sponsor)
     meetup = models.ForeignKey('Meetup')
     note = models.TextField(blank=True, default='')
@@ -42,7 +50,6 @@ class Meetup(models.Model):
 
     name = models.CharField(max_length=255, blank=False)
     description = models.TextField()
-    announced = models.BooleanField(default=False)
     event_url = models.URLField()
 
     sponsors = models.ManyToManyField(Sponsor, through=MeetupSponsorRelationship, null=True, blank=True)
