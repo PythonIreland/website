@@ -24,7 +24,6 @@ class MeetupModelTests(TestCase):
         self.assertIsNotNone(meetup.id)
         self.assertIsNotNone(meetup.name)
         self.assertIsNotNone(meetup.description)
-        self.assertIsNotNone(meetup.announced)
         self.assertIsNotNone(meetup.event_url)
         self.assertIsNotNone(meetup.time)
         self.assertIsNotNone(meetup.created)
