@@ -48,6 +48,7 @@ def update():
         meetup.rsvps = result.get('yes_rsvp_count')
         meetup.maybe_rsvps = result.get('maybe_rsvp_count')
         meetup.waitlist_count = result.get('waitlist_count')
+
         if result['updated'] <= meetup.updated:
             log.info('Existing meetup:{!r} RSPs updated'.format(meetup))
             meetup.save()

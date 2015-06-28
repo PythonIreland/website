@@ -3,10 +3,10 @@ from django.db import models
 
 from sponsors.models import Sponsor
 from wagtail.wagtailsnippets.models import register_snippet
+from delorean import Delorean
+from delorean.dates import UTC
 
 import logging
-from pytz import UTC
-
 log = logging.getLogger('meetups')
 
 
@@ -20,10 +20,9 @@ class MeetupUpdate(models.Model):
         """ Record Datetime of latest Meetup update
        """
         meetup_update = cls.objects.filter().first()
-        now = datetime.now(tz=UTC)
         if not meetup_update:
             meetup_update = cls()
-        meetup_update.updated = now
+        meetup_update.updated = Delorean().datetime
         meetup_update.save()
 
     @classmethod
@@ -56,7 +55,8 @@ class Meetup(models.Model):
 
     time = models.DateTimeField()
     created = models.DateTimeField()
-    updated = models.DateTimeField()
+    updated = models.DateTimeField(default=Delorean(datetime(1970, 1, 1),
+                                                    timezone=UTC).datetime)
 
     rsvps = models.IntegerField(default=0)
     maybe_rsvps = models.IntegerField(default=0)
