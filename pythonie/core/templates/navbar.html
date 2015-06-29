@@ -16,8 +16,8 @@
             {% root_page as homepage %}
             <li><a href="{% pageurl homepage %}">Home</a></li>
 
-            {% for item in homepage.get_navigation_menu_items %}
-                {%  if item.menu_items %}
+            {% for item in homepage.get_descendants.live.in_menu %}
+                {%  if item.get_descendants.live.in_menu %}
                     {# We're in a dropdown #}
                     <li class="dropdown">
                         <a href="{% pageurl item %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ item }} <span class="caret"></span></a>
