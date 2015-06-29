@@ -16,6 +16,7 @@ from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.wagtailembeds.blocks import EmbedBlock
 
 import logging
 from meetups.models import Meetup
@@ -43,6 +44,7 @@ class PageSegment(models.Model):
     def __str__(self):
         return "{!s} on {!s}".format(self.title, self.homepage_segments.first())
 
+
 class HomePageSegment(Orderable, models.Model):
     """ Pivot table to associate a HomePage to Segment snippets
     """
@@ -59,6 +61,7 @@ class HomePageSegment(Orderable, models.Model):
 
     def __str__(self):
         return "{!s} Segment".format(self.homepage)
+
 
 class HomePage(Page):
     subpage_types = ['NewsIndex', 'HomePage', 'SimplePage']
@@ -94,12 +97,21 @@ HomePage.content_panels = HomePage.content_panels + [
 ]
 
 
+
 class SimplePage(Page):
+    """
+    allowed url to embed listed in
+    lib/python3.4/site-packages/wagtail/wagtailembeds/oembed_providers.py
+    """
     body = StreamField([
-        ('heading', blocks.CharBlock(classname="full title")),
-        ('paragraph', blocks.RichTextBlock()),
-        ('image', ImageChooserBlock()),
+        ('heading', blocks.CharBlock(icon="home",
+                                     classname="full title")),
+        ('paragraph', blocks.RichTextBlock(icon="edit")),
+        ('video', EmbedBlock(icon="media")),
+        ('image', ImageChooserBlock(icon="image")),
+        ('slide', EmbedBlock(icon="media")),
     ])
+
 
 SimplePage.content_panels = [
     FieldPanel('title', classname='full title'),

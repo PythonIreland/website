@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'wagtail.wagtailforms',
 
     'wagtailnews',
+    'wagtail.contrib.wagtailstyleguide',
     'core',
     'storages',
     'blog',
@@ -171,7 +172,15 @@ TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
     'django.core.context_processors.request',
 )
 
-
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+TEMPLATE_DIRS = (
+    join(PROJECT_ROOT, 'templates'),
+    join(PROJECT_ROOT, 'templates/wagtailembeds'),
+)
+# log.debug("Template dirs: {0}".format(TEMPLATE_DIRS))
 
 # Wagtail settings
 
@@ -191,3 +200,4 @@ WAGTAIL_SITE_NAME = "pythonie"
 
 # Whether to use face/feature detection to improve image cropping - requires OpenCV
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
+

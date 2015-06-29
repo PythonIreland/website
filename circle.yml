@@ -8,4 +8,6 @@ dependencies:
 
 test:
   override:
-    - python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+    - coverage erase
+    - coverage run pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+    - coverage html -d $CIRCLE_ARTIFACTS/coverage

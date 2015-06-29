@@ -33,7 +33,6 @@ class Meetups(colander.MappingSchema):
                 colander.Integer(), preparer=int_to_datetime)
             updated = colander.SchemaNode(
                 colander.Integer(), preparer=int_to_datetime)
-            announced = colander.SchemaNode(colander.Boolean())
 
             time = colander.SchemaNode(
                 colander.Integer(), preparer=int_to_datetime)
