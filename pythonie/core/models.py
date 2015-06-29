@@ -88,6 +88,7 @@ class HomePage(Page):
     def __str__(self):
         return self.title
 
+
 HomePage.content_panels = HomePage.content_panels + [
     InlinePanel('homepage_segments', label='Homepage Segment'),
 ]
