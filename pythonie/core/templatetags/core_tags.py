@@ -17,8 +17,9 @@ def show_homepage_segment(homepage_segment):
 @register.inclusion_tag('core/meetup.html', takes_context=True)
 def meetups(context):
     update()
+    meetups = Meetup.future_events()[:3] if context.get('show_meetups', True) else []
     return {
-        'meetups': Meetup.future_events()[:3],
+        'meetups': meetups,
         'request': context['request'],
     }
 

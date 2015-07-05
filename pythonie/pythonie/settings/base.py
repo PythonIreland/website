@@ -21,11 +21,6 @@ PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = ['.herokuapp.com', '.python.ie', 'next.python.ie', '127.0.0.1']
 
 

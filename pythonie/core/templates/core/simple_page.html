@@ -6,10 +6,8 @@
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
 {% block content %}
-
     <div class="container">
         <div class="row well">
-        <div class="col-md-1"></div>
             <div class="col-md-8">
                 <div class="row">
                     <article>
@@ -25,7 +23,7 @@
                     </article>
                 </div>
             </div>
+            <div class="col-md-4">{% meetups %}</div>
         </div>
-        <div class="col-md-3"></div>
     </div>
 {% endblock %}
