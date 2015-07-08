@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+from blog.models import BlogPage, BlogCategory
 
 from django.db import models
 from modelcluster.fields import ParentalKey
@@ -22,6 +23,17 @@ import logging
 from meetups.models import Meetup
 
 log = logging.getLogger('pythonie')
+
+
+class MeetupMixin(models.Model):
+    show_meetups = models.BooleanField(default=False)
+
+    settings_panels = [
+        FieldPanel('show_meetups'),
+    ]
+
+    class Meta:
+        abstract = True
 
 
 @register_snippet
@@ -63,42 +75,31 @@ class HomePageSegment(Orderable, models.Model):
         return "{!s} Segment".format(self.homepage)
 
 
-class HomePage(Page):
-    subpage_types = ['NewsIndex', 'HomePage', 'SimplePage']
+class HomePage(Page, MeetupMixin):
+    subpage_types = ['HomePage', 'SimplePage']
 
-    def segments_for_location(self, location):
-        return self.homepage_segments.filter(segment__location=location)
-
-    def segments_for_main(self):
-        return self.segments_for_location('main')
-
-    def segments_for_right(self):
-        return self.segments_for_location('right')
-
-    def menu_items(self):
-        """ Get child HomePages of 'self' which have 'show_in_menu' = True and are published.
-        """
-        pages = Page.objects.child_of(self)
-        return pages.live().in_menu()
-
-    def news_items(self):
-        news_index = NewsIndex.objects.child_of(self).first()
-        if not news_index:
-            return []
-        news_items = news_index.newsitem_set.all()
-        return news_items
+    body = StreamField([
+        ('heading', blocks.CharBlock(icon="home",
+                                     classname="full title")),
+        ('paragraph', blocks.RichTextBlock(icon="edit")),
+        ('video', EmbedBlock(icon="media")),
+        ('image', ImageChooserBlock(icon="image")),
+        ('slide', EmbedBlock(icon="media")),
+    ])
 
     def __str__(self):
         return self.title
 
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
 
-HomePage.content_panels = HomePage.content_panels + [
-    InlinePanel('homepage_segments', label='Homepage Segment'),
-]
+    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + [
+        InlinePanel('homepage_segments', label='Homepage Segment'),
+    ]
 
 
-
-class SimplePage(Page):
+class SimplePage(Page, MeetupMixin):
     """
     allowed url to embed listed in
     lib/python3.4/site-packages/wagtail/wagtailembeds/oembed_providers.py
@@ -112,13 +113,13 @@ class SimplePage(Page):
         ('slide', EmbedBlock(icon="media")),
     ])
 
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('body'),
+    ]
 
-SimplePage.content_panels = [
-    FieldPanel('title', classname='full title'),
-    StreamFieldPanel('body'),
-]
+    settings_panels = Page.settings_panels + MeetupMixin.settings_panels
 
-# The decorator registers this model as a news index
+
 @newsindex
 class NewsIndex(NewsIndexMixin, Page):
     # Add extra fields here, as in a normal Wagtail Page class, if required

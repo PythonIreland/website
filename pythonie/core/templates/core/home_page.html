@@ -11,28 +11,28 @@
         <div class="row well">
             <div class="col-md-8">
                 <div class="row">
-                    {% for segment in self.segments_for_main %}
-                        {% show_homepage_segment segment %}
+                    <article>
+                        {% for block in self.body %}
+                            {% if block.block_type == 'heading' %}
+                                <h1>{{ block.value }}</h1>
+                            {% else %}
+                                <section class="block-{{ block.block_type }}">
+                                    {{ block }}
+                                </section>
+                            {% endif %}
+                        {% endfor %}
+                    </article>
+                </div>
+                <div class="row">
+                    {% get_blogs categories as blogs %}
+                    {% for blog in blogs %}
+                        <h1>{{ blog.title }}</h1>
+                        {{ blog.body|richtext }}
                     {% endfor %}
                 </div>
-                {% if self.news_items %}
-                    <div class="row">
-                        <div class="col-md-12" id="blog">
-                            {% for news_item in self.news_items %}
-                                <h3>{{ news_item.title }}</h3>
-                                {{ news_item.body|richtext }}
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endif %}
             </div>
             <div class="col-md-4">
                 {% meetups %}
-                <div class="row">
-                    {% for segment in self.segments_for_right %}
-                        {% show_homepage_segment segment %}
-                    {% endfor %}
-                </div>
             </div>
         </div>
     </div>

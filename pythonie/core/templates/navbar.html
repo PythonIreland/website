@@ -16,20 +16,23 @@
             {% root_page as homepage %}
             <li><a href="{% pageurl homepage %}">Home</a></li>
 
-            {% for item in homepage.get_descendants.live.in_menu %}
-                {%  if item.get_descendants.live.in_menu %}
+            {% child_pages homepage as children %}
+            {% for page in children %}
+                {% child_pages page as nested_children %}
+                {% if nested_children %}
                     {# We're in a dropdown #}
                     <li class="dropdown">
-                        <a href="{% pageurl item %}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ item }} <span class="caret"></span></a>
+                        <a href="{% pageurl page %}" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{ page }} <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="{% pageurl item %}">{{ item }}</a></li>
-                            {% for sub_item in item.get_children %}
-                            <li><a href="{% pageurl sub_item %}">{{ sub_item }}</a></li>
+                            <li><a href="{% pageurl page %}">{{ page }}</a></li>
+                            {% for child_page in nested_children %}
+                                <li><a href="{% pageurl child_page %}">{{ child_page }}</a></li>
                             {% endfor %}
                         </ul>
                     </li>
                 {% else %}
-                    <li><a href="{% pageurl item  %}">{{ item }}</a></li>
+                    <li><a href="{% pageurl page %}">{{ page }}</a></li>
                 {% endif %}
             {% endfor %}
         </ul>
