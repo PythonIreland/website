@@ -1,10 +1,11 @@
 {% load wagtailimages_tags %}
+{% load tz %}
 
 {% for meetup in meetups %}
 <div class="col-md-12">
     <h3>{{ meetup.name }}</h3>
 
-    <p><b>When:</b> {{ meetup.time }}</p>
+    <p><b>When:</b> {{ meetup.time|timezone:"Europe/Dublin" }} IST</p>
     {% if meetup.venue %}
         <p><b>Where:</b> {{ meetup.venue.name }}</p>
     {% endif %}
