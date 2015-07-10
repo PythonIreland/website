@@ -58,11 +58,11 @@
 {% block content %}{% endblock %}
 
 {% compress js %}
-    <script src='https://js.tito.io/v1' async></script>
     <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
 {% endcompress %}
 
 {% block basejs %}
+    <script src='https://js.tito.io/v1' async></script>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% endblock %}
