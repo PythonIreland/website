@@ -6,27 +6,7 @@
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js"> <!--<![endif]-->
-<body class="{% block body_class %}{% endblock %}">
-{% wagtailuserbar %}
 
-{% include "header.html" %}
-{% include "navbar.html" %}
-
-{% block content %}{% endblock %}
-
-{% compress js %}
-
-    <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
-{% endcompress %}
-
-{% block basejs %}
-    <script src="http://code.jquery.com/jquery.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-{% endblock %}
-{% block extra_js %}
-
-{% endblock %}
-</body>
 
 <head>
     <meta charset="utf-8"/>
@@ -47,8 +27,6 @@
 
     {% endblock %}
 
-
-<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
     <!--
 
     <script type="text/javascript" src="//use.typekit.net/qgj1xay.js"></script>
@@ -71,4 +49,25 @@
     -->
 
 </head>
+<body class="{% block body_class %}{% endblock %}">
+{% wagtailuserbar %}
+
+{% include "header.html" %}
+{% include "navbar.html" %}
+
+{% block content %}{% endblock %}
+
+{% compress js %}
+
+    <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
+{% endcompress %}
+
+{% block basejs %}
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
+</body>
 </html>
