@@ -5,6 +5,7 @@ from django import template
 from wagtail.wagtailcore.models import Site, Page
 
 from meetups.models import Meetup
+from sponsors.models import Sponsor
 from meetups.utils import update
 
 register = template.Library()
@@ -27,6 +28,19 @@ def meetups(context):
         meetups = []
     return {
         'meetups': meetups,
+        'request': context['request'],
+    }
+
+@register.inclusion_tag('core/sponsor.html', takes_context=True)
+def sponsors(context):
+    self = context.get('self')
+    if hasattr(self, 'show_sponsors') and self.show_sponsors:
+        sponsors = Sponsor.for_event(self)
+    else:
+        sponsors = []
+        sponsors = Sponsor.for_event(self)
+    return {
+        'sponsors': sponsors,
         'request': context['request'],
     }
 

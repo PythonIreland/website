@@ -14,7 +14,7 @@ class MeetupAdmin(admin.ModelAdmin):
 @admin.register(MeetupSponsorRelationship)
 class MeetupSponsorRelationshipAdmin(admin.ModelAdmin):
     list_display = ('meetup', 'sponsor')
-    list_editable  = ('meetup', 'sponsor')
+    list_editable = ('meetup', 'sponsor')
     list_filter = ('sponsor',)
 
 admin.site.register(MeetupUpdate)

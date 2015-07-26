@@ -33,3 +33,9 @@ class Sponsor(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def for_event(cls, context):
+        parents = [page for page in context.get_ancestors(inclusive=True)
+                   if hasattr(page, "homepage")]
+        homepage = parents[-1].homepage
+        return homepage.homepagesponsorrelationship_set.order_by('level')

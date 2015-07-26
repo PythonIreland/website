@@ -20,7 +20,7 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailembeds.blocks import EmbedBlock
 
 import logging
-from meetups.models import Meetup
+# from meetups.models import Meetup
 
 log = logging.getLogger('pythonie')
 
@@ -30,6 +30,16 @@ class MeetupMixin(models.Model):
 
     settings_panels = [
         FieldPanel('show_meetups'),
+    ]
+
+    class Meta:
+        abstract = True
+
+class SponsorMixin(models.Model):
+    show_sponsors = models.BooleanField(default=False)
+
+    settings_panels = [
+        FieldPanel('show_sponsors'),
     ]
 
     class Meta:
@@ -74,8 +84,18 @@ class HomePageSegment(Orderable, models.Model):
     def __str__(self):
         return "{!s} Segment".format(self.homepage)
 
+from sponsors.models import Sponsor, SponsorshipLevel
 
-class HomePage(Page, MeetupMixin):
+class HomePageSponsorRelationship(models.Model):
+    """ Qualify how sponsor helped content described in HomePage
+    Pivot table for Sponsor M<-->M HomePage
+    """
+    sponsor = models.ForeignKey(Sponsor)
+    homepage = models.ForeignKey('HomePage')
+    level = models.ForeignKey(SponsorshipLevel)
+
+
+class HomePage(Page, MeetupMixin, SponsorMixin):
     subpage_types = ['HomePage', 'SimplePage']
 
     body = StreamField([
@@ -87,6 +107,8 @@ class HomePage(Page, MeetupMixin):
         ('slide', EmbedBlock(icon="media")),
     ])
 
+    sponsors = models.ManyToManyField(Sponsor, through=HomePageSponsorRelationship, null=True, blank=True)
+
     def __str__(self):
         return self.title
 
@@ -94,12 +116,12 @@ class HomePage(Page, MeetupMixin):
         StreamFieldPanel('body'),
     ]
 
-    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + [
+    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + SponsorMixin.settings_panels +[
         InlinePanel('homepage_segments', label='Homepage Segment'),
     ]
 
 
-class SimplePage(Page, MeetupMixin):
+class SimplePage(Page, MeetupMixin, SponsorMixin):
     """
     allowed url to embed listed in
     lib/python3.4/site-packages/wagtail/wagtailembeds/oembed_providers.py
@@ -117,7 +139,7 @@ class SimplePage(Page, MeetupMixin):
         StreamFieldPanel('body'),
     ]
 
-    settings_panels = Page.settings_panels + MeetupMixin.settings_panels
+    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + SponsorMixin.settings_panels
 
 
 @newsindex
