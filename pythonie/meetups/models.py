@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from django.db import models
 
 from sponsors.models import Sponsor
@@ -8,6 +8,13 @@ from delorean.dates import UTC
 
 import logging
 log = logging.getLogger('meetups')
+
+
+def next_n_months(source_date, months):
+    month = source_date.month - 1 + months
+    year = source_date.year + month // 12
+    month = month % 12 + 2
+    return date(year, month, 1)
 
 
 class MeetupUpdate(models.Model):
@@ -74,5 +81,5 @@ class Meetup(models.Model):
     @classmethod
     def future_events(cls):
         today = datetime.now()
-        return cls.objects.filter(time__gt=today)
+        return cls.objects.filter(time__gt=today).filter(time__lt=next_n_months(today, 3))
 

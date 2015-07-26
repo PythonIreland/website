@@ -22,7 +22,7 @@ def meetups(context):
     update()
     self = context.get('self')
     if hasattr(self, 'show_meetups') and self.show_meetups:
-        meetups = Meetup.future_events()[:3]
+        meetups = Meetup.future_events()
     else:
         meetups = []
     return {
