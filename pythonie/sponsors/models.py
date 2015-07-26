@@ -6,11 +6,12 @@ log = logging.getLogger('sponsor')
 
 
 class SponsorshipLevel(models.Model):
+    # level is defined as money spent
     level = models.IntegerField()
     name = models.CharField(max_length=255)
 
     class Meta:
-        ordering = ['level']
+        ordering = ['-level']
 
     def __str__(self):
         return self.name
