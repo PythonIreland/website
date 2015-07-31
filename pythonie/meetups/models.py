@@ -17,30 +17,6 @@ def next_n_months(source_date, months):
     return date(year, month, 1)
 
 
-class MeetupUpdate(models.Model):
-    """ Poor man's caching for meetups
-    """
-    updated = models.DateTimeField(auto_now_add=True)
-
-    @classmethod
-    def tick(cls):
-        """ Record Datetime of latest Meetup update
-       """
-        meetup_update = cls.objects.filter().first()
-        if not meetup_update:
-            meetup_update = cls()
-        meetup_update.updated = Delorean().datetime
-        meetup_update.save()
-
-    @classmethod
-    def _invalidate_meetup_update(cls):
-        """ Invalidate the MeetupUpdate by making more than an hour ago
-        """
-        meetup_update = cls.objects.filter().get()
-        meetup_update.updated = Delorean().datetime - timedelta(hours=1)
-        meetup_update.save(force_update=True, update_fields=['updated'])
-
-
 class MeetupSponsorRelationship(models.Model):
     """ Qualify how sponsor helped what meetup
     Pivot table for Sponsor M<-->M Meetup

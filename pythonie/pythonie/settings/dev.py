@@ -16,6 +16,8 @@ DATABASES = {
     }
 }
 
+REDIS_URL = '127.0.0.1:6379'
+
 # CACHES = {
 #     'default': {
 #         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',

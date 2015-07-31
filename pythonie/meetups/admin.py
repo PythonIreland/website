@@ -1,5 +1,5 @@
 from django.contrib import admin
-from meetups.models import Meetup, MeetupUpdate, MeetupSponsorRelationship
+from meetups.models import Meetup, MeetupSponsorRelationship
 
 class MeetupSponsorRelationshipInline(admin.TabularInline):
     model = MeetupSponsorRelationship
@@ -16,5 +16,3 @@ class MeetupSponsorRelationshipAdmin(admin.ModelAdmin):
     list_display = ('meetup', 'sponsor')
     list_editable = ('meetup', 'sponsor')
     list_filter = ('sponsor',)
-
-admin.site.register(MeetupUpdate)
