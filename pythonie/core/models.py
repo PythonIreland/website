@@ -94,6 +94,8 @@ class HomePageSponsorRelationship(models.Model):
     homepage = models.ForeignKey('HomePage')
     level = models.ForeignKey(SponsorshipLevel)
 
+    def __repr__(self):
+        return '{} {} {}'.format(self.sponsor.name, self.homepage.title, self.level.name)
 
 class HomePage(Page, MeetupMixin, SponsorMixin):
     subpage_types = ['HomePage', 'SimplePage']

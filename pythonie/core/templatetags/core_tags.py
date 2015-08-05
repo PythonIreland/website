@@ -38,7 +38,6 @@ def sponsors(context):
         sponsors = Sponsor.for_event(self)
     else:
         sponsors = []
-        sponsors = Sponsor.for_event(self)
     return {
         'sponsors': sponsors,
         'request': context['request'],
