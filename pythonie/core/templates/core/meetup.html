@@ -22,7 +22,12 @@
                         {% image sponsor.sponsor.logo width-80 class="thumbnail" %}
                     </div>
                     <div class="col-md-8">
-                        <div class="name">{{ sponsor.sponsor.name }}</div>
+
+                        <div class="name">
+                            <a href="{{ sponsor.sponsor.url }}" title="{{ sponsor.sponsor.description }}">
+                            {{ sponsor.sponsor.name }}
+                            </a>
+                        </div>
 
                         {% if sponsor.note %}
                             <small class="caption">{{ sponsor.note }}</small>
