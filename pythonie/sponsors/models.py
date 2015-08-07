@@ -1,5 +1,6 @@
 from django.db import models
 import logging
+import operator
 from wagtail.wagtailimages.models import Image
 
 log = logging.getLogger('sponsor')
@@ -38,4 +39,6 @@ class Sponsor(models.Model):
         parents = [page for page in context.get_ancestors(inclusive=True)
                    if hasattr(page, "homepage")]
         homepage = parents[-1].homepage
-        return homepage.homepagesponsorrelationship_set.order_by('level')
+        all_sponsorship = homepage.homepagesponsorrelationship_set.all()
+        return sorted(all_sponsorship, key=operator.attrgetter('level.level'), reverse=True)
+
