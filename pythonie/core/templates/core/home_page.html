@@ -14,7 +14,7 @@
                     <article>
                         {% for block in self.body %}
                             {% if block.block_type == 'heading' %}
-                                <h1>{{ block.value }}</h1>
+                                <h3>{{ block.value }}</h3>
                             {% else %}
                                 <section class="block-{{ block.block_type }}">
                                     {{ block }}
@@ -26,7 +26,7 @@
                 <div class="row">
                     {% get_blogs categories as blogs %}
                     {% for blog in blogs %}
-                        <h1>{{ blog.title }}</h1>
+                        <h3>{{ blog.title }}</h3>
                         {{ blog.body|richtext }}
                     {% endfor %}
                 </div>

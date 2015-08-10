@@ -5,6 +5,7 @@ from django.db import models
 from modelcluster.fields import ParentalKey
 
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.wagtailcore.blocks import RawHTMLBlock
 from wagtail.wagtailcore.fields import RichTextField
 from wagtail.wagtailcore.models import Page, Orderable
 from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
@@ -107,6 +108,7 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
         ('video', EmbedBlock(icon="media")),
         ('image', ImageChooserBlock(icon="image")),
         ('slide', EmbedBlock(icon="media")),
+        ('html', RawHTMLBlock(icon="code"))
     ])
 
     sponsors = models.ManyToManyField(Sponsor, through=HomePageSponsorRelationship, null=True, blank=True)
@@ -135,6 +137,7 @@ class SimplePage(Page, MeetupMixin, SponsorMixin):
         ('video', EmbedBlock(icon="media")),
         ('image', ImageChooserBlock(icon="image")),
         ('slide', EmbedBlock(icon="media")),
+        ('html', RawHTMLBlock(icon="code"))
     ])
 
     content_panels = Page.content_panels + [

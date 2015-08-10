@@ -25,5 +25,7 @@ def allow_iframes():
                 'frameborder': True,
                 'marginheight': True,
                 'marginwidth': True
-            })
+            }),
+        'tito-widget': attribute_rule({'event': True}),
+        'tito-button': attribute_rule({'event': True}),
     }

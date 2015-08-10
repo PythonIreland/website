@@ -2,41 +2,42 @@
 {% load tz %}
 
 {% for meetup in meetups %}
-<div class="col-md-12">
-    <h3>{{ meetup.name }}</h3>
+    <div class="col-md-12">
+        <h3>{{ meetup.name }}</h3>
 
-    <p><b>When:</b> {{ meetup.time|timezone:"Europe/Dublin" }} IST</p>
-    {% if meetup.venue %}
-        <p><b>Where:</b> {{ meetup.venue.name }}</p>
-    {% endif %}
-    <p>{{ meetup.rsvps }} people are attending. <a href="{{ meetup.event_url }}">Click for more information and to
-        RSVP</a></p>
+        <p><b>When:</b> {{ meetup.time|timezone:"Europe/Dublin" }} IST</p>
+        {% if meetup.venue %}
+            <p><b>Where:</b> {{ meetup.venue.name }}</p>
+        {% endif %}
+        <p>{{ meetup.rsvps }} people are attending. <a href="{{ meetup.event_url }}">Click for more information and to
+            RSVP</a></p>
 
-    {% if meetup.sponsors.count %}
-        <h5>Sponsors:</h5>
-        <div class="sponsor-list">
-            {% for sponsor in meetup.meetupsponsorrelationship_set.all %}
-                <div class="sponsor clearfix">
-
-                    <div class="col-md-4">
-                        {% image sponsor.sponsor.logo width-80 class="thumbnail" %}
-                    </div>
-                    <div class="col-md-8">
-
-                        <div class="name">
-                            <a href="{{ sponsor.sponsor.url }}" title="{{ sponsor.sponsor.description }}">
-                            {{ sponsor.sponsor.name }}
-                            </a>
+        {% if meetup.sponsors.count %}
+            <h5>Sponsors:</h5>
+            <div class="sponsor-list">
+                {% for sponsor in meetup.meetupsponsorrelationship_set.all %}
+                    <div class="sponsor clearfix">
+                
+                        <div class="col-md-4">
+                            {% image sponsor.sponsor.logo width-80 class="thumbnail" %}
                         </div>
+                        <div class=`"col-md-8">
+                            <div class="name">
+                                {% if sponsor.sponsor.url %}
+                                    <a href="{{ sponsor.sponsor.url }}" title="{{ sponsor.sponsor.description }}">{{ sponsor.sponsor.name }}</a>
+                                {% else %}
+                                    {{ sponsor.sponsor.name }}
+                                {% endif %}
+                            </div>
 
-                        {% if sponsor.note %}
-                            <small class="caption">{{ sponsor.note }}</small>
-                        {% endif %}
+                            {% if sponsor.note %}
+                                <small class="caption">{{ sponsor.note }}</small>
+                            {% endif %}
+                        </div>
                     </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
 
-</div>
+    </div>
 {% endfor %}
