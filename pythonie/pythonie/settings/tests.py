@@ -10,3 +10,5 @@ DATABASES = {
         'NAME': join(PROJECT_ROOT, 'db.sqlite3'),
     }
 }
+
+REDIS = configure_redis(test=True)

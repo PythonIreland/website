@@ -1,15 +1,17 @@
 from datetime import datetime, timedelta
 from unittest.mock import patch
-
+from delorean import Delorean
+from django.conf import settings
 from django.test import TestCase
 
+from iso8601 import iso8601
 from model_mommy import mommy
 from pytz import UTC
 
 from meetups import utils
 
-from meetups.models import Meetup, MeetupUpdate
-from meetups.utils import update_not_needed
+from meetups.models import Meetup
+from meetups.utils import update_needed
 
 description = '<p>We will be having a meetup in June. More details to follow.</p> <p>If you are ' \
               'interested in speaking, please submit your details to\xa0<a ' \
@@ -36,6 +38,15 @@ class MeetupModelTests(TestCase):
 
 
 class UtilsTests(TestCase):
+
+    def setUp(self):
+        settings.REDIS.set(settings.MEETUPS_LAST_CHECKED, None)
+
+    def _invalidate_meetup_update(self):
+        """ Invalidate the MeetupUpdate by making more than an hour ago
+        """
+        settings.REDIS.set(settings.MEETUPS_LAST_CHECKED, Delorean().datetime - timedelta(hours=1))
+
     def _first_result(self):
         return {
             'results': [
@@ -82,15 +93,15 @@ class UtilsTests(TestCase):
         first['results'][0].update({'name': "New entry"})
         return first
 
-    def test_update_not_needed(self):
-        result = update_not_needed()
-        self.assertEqual(result, False)
-        MeetupUpdate.tick()
-        result = update_not_needed()
+    def test_update_needed(self):
+        result = update_needed()
         self.assertEqual(result, True)
-        MeetupUpdate._invalidate_meetup_update()
-        result = update_not_needed()
+        utils.tick()
+        result = update_needed()
         self.assertEqual(result, False)
+        self._invalidate_meetup_update()
+        result = update_needed()
+        self.assertEqual(result, True)
 
     @patch('meetups.utils.get_content')
     def test_update_first_run(self, mock_get_content):
@@ -120,9 +131,10 @@ class UtilsTests(TestCase):
         self.assertEqual(meetup.event_url, 'http://www.meetup.com/pythonireland/events/221078098/')
 
         # We should have ticked the MeetupUpdate
-        meetup_update = MeetupUpdate.objects.filter().get()
+        r = settings.REDIS
+        meetup_update = iso8601.parse_date(r.get(settings.MEETUPS_LAST_CHECKED).decode('utf-8'))
         minute_ago = datetime.now(tz=UTC) - timedelta(minutes=1)
-        self.assertGreater(meetup_update.updated, minute_ago)
+        self.assertGreater(meetup_update, minute_ago)
 
     @patch('meetups.utils.get_content')
     def test_update_second_run(self, mock_get_content):
@@ -134,7 +146,7 @@ class UtilsTests(TestCase):
         self.assertEqual(meetups[0].updated, expected_datetime)
 
         mock_get_content.return_value = self._second_result()
-        MeetupUpdate._invalidate_meetup_update()  # Allow a another update so soon
+        self._invalidate_meetup_update()  # Allow a another update so soon
         utils.update()
         meetups = Meetup.objects.all()
         self.assertEqual(len(meetups), 1)
@@ -145,7 +157,6 @@ class UtilsTests(TestCase):
         self.assertEqual(meetups[0].name, "New name")
 
         self.assertEqual(meetups[0].rsvps, 125)
-
 
     @patch('meetups.utils.get_content')
     def test_update_second_run_too_soon(self, mock_get_content):
@@ -165,15 +176,14 @@ class UtilsTests(TestCase):
         self.assertEqual(meetups[0].updated, expected_datetime)
         self.assertEqual(meetups[0].name, "Python Ireland meetup")
 
-
     @patch('meetups.utils.get_content')
     def test_update_second_run_add_one(self, mock_get_content):
         mock_get_content.return_value = self._first_result()
         utils.update()
-        MeetupUpdate._invalidate_meetup_update()  # Allow another update so soon
+        self._invalidate_meetup_update()  # Allow another update so soon
         mock_get_content.return_value = self._second_result()
         utils.update()
-        MeetupUpdate._invalidate_meetup_update()  # Allow another update so soon
+        self._invalidate_meetup_update()  # Allow another update so soon
         mock_get_content.return_value = self._third_result()
         utils.update()
         meetup_one = Meetup.objects.get(id='qwfbshytjbnb')
