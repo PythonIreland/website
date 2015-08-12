@@ -33,6 +33,8 @@ def tick():
 
 def get_content(url, params=None):
     response = requests.get(url, params=params)
+    if not response:
+        return []
     log.debug("Retrieved {} from {}".format(response.json(), url))
     return response.json()
 
@@ -50,6 +52,8 @@ def update():
                 'group_urlname': 'pythonireland',
                 'text_format': 'html',
                 'time': ',3m'})
+    if not meetup_data:
+        return
     log.info(meetup_data)
     meetups = schema.Meetups()
     meetups = meetups.deserialize(meetup_data)
