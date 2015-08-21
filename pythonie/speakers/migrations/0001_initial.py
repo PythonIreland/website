@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='SpeakersPage',
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, primary_key=True, parent_link=True, serialize=False, to='wagtailcore.Page')),
+                ('page_ptr', models.OneToOneField(to='wagtailcore.Page', primary_key=True, serialize=False, parent_link=True, auto_created=True)),
                 ('api_url', models.CharField(max_length=255)),
             ],
             options={
