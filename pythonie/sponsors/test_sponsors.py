@@ -22,4 +22,3 @@ class SponsorshipLevelModelTests(TestCase):
         self.assertIsNotNone(sponsorship.id)
         self.assertIsNotNone(sponsorship.name)
         self.assertIsNotNone(sponsorship.level)
-

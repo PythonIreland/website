@@ -1,4 +1,5 @@
 from .base import *
+from pythonie.settings.configure import configure_redis
 
 DEBUG = True
 TEMPLATE_DEBUG = True
@@ -16,7 +17,8 @@ DATABASES = {
     }
 }
 
-REDIS_URL = '127.0.0.1:6379'
+REDIS_URL = os.environ.get('REDISCLOUD_URL')
+REDIS = configure_redis(REDIS_URL)
 
 # CACHES = {
 #     'default': {

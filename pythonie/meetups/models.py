@@ -7,6 +7,7 @@ from delorean import Delorean
 from delorean.dates import UTC
 
 import logging
+
 log = logging.getLogger('meetups')
 
 
@@ -58,4 +59,3 @@ class Meetup(models.Model):
     def future_events(cls):
         today = datetime.now()
         return cls.objects.filter(time__gt=today).filter(time__lt=next_n_months(today, 3))
-

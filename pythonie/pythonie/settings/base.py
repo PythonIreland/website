@@ -63,6 +63,7 @@ INSTALLED_APPS = (
 
     'meetups',
     'sponsors',
+    'speakers',
     # 'debug_toolbar',
 )
 
@@ -112,6 +113,10 @@ LOGGING = {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
         },
+        'speakers': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
         'core': {
             'handlers': ['console'],
             'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
@@ -131,21 +136,8 @@ MEETUP_KEY = os.getenv('MEETUP_KEY')
 DATABASES = {}
 
 import dj_database_url
+
 DATABASES['default'] = dj_database_url.config()
-
-
-def configure_redis(test=False):
-    if test:
-        import fakeredis
-        return fakeredis.FakeStrictRedis()
-    else:
-        import redis
-        from urllib.parse import urlparse
-        url = urlparse(REDIS_URL)
-        return redis.Redis(host=url.hostname, port=url.port, password=url.password)
-
-REDIS_URL = os.environ.get('REDISCLOUD_URL')
-REDIS = configure_redis()
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

@@ -1,8 +1,8 @@
 from .base import *
 
+from pythonie.settings.configure import configure_redis
 
 # Disable debug mode
-
 DEBUG = False
 TEMPLATE_DEBUG = False
 
@@ -18,6 +18,8 @@ AWS_HOST = 's3-eu-west-1.amazonaws.com'
 
 COMPRESS_OFFLINE = False
 
+REDIS_URL = os.environ.get('REDISCLOUD_URL')
+REDIS = configure_redis(REDIS_URL)
 
 # Send notification emails as a background task using Celery,
 # to prevent this from blocking web server threads

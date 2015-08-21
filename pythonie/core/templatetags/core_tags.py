@@ -31,6 +31,7 @@ def meetups(context):
         'request': context['request'],
     }
 
+
 @register.inclusion_tag('core/sponsor.html', takes_context=True)
 def sponsors(context):
     self = context.get('self')

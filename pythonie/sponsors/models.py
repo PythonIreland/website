@@ -41,4 +41,3 @@ class Sponsor(models.Model):
         homepage = parents[-1].homepage
         all_sponsorship = homepage.homepagesponsorrelationship_set.all()
         return sorted(all_sponsorship, key=operator.attrgetter('level.level'), reverse=True)
-

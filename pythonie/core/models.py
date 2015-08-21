@@ -36,6 +36,7 @@ class MeetupMixin(models.Model):
     class Meta:
         abstract = True
 
+
 class SponsorMixin(models.Model):
     show_sponsors = models.BooleanField(default=False)
 
@@ -85,7 +86,9 @@ class HomePageSegment(Orderable, models.Model):
     def __str__(self):
         return "{!s} Segment".format(self.homepage)
 
+
 from sponsors.models import Sponsor, SponsorshipLevel
+
 
 class HomePageSponsorRelationship(models.Model):
     """ Qualify how sponsor helped content described in HomePage
@@ -98,8 +101,9 @@ class HomePageSponsorRelationship(models.Model):
     def __repr__(self):
         return '{} {} {}'.format(self.sponsor.name, self.homepage.title, self.level.name)
 
+
 class HomePage(Page, MeetupMixin, SponsorMixin):
-    subpage_types = ['HomePage', 'SimplePage']
+    subpage_types = ['HomePage', 'SimplePage', 'speakers.SpeakersPage']
 
     body = StreamField([
         ('heading', blocks.CharBlock(icon="home",
@@ -120,7 +124,7 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
         StreamFieldPanel('body'),
     ]
 
-    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + SponsorMixin.settings_panels +[
+    settings_panels = Page.settings_panels + MeetupMixin.settings_panels + SponsorMixin.settings_panels + [
         InlinePanel('homepage_segments', label='Homepage Segment'),
     ]
 

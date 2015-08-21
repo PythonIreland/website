@@ -7,10 +7,7 @@ from django.conf import settings
 from meetups import models, schema
 
 import logging
-from pythonie.settings import MEETUPS_LAST_CHECKED
 log = logging.getLogger(__name__)
-
-redis = settings.REDIS
 
 
 def update_needed():
@@ -18,7 +15,7 @@ def update_needed():
     Checks if we need to refresh the meetup events.
     :return: True if a MeetupUpdate exists from the last hour. False otherwise
     """
-    last_checked = redis.get(MEETUPS_LAST_CHECKED)
+    last_checked = settings.REDIS.get(settings.MEETUPS_LAST_CHECKED)
     last_checked = iso8601.parse_date(last_checked.decode('utf-8')) if last_checked else None
     if not last_checked:
         return True
@@ -28,7 +25,7 @@ def update_needed():
 
 def tick():
     now = Delorean().datetime
-    redis.set(MEETUPS_LAST_CHECKED, now)
+    settings.REDIS.set(settings.MEETUPS_LAST_CHECKED, now)
 
 
 def get_content(url, params=None):

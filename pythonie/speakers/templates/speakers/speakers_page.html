@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load static core_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row well">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="well clearfix">
+                        <a name="speakerlist"></a>
+
+                        <div class="panel-heading">
+                            <h3 class="text-center"><span class="glyphicon glyphicon-star"></span> PyCon Ireland 2015
+                                Speakers
+                                <span class="glyphicon glyphicon-star"></span></h3>
+                        </div>
+
+                        <table class="table speakers">
+                            {% for speaker in self.speakers %}
+                                <tr class="speaker">
+                                    <td>
+                                        {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                        {% if "cropped" in speaker.image_75 %}
+                                            <img src="{{ speaker.image_75 }}" width="75" height="75" class="img-circle">
+                                        {% else %}
+                                            <img src="https://robohash.org/{{ speaker.name }}?bgset=bg1&amp;size=75x75"
+                                                 width="75"
+                                                 height="75" class="img-circle">
+                                        {% endif %}
+                                        {% if speaker.web_url %}</a>{% endif %}
+                                    </td>
+                                    <td>
+                                        {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                        <h4>{{ speaker.name }}</h4>
+                                        {% if speaker.web_url %}</a>{% endif %}
+                                        {{ speaker.bio|safe }}
+                                    </td>
+                                    <td>
+                                        <a name="{{ speaker.name|urlencode }}"></a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            <tr>
+                                <td colspan="3">*Robots thanks to <a href="http://robohash.org/">http://robohash.org/</a>.
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
