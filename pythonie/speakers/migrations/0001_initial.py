@@ -5,16 +5,17 @@ from django.db import models, migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('wagtailcore', '0002_auto_20150821_2305'),
+        ("wagtailcore", "0016_change_page_url_path_to_text_field")
     ]
 
     operations = [
         migrations.CreateModel(
             name='SpeakersPage',
             fields=[
-                ('page_ptr', models.OneToOneField(primary_key=True, serialize=False, to='wagtailcore.Page', parent_link=True, auto_created=True)),
+                ('page_ptr',
+                 models.OneToOneField(auto_created=True, to='wagtailcore.Page', parent_link=True, serialize=False,
+                                      primary_key=True)),
                 ('api_url', models.CharField(max_length=255)),
             ],
             options={
