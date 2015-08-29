@@ -4,11 +4,10 @@
 {% for sponsorship in sponsors %}
     {% ifchanged %}<h3>{{ sponsorship.level.name }}</h3>{% endifchanged %}
     <div class="col-md-12">
-        <a href="{{ sponsorship.sponsor.url }}">
+        <a href="{{ sponsorship.sponsor.url }}"
+                title="{{ sponsorship.sponsor.description }}">
             <h3>{{ sponsorship.sponsor.name }}</h3>
-            {% image sponsorship.sponsor.logo max-400x240 class="thumbnail" %}
+            {% image sponsorship.sponsor.logo max-200x240 class="thumbnail" %}
         </a>
-
-        <p><small>{{ sponsorship.sponsor.description }}</small></p>
     </div>
 {% endfor %}
