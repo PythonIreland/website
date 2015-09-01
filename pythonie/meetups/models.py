@@ -1,4 +1,5 @@
-from datetime import datetime, timedelta, date
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
 from django.db import models
 
 from sponsors.models import Sponsor
@@ -12,10 +13,8 @@ log = logging.getLogger('meetups')
 
 
 def next_n_months(source_date, months):
-    month = source_date.month - 1 + months
-    year = source_date.year + month // 12
-    month = month % 12 + 2
-    return date(year, month, 1)
+    delta = relativedelta(months=+months)
+    return source_date + delta
 
 
 class MeetupSponsorRelationship(models.Model):

@@ -10,7 +10,7 @@ from pytz import UTC
 
 from meetups import utils
 
-from meetups.models import Meetup
+from meetups.models import Meetup, next_n_months
 from meetups.utils import update_needed
 
 description = '<p>We will be having a meetup in June. More details to follow.</p> <p>If you are ' \
@@ -35,6 +35,16 @@ class MeetupModelTests(TestCase):
         self.assertIsNotNone(meetup.waitlist_count)
         self.assertIsNotNone(meetup.status)
         self.assertIsNotNone(meetup.visibility)
+
+    def test_next_n_months(self):
+        september = datetime(year=2015, month=9, day=1, hour=1, minute=00)
+        expected = datetime(year=2015, month=12, day=1, hour=1, minute=00)
+        actual = next_n_months(september, 3)
+        self.assertEqual(expected, actual)
+        november = datetime(year=2015, month=10, day=1, hour=1, minute=00)
+        expected = datetime(year=2016, month=1, day=1, hour=1, minute=00)
+        actual = next_n_months(november, 3)
+        self.assertEqual(expected, actual)
 
 
 class UtilsTests(TestCase):
