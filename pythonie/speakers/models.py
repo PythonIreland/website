@@ -26,7 +26,7 @@ class SpeakersPage(Page):
 
     @property
     def speakers(self):
-        log.info('Fetching from redis with key: %s' % self.api_url)
+        log.info('Fetching from redis_url=%s with key: %s' % (settings.REDIS_URL, self.api_url))
         result = settings.REDIS.get(self.api_url)
         decoded = result.decode("utf-8")
         result = json.loads(decoded)
