@@ -23,13 +23,6 @@
                         {% endfor %}
                     </article>
                 </div>
-                <div class="row">
-                    {% get_blogs categories as blogs %}
-                    {% for blog in blogs %}
-                        <h3>{{ blog.title }}</h3>
-                        {{ blog.body|richtext }}
-                    {% endfor %}
-                </div>
             </div>
             <div class="col-md-4">
                 {% meetups %}

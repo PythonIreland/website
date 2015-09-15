@@ -70,3 +70,10 @@ h1 {
     float: left;
     margin-right: 0.5em
 }
+
+.blog .blog-post-link {
+    font-family: "bree", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: black;
+}
