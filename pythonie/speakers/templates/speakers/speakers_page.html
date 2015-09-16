@@ -20,32 +20,101 @@
                         </div>
 
                         <table class="table speakers">
+                            {% comment %}
+                            Warning: ~~~HERE BE DRAGONS~~~
+                            Three loops there are below
+                            The first to open the show
+                            The second with keys
+                            And the rest for the bees
+                            Tra La La La La La
+                            {% endcomment %}
                             {% for speaker in self.speakers %}
-                                <tr class="speaker">
-                                    <td>
-                                        {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
-                                        {% if "cropped" in speaker.image_75 %}
-                                            <img src="{{ speaker.image_75 }}" width="75" height="75" class="img-circle">
-                                        {% else %}
-                                            <img src="https://robohash.org/{{ speaker.name }}?bgset=bg1&amp;size=75x75"
-                                                 width="75"
-                                                 height="75" class="img-circle">
-                                        {% endif %}
-                                        {% if speaker.web_url %}</a>{% endif %}
-                                    </td>
-                                    <td>
-                                        {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
-                                        <h4>{{ speaker.name }}</h4>
-                                        {% if speaker.web_url %}</a>{% endif %}
-                                        {{ speaker.bio|safe }}
-                                    </td>
-                                    <td>
-                                        <a name="{{ speaker.name|urlencode }}"></a>
-                                    </td>
-                                </tr>
+                                {% if speaker.name == "Niamh Breslin" %}
+                                    <tr class="speaker">
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if "cropped" in speaker.image_75 %}
+                                                <img src="{{ speaker.image_75 }}" width="75" height="75"
+                                                     class="img-circle">
+                                            {% else %}
+                                                <img src="https://robohash.org/{{ speaker.name }}?bgset=bg1&amp;size=75x75"
+                                                     width="75"
+                                                     height="75" class="img-circle">
+                                            {% endif %}
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                        </td>
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            <h4>{{ speaker.name }}</h4>
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {{ speaker.speaker_bio|safe }}
+                                        </td>
+                                        <td>
+                                            <a name="{{ speaker.name|urlencode }}"></a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            {% for speaker in self.speakers %}
+                                {% if speaker.name == "Naomi Ceder" or speaker.name == "Trent McConaghy" %}
+                                    <tr class="speaker">
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if "cropped" in speaker.image_75 %}
+                                                <img src="{{ speaker.image_75 }}" width="75" height="75"
+                                                     class="img-circle">
+                                            {% else %}
+                                                <img src="https://robohash.org/{{ speaker.name }}?bgset=bg1&amp;size=75x75"
+                                                     width="75"
+                                                     height="75" class="img-circle">
+                                            {% endif %}
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                        </td>
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            <h4>{{ speaker.name }}</h4>
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {{ speaker.speaker_bio|safe }}
+                                        </td>
+                                        <td>
+                                            <a name="{{ speaker.name|urlencode }}"></a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            {% for speaker in self.speakers %}
+                                {% if speaker.name != "Niamh Breslin" and speaker.name != "Naomi Ceder" and speaker.name != "Trent McConaghy" %}
+                                    <tr class="speaker">
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if "cropped" in speaker.image_75 %}
+                                                <img src="{{ speaker.image_75 }}" width="75" height="75"
+                                                     class="img-circle">
+                                            {% else %}
+                                                <img src="https://robohash.org/{{ speaker.name }}?bgset=bg1&amp;size=75x75"
+                                                     width="75"
+                                                     height="75" class="img-circle">
+                                            {% endif %}
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                        </td>
+                                        <td>
+                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            <h4>{{ speaker.name }}</h4>
+                                            {% if speaker.web_url %}</a>{% endif %}
+                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {{ speaker.speaker_bio|safe }}
+                                        </td>
+                                        <td>
+                                            <a name="{{ speaker.name|urlencode }}"></a>
+                                        </td>
+                                    </tr>
+                                {% endif %}
                             {% endfor %}
                             <tr>
-                                <td colspan="3">*Robots thanks to <a href="http://robohash.org/">http://robohash.org/</a>.
+                                <td colspan="3">*Robots thanks to <a
+                                        href="http://robohash.org/">http://robohash.org/</a>.
                                 </td>
                             </tr>
                         </table>
