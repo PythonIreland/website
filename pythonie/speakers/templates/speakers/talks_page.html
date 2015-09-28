@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load static core_tags %}
+
+{% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row well">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="well clearfix">
+                        <a name="talklist"></a>
+
+                        <div class="panel-heading">
+                            <h3 class="text-center"><span class="glyphicon glyphicon-star"></span> PyCon Ireland 2015
+                                Talks
+                                <span class="glyphicon glyphicon-star"></span></h3>
+                        </div>
+                        <h2>Saturday 24th October</h2>
+                        <table class="table talks">
+                            {% for session in self.day_1 %}
+                            <tr>
+                                <td>{{ session.times }}</td>
+                                <td>{{ session.space|default:"" }}</td>
+                                <td>{% if session.space %}<a href="{{ session.web_url }}">{% endif %}
+                                            {{ session.title }}
+                                            {% if session.space %}</a>{% endif %}
+                                 </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <h2>Sunday 25th October</h2>
+                        <table class="table talks">
+                            {% for session in self.day_2 %}
+                            <tr>
+                                <td>{{ session.times }}</td>
+                                <td>{{ session.space|default:"" }}</td>
+                                <td>{% if session.space %}<a href="{{ session.web_url }}">{% endif %}
+                                            {{ session.title }}
+                                            {% if session.space %}</a>{% endif %}
+                                 </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

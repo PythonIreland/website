@@ -103,7 +103,8 @@ class HomePageSponsorRelationship(models.Model):
 
 
 class HomePage(Page, MeetupMixin, SponsorMixin):
-    subpage_types = ['HomePage', 'SimplePage', 'speakers.SpeakersPage']
+    subpage_types = ['HomePage', 'SimplePage',
+                     'speakers.SpeakersPage', 'speakers.TalksPage']
 
     body = StreamField([
         ('heading', blocks.CharBlock(icon="home",
