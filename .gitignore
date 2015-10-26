@@ -62,5 +62,5 @@ target/
 project.db
 
 # Virtualenv folders
-venv/
+*venv/
 
