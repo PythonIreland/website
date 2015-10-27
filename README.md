@@ -13,4 +13,6 @@
  - Check that it works by visiting `http://localhost:8000/` in your browser. (You should see a 'welcome to Wagtail' site, as you will not see content until you've added it in your DB)
  - Create a super user on your local DB. `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
  - Log in to wagtail with your superuser.
+ - To get rid of redis errors, install and run redis server locally and set environment variable export REDISCLOUD_URL=127.0.0.1:6379
+
 
