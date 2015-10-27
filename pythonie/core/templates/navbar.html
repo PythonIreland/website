@@ -17,24 +17,9 @@
             <li><a href="{% pageurl homepage %}">Home</a></li>
 
             {% child_pages homepage as children %}
-            {% for page in children %}
-                {% child_pages page as nested_children %}
-                {% if nested_children %}
-                    {# We're in a dropdown #}
-                    <li class="dropdown">
-                        <a href="{% pageurl page %}" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                           aria-haspopup="true" aria-expanded="false">{{ page }} <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% pageurl page %}">{{ page }}</a></li>
-                            {% for child_page in nested_children %}
-                                <li><a href="{% pageurl child_page %}">{{ child_page }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </li>
-                {% else %}
-                    <li><a href="{% pageurl page %}">{{ page }}</a></li>
-                {% endif %}
-            {% endfor %}
+                {% for page in children %}
+                        {%include "navbar_tree.html" %}
+                {%endfor%}
         </ul>
     </div>
 </nav>

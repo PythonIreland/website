@@ -23,6 +23,10 @@
 
     {% compress css %}
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        
+        <!-- nested bootstrap menus -->
+        <link rel="stylesheet" href="{% static 'css/jquery.smartmenus.bootstrap.css' %}">
+        
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <link rel="stylesheet" href="{% static 'css/tito.css' %}">
         <link rel="stylesheet" type="text/x-scss" href="{% static 'css/pythonie.scss' %}">
@@ -49,6 +53,8 @@
 {% block basejs %}
     <script src='https://js.tito.io/v1' async></script>
     <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="{% static 'js/jquery.smartmenus.js' %}"></script>
+    <script src="{% static 'js/jquery.smartmenus.bootstrap.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 
     <script>
