@@ -16,7 +16,8 @@ def update_needed():
     :return: True if a MeetupUpdate exists from the last hour. False otherwise
     """
     last_checked = settings.REDIS.get(settings.MEETUPS_LAST_CHECKED)
-    last_checked = iso8601.parse_date(last_checked.decode('utf-8')) if last_checked else None
+    last_checked = (iso8601.parse_date(last_checked.decode('utf-8')) if
+                    last_checked else None)
     if not last_checked:
         return True
     an_hour_ago = Delorean().datetime - timedelta(hours=1)
@@ -57,7 +58,8 @@ def update():
     log.info(meetups)
     for result in meetups.get('results'):
         # Check if the meetup exists
-        meetup = models.Meetup.objects.filter(id=result['id']).first() or models.Meetup()
+        meetup = (models.Meetup.objects.filter(id=result['id']).first() or
+                  models.Meetup())
         meetup.rsvps = result.get('yes_rsvp_count')
         meetup.maybe_rsvps = result.get('maybe_rsvp_count')
         meetup.waitlist_count = result.get('waitlist_count')

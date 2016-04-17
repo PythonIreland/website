@@ -2,3 +2,4 @@
 coverage
 model-mommy==1.2.4
 fakeredis==0.6.2
+flake8==2.5.4
