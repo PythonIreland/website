@@ -1,12 +1,11 @@
-from .base import *  # noqa
+from .base import *
 from pythonie.settings.configure import configure_redis
 
 DEBUG = True
 TEMPLATE_DEBUG = True
 
 SECRET_KEY = '1185a082-7e72-449e-bf43-12d2da59222b'  # Just for dev
-MEETUP_KEY = ''  # Put your own key here.
-# See https://secure.meetup.com/meetup_api/key/
+MEETUP_KEY = ''  # Put your own key here. See https://secure.meetup.com/meetup_api/key/
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
@@ -31,6 +30,6 @@ REDIS = configure_redis(REDIS_URL)
 
 
 try:
-    from .local import *  # noqa
+    from .local import *
 except ImportError:
     pass
