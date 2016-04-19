@@ -64,9 +64,11 @@ class Meetups(colander.MappingSchema):
             headcount = colander.SchemaNode(colander.Integer())
             description = colander.SchemaNode(colander.String(), missing="")
             visibility = colander.SchemaNode(colander.String())
-            duration = colander.SchemaNode(colander.Integer(), missing=colander.drop)
+            duration = colander.SchemaNode(colander.Integer(),
+                                           missing=colander.drop)
 
             maybe_rsvp_count = colander.SchemaNode(colander.Integer())
             yes_rsvp_count = colander.SchemaNode(colander.Integer())
-            rsvp_limit = colander.SchemaNode(colander.Integer(), missing=colander.drop)
+            rsvp_limit = colander.SchemaNode(colander.Integer(),
+                                             missing=colander.drop)
             waitlist_count = colander.SchemaNode(colander.Integer())

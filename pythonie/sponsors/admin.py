@@ -7,8 +7,8 @@ class SponsorshipLevelAdmin(admin.ModelAdmin):
 
 admin.site.register(SponsorshipLevel, SponsorshipLevelAdmin)
 
+
 class SponsorAdmin(admin.ModelAdmin):
     list_display = ('name', 'logo',)
 
 admin.site.register(Sponsor, SponsorAdmin)
-
