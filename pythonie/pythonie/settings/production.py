@@ -1,4 +1,4 @@
-from .base import *  # noqa
+from .base import *
 
 from pythonie.settings.configure import configure_redis
 
@@ -51,6 +51,6 @@ REDIS = configure_redis(REDIS_URL)
 
 
 try:
-    from .local import *  # noqa
+    from .local import *
 except ImportError:
     pass

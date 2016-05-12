@@ -14,6 +14,5 @@
  - Create a super user on your local DB. `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
  - Log in to wagtail with your superuser.
  - To get rid of redis errors, install and run redis server locally and set environment variable export REDISCLOUD_URL=127.0.0.1:6379
- - To test flake8 compliance in the python source code `flake8 pythonie/`
 
 

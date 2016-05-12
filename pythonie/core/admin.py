@@ -4,7 +4,6 @@ from core.models import HomePageSponsorRelationship
 
 admin.site.register(SimplePage)
 
-
 @admin.register(HomePageSponsorRelationship)
 class HomePageSponsorRelationshipAdmin(admin.ModelAdmin):
     list_display = ('homepage', 'sponsor', 'level')
