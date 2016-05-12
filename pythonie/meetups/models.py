@@ -34,8 +34,9 @@ class Meetup(models.Model):
     description = models.TextField()
     event_url = models.URLField()
 
-    sponsors = models.ManyToManyField(Sponsor, through=MeetupSponsorRelationship, null=True, blank=True)
-
+    sponsors = models.ManyToManyField(Sponsor,
+                                      through=MeetupSponsorRelationship,
+                                      null=True, blank=True)
     time = models.DateTimeField()
     created = models.DateTimeField()
     updated = models.DateTimeField(default=Delorean(datetime(1970, 1, 1),
@@ -57,4 +58,5 @@ class Meetup(models.Model):
     @classmethod
     def future_events(cls):
         today = datetime.now()
-        return cls.objects.filter(time__gt=today).filter(time__lt=next_n_months(today, 3))
+        return cls.objects.filter(
+            time__gt=today).filter(time__lt=next_n_months(today, 3))

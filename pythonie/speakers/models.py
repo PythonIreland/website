@@ -1,6 +1,5 @@
 import json
 import logging
-import operator
 import requests
 
 from django.conf import settings
@@ -28,7 +27,8 @@ class SpeakersPage(Page):
 
     @property
     def speakers(self):
-        log.info('Fetching from redis_url=%s with key=%s' % (settings.REDIS_URL, self.api_url))
+        log.info('Fetching from redis_url=%s with key=%s' % (
+            settings.REDIS_URL, self.api_url))
         result = settings.REDIS.get(self.api_url)
         decoded = result.decode("utf-8")
         result = json.loads(decoded)
@@ -52,7 +52,8 @@ class TalksPage(Page):
 
     @property
     def schedule(self):
-        log.info('Fetching from redis_url=%s with key=%s' % (settings.REDIS_URL, self.api_url))
+        log.info('Fetching from redis_url=%s with key=%s' % (
+            settings.REDIS_URL, self.api_url))
         result = settings.REDIS.get(self.api_url)
         decoded = result.decode("utf-8")
         result = json.loads(decoded)
@@ -66,4 +67,3 @@ class TalksPage(Page):
     @property
     def day_2(self):
         return self.schedule['sessions'][1]['sessions']
-
