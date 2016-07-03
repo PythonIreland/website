@@ -46,9 +46,11 @@ def enable_quotes():
     js_files = [
         'js/hallo-custombuttons.js',
     ]
-    js_includes = format_html_join('\n', '<script src="{0}{1}"></script>',
-                                   ((settings.STATIC_URL, filename) for filename in js_files)
-                                   )
+    js_includes = format_html_join(
+        '\n',
+        '<script src="{0}{1}"></script>',
+        ((settings.STATIC_URL, filename) for filename in js_files)
+    )
 
     return js_includes + format_html(
         """
@@ -61,4 +63,6 @@ def enable_quotes():
 
 @hooks.register('insert_editor_css')
 def font_awesome_css():
-    return format_html('<link rel="stylesheet" href="' + settings.STATIC_URL + 'css/font-awesome.min.css">')
+    return format_html('<link rel="stylesheet" href="' +
+                       settings.STATIC_URL +
+                       'css/font-awesome.min.css">')

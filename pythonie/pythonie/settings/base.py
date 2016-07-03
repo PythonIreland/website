@@ -12,12 +12,8 @@ from os.path import abspath, dirname, join
 
 import dj_database_url
 
-from django.conf import global_settings
-
-
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -27,11 +23,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 ALLOWED_HOSTS = ['.herokuapp.com', '.python.ie', 'next.python.ie', '127.0.0.1']
 
-
 # Base URL to use when referring to full URLs within the Wagtail admin backend-
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = 'http://python.ie'
-
 
 # Application definition
 
@@ -157,7 +151,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
@@ -175,14 +168,12 @@ STATICFILES_FINDERS = (
 MEDIA_ROOT = join(PROJECT_ROOT, 'media')
 MEDIA_URL = '/media/'
 
-
 # Django compressor settings
 # http://django-compressor.readthedocs.org/en/latest/settings/
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
-
 
 # # Template configuration
 # TEMPLATE_CONTEXT_PROCESSORS = global_settings.TEMPLATE_CONTEXT_PROCESSORS + (
