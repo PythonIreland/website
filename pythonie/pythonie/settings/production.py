@@ -1,6 +1,5 @@
-from .base import *  # noqa
-
 from pythonie.settings.configure import configure_redis
+from .base import *  # flake8: noqa
 
 # Disable debug mode
 DEBUG = False
