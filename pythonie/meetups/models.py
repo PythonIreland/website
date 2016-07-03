@@ -5,7 +5,6 @@ from django.db import models
 from sponsors.models import Sponsor
 from wagtail.wagtailsnippets.models import register_snippet
 from delorean import Delorean
-from delorean.dates import UTC
 
 import logging
 
@@ -36,11 +35,11 @@ class Meetup(models.Model):
 
     sponsors = models.ManyToManyField(Sponsor,
                                       through=MeetupSponsorRelationship,
-                                      null=True, blank=True)
+                                      blank=True)
     time = models.DateTimeField()
     created = models.DateTimeField()
     updated = models.DateTimeField(default=Delorean(datetime(1970, 1, 1),
-                                                    timezone=UTC).datetime)
+                                                    timezone='UTC').datetime)
 
     rsvps = models.IntegerField(default=0)
     maybe_rsvps = models.IntegerField(default=0)

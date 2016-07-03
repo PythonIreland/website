@@ -2,7 +2,6 @@ from .base import *  # noqa
 from pythonie.settings.configure import configure_redis
 
 DEBUG = True
-TEMPLATE_DEBUG = True
 
 SECRET_KEY = '1185a082-7e72-449e-bf43-12d2da59222b'  # Just for dev
 MEETUP_KEY = ''  # Put your own key here.

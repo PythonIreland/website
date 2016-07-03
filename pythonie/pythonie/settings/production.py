@@ -4,7 +4,6 @@ from pythonie.settings.configure import configure_redis
 
 # Disable debug mode
 DEBUG = False
-TEMPLATE_DEBUG = False
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
