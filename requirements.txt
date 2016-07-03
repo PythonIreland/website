@@ -1,2 +1,2 @@
 -r requirements-base.txt
-psycopg2
+psycopg2==2.6.1
