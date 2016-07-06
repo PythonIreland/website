@@ -22,7 +22,6 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from sponsors.models import Sponsor, SponsorshipLevel
 
 import logging
-# from meetups.models import Meetup
 
 log = logging.getLogger('pythonie')
 
@@ -122,7 +121,7 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
 
     sponsors = models.ManyToManyField(Sponsor,
                                       through=HomePageSponsorRelationship,
-                                      null=True, blank=True)
+                                      blank=True)
 
     def __str__(self):
         return self.title

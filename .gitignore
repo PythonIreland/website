@@ -58,7 +58,7 @@ docs/_build/
 # PyBuilder
 target/
 
-.idea
+.idea/
 project.db
 
 # Virtualenv folders
