@@ -14,7 +14,7 @@
         button.hallobutton({
           uuid: this.options.uuid,
           editable: this.options.editable,
-          label: 'Pull Out Quote',
+          label: 'Click to tweet',
           icon: 'fa fa-twitter',
           command: null
         });
