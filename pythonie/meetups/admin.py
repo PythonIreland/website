@@ -12,6 +12,13 @@ class MeetupAdmin(admin.ModelAdmin):
     inlines = [
         MeetupSponsorRelationshipInline
     ]
+    list_display = ('id',
+                    'name',
+                    'time',
+                    'rsvps',
+                    'waitlist_count',
+                    'status',
+                    'visibility')
 
 
 @admin.register(MeetupSponsorRelationship)
