@@ -59,6 +59,8 @@ INSTALLED_APPS = (
     'storages',
     'blog',
 
+    'wagtailfontawesome',
+
     'meetups',
     'sponsors',
     'speakers',

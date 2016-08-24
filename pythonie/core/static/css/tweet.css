@@ -150,6 +150,7 @@
   float: right;
   padding-right: 24px;
   text-decoration: none;
+  background: transparent url(../img/twitter-little-bird.png) no-repeat right top;
 }
 .tm-click-to-tweet a.tm-ctt-btn:hover {
   text-decoration: none;

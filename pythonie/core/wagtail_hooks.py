@@ -37,7 +37,6 @@ def allow_blockquotes():
     return {
         'a': attribute_rule({'href': check_url, 'target': True, 'class': True}),
         'blockquote': attribute_rule({'class': True}),
-        'div': attribute_rule({'class': True}),
     }
 
 

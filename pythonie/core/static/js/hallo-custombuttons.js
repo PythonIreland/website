@@ -14,7 +14,7 @@
         button.hallobutton({
           uuid: this.options.uuid,
           editable: this.options.editable,
-          label: 'Pull Out Quote',
+          label: 'Click to tweet',
           icon: 'fa fa-twitter',
           command: null
         });
@@ -24,24 +24,22 @@
 
           lastSelection = widget.options.editable.getSelection();
           insertionPoint = $(lastSelection.endContainer).parentsUntil('.richtext').last();
-                    var elem;
+                    var quoted = "“" + lastSelection + "”";
+                    var escaped = $("<div>").text(quoted).html();
+                    var link_ref = "https://twitter.com/share?text="+escaped+"&amp;url=https://www.python.ie/"
+                    var link = $("<a>").attr({
+                        "target": '_blank',
+                        "href": link_ref,
+                        }).text(quoted);
+                    var elem = $("<blockquote>").attr({
+                        "class" : 'tm-click-to-tweet',
+                        }).append(link);
 
-//                    elem = "<div class='tm-tweet-clear'></div>";
-//                    elem = "<div class='tm-click-to-tweet'>dfsdfsdfs</div>";
-//                    elem = elem + "<div class='tm-click-to-tweet'> \
-//                                    "<div class='tm-ctt-text'>"\
-//                                    "<a href='https://twitter.com/share?text=%22Let.%22&amp;url=https://blog/'"\
-//                                       "arget='_blank'>“Let.”"\
-//                                       "</a>"\
-//                                       "</div>"\
-//                                    "<p><a href='https://twitter.com/share?text=%22Let.%22&amp;url=https://blog/'" \
-//                                          "target='_blank' class='tm-ctt-btn'>Click To Tweet</a>" \
-//                                    "</p><div class='tm-ctt-tip'></div>" \
-//                                    "</div>";
-                    elem = "<blockquote class='tm-click-to-tweet'><a target='_blank' href='https://twitter.com/share?text=%22Let.%22&amp;url=https://blog/'>“" + lastSelection + "”</a></blockquote>";
-//                    elem = "<blockquote class='tm-click-to-tweet'>“" + lastSelection + "”</blockquote>";
+                    var tweet = $("<p>").attr({"class" : 'tm-ctt-tip'}).append(
+                        link.clone().attr({"class": 'tm-ctt-btn'}).text('Click to tweet'));
 
-                    var node = lastSelection.createContextualFragment(elem);
+                    elem.append(tweet);
+                    var node = lastSelection.createContextualFragment($('<div>').append(elem).html());
 
                     lastSelection.deleteContents();
                     lastSelection.insertNode(node);
