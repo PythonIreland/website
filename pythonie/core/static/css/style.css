@@ -67,3 +67,7 @@ h1 {
     font-weight: 400;
     color: black;
 }
+
+.thumbnail {
+  padding: 4px 0;
+  }
