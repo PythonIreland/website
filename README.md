@@ -14,5 +14,7 @@
  - Create a super user on your local DB. `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
  - Log in to wagtail with your superuser.
  - To get rid of redis errors, install and run redis server locally and set environment variable export REDISCLOUD_URL=127.0.0.1:6379
+ - When the installation is complete you should see a Django-Wagtail framework with 1 page at http://localhost:8000/admin/ and a header saying 'Welcome to the pythonie Wagtail CMS'
+
 
 
