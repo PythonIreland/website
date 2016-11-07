@@ -6,7 +6,6 @@ from wagtail.wagtailcore.models import Site, Page
 
 from meetups.models import Meetup
 from sponsors.models import Sponsor
-from meetups.utils import update
 
 register = template.Library()
 
@@ -20,7 +19,6 @@ def show_homepage_segment(homepage_segment):
 
 @register.inclusion_tag('core/meetup.html', takes_context=True)
 def meetups(context):
-    update()
     self = context.get('self')
     if hasattr(self, 'show_meetups') and self.show_meetups:
         meetups = Meetup.future_events()
