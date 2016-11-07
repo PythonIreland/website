@@ -1,7 +1,12 @@
+{% load static %}
+
 <section class="container">
     <header class="row" id="header">
         <!-- Begin grid -->
-        <a href="/"><h1><span id="pyhead">Python Ireland</span></h1></a>
+        <a href="/">
+            <h1><img src="{% static 'img/pythonie.png' %}"
+                 class="logo img-rounded"/>
+            <span id="pyhead">Python Ireland</span></h1></a>
         <!-- End grid -->
     </header>
     <!-- header -->
