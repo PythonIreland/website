@@ -147,10 +147,8 @@ class UtilsTests(TestCase):
     def test_update_second_run_add_one(self, mock_get_content):
         mock_get_content.return_value = self._first_result()
         utils.update()
-
         mock_get_content.return_value = self._second_result()
         utils.update()
-
         mock_get_content.return_value = self._third_result()
         utils.update()
         meetup_one = Meetup.objects.get(id='qwfbshytjbnb')
