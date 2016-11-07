@@ -25,6 +25,9 @@ h1 {
     width: 100%;
     max-width: 183px;
 }
+#header >a {
+    text-decoration: none;
+}
 #header h1 {
     font-size: 32pt;
     text-align: left;
@@ -43,6 +46,10 @@ h1 {
 }
 #header .well {
     margin-top: 15px;
+}
+
+#header img.logo {
+    height: 50px;
 }
 
 /* END HEADER */
