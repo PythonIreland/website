@@ -16,4 +16,5 @@
  - To get rid of redis errors, install and run redis server locally and set environment variable export REDISCLOUD_URL=127.0.0.1:6379
  - To test flake8 compliance in the python source code `flake8 pythonie/`
 
-
+# Running Tests
+ - pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
