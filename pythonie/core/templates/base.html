@@ -33,6 +33,8 @@
         <link rel="stylesheet" type="text/x-scss" href="{% static 'css/pythonie.scss' %}">
     {% endcompress %}
 
+    <link rel="shortcut icon" type="image/ico" href="{% static 'icons/favicon.ico' %}"/>
+
     {% block extra_css %}
     {% endblock %}
 
@@ -46,6 +48,8 @@
 {% include "navbar.html" %}
 
 {% block content %}{% endblock %}
+
+{% include "footer.html" %}
 
 {% compress js %}
     <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>

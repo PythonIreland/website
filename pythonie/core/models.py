@@ -84,7 +84,7 @@ class HomePageSegment(Orderable, models.Model):
         verbose_name_plural = "Homepage Segments"
 
     panels = [
-        SnippetChooserPanel('segment', PageSegment),
+        SnippetChooserPanel('segment'),
     ]
 
     def __str__(self):
