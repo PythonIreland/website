@@ -1,4 +1,4 @@
-# website
+# website - An Amazing Project
 
 # Contributing
  - Fork the repository into your own personal github account. 
