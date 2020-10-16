@@ -1,6 +1,5 @@
 import requests
 
-from django.conf import settings
 from meetups import models, schema
 
 import logging
