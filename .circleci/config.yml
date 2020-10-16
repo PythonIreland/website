@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:  # required for runs that don't use workflows
     docker:
-      - image: circleci/python:3.6.2-stretch-browsers   # primary container for the build job
+      - image: circleci/python:3.6.1-stretch-browsers   # primary container for the build job
     steps:
       - checkout
       - run: echo "This is the test job"
