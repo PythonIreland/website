@@ -1,17 +1,20 @@
-version: 1
+version: 2
 jobs:
   build:  # required for runs that don't use workflows
-    working_directory: ~/website
     docker:
       - image: circleci/python:3.6.2-stretch-browsers   # primary container for the build job
     steps:
       - checkout
-      - run: echo "this is the test job"
-      - run: pip install -r requirements-dev.txt
-  test:
-    docker:
-      - image: circleci/python:3.6.2-stretch-browsers   # primary container for the build job
-    steps:
-      - run: coverage run pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
-      - run: coverage html -d $CIRCLE_ARTIFACTS/coverage
-      - run: flake8 pythonie/
+      - run: echo "This is the test job"
+      - run:
+          name: Install the python dependencies in a virtualenv
+          command: |
+            python3 -m venv
+            . venv/bin/activate
+            pip install -r requirements-dev.txt
+      - run:
+          command: |
+            . venv/bin/activate
+            coverage run pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+            coverage html -d $CIRCLE_ARTIFACTS/coverage
+            flake8 pythonie/
