@@ -9,6 +9,7 @@ log = logging.getLogger(__name__)
 
 def get_content(url, params=None):
     response = requests.get(url, params=params, timeout=3)
+    log.info("Response from meetups request: {0}".format(response))
     if not response:
         return []
     log.debug("Retrieved {} from {}".format(response.json(), url))
@@ -21,8 +22,7 @@ def update():
     log.info("Updating meetups")
     meetup_data = get_content(
         'https://api.meetup.com/2/events.html',
-        params={'key': settings.MEETUP_KEY,
-                'group_urlname': 'pythonireland',
+        params={'group_urlname': 'pythonireland',
                 'text_format': 'html',
                 'time': ',3m'})
     if not meetup_data:
