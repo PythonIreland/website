@@ -16,5 +16,5 @@ jobs:
           command: |
             . venv/bin/activate
             coverage run pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
-            coverage html -d $CIRCLE_ARTIFACTS/coverage
+            coverage report
             flake8 pythonie/
