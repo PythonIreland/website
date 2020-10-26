@@ -50,14 +50,14 @@ class Meetups(colander.MappingSchema):
 
             @colander.instantiate(missing=colander.drop)
             class venue(colander.MappingSchema):
-                city = colander.SchemaNode(colander.String())
+                # city = colander.SchemaNode(colander.String())
                 lon = colander.SchemaNode(colander.Float())
                 repinned = colander.SchemaNode(colander.Boolean())
                 lat = colander.SchemaNode(colander.Float())
                 id = colander.SchemaNode(colander.Float())
                 name = colander.SchemaNode(colander.String())
-                address_1 = colander.SchemaNode(colander.String())
-                country = colander.SchemaNode(colander.String())
+                # address_1 = colander.SchemaNode(colander.String())
+                # country = colander.SchemaNode(colander.String())
 
             name = colander.SchemaNode(colander.String())
             headcount = colander.SchemaNode(colander.Integer())
