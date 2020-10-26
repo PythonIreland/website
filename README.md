@@ -3,7 +3,7 @@
 # Contributing
  - Fork the repository into your own personal github account. 
  - Clone your fork of the repository. `git clone git@github.com:YourGitHubName/website.git`
- - Ensure you are running python 3.6. `python -V` or `python3 -V` should output `Python 3.6.x`
+ - Ensure you are running python 3.6. `python -V` or `python3 -V` should print output `Python 3.6.x`
  - Create a virtualenv to isolate the project dependencies. `python3 -m venv pythonie-venv` or `virtualenv -p python3 pythonie-venv` works for Ubuntu.
  - Activate the virtualenv. `source pythonie-venv/bin/activate`
  - Change into the website directory. `cd website`
