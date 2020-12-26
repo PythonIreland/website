@@ -1,6 +1,6 @@
 -r requirements-base.txt
 coverage==4.1
-model-mommy==1.2.6
+model-mommy==2.0.0
 fakeredis==0.7.0
 flake8==2.6.2
 pep8==1.7.0

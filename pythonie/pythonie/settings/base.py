@@ -41,20 +41,20 @@ INSTALLED_APPS = (
     'taggit',
     'modelcluster',
 
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtaildocs',
-    'wagtail.wagtailsnippets',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailimages',
-    'wagtail.wagtailembeds',
-    'wagtail.wagtailsearch',
-    'wagtail.wagtailredirects',
-    'wagtail.wagtailforms',
+    'wagtail.core',
+    'wagtail.admin',
+    'wagtail.documents',
+    'wagtail.snippets',
+    'wagtail.users',
+    'wagtail.sites',
+    'wagtail.images',
+    'wagtail.embeds',
+    'wagtail.search',
+    'wagtail.contrib.redirects',
+    'wagtail.contrib.forms',
 
     'wagtailnews',
-    'wagtail.contrib.wagtailstyleguide',
+    'wagtail.contrib.styleguide',
     'core',
     'storages',
     'blog',
@@ -67,7 +67,7 @@ INSTALLED_APPS = (
     # 'debug_toolbar',
 )
 
-MIDDLEWARE_CLASSES = (
+MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -75,8 +75,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
-    'wagtail.wagtailredirects.middleware.RedirectMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 )
 
 LOGGING = {
@@ -228,7 +228,7 @@ WAGTAIL_SITE_NAME = "pythonie"
 #
 # WAGTAILSEARCH_BACKENDS = {
 #     'default': {
-#         'BACKEND': ('wagtail.wagtailsearch.backends.elasticsearch.'
+#         'BACKEND': ('wagtail.search.backends.elasticsearch.'
 #                     'ElasticSearch'),
 #         'INDEX': 'pythonie',
 #     },

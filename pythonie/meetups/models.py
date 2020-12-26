@@ -3,7 +3,7 @@ from dateutil.relativedelta import relativedelta
 from django.db import models
 
 from sponsors.models import Sponsor
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.snippets.models import register_snippet
 from delorean import Delorean
 
 import logging
@@ -20,8 +20,8 @@ class MeetupSponsorRelationship(models.Model):
     """ Qualify how sponsor helped what meetup
     Pivot table for Sponsor M<-->M Meetup
     """
-    sponsor = models.ForeignKey(Sponsor)
-    meetup = models.ForeignKey('Meetup')
+    sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
+    meetup = models.ForeignKey('Meetup', on_delete=models.CASCADE)
     note = models.TextField(blank=True, default='')
 
 

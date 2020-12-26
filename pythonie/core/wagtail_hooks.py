@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
-from wagtail.wagtailcore import hooks
-from wagtail.wagtailcore.whitelist import attribute_rule, check_url
+from wagtail.core import hooks
+from wagtail.core.whitelist import attribute_rule, check_url
 
 
 @hooks.register('insert_editor_js')

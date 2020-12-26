@@ -2,7 +2,7 @@ from blog.models import BlogPage
 
 from django import template
 
-from wagtail.wagtailcore.models import Site, Page
+from wagtail.core.models import Site, Page
 
 from meetups.models import Meetup
 from sponsors.models import Sponsor
@@ -43,19 +43,19 @@ def sponsors(context):
     }
 
 
-@register.assignment_tag(takes_context=False)
+@register.simple_tag(takes_context=False)
 def root_page():
     site = Site.objects.get(is_default_site=True)
     return Page.objects.page(site.root_page).first()
 
 
-@register.assignment_tag(takes_context=False)
+@register.simple_tag(takes_context=False)
 def child_pages(page):
     pages = page.get_children().live().in_menu().all()
     return pages
 
 
-@register.assignment_tag(takes_context=False)
+@register.simple_tag(takes_context=False)
 def get_blogs(categories, count=3):
     """
     :param categories: Filter by these BlogCategories if specified

@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailembeds.blocks
-import wagtail.wagtailimages.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.embeds.blocks
+import wagtail.images.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('heading', wagtail.wagtailcore.blocks.CharBlock(icon='home', classname='full title')), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='edit')), ('video', wagtail.wagtailembeds.blocks.EmbedBlock(icon='media')), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(icon='image')), ('slide', wagtail.wagtailembeds.blocks.EmbedBlock(icon='media'))), default=None),
+            field=wagtail.core.fields.StreamField((('heading', wagtail.core.blocks.CharBlock(icon='home', classname='full title')), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='edit')), ('video', wagtail.embeds.blocks.EmbedBlock(icon='media')), ('image', wagtail.images.blocks.ImageChooserBlock(icon='image')), ('slide', wagtail.embeds.blocks.EmbedBlock(icon='media'))), default=None),
             preserve_default=False,
         ),
         migrations.AddField(

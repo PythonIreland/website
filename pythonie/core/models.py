@@ -3,21 +3,21 @@ from __future__ import unicode_literals
 from django.db import models
 from modelcluster.fields import ParentalKey
 
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, InlinePanel
-from wagtail.wagtailcore.blocks import RawHTMLBlock
-from wagtail.wagtailcore.fields import RichTextField
-from wagtail.wagtailcore.models import Page, Orderable
-from wagtail.wagtailsnippets.edit_handlers import SnippetChooserPanel
-from wagtail.wagtailsnippets.models import register_snippet
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.core.blocks import RawHTMLBlock
+from wagtail.core.fields import RichTextField
+from wagtail.core.models import Page, Orderable
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
+from wagtail.snippets.models import register_snippet
 
 from wagtailnews.models import NewsIndexMixin, AbstractNewsItem
 from wagtailnews.decorators import newsindex
 
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailadmin.edit_handlers import StreamFieldPanel
-from wagtail.wagtailimages.blocks import ImageChooserBlock
-from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.core.fields import StreamField
+from wagtail.core import blocks
+from wagtail.admin.edit_handlers import StreamFieldPanel
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 
 from sponsors.models import Sponsor, SponsorshipLevel
 
@@ -75,9 +75,9 @@ class PageSegment(models.Model):
 class HomePageSegment(Orderable, models.Model):
     """ Pivot table to associate a HomePage to Segment snippets
     """
-    homepage = ParentalKey('HomePage', related_name='homepage_segments')
+    homepage = ParentalKey('HomePage', related_name='homepage_segments', on_delete=models.CASCADE)
     segment = models.ForeignKey('PageSegment',
-                                related_name='homepage_segments')
+                                related_name='homepage_segments', on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Homepage Segment"
@@ -95,9 +95,9 @@ class HomePageSponsorRelationship(models.Model):
     """ Qualify how sponsor helped content described in HomePage
     Pivot table for Sponsor M<-->M HomePage
     """
-    sponsor = models.ForeignKey(Sponsor)
-    homepage = models.ForeignKey('HomePage')
-    level = models.ForeignKey(SponsorshipLevel)
+    sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
+    homepage = models.ForeignKey('HomePage', on_delete=models.CASCADE)
+    level = models.ForeignKey(SponsorshipLevel, on_delete=models.CASCADE)
 
     def __repr__(self):
         return '{} {} {}'.format(self.sponsor.name,

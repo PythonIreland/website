@@ -2,10 +2,10 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import wagtail.wagtailcore.fields
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailimages.blocks
-import wagtail.wagtailembeds.blocks
+import wagtail.core.fields
+import wagtail.core.blocks
+import wagtail.images.blocks
+import wagtail.embeds.blocks
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='simplepage',
             name='body',
-            field=wagtail.wagtailcore.fields.StreamField((('heading', wagtail.wagtailcore.blocks.CharBlock(classname='full title', icon='home')), ('paragraph', wagtail.wagtailcore.blocks.RichTextBlock(icon='edit')), ('video', wagtail.wagtailembeds.blocks.EmbedBlock(icon='media')), ('image', wagtail.wagtailimages.blocks.ImageChooserBlock(icon='image')), ('slide', wagtail.wagtailembeds.blocks.EmbedBlock(icon='media')))),
+            field=wagtail.core.fields.StreamField((('heading', wagtail.core.blocks.CharBlock(classname='full title', icon='home')), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='edit')), ('video', wagtail.embeds.blocks.EmbedBlock(icon='media')), ('image', wagtail.images.blocks.ImageChooserBlock(icon='image')), ('slide', wagtail.embeds.blocks.EmbedBlock(icon='media')))),
             preserve_default=True,
         ),
     ]
