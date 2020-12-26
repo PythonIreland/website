@@ -75,9 +75,11 @@ class PageSegment(models.Model):
 class HomePageSegment(Orderable, models.Model):
     """ Pivot table to associate a HomePage to Segment snippets
     """
-    homepage = ParentalKey('HomePage', related_name='homepage_segments', on_delete=models.CASCADE)
+    homepage = ParentalKey('HomePage', related_name='homepage_segments',
+                           on_delete=models.CASCADE)
     segment = models.ForeignKey('PageSegment',
-                                related_name='homepage_segments', on_delete=models.CASCADE)
+                                related_name='homepage_segments',
+                                on_delete=models.CASCADE)
 
     class Meta:
         verbose_name = "Homepage Segment"
