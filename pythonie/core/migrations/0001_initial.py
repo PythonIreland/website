@@ -5,7 +5,7 @@ from django.db import models, migrations
 import wagtailnews.models
 import modelcluster.fields
 import django.utils.timezone
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='HomePage',
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True)),
+                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True, on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -41,7 +41,7 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='NewsIndex',
             fields=[
-                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True)),
+                ('page_ptr', models.OneToOneField(auto_created=True, serialize=False, to='wagtailcore.Page', primary_key=True, parent_link=True, on_delete=models.CASCADE)),
             ],
             options={
             },
@@ -53,8 +53,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('date', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Published date')),
                 ('title', models.CharField(max_length=255)),
-                ('body', wagtail.wagtailcore.fields.RichTextField()),
-                ('newsindex', models.ForeignKey(to='wagtailcore.Page')),
+                ('body', wagtail.core.fields.RichTextField()),
+                ('newsindex', models.ForeignKey(to='wagtailcore.Page', on_delete=models.CASCADE)),
             ],
             options={
                 'abstract': False,
@@ -67,7 +67,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, serialize=False, verbose_name='ID', primary_key=True)),
                 ('title', models.CharField(max_length=255)),
-                ('body', wagtail.wagtailcore.fields.RichTextField()),
+                ('body', wagtail.core.fields.RichTextField()),
                 ('location', models.CharField(default='main', max_length=5, choices=[('main', 'Main section'), ('right', 'Right side'), ('left', 'Left side')])),
             ],
             options={
@@ -77,7 +77,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='homepagesegment',
             name='segment',
-            field=models.ForeignKey(to='core.PageSegment', related_name='homepage_segments'),
+            field=models.ForeignKey(to='core.PageSegment', related_name='homepage_segments', on_delete=models.CASCADE),
             preserve_default=True,
         ),
     ]

@@ -17,8 +17,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False, verbose_name='ID', auto_created=True)),
                 ('note', models.TextField(default='', blank=True)),
-                ('meetup', models.ForeignKey(to='meetups.Meetup')),
-                ('sponsor', models.ForeignKey(to='sponsors.Sponsor')),
+                ('meetup', models.ForeignKey(to='meetups.Meetup', on_delete=models.CASCADE)),
+                ('sponsor', models.ForeignKey(to='sponsors.Sponsor', on_delete=models.CASCADE)),
             ],
             options={
             },

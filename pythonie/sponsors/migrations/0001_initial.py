@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('visibility', models.CharField(max_length=255)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('updated', models.DateTimeField(auto_now=True)),
-                ('logo', models.ForeignKey(to='wagtailimages.Image')),
+                ('logo', models.ForeignKey(to='wagtailimages.Image', on_delete=models.CASCADE)),
             ],
             options={
                 'ordering': ['name'],

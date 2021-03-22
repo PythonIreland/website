@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('page_ptr',
                  models.OneToOneField(auto_created=True, to='wagtailcore.Page', parent_link=True, serialize=False,
-                                      primary_key=True)),
+                                      primary_key=True, on_delete=models.CASCADE)),
                 ('api_url', models.CharField(max_length=255)),
             ],
             options={

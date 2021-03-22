@@ -1,7 +1,7 @@
 from django.db import models
 import logging
 import operator
-from wagtail.wagtailimages.models import Image
+from wagtail.images.models import Image
 
 log = logging.getLogger('sponsor')
 
@@ -22,7 +22,7 @@ class Sponsor(models.Model):
     name = models.CharField(max_length=255, blank=False)
     description = models.TextField()
 
-    logo = models.ForeignKey(Image)
+    logo = models.ForeignKey(Image, on_delete=models.CASCADE)
     url = models.URLField(blank=True)
 
     created = models.DateTimeField(auto_now_add=True)

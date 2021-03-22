@@ -16,9 +16,9 @@ class Migration(migrations.Migration):
             name='HomePageSponsorRelationship',
             fields=[
                 ('id', models.AutoField(serialize=False, primary_key=True, auto_created=True, verbose_name='ID')),
-                ('homepage', models.ForeignKey(to='core.HomePage')),
-                ('level', models.ForeignKey(to='sponsors.SponsorshipLevel')),
-                ('sponsor', models.ForeignKey(to='sponsors.Sponsor')),
+                ('homepage', models.ForeignKey(to='core.HomePage', on_delete=models.CASCADE)),
+                ('level', models.ForeignKey(to='sponsors.SponsorshipLevel', on_delete=models.CASCADE)),
+                ('sponsor', models.ForeignKey(to='sponsors.Sponsor', on_delete=models.CASCADE)),
             ],
             options={
             },
