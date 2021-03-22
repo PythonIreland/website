@@ -27,7 +27,7 @@ iso8601==0.1.11
 jmespath==0.9.0
 jsonfield==1.0.3
 libsass==0.11.1
-lxml==3.7.3
+lxml==4.6.2
 mccabe==0.5.0
 olefile==0.44
 packaging==16.8
