@@ -31,7 +31,7 @@ lxml==4.6.2
 mccabe==0.5.0
 olefile==0.44
 packaging==16.8
-Pillow==4.1.0
+Pillow==8.1.1
 pycodestyle==2.0.0
 pyflakes==1.2.3
 pyparsing==2.2.0
