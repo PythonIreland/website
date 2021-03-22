@@ -16,7 +16,7 @@ django-modelcluster==4.4.1
 django-storages==1.5.2
 django-taggit==0.22.2
 django-treebeard==4.2.0
-djangorestframework==3.8.2
+djangorestframework==3.11.2
 docutils==0.12
 enum34==1.1.6
 futures==3.0.5
