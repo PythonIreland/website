@@ -1,11 +1,11 @@
+---
 version: 2
 jobs:
   build:  # required for runs that don't use workflows
     docker:
-      - image: circleci/python:3.6.12   # primary container for the build job
+      - image: circleci/python:3.9.2   # primary container for the build job
     steps:
       - checkout
-      - run: echo "This is the test job"
       - run:
           name: Install the python dependencies in a virtualenv
           command: |
@@ -13,6 +13,8 @@ jobs:
             . venv/bin/activate
             pip install -r requirements-dev.txt
       - run:
+          environment:
+            DJANGO_SETTINGS_MODULE: pythonie.settings.tests
           command: |
             . venv/bin/activate
-            python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+            python pythonie/manage.py test pythonie --verbosity=2
