@@ -14,7 +14,7 @@ dj-static==0.0.6
 Django==3.1.8
 django-appconf==1.0.4
 django-compressor==2.4
-django-debug-toolbar==3.2
+django-debug-toolbar==3.2.1
 django-filter==2.4.0
 django-libsass==0.8
 django-modelcluster==5.1
