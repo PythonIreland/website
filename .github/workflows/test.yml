@@ -1,0 +1,21 @@
+name: Test packages
+on: [puwh, pull_requests, workflow_dispatch]
+
+jobs:
+  build:
+    name: Execute tests
+    env:
+      DJANGO_SETTINGS_MODULE: pythonie.settings.tests
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set Up Puython 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+      - name: Install the dependencies
+        run: |
+          python -m pip install --upgrade pip setuptools
+          python -m pip install -r requirements-dev.txt
+      - name: Run the tests
+        run: |
+          python pythonie/manage.py test pythonie --verbosity=2
