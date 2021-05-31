@@ -1,9 +1,10 @@
 name: Test packages
-on: [push, pull_requests, workflow_dispatch]
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   build:
     name: Execute tests
+    runs-on: ubuntu-latest
     env:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
     steps:
