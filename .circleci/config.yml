@@ -1,3 +1,4 @@
+---
 version: 2
 jobs:
   build:  # required for runs that don't use workflows
@@ -12,6 +13,8 @@ jobs:
             . venv/bin/activate
             pip install -r requirements-dev.txt
       - run:
+          environment:
+            DJANGO_SETTINGS_MODULE: pythonie.settings.tests
           command: |
             . venv/bin/activate
-            python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+            python pythonie/manage.py test pythonie --verbosity=2
