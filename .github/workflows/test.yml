@@ -1,5 +1,5 @@
 name: Test packages
-on: [puwh, pull_requests, workflow_dispatch]
+on: [push, pull_requests, workflow_dispatch]
 
 jobs:
   build:
