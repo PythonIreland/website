@@ -53,7 +53,7 @@ rjsmin==1.1.0
 s3transfer==0.3.6
 six==1.15.0
 soupsieve==2.2.1
-sqlparse==0.4.1
+sqlparse==0.4.2
 static3==0.7.0
 tablib==3.0.0
 translationstring==1.3
