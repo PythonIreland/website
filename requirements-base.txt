@@ -40,7 +40,7 @@ mccabe==0.5.0
 olefile==0.44
 openpyxl==3.0.7
 packaging==20.9
-Pillow==8.1.2
+Pillow==8.3.2
 pycodestyle==2.0.0
 pyflakes==1.2.3
 pyparsing==2.2.0
