@@ -2,7 +2,7 @@
 -c main.txt
 black
 coverage
-fakeredis==1.4.5
+fakeredis~=1.4
 flake8
 isort
-model-mommy==2.0.0
+model-mommy~=2.0
