@@ -1,8 +1,8 @@
 # dev.in
 -c main.txt
-black==21.9b0
-coverage==5.5
+black
+coverage
 fakeredis==1.4.5
-flake8==3.2.1
-isort==5.9.3
+flake8
+isort
 model-mommy==2.0.0
