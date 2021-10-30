@@ -9,7 +9,7 @@ jobs:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
     steps:
       - uses: actions/checkout@v2
-      - name: Set Up Puython 3.9
+      - name: Set Up Python 3.9
         uses: actions/setup-python@v2
         with:
           python-version: 3.9
