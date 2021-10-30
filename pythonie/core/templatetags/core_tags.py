@@ -10,36 +10,34 @@ from sponsors.models import Sponsor
 register = template.Library()
 
 
-@register.inclusion_tag('core/segment.html', takes_context=False)
+@register.inclusion_tag("core/segment.html", takes_context=False)
 def show_homepage_segment(homepage_segment):
-    return {
-        'segment': homepage_segment.segment
-    }
+    return {"segment": homepage_segment.segment}
 
 
-@register.inclusion_tag('core/meetup.html', takes_context=True)
+@register.inclusion_tag("core/meetup.html", takes_context=True)
 def meetups(context):
-    self = context.get('self')
-    if hasattr(self, 'show_meetups') and self.show_meetups:
+    self = context.get("self")
+    if hasattr(self, "show_meetups") and self.show_meetups:
         meetups = Meetup.future_events()
     else:
         meetups = []
     return {
-        'meetups': meetups,
-        'request': context['request'],
+        "meetups": meetups,
+        "request": context["request"],
     }
 
 
-@register.inclusion_tag('core/sponsor.html', takes_context=True)
+@register.inclusion_tag("core/sponsor.html", takes_context=True)
 def sponsors(context):
-    self = context.get('self')
-    if hasattr(self, 'show_sponsors') and self.show_sponsors:
+    self = context.get("self")
+    if hasattr(self, "show_sponsors") and self.show_sponsors:
         sponsors = Sponsor.for_event(self)
     else:
         sponsors = []
     return {
-        'sponsors': sponsors,
-        'request': context['request'],
+        "sponsors": sponsors,
+        "request": context["request"],
     }
 
 
@@ -65,4 +63,4 @@ def get_blogs(categories, count=3):
     blog_pages = BlogPage.objects.filter()
     if categories:
         blog_pages = blog_pages.filter(blog_categories__in=categories)
-    return blog_pages.order_by('date')[:count]
+    return blog_pages.order_by("date")[:count]

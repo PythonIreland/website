@@ -28,13 +28,10 @@ class Meetups(colander.MappingSchema):
             event_url = colander.SchemaNode(colander.String())
             status = colander.SchemaNode(colander.String())
 
-            created = colander.SchemaNode(
-                colander.Integer(), preparer=int_to_datetime)
-            updated = colander.SchemaNode(
-                colander.Integer(), preparer=int_to_datetime)
+            created = colander.SchemaNode(colander.Integer(), preparer=int_to_datetime)
+            updated = colander.SchemaNode(colander.Integer(), preparer=int_to_datetime)
 
-            time = colander.SchemaNode(
-                colander.Integer(), preparer=int_to_datetime)
+            time = colander.SchemaNode(colander.Integer(), preparer=int_to_datetime)
             utc_offset = colander.SchemaNode(colander.Integer())
 
             @colander.instantiate()
@@ -63,11 +60,9 @@ class Meetups(colander.MappingSchema):
             headcount = colander.SchemaNode(colander.Integer())
             description = colander.SchemaNode(colander.String(), missing="")
             visibility = colander.SchemaNode(colander.String())
-            duration = colander.SchemaNode(colander.Integer(),
-                                           missing=colander.drop)
+            duration = colander.SchemaNode(colander.Integer(), missing=colander.drop)
 
             maybe_rsvp_count = colander.SchemaNode(colander.Integer())
             yes_rsvp_count = colander.SchemaNode(colander.Integer())
-            rsvp_limit = colander.SchemaNode(colander.Integer(),
-                                             missing=colander.drop)
+            rsvp_limit = colander.SchemaNode(colander.Integer(), missing=colander.drop)
             waitlist_count = colander.SchemaNode(colander.Integer())

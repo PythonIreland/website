@@ -8,13 +8,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('meetups', '0005_delete_meetupupdate'),
+        ("meetups", "0005_delete_meetupupdate"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='meetup',
-            name='sponsors',
-            field=models.ManyToManyField(blank=True, through='meetups.MeetupSponsorRelationship', to='sponsors.Sponsor'),
+            model_name="meetup",
+            name="sponsors",
+            field=models.ManyToManyField(
+                blank=True,
+                through="meetups.MeetupSponsorRelationship",
+                to="sponsors.Sponsor",
+            ),
         ),
     ]

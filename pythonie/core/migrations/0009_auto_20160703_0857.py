@@ -8,23 +8,31 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0008_auto_20150821_2230'),
+        ("core", "0008_auto_20150821_2230"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='newsitem',
-            name='has_unpublished_changes',
-            field=models.BooleanField(default=False, editable=False, verbose_name='Has unpublished changes'),
+            model_name="newsitem",
+            name="has_unpublished_changes",
+            field=models.BooleanField(
+                default=False, editable=False, verbose_name="Has unpublished changes"
+            ),
         ),
         migrations.AddField(
-            model_name='newsitem',
-            name='live',
-            field=models.BooleanField(default=True, editable=False, verbose_name='Live'),
+            model_name="newsitem",
+            name="live",
+            field=models.BooleanField(
+                default=True, editable=False, verbose_name="Live"
+            ),
         ),
         migrations.AlterField(
-            model_name='homepage',
-            name='sponsors',
-            field=models.ManyToManyField(blank=True, through='core.HomePageSponsorRelationship', to='sponsors.Sponsor'),
+            model_name="homepage",
+            name="sponsors",
+            field=models.ManyToManyField(
+                blank=True,
+                through="core.HomePageSponsorRelationship",
+                to="sponsors.Sponsor",
+            ),
         ),
     ]

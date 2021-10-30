@@ -7,11 +7,11 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('meetups', '0004_auto_20150705_1641'),
+        ("meetups", "0004_auto_20150705_1641"),
     ]
 
     operations = [
         migrations.DeleteModel(
-            name='MeetupUpdate',
+            name="MeetupUpdate",
         ),
     ]

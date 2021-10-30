@@ -23,14 +23,14 @@ from sponsors.models import Sponsor, SponsorshipLevel
 
 import logging
 
-log = logging.getLogger('pythonie')
+log = logging.getLogger("pythonie")
 
 
 class MeetupMixin(models.Model):
     show_meetups = models.BooleanField(default=False)
 
     settings_panels = [
-        FieldPanel('show_meetups'),
+        FieldPanel("show_meetups"),
     ]
 
     class Meta:
@@ -41,7 +41,7 @@ class SponsorMixin(models.Model):
     show_sponsors = models.BooleanField(default=False)
 
     settings_panels = [
-        FieldPanel('show_sponsors'),
+        FieldPanel("show_sponsors"),
     ]
 
     class Meta:
@@ -50,43 +50,46 @@ class SponsorMixin(models.Model):
 
 @register_snippet
 class PageSegment(models.Model):
-    """ This is a fixed text content
-    """
+    """This is a fixed text content"""
+
     title = models.CharField(max_length=255)
     body = RichTextField()
     location = models.CharField(
         max_length=5,
-        choices=(('main', 'Main section'),
-                 ('right', 'Right side'),
-                 ('left', 'Left side')),
-        default='main')
+        choices=(
+            ("main", "Main section"),
+            ("right", "Right side"),
+            ("left", "Left side"),
+        ),
+        default="main",
+    )
 
     panels = [
-        FieldPanel('title', classname='full title'),
-        FieldPanel('body', classname='full'),
-        FieldPanel('location', classname='select'),
+        FieldPanel("title", classname="full title"),
+        FieldPanel("body", classname="full"),
+        FieldPanel("location", classname="select"),
     ]
 
     def __str__(self):
-        return "{!s} on {!s}".format(self.title,
-                                     self.homepage_segments.first())
+        return "{!s} on {!s}".format(self.title, self.homepage_segments.first())
 
 
 class HomePageSegment(Orderable, models.Model):
-    """ Pivot table to associate a HomePage to Segment snippets
-    """
-    homepage = ParentalKey('HomePage', related_name='homepage_segments',
-                           on_delete=models.CASCADE)
-    segment = models.ForeignKey('PageSegment',
-                                related_name='homepage_segments',
-                                on_delete=models.CASCADE)
+    """Pivot table to associate a HomePage to Segment snippets"""
+
+    homepage = ParentalKey(
+        "HomePage", related_name="homepage_segments", on_delete=models.CASCADE
+    )
+    segment = models.ForeignKey(
+        "PageSegment", related_name="homepage_segments", on_delete=models.CASCADE
+    )
 
     class Meta:
         verbose_name = "Homepage Segment"
         verbose_name_plural = "Homepage Segments"
 
     panels = [
-        SnippetChooserPanel('segment'),
+        SnippetChooserPanel("segment"),
     ]
 
     def __str__(self):
@@ -94,48 +97,56 @@ class HomePageSegment(Orderable, models.Model):
 
 
 class HomePageSponsorRelationship(models.Model):
-    """ Qualify how sponsor helped content described in HomePage
+    """Qualify how sponsor helped content described in HomePage
     Pivot table for Sponsor M<-->M HomePage
     """
+
     sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
-    homepage = models.ForeignKey('HomePage', on_delete=models.CASCADE)
+    homepage = models.ForeignKey("HomePage", on_delete=models.CASCADE)
     level = models.ForeignKey(SponsorshipLevel, on_delete=models.CASCADE)
 
     def __repr__(self):
-        return '{} {} {}'.format(self.sponsor.name,
-                                 self.homepage.title,
-                                 self.level.name)
+        return "{} {} {}".format(
+            self.sponsor.name, self.homepage.title, self.level.name
+        )
 
 
 class HomePage(Page, MeetupMixin, SponsorMixin):
-    subpage_types = ['HomePage', 'SimplePage',
-                     'speakers.SpeakersPage', 'speakers.TalksPage']
+    subpage_types = [
+        "HomePage",
+        "SimplePage",
+        "speakers.SpeakersPage",
+        "speakers.TalksPage",
+    ]
 
-    body = StreamField([
-        ('heading', blocks.CharBlock(icon="home",
-                                     classname="full title")),
-        ('paragraph', blocks.RichTextBlock(icon="edit")),
-        ('video', EmbedBlock(icon="media")),
-        ('image', ImageChooserBlock(icon="image")),
-        ('slide', EmbedBlock(icon="media")),
-        ('html', RawHTMLBlock(icon="code"))
-    ])
+    body = StreamField(
+        [
+            ("heading", blocks.CharBlock(icon="home", classname="full title")),
+            ("paragraph", blocks.RichTextBlock(icon="edit")),
+            ("video", EmbedBlock(icon="media")),
+            ("image", ImageChooserBlock(icon="image")),
+            ("slide", EmbedBlock(icon="media")),
+            ("html", RawHTMLBlock(icon="code")),
+        ]
+    )
 
-    sponsors = models.ManyToManyField(Sponsor,
-                                      through=HomePageSponsorRelationship,
-                                      blank=True)
+    sponsors = models.ManyToManyField(
+        Sponsor, through=HomePageSponsorRelationship, blank=True
+    )
 
     def __str__(self):
         return self.title
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]
 
-    settings_panels = (Page.settings_panels + MeetupMixin.settings_panels +
-                       SponsorMixin.settings_panels +
-                       [InlinePanel('homepage_segments',
-                                    label='Homepage Segment')])
+    settings_panels = (
+        Page.settings_panels
+        + MeetupMixin.settings_panels
+        + SponsorMixin.settings_panels
+        + [InlinePanel("homepage_segments", label="Homepage Segment")]
+    )
 
 
 class SimplePage(Page, MeetupMixin, SponsorMixin):
@@ -143,28 +154,33 @@ class SimplePage(Page, MeetupMixin, SponsorMixin):
     allowed url to embed listed in
     lib/python3.4/site-packages/wagtail/wagtailembeds/oembed_providers.py
     """
-    body = StreamField([
-        ('heading', blocks.CharBlock(icon="home",
-                                     classname="full title")),
-        ('paragraph', blocks.RichTextBlock(icon="edit")),
-        ('video', EmbedBlock(icon="media")),
-        ('image', ImageChooserBlock(icon="image")),
-        ('slide', EmbedBlock(icon="media")),
-        ('html', RawHTMLBlock(icon="code"))
-    ])
+
+    body = StreamField(
+        [
+            ("heading", blocks.CharBlock(icon="home", classname="full title")),
+            ("paragraph", blocks.RichTextBlock(icon="edit")),
+            ("video", EmbedBlock(icon="media")),
+            ("image", ImageChooserBlock(icon="image")),
+            ("slide", EmbedBlock(icon="media")),
+            ("html", RawHTMLBlock(icon="code")),
+        ]
+    )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('body'),
+        StreamFieldPanel("body"),
     ]
 
-    settings_panels = (Page.settings_panels + MeetupMixin.settings_panels +
-                       SponsorMixin.settings_panels)
+    settings_panels = (
+        Page.settings_panels
+        + MeetupMixin.settings_panels
+        + SponsorMixin.settings_panels
+    )
 
 
 @newsindex
 class NewsIndex(NewsIndexMixin, Page):
     # Add extra fields here, as in a normal Wagtail Page class, if required
-    newsitem_model = 'NewsItem'
+    newsitem_model = "NewsItem"
 
 
 class NewsItem(AbstractNewsItem):
@@ -173,11 +189,14 @@ class NewsItem(AbstractNewsItem):
     Add any fields required for your page.
     It already has ``date`` field, and a link to its parent ``NewsIndex`` Page
     """
+
     title = models.CharField(max_length=255)
     body = RichTextField()
 
-    panels = [FieldPanel('title', classname='full title'),
-              FieldPanel('body', classname='full'), ] + AbstractNewsItem.panels
+    panels = [
+        FieldPanel("title", classname="full title"),
+        FieldPanel("body", classname="full"),
+    ] + AbstractNewsItem.panels
 
     def __unicode__(self):
         return self.title

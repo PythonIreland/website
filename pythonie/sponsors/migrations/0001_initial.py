@@ -7,25 +7,38 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wagtailimages', '0005_make_filter_spec_unique'),
+        ("wagtailimages", "0005_make_filter_spec_unique"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Sponsor',
+            name="Sponsor",
             fields=[
-                ('id', models.AutoField(serialize=False, verbose_name='ID', primary_key=True, auto_created=True)),
-                ('name', models.CharField(max_length=255)),
-                ('description', models.TextField()),
-                ('is_active', models.BooleanField(default=False)),
-                ('status', models.CharField(max_length=255)),
-                ('visibility', models.CharField(max_length=255)),
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('updated', models.DateTimeField(auto_now=True)),
-                ('logo', models.ForeignKey(to='wagtailimages.Image', on_delete=models.CASCADE)),
+                (
+                    "id",
+                    models.AutoField(
+                        serialize=False,
+                        verbose_name="ID",
+                        primary_key=True,
+                        auto_created=True,
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("description", models.TextField()),
+                ("is_active", models.BooleanField(default=False)),
+                ("status", models.CharField(max_length=255)),
+                ("visibility", models.CharField(max_length=255)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("updated", models.DateTimeField(auto_now=True)),
+                (
+                    "logo",
+                    models.ForeignKey(
+                        to="wagtailimages.Image", on_delete=models.CASCADE
+                    ),
+                ),
             ],
             options={
-                'ordering': ['name'],
+                "ordering": ["name"],
             },
             bases=(models.Model,),
         ),

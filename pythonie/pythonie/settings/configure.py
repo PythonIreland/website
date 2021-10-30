@@ -1,11 +1,11 @@
 import logging
 
-log = logging.getLogger('pythonie')
+log = logging.getLogger("pythonie")
 
 
 def configure_redis(redis_url, test=False):
     if test:
-        log.info('Configuring redis for test')
+        log.info("Configuring redis for test")
         import fakeredis
 
         return fakeredis.FakeStrictRedis()
@@ -15,9 +15,7 @@ def configure_redis(redis_url, test=False):
         from urllib.parse import urlparse
 
         url = urlparse(redis_url)
-        log.info('Redis configured with redis_url: %s' % redis_url)
-        return redis.Redis(host=url.hostname,
-                           port=url.port,
-                           password=url.password)
+        log.info("Redis configured with redis_url: %s" % redis_url)
+        return redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
-    log.warn('Redis not configured')
+    log.warn("Redis not configured")

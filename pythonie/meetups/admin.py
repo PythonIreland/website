@@ -9,21 +9,21 @@ class MeetupSponsorRelationshipInline(admin.TabularInline):
 
 @admin.register(Meetup)
 class MeetupAdmin(admin.ModelAdmin):
-    inlines = [
-        MeetupSponsorRelationshipInline
-    ]
-    list_display = ('id',
-                    'name',
-                    'time',
-                    'rsvps',
-                    'waitlist_count',
-                    'status',
-                    'visibility')
+    inlines = [MeetupSponsorRelationshipInline]
+    list_display = (
+        "id",
+        "name",
+        "time",
+        "rsvps",
+        "waitlist_count",
+        "status",
+        "visibility",
+    )
 
 
 @admin.register(MeetupSponsorRelationship)
 class MeetupSponsorRelationshipAdmin(admin.ModelAdmin):
-    list_display = ('meetup', 'sponsor')
+    list_display = ("meetup", "sponsor")
     list_display_links = None
-    list_editable = ('meetup', 'sponsor')
-    list_filter = ('sponsor',)
+    list_editable = ("meetup", "sponsor")
+    list_filter = ("sponsor",)

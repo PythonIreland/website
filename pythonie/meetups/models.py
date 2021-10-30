@@ -8,7 +8,7 @@ from delorean import Delorean
 
 import logging
 
-log = logging.getLogger('meetups')
+log = logging.getLogger("meetups")
 
 
 def next_n_months(source_date, months):
@@ -17,12 +17,13 @@ def next_n_months(source_date, months):
 
 
 class MeetupSponsorRelationship(models.Model):
-    """ Qualify how sponsor helped what meetup
+    """Qualify how sponsor helped what meetup
     Pivot table for Sponsor M<-->M Meetup
     """
+
     sponsor = models.ForeignKey(Sponsor, on_delete=models.CASCADE)
-    meetup = models.ForeignKey('Meetup', on_delete=models.CASCADE)
-    note = models.TextField(blank=True, default='')
+    meetup = models.ForeignKey("Meetup", on_delete=models.CASCADE)
+    note = models.TextField(blank=True, default="")
 
 
 @register_snippet
@@ -33,13 +34,14 @@ class Meetup(models.Model):
     description = models.TextField()
     event_url = models.URLField()
 
-    sponsors = models.ManyToManyField(Sponsor,
-                                      through=MeetupSponsorRelationship,
-                                      blank=True)
+    sponsors = models.ManyToManyField(
+        Sponsor, through=MeetupSponsorRelationship, blank=True
+    )
     time = models.DateTimeField()
     created = models.DateTimeField()
-    updated = models.DateTimeField(default=Delorean(datetime(1970, 1, 1),
-                                                    timezone='UTC').datetime)
+    updated = models.DateTimeField(
+        default=Delorean(datetime(1970, 1, 1), timezone="UTC").datetime
+    )
 
     rsvps = models.IntegerField(default=0)
     maybe_rsvps = models.IntegerField(default=0)
@@ -49,7 +51,7 @@ class Meetup(models.Model):
     visibility = models.CharField(max_length=255, blank=False)
 
     class Meta:
-        ordering = ['time']
+        ordering = ["time"]
 
     def __str__(self):
         return self.name
@@ -57,5 +59,6 @@ class Meetup(models.Model):
     @classmethod
     def future_events(cls):
         today = datetime.now()
-        return cls.objects.filter(
-            time__gt=today).filter(time__lt=next_n_months(today, 3))
+        return cls.objects.filter(time__gt=today).filter(
+            time__lt=next_n_months(today, 3)
+        )

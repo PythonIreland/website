@@ -7,19 +7,27 @@ from django.db import models, migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('sponsors', '0002_restructure_sponsor'),
+        ("sponsors", "0002_restructure_sponsor"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SponsorshipLevel',
+            name="SponsorshipLevel",
             fields=[
-                ('id', models.AutoField(verbose_name='ID', serialize=False, primary_key=True, auto_created=True)),
-                ('level', models.IntegerField()),
-                ('name', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.AutoField(
+                        verbose_name="ID",
+                        serialize=False,
+                        primary_key=True,
+                        auto_created=True,
+                    ),
+                ),
+                ("level", models.IntegerField()),
+                ("name", models.CharField(max_length=255)),
             ],
             options={
-                'ordering': ['level'],
+                "ordering": ["level"],
             },
             bases=(models.Model,),
         ),

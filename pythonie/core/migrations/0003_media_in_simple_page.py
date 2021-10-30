@@ -11,14 +11,27 @@ import wagtail.embeds.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0002_simplepage'),
+        ("core", "0002_simplepage"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='simplepage',
-            name='body',
-            field=wagtail.core.fields.StreamField((('heading', wagtail.core.blocks.CharBlock(classname='full title', icon='home')), ('paragraph', wagtail.core.blocks.RichTextBlock(icon='edit')), ('video', wagtail.embeds.blocks.EmbedBlock(icon='media')), ('image', wagtail.images.blocks.ImageChooserBlock(icon='image')), ('slide', wagtail.embeds.blocks.EmbedBlock(icon='media')))),
+            model_name="simplepage",
+            name="body",
+            field=wagtail.core.fields.StreamField(
+                (
+                    (
+                        "heading",
+                        wagtail.core.blocks.CharBlock(
+                            classname="full title", icon="home"
+                        ),
+                    ),
+                    ("paragraph", wagtail.core.blocks.RichTextBlock(icon="edit")),
+                    ("video", wagtail.embeds.blocks.EmbedBlock(icon="media")),
+                    ("image", wagtail.images.blocks.ImageChooserBlock(icon="image")),
+                    ("slide", wagtail.embeds.blocks.EmbedBlock(icon="media")),
+                )
+            ),
             preserve_default=True,
         ),
     ]

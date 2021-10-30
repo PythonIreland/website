@@ -4,19 +4,19 @@ from .base import *  # flake8: noqa
 # Disable debug mode
 DEBUG = False
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_CUSTOM_DOMAIN = 's3.python.ie'
-AWS_HOST = 's3-eu-west-1.amazonaws.com'
+DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_CUSTOM_DOMAIN = "s3.python.ie"
+AWS_HOST = "s3-eu-west-1.amazonaws.com"
 
 # Compress static files offline
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 
 COMPRESS_OFFLINE = False
 
-REDIS_URL = os.environ.get('REDISCLOUD_URL')
+REDIS_URL = os.environ.get("REDISCLOUD_URL")
 REDIS = configure_redis(REDIS_URL)
 
 # Send notification emails as a background task using Celery,
