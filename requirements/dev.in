@@ -1,8 +1,8 @@
--r requirements-base.txt
+# dev.in
+-c main.txt
 black==21.9b0
 coverage==5.5
 fakeredis==1.4.5
 flake8==3.2.1
 isort==5.9.3
 model-mommy==2.0.0
-pep8==1.7.1
