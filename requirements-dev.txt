@@ -5,3 +5,4 @@ flake8==3.2.1
 model-mommy==2.0.0
 pep8==1.7.1
 black==21.9b0
+isort==5.9.3
