@@ -17,7 +17,6 @@ pytz==2021.1
 redis==2.10.5
 requests==2.25.1
 wagtail-blog==2.3.5
-wagtail-blog==2.3.5
 wagtail==2.12.5
 wagtailfontawesome==1.2.1
 wagtailnews==2.7.1
