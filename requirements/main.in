@@ -1,6 +1,6 @@
 # main.in
 Delorean==1.0.0
-Django==3.1
+Django==3.1.13
 Willow==1.4
 boto3==1.17.34
 colander==1.8.3
