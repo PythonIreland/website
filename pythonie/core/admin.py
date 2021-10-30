@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import SimplePage
-from .models import HomePageSponsorRelationship
+
+from .models import HomePageSponsorRelationship, SimplePage
 
 admin.site.register(SimplePage)
 

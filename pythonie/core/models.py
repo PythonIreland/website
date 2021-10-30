@@ -1,27 +1,22 @@
 from __future__ import unicode_literals
 
+import logging
+
 from django.db import models
 from modelcluster.fields import ParentalKey
-
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.core import blocks
 from wagtail.core.blocks import RawHTMLBlock
-from wagtail.core.fields import RichTextField
-from wagtail.core.models import Page, Orderable
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Orderable, Page
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
-
-from wagtailnews.models import NewsIndexMixin, AbstractNewsItem
 from wagtailnews.decorators import newsindex
-
-from wagtail.core.fields import StreamField
-from wagtail.core import blocks
-from wagtail.admin.edit_handlers import StreamFieldPanel
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.embeds.blocks import EmbedBlock
+from wagtailnews.models import AbstractNewsItem, NewsIndexMixin
 
 from sponsors.models import Sponsor, SponsorshipLevel
-
-import logging
 
 log = logging.getLogger("pythonie")
 

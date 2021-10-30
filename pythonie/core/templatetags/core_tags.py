@@ -1,8 +1,6 @@
 from blog.models import BlogPage
-
 from django import template
-
-from wagtail.core.models import Site, Page
+from wagtail.core.models import Page, Site
 
 from meetups.models import Meetup
 from sponsors.models import Sponsor

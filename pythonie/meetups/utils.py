@@ -1,8 +1,8 @@
+import logging
+
 import requests
 
 from meetups import models, schema
-
-import logging
 
 log = logging.getLogger(__name__)
 

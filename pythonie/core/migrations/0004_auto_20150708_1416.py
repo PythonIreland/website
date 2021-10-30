@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db import models, migrations
 import wagtail.core.blocks
+import wagtail.core.fields
 import wagtail.embeds.blocks
 import wagtail.images.blocks
-import wagtail.core.fields
+from django.db import migrations, models
 
 
 class Migration(migrations.Migration):

@@ -1,9 +1,7 @@
 from django.test import TestCase
-
 from model_mommy import mommy
 
-from sponsors.models import SponsorshipLevel
-from sponsors.models import Sponsor
+from sponsors.models import Sponsor, SponsorshipLevel
 
 
 class SponsorModelTests(TestCase):

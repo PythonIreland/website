@@ -1,12 +1,11 @@
 from datetime import datetime
 from unittest.mock import patch
-from django.test import TestCase
 
+from django.test import TestCase
 from model_mommy import mommy
 from pytz import UTC
 
 from meetups import utils
-
 from meetups.models import Meetup, next_n_months
 
 description = (

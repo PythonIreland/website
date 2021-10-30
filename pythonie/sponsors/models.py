@@ -1,6 +1,7 @@
-from django.db import models
 import logging
 import operator
+
+from django.db import models
 from wagtail.images.models import Image
 
 log = logging.getLogger("sponsor")

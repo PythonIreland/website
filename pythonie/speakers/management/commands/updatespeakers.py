@@ -1,7 +1,8 @@
 import logging
+
 from django.core.management.base import BaseCommand
-from speakers.models import SpeakersPage
-from speakers.models import TalksPage
+
+from speakers.models import SpeakersPage, TalksPage
 
 log = logging.getLogger("speakers")
 
