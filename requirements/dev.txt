@@ -1,27 +1,27 @@
 asgiref==3.4.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
 black==21.9b0
-    # via -r requirements/dev.in
+    # via -r dev.in
 click==8.0.3
     # via black
 coverage==6.1.1
-    # via -r requirements/dev.in
-django==3.1.13
+    # via -r dev.in
+django==3.1.14
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   model-mommy
 fakeredis==1.6.1
-    # via -r requirements/dev.in
+    # via -r dev.in
 flake8==4.0.1
-    # via -r requirements/dev.in
+    # via -r dev.in
 isort==5.9.3
-    # via -r requirements/dev.in
+    # via -r dev.in
 mccabe==0.6.1
     # via flake8
 model-mommy==2.0.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 mypy-extensions==0.4.3
     # via black
 packaging==21.2
@@ -38,23 +38,23 @@ pyparsing==2.4.7
     # via packaging
 pytz==2021.3
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
 redis==2.10.6
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   fakeredis
 regex==2021.10.23
     # via black
 six==1.16.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   fakeredis
 sortedcontainers==2.4.0
     # via fakeredis
 sqlparse==0.4.2
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
 tomli==1.2.2
     # via black
