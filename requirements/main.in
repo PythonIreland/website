@@ -17,7 +17,7 @@ pytz
 redis~=2.10
 requests
 wagtail-blog
-wagtail~=2.12
+wagtail~=2.15
 wagtailfontawesome
 wagtailnews
 whitenoise~=5.2
