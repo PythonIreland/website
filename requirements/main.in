@@ -1,11 +1,11 @@
 # main.in
-Delorean~=1.0
-Django<3.2
-Willow==1.4
-boto3~=1.17
-colander~=1.8
-dj-database-url~=0.5
-dj-static==0.0.6
+Delorean
+Django<4.0
+Willow
+boto3
+colander
+dj-database-url
+dj-static
 django-compressor
 django-libsass
 django-modelcluster
@@ -14,10 +14,10 @@ django-taggit
 gunicorn
 python-dateutil
 pytz
-redis~=2.10
+redis
 requests
 wagtail-blog
-wagtail~=2.12
+wagtail
 wagtailfontawesome
 wagtailnews
-whitenoise~=5.2
+whitenoise
