@@ -25,7 +25,7 @@ ALLOWED_HOSTS = [".herokuapp.com", ".python.ie", "next.python.ie", "127.0.0.1"]
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend-
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
-BASE_URL = "http://python.ie"
+BASE_URL = "https://python.ie"
 
 # Application definition
 
