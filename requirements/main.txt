@@ -8,13 +8,13 @@ babel==2.10.3
     # via delorean
 beautifulsoup4==4.9.3
     # via wagtail
-boto3==1.24.67
+boto3==1.24.81
     # via -r requirements/main.in
-botocore==1.27.67
+botocore==1.27.81
     # via
     #   boto3
     #   s3transfer
-certifi==2022.6.15
+certifi==2022.9.24
     # via requests
 charset-normalizer==2.1.1
     # via requests
@@ -63,7 +63,7 @@ django-taggit==2.1.0
     #   wagtail
 django-treebeard==4.5.1
     # via wagtail
-djangorestframework==3.13.1
+djangorestframework==3.14.0
     # via wagtail
 draftjs-exporter==2.1.7
     # via wagtail
@@ -73,9 +73,9 @@ gunicorn==20.1.0
     # via -r requirements/main.in
 html5lib==1.1
     # via wagtail
-humanize==4.3.0
+humanize==4.4.0
     # via delorean
-idna==3.3
+idna==3.4
     # via requests
 iso8601==1.0.2
     # via colander
@@ -134,17 +134,17 @@ six==1.16.0
     #   python-dateutil
 soupsieve==2.3.2.post1
     # via beautifulsoup4
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via django
 static3==0.7.0
     # via dj-static
 tablib[xls,xlsx]==3.2.1
     # via wagtail
-telepath==0.2
+telepath==0.3
     # via wagtail
 translationstring==1.4
     # via colander
-tzdata==2022.2
+tzdata==2022.4
     # via pytz-deprecation-shim
 tzlocal==4.2
     # via delorean

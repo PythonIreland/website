@@ -20,7 +20,7 @@ django==3.2.15
     # via
     #   -c requirements/main.txt
     #   model-mommy
-fakeredis==1.9.1
+fakeredis==1.9.2
     # via -r requirements/dev.in
 flake8==5.0.4
     # via -r requirements/dev.in
@@ -56,13 +56,9 @@ redis==4.3.4
     # via
     #   -c requirements/main.txt
     #   fakeredis
-six==1.16.0
-    # via
-    #   -c requirements/main.txt
-    #   fakeredis
 sortedcontainers==2.4.0
     # via fakeredis
-sqlparse==0.4.2
+sqlparse==0.4.3
     # via
     #   -c requirements/main.txt
     #   django
