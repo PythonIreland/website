@@ -21,3 +21,4 @@ wagtail
 wagtailfontawesome
 wagtailnews
 whitenoise
+django-extensions
