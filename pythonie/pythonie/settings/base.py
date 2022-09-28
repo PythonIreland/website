@@ -230,3 +230,5 @@ WAGTAIL_SITE_NAME = "pythonie"
 WAGTAILIMAGES_FEATURE_DETECTION_ENABLED = False
 
 MEETUPS_LAST_CHECKED = "meetups_last_checked"
+
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
