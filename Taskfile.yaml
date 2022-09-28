@@ -1,0 +1,82 @@
+# https://taskfile.dev
+
+version: '3'
+
+env:
+  DOCKER_IMAGE: python.ie/website-dev
+  PGPASSWORD: pythonie
+  PGUSER: postgres
+
+dotenv: ['production.env']
+
+tasks:
+  database:drop:
+    cmds:
+      - psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS pythonie"
+
+  database:pull:
+    desc: Pull the database from Heroku and store it into a localhost PostgreSQL
+    cmds:
+      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER postgres://postgres@localhost/pythonie -a pythonie
+
+  database:reset:
+    desc: Reset the database with a fresh copy of the official database
+    cmds:
+      - task: database:drop
+      - task: database:pull
+
+  run:
+    desc: Run a local version of PythonIE (works)
+    cmds:
+      - docker compose run --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
+
+  django:shell-plus:
+    desc: Run a local version of PythonIE
+    cmds:
+      - docker compose run --service-ports web python pythonie/manage.py shell_plus
+
+  django:make-migrations:
+    desc: Make migrations
+    cmds:
+      - docker compose run --service-ports web python pythonie/manage.py makemigrations
+
+  django:migrate:
+    desc: Make migrations
+    cmds:
+      - docker compose run --service-ports web python pythonie/manage.py migrate
+
+  django:collect-static:
+    desc: Make migrations
+    cmds:
+      - docker compose run --service-ports web python pythonie/manage.py collectstatic
+
+  dependencies:compute:
+    desc: Compute the dependencies
+    cmds:
+      - toast deps:compute
+
+  dependencies:outdated:
+    desc: List the outdated dependencies
+    cmds:
+      - toast deps:outdated
+
+  dependencies:upgrade:
+    desc: Upgrade the dependencies
+    cmds:
+      - toast deps:upgrade
+
+  docker:build:
+    desc: Build the docker image
+    cmds:
+      - docker build --no-cache -t $DOCKER_IMAGE .
+
+  docker:run:
+    desc: Run a shell into the docker container
+    cmds:
+      - docker compose run web /bin/bash
+
+  tests:
+    env:
+      DJANGO_SETTINGS_MODULE: pythonie.settings.tests
+    cmds:
+      - docker run --rm -p 8000:8000 --env-file development.env -e DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE -v $PWD:/app -w /app -it $DOCKER_IMAGE python pythonie/manage.py test pythonie --verbosity=3

@@ -1,0 +1,51 @@
+image: python.ie/website-dev
+tasks:
+  deps:compute:
+    description: Compute the dependencies
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: |
+      pip-compile --build-isolation --no-header --output-file requirements/main.txt requirements/main.in
+      pip-compile --build-isolation --no-header --output-file requirements/dev.txt requirements/dev.in
+      pip-compile --build-isolation --no-header --output-file requirements/production.txt requirements/production.in
+
+  deps:outdated:
+    description: Show the outdated dependencies
+    cache: false
+    command: pip list -o
+
+  deps:upgrade:
+    description: Upgrade the dependencies
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: |
+      pip-compile --upgrade --build-isolation --no-header --output-file requirements/main.txt requirements/main.in
+      pip-compile --upgrade --build-isolation --no-header --output-file requirements/dev.txt requirements/dev.in
+      pip-compile --upgrade --build-isolation --no-header --output-file requirements/production.txt requirements/production.in
+
+  deps:tree:
+    description: Show the dependencies tree
+    cache: false
+    command: pipdeptree
+
+  code:format:
+    description: Format the code
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: |
+      isort pythonie
+      black pythonie
+
+  fish:
+    description: Run a Shell
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: /usr/bin/fish
