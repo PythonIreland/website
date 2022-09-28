@@ -1,0 +1,73 @@
+version: '3.9'
+
+services:
+  web:
+    image: python.ie/website-dev
+    ports:
+      - "8000:8000"
+    command: /usr/bin/fish
+    depends_on:
+      - postgres
+      - minio
+      - redis
+    env_file:
+      - development.env
+    environment:
+      PGDATABASE: pythonie
+      PGUSER: postgres
+      PGPASSWORD: pythonie
+    volumes:
+      - .:/app
+    working_dir: /app
+
+
+  postgres:
+    image: postgres:13.7
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: pythonie
+
+  redis:
+    image: redis:6.2
+
+  minio:
+    image: quay.io/minio/minio
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    command: server --console-address ":9001" /data
+    environment:
+      MINIO_ROOT_USER: pythonie
+      MINIO_ROOT_PASSWORD: pythonie
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  mc:
+    image: quay.io/minio/mc
+    links:
+      - minio
+    volumes:
+      - ./mc:/root/.mc
+      - ../s3:/s3
+
+  test:
+    image: pythonie:compile-stage
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: compile-stage
+    environment:
+      DJANGO_SETTINGS_MODULE: pythonie.settings.tests
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: python pythonie/manage.py test pythonie --verbosity=3
+
+volumes:
+  minio-data:
