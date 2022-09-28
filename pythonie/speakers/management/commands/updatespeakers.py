@@ -12,6 +12,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         speaker_pages = SpeakersPage.objects.all()
         for speaker_page in speaker_pages:
+            speaker_page: SpeakersPage
             if speaker_page.api_url:
                 log.info("api_url: %s" % speaker_page.api_url)
                 speaker_page.fetch()
@@ -19,6 +20,7 @@ class Command(BaseCommand):
 
         talk_pages = TalksPage.objects.all()
         for talk_page in talk_pages:
+            talk_page: TalksPage
             if talk_page.api_url:
                 log.info("api_url: %s" % talk_page.api_url)
                 talk_page.fetch()

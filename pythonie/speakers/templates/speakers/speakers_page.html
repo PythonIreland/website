@@ -14,25 +14,29 @@
                         <a name="speakerlist"></a>
 
                         <div class="panel-heading">
-                            <h3 class="text-center"><span class="glyphicon glyphicon-star"></span> PyCon Ireland 2015
-                                Speakers
+                            <h3 class="text-center">
+                                <span class="glyphicon glyphicon-star"></span> PyCon
+                                                                               Ireland
+                                                                               2015
+                                                                               Speakers
                                 <span class="glyphicon glyphicon-star"></span></h3>
                         </div>
 
                         <table class="table speakers">
                             {% comment %}
-                            Warning: ~~~HERE BE DRAGONS~~~
-                            Three loops there are below
-                            The first to open the show
-                            The second with keys
-                            And the rest for the bees
-                            Tra La La La La La
+                                Warning: ~~~HERE BE DRAGONS~~~
+                                Three loops there are below
+                                The first to open the show
+                                The second with keys
+                                And the rest for the bees
+                                Tra La La La La La
                             {% endcomment %}
                             {% for speaker in self.speakers %}
                                 {% if speaker.name == "Niamh Breslin" %}
                                     <tr class="speaker">
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             {% if "cropped" in speaker.image_75 %}
                                                 <img src="{{ speaker.image_75 }}" width="75" height="75"
                                                      class="img-circle">
@@ -44,10 +48,12 @@
                                             {% if speaker.web_url %}</a>{% endif %}
                                         </td>
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             <h4>{{ speaker.name }}</h4>
                                             {% if speaker.web_url %}</a>{% endif %}
-                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {% if speaker.role %}
+                                                <h5>{{ speaker.role }}</h5>{% endif %}
                                             {{ speaker.speaker_bio|safe }}
                                         </td>
                                         <td>
@@ -60,7 +66,8 @@
                                 {% if speaker.name == "Naomi Ceder" or speaker.name == "Juliana Arrighi" %}
                                     <tr class="speaker">
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             {% if "cropped" in speaker.image_75 %}
                                                 <img src="{{ speaker.image_75 }}" width="75" height="75"
                                                      class="img-circle">
@@ -72,10 +79,12 @@
                                             {% if speaker.web_url %}</a>{% endif %}
                                         </td>
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             <h4>{{ speaker.name }}</h4>
                                             {% if speaker.web_url %}</a>{% endif %}
-                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {% if speaker.role %}
+                                                <h5>{{ speaker.role }}</h5>{% endif %}
                                             {{ speaker.speaker_bio|safe }}
                                         </td>
                                         <td>
@@ -88,7 +97,8 @@
                                 {% if speaker.name != "Niamh Breslin" and speaker.name != "Naomi Ceder" and speaker.name != "Trent McConaghy" %}
                                     <tr class="speaker">
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             {% if "cropped" in speaker.image_75 %}
                                                 <img src="{{ speaker.image_75 }}" width="75" height="75"
                                                      class="img-circle">
@@ -100,10 +110,12 @@
                                             {% if speaker.web_url %}</a>{% endif %}
                                         </td>
                                         <td>
-                                            {% if speaker.web_url %}<a href="{{ speaker.web_url }}">{% endif %}
+                                            {% if speaker.web_url %}
+                                                <a href="{{ speaker.web_url }}">{% endif %}
                                             <h4>{{ speaker.name }}</h4>
                                             {% if speaker.web_url %}</a>{% endif %}
-                                            {% if speaker.role %}<h5>{{ speaker.role }}</h5>{% endif %}
+                                            {% if speaker.role %}
+                                                <h5>{{ speaker.role }}</h5>{% endif %}
                                             {{ speaker.speaker_bio|safe }}
                                         </td>
                                         <td>
