@@ -60,7 +60,7 @@ INSTALLED_APPS = (
     "sponsors",
     "speakers",
     # 'debug_toolbar',
-    'django_extensions',
+    "django_extensions",
 )
 
 MIDDLEWARE = (

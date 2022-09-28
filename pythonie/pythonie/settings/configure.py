@@ -11,8 +11,9 @@ def configure_redis(redis_url, test=False):
         return fakeredis.FakeStrictRedis()
 
     if redis_url:
-        import redis
         from urllib.parse import urlparse
+
+        import redis
 
         url = urlparse(redis_url)
         log.info("Redis configured with redis_url: %s" % redis_url)

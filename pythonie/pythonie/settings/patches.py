@@ -6,8 +6,7 @@ import logging
 
 # allow for other slideshare urls (fr.slideshare...)
 from wagtail.embeds import oembed_providers
-from wagtail.embeds.oembed_providers import compile_endpoints
-from wagtail.embeds.oembed_providers import OEMBED_ENDPOINTS
+from wagtail.embeds.oembed_providers import OEMBED_ENDPOINTS, compile_endpoints
 
 log = logging.getLogger("pythonie")
 
