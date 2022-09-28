@@ -2,7 +2,8 @@
 -c main.txt
 black
 coverage
-fakeredis~=1.4
+fakeredis
 flake8
 isort
-model-mommy~=2.0
+model-mommy
+pipdeptree

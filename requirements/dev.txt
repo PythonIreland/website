@@ -20,7 +20,7 @@ django==3.2.15
     # via
     #   -c requirements/main.txt
     #   model-mommy
-fakeredis==1.9.2
+fakeredis==1.9.3
     # via -r requirements/dev.in
 flake8==5.0.4
     # via -r requirements/dev.in
@@ -38,6 +38,8 @@ packaging==21.3
     #   redis
 pathspec==0.10.1
     # via black
+pipdeptree==2.3.1
+    # via -r requirements/dev.in
 platformdirs==2.5.2
     # via black
 pycodestyle==2.9.1
