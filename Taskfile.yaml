@@ -28,27 +28,32 @@ tasks:
   run:
     desc: Run a local version of PythonIE (works)
     cmds:
-      - docker compose run --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
+      - docker compose run --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
 
   django:shell-plus:
     desc: Run a local version of PythonIE
     cmds:
-      - docker compose run --service-ports web python pythonie/manage.py shell_plus
+      - docker compose run --rm web python pythonie/manage.py shell_plus
+
+  shell:
+    desc: Run a shell
+    cmds:
+      - docker compose run --rm web /bin/bash
 
   django:make-migrations:
     desc: Make migrations
     cmds:
-      - docker compose run --service-ports web python pythonie/manage.py makemigrations
+      - docker compose run --rm web python pythonie/manage.py makemigrations
 
   django:migrate:
     desc: Make migrations
     cmds:
-      - docker compose run --service-ports web python pythonie/manage.py migrate
+      - docker compose run --rm web python pythonie/manage.py migrate
 
   django:collect-static:
     desc: Make migrations
     cmds:
-      - docker compose run --service-ports web python pythonie/manage.py collectstatic
+      - docker compose run --rm web python pythonie/manage.py collectstatic
 
   dependencies:compute:
     desc: Compute the dependencies
@@ -74,6 +79,16 @@ tasks:
     desc: Run a shell into the docker container
     cmds:
       - docker compose run web /bin/bash
+
+  pycon:import:sessionize:
+    desc: Import the information from Sessionize
+    cmds:
+      - docker compose run web python pythonie/manage.py import-sessionize --file sessionize.xlsx
+
+  code:format:
+    desc: Format the code
+    cmds:
+      - toast code:format
 
   tests:
     env:

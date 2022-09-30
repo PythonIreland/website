@@ -6,6 +6,7 @@ body {
     font-style: normal;
     font-weight: 300; /* Bree Serif: 700 (bold), 400 (regular), 300 (light), 200 (thin); */
 }
+
 .wf-loading {
     visibility: hidden;
 }
@@ -16,18 +17,22 @@ h2, h3, h4, h5, h6 {
     font-style: normal;
     font-weight: 400; /* Bree: 700 (bold), 400 (regular), 300 (light), 200 (thin) */
 }
+
 h1 {
     font-family: "bree", sans-serif;
     font-style: normal;
     font-weight: 700;
 }
+
 .list-group img {
     width: 100%;
     max-width: 183px;
 }
-#header >a {
+
+#header > a {
     text-decoration: none;
 }
+
 #header h1 {
     font-size: 32pt;
     text-align: left;
@@ -35,15 +40,19 @@ h1 {
     white-space: normal;
     color: white;
 }
+
 #header h1 #pyhead {
     color: #336600;
 }
+
 #header h1 #iehead {
     color: #339900;
 }
+
 #header h1 #yearhead {
     color: #66cc33;
 }
+
 #header .well {
     margin-top: 15px;
 }
@@ -57,17 +66,21 @@ h1 {
     max-width: 140px;
     max-height: 100px;
 }
+
 .sponsor-list .sponsor {
     padding-bottom: 0.5em
 }
+
 .sponsor-list {
     list-style: none;
     padding-left: 0em;
 }
+
 .sponsor .logo {
     float: left;
     margin-right: 0.5em
 }
+
 .blog .blog-post-link {
     font-family: "bree", sans-serif;
     font-style: normal;
@@ -76,5 +89,5 @@ h1 {
 }
 
 .thumbnail {
-  padding: 4px 0;
-  }
+    padding: 4px 0;
+}

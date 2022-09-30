@@ -19,7 +19,10 @@ deprecated==1.2.13
 django==3.2.15
     # via
     #   -c requirements/main.txt
+    #   django-debug-toolbar
     #   model-mommy
+django-debug-toolbar==3.7.0
+    # via -r requirements/dev.in
 fakeredis==1.9.3
     # via -r requirements/dev.in
 flake8==5.0.4
@@ -64,6 +67,7 @@ sqlparse==0.4.3
     # via
     #   -c requirements/main.txt
     #   django
+    #   django-debug-toolbar
 tomli==2.0.1
     # via black
 wrapt==1.14.1

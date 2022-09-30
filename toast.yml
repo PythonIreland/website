@@ -39,7 +39,6 @@ tasks:
       - .:/app
     location: /app
     command: |
-      isort pythonie
       black pythonie
 
   fish:
