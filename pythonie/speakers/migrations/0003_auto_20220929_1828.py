@@ -46,8 +46,11 @@ class Migration(migrations.Migration):
                 ),
                 ("name", models.CharField(max_length=255)),
                 ("email", models.CharField(max_length=255)),
-                ("external_id", models.CharField(max_length=255, unique=True)),
-                ("picture_url", models.CharField(max_length=255)),
+                (
+                    "external_id",
+                    models.CharField(blank=True, max_length=255, unique=True),
+                ),
+                ("picture_url", models.CharField(blank=True, max_length=255)),
                 ("biography", models.TextField()),
                 ("created_at", models.DateTimeField(auto_now_add=True)),
                 ("updated_at", models.DateTimeField(auto_now=True)),
@@ -59,6 +62,10 @@ class Migration(migrations.Migration):
         ),
         migrations.RemoveField(
             model_name="speakerspage",
+            name="api_url",
+        ),
+        migrations.RemoveField(
+            model_name="talkspage",
             name="api_url",
         ),
         migrations.CreateModel(
@@ -112,7 +119,12 @@ class Migration(migrations.Migration):
                         on_delete=django.db.models.deletion.CASCADE, to="speakers.room"
                     ),
                 ),
-                ("speakers", models.ManyToManyField(to="speakers.Speaker")),
+                (
+                    "speakers",
+                    models.ManyToManyField(
+                        related_name="sessions", to="speakers.Speaker"
+                    ),
+                ),
             ],
             options={
                 "ordering": ["name"],
