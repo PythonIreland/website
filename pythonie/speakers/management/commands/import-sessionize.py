@@ -67,7 +67,7 @@ class Command(BaseCommand):
             print(f"{row[SpeakerHeaders.Id]=}")
             picture_url = row[SpeakerHeaders.ProfilePicture]
             if picture_url is np.nan:
-                picture_url = ''
+                picture_url = ""
             try:
                 speaker = Speaker.objects.get(external_id=row[SpeakerHeaders.Id])
                 speaker.name = name
@@ -150,7 +150,10 @@ class Command(BaseCommand):
             session.speakers.all().delete()
             session.save()
 
-            speaker_ids = [speaker_id.strip() for speaker_id in row[SessionHeaders.SpeakerIds].split(',')]
+            speaker_ids = [
+                speaker_id.strip()
+                for speaker_id in row[SessionHeaders.SpeakerIds].split(",")
+            ]
             for speaker in Speaker.objects.filter(external_id__in=speaker_ids):
                 session.speakers.add(speaker)
 

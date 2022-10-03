@@ -93,7 +93,7 @@ class Session(Page):
 
     @property
     def speaker_names(self):
-        return ', '.join(speaker.name for speaker in self.speakers.all())
+        return ", ".join(speaker.name for speaker in self.speakers.all())
 
     content_panels = Page.content_panels + [
         FieldPanel("name"),
