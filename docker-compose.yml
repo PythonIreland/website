@@ -13,6 +13,7 @@ services:
     env_file:
       - development.env
     environment:
+#       DJANGO_SETTINGS_MODULE: pythonie.settings.dev
       PGDATABASE: pythonie
       PGUSER: postgres
       PGPASSWORD: pythonie
@@ -57,11 +58,7 @@ services:
       - ../s3:/s3
 
   test:
-    image: pythonie:compile-stage
-    build:
-      context: .
-      dockerfile: Dockerfile
-      target: compile-stage
+    image: python.ie/website-dev
     environment:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
     volumes:

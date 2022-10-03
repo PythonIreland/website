@@ -20,6 +20,8 @@ charset-normalizer==2.1.1
     # via requests
 colander==1.8.3
     # via -r requirements/main.in
+defusedxml==0.7.1
+    # via -r requirements/main.in
 delorean==1.0.0
     # via -r requirements/main.in
 deprecated==1.2.13
@@ -92,12 +94,18 @@ libsass==0.21.0
     # via django-libsass
 lxml==4.9.1
     # via wagtail-blog
+numpy==1.23.3
+    # via pandas
 openpyxl==3.0.10
     # via tablib
 packaging==21.3
     # via redis
+pandas==1.5.0
+    # via -r requirements/main.in
 pillow==9.2.0
     # via wagtail
+pydantic==1.10.2
+    # via -r requirements/main.in
 pyparsing==3.0.9
     # via packaging
 python-dateutil==2.8.2
@@ -105,6 +113,7 @@ python-dateutil==2.8.2
     #   -r requirements/main.in
     #   botocore
     #   delorean
+    #   pandas
 pytz==2022.2.1
     # via
     #   -r requirements/main.in
@@ -114,6 +123,7 @@ pytz==2022.2.1
     #   django-modelcluster
     #   djangorestframework
     #   l18n
+    #   pandas
 pytz-deprecation-shim==0.1.0.post0
     # via tzlocal
 rcssmin==1.1.0
@@ -147,6 +157,8 @@ telepath==0.3
     # via wagtail
 translationstring==1.4
     # via colander
+typing-extensions==4.3.0
+    # via pydantic
 tzdata==2022.4
     # via pytz-deprecation-shim
 tzlocal==4.2

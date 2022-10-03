@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% load wagtailcore_tags %}
-{% load static core_tags %}
+{% load static core_tags speaker_tags %}
 
 {% block body_class %}template-{{ self.get_verbose_name|slugify }}{% endblock %}
 
@@ -11,40 +11,47 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="well clearfix">
-                        <a name="talklist"></a>
-
+                        <a id="talklist"></a>
                         <div class="panel-heading">
-                            <h3 class="text-center"><span class="glyphicon glyphicon-star"></span> PyCon Ireland 2015
-                                Talks
+                            <h3 class="text-center">
+                                <span class="glyphicon glyphicon-star"></span> PyCon
+                                                                               Ireland
+                                                                               2022
+                                                                               Talks
                                 <span class="glyphicon glyphicon-star"></span></h3>
                         </div>
-                        <h2>Saturday 24th October</h2>
                         <table class="table talks">
-                            {% for session in self.day_1 %}
+                            <thead>
                             <tr>
-                                <td>{{ session.times }}</td>
-                                <td>{{ session.space|default:"" }}</td>
-                                <td>{% if session.space %}<a href="{{ session.web_url }}">{% endif %}
-                                            {{ session.title }}
-                                            {% if session.space %}</a>{% endif %}
-                                 </td>
+                                <th>Title</th>
+                                <th>Speaker(s)</th>
+                                <th>When</th>
+                                <th>Where</th>
+                                <th>Duration</th>
                             </tr>
-                            {% endfor %}
-                        </table>
-                        <h2>Sunday 25th October</h2>
-                        <table class="table talks">
-                            {% for session in self.day_2 %}
-                            <tr>
-                                <td>{{ session.times }}</td>
-                                <td>{{ session.space|default:"" }}</td>
-                                <td>{% if session.space %}<a href="{{ session.web_url }}">{% endif %}
-                                            {{ session.title }}
-                                            {% if session.space %}</a>{% endif %}
-                                 </td>
-                            </tr>
-                            {% endfor %}
-                        </table>
+                            </thead>
+                            <tbody>
 
+                            {% for session in self.sessions %}
+                                <tr>
+                                    <td>
+                                        <a href="{% pageurl session %}">{{ session.title }}</a>
+                                    </td>
+                                    <td>
+                                        <ul class="list-unstyled">
+                                        {% for speaker in session.speakers.all %}
+                                        <li>{% speaker_picture speaker 40 %} <a href="{% pageurl speaker %}">{{ speaker.name }}</a>
+                                        </li>
+                                        {% endfor %}
+                                        </ul>
+                                    </td>
+                                    <td>{{ session.scheduled_at }}</td>
+                                    <td>{{ session.duration }}</td>
+                                    <td>{{ session.room }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -7,3 +7,4 @@ flake8
 isort
 model-mommy
 pipdeptree
+django-debug-toolbar

@@ -51,7 +51,7 @@ class Meetup(models.Model):
     visibility = models.CharField(max_length=255, blank=False)
 
     class Meta:
-        ordering = ["time"]
+        ordering = ["-time"]
 
     def __str__(self):
         return self.name
