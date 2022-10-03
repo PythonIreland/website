@@ -24,7 +24,7 @@ class Speaker(Page):
     name = models.CharField(max_length=255, blank=False)
     email = models.CharField(max_length=255, blank=False)
     external_id = models.CharField(max_length=255, unique=True, blank=True)
-    picture_url = models.CharField(max_length=255)
+    picture_url = models.CharField(max_length=255, blank=True)
     biography = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -121,12 +121,4 @@ class TalksPage(Page):
 
     @property
     def sessions(self):
-        return Session.objects.order_by("name").all()
-
-    # @property
-    # def day_1(self):
-    #     return self.schedule["sessions"][0]["sessions"]
-    #
-    # @property
-    # def day_2(self):
-    #     return self.schedule["sessions"][1]["sessions"]
+        return Session.objects.order_by("scheduled_at", "room__name").all()

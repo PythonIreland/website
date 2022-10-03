@@ -40,7 +40,7 @@
                                     <td>
                                         <ul class="list-unstyled">
                                         {% for speaker in session.speakers.all %}
-                                        <li>{% speaker_picture speaker %} <a href="{% pageurl speaker %}">{{ speaker.name }}</a>
+                                        <li>{% speaker_picture speaker 40 %} <a href="{% pageurl speaker %}">{{ speaker.name }}</a>
                                         </li>
                                         {% endfor %}
                                         </ul>

@@ -65,12 +65,15 @@ class Command(BaseCommand):
             # print(index, row)
             name = f"{row[SpeakerHeaders.FirstName]} {row[SpeakerHeaders.LastName]}"
             print(f"{row[SpeakerHeaders.Id]=}")
+            picture_url = row[SpeakerHeaders.ProfilePicture]
+            if picture_url is np.nan:
+                picture_url = ''
             try:
                 speaker = Speaker.objects.get(external_id=row[SpeakerHeaders.Id])
                 speaker.name = name
                 speaker.email = row[SpeakerHeaders.Email]
                 speaker.biography = row[SpeakerHeaders.Bio]
-                speaker.picture_url = row[SpeakerHeaders.ProfilePicture]
+                speaker.picture_url = picture_url
                 speaker.title = name
             except Speaker.DoesNotExist:
                 speaker = Speaker(
@@ -78,7 +81,7 @@ class Command(BaseCommand):
                     name=name,
                     email=row[SpeakerHeaders.Email],
                     biography=row[SpeakerHeaders.Bio],
-                    picture_url=row[SpeakerHeaders.ProfilePicture],
+                    picture_url=picture_url,
                     title=name,
                 )
                 parent_page.add_child(instance=speaker)
@@ -145,6 +148,7 @@ class Command(BaseCommand):
             session.save_revision().publish()
 
             session.speakers.all().delete()
+            session.save()
 
             speaker_ids = [speaker_id.strip() for speaker_id in row[SessionHeaders.SpeakerIds].split(',')]
             for speaker in Speaker.objects.filter(external_id__in=speaker_ids):
