@@ -17,13 +17,28 @@ tasks:
   database:pull:
     desc: Pull the database from Heroku and store it into a localhost PostgreSQL
     cmds:
-      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER postgres://postgres@localhost/pythonie -a pythonie
+      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER postgres://postgres@localhost/pythonie
+
+  database:push:
+    desc: Push the database from local PostgreSQL to Heroku
+    cmds:
+      - heroku pg:push postgres://postgres@localhost/pythonie $HEROKU_POSTGRESQL_IDENTIFIER
 
   database:reset:
     desc: Reset the database with a fresh copy of the official database
     cmds:
       - task: database:drop
       - task: database:pull
+
+  heroku:database:backups:
+    desc: Show the backups of the database
+    cmds:
+      - heroku pg:backups
+
+  heroku:database:run-backup:
+    desc: Run a remote backup
+    cmds:
+      - heroku pg:backups:capture
 
   run:
     desc: Run a local version of PythonIE (works)
