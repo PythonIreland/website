@@ -59,7 +59,7 @@ class Command(BaseCommand):
             sheet_name="Accepted speakers",
         )
         speakers = df_accepted_speakers[SPEAKER_HEADERS]
-        parent_page = Page.objects.get(id=145).specific
+        parent_page = Page.objects.get(id=144).specific
         print(parent_page.title)
         for index, row in speakers.iterrows():
             # print(index, row)
@@ -95,7 +95,7 @@ class Command(BaseCommand):
             sheet_name="Accepted sessions",
         )
         sessions = df_accepted_session[SESSION_HEADERS]
-        parent_page = Page.objects.get(id=187).specific
+        parent_page = Page.objects.get(id=145).specific
 
         for index, row in sessions.iterrows():
 
