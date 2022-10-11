@@ -8,9 +8,9 @@ babel==2.10.3
     # via delorean
 beautifulsoup4==4.9.3
     # via wagtail
-boto3==1.24.82
+boto3==1.24.89
     # via -r requirements/main.in
-botocore==1.27.82
+botocore==1.27.89
     # via
     #   boto3
     #   s3transfer
@@ -30,7 +30,7 @@ dj-database-url==1.0.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==3.2.15
+django==3.2.16
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -82,7 +82,7 @@ humanize==4.4.0
     # via delorean
 idna==3.4
     # via requests
-iso8601==1.0.2
+iso8601==1.1.0
     # via colander
 jmespath==1.0.1
     # via
@@ -114,7 +114,7 @@ python-dateutil==2.8.2
     #   botocore
     #   delorean
     #   pandas
-pytz==2022.2.1
+pytz==2022.4
     # via
     #   -r requirements/main.in
     #   babel
@@ -157,7 +157,7 @@ telepath==0.3
     # via wagtail
 translationstring==1.4
     # via colander
-typing-extensions==4.3.0
+typing-extensions==4.4.0
     # via pydantic
 tzdata==2022.4
     # via pytz-deprecation-shim
