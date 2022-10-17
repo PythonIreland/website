@@ -23,7 +23,7 @@ django==3.2.16
     #   model-mommy
 django-debug-toolbar==3.7.0
     # via -r requirements/dev.in
-fakeredis==1.9.3
+fakeredis==1.9.4
     # via -r requirements/dev.in
 flake8==5.0.4
     # via -r requirements/dev.in
