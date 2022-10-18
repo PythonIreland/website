@@ -21,7 +21,7 @@ PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = [".herokuapp.com", ".python.ie", "next.python.ie", "127.0.0.1"]
+ALLOWED_HOSTS = [".herokuapp.com", ".python.ie", ".pycon.ie", "next.python.ie", "127.0.0.1"]
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend-
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
