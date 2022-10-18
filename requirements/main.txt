@@ -8,9 +8,9 @@ babel==2.10.3
     # via delorean
 beautifulsoup4==4.9.3
     # via wagtail
-boto3==1.24.91
+boto3==1.24.92
     # via -r requirements/main.in
-botocore==1.27.91
+botocore==1.27.92
     # via
     #   boto3
     #   s3transfer
@@ -114,7 +114,7 @@ python-dateutil==2.8.2
     #   botocore
     #   delorean
     #   pandas
-pytz==2022.4
+pytz==2022.5
     # via
     #   -r requirements/main.in
     #   babel
