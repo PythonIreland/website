@@ -1,3 +1,4 @@
+---
 # https://taskfile.dev
 
 version: '3'
@@ -6,23 +7,24 @@ env:
   DOCKER_IMAGE: python.ie/website-dev
   PGPASSWORD: pythonie
   PGUSER: postgres
+  PGHOST: 127.0.0.1
 
 dotenv: ['production.env']
 
 tasks:
   database:drop:
     cmds:
-      - psql -h localhost -U postgres -c "DROP DATABASE IF EXISTS pythonie"
+      - docker compose exec -u postgres postgres dropdb --if-exists pythonie
 
   database:pull:
     desc: Pull the database from Heroku and store it into a localhost PostgreSQL
     cmds:
-      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER postgres://postgres@localhost/pythonie
+      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER pythonie
 
   database:push:
     desc: Push the database from local PostgreSQL to Heroku
     cmds:
-      - heroku pg:push postgres://postgres@localhost/pythonie $HEROKU_POSTGRESQL_IDENTIFIER
+      - heroku pg:push pythonie $HEROKU_POSTGRESQL_IDENTIFIER
 
   database:reset:
     desc: Reset the database with a fresh copy of the official database
@@ -94,6 +96,11 @@ tasks:
     desc: Run a shell into the docker container
     cmds:
       - docker compose run web /bin/bash
+
+  stack:pull:
+    desc: Pull the docker images for the stack
+    cmds:
+      - docker compose pull postgres minio mc
 
   pycon:import:sessionize:
     desc: Import the information from Sessionize
