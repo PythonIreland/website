@@ -9,7 +9,7 @@ babel==2.10.3
 beautifulsoup4==4.9.3
     # via wagtail
 boto3==1.25.0
-    # via -r requirements/main.in
+    # via -r main.in
 botocore==1.28.0
     # via
     #   boto3
@@ -19,20 +19,20 @@ certifi==2022.9.24
 charset-normalizer==2.1.1
     # via requests
 colander==1.8.3
-    # via -r requirements/main.in
+    # via -r main.in
 defusedxml==0.7.1
-    # via -r requirements/main.in
+    # via -r main.in
 delorean==1.0.0
-    # via -r requirements/main.in
+    # via -r main.in
 deprecated==1.2.13
     # via redis
 dj-database-url==1.0.0
-    # via -r requirements/main.in
+    # via -r main.in
 dj-static==0.0.6
-    # via -r requirements/main.in
+    # via -r main.in
 django==3.2.16
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   dj-database-url
     #   django-appconf
     #   django-extensions
@@ -48,23 +48,23 @@ django-appconf==1.0.5
     # via django-compressor
 django-compressor==4.1
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   django-libsass
 django-extensions==3.2.1
-    # via -r requirements/main.in
+    # via -r main.in
 django-filter==21.1
     # via wagtail
 django-libsass==0.9
-    # via -r requirements/main.in
+    # via -r main.in
 django-modelcluster==5.3
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   wagtail
 django-storages==1.13.1
-    # via -r requirements/main.in
+    # via -r main.in
 django-taggit==2.1.0
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   wagtail
 django-treebeard==4.5.1
     # via wagtail
@@ -75,7 +75,7 @@ draftjs-exporter==2.1.7
 et-xmlfile==1.1.0
     # via openpyxl
 gunicorn==20.1.0
-    # via -r requirements/main.in
+    # via -r main.in
 html5lib==1.1
     # via wagtail
 humanize==4.4.0
@@ -101,22 +101,22 @@ openpyxl==3.0.10
 packaging==21.3
     # via redis
 pandas==1.5.1
-    # via -r requirements/main.in
-pillow==9.2.0
+    # via -r main.in
+pillow==9.3.0
     # via wagtail
 pydantic==1.10.2
-    # via -r requirements/main.in
+    # via -r main.in
 pyparsing==3.0.9
     # via packaging
 python-dateutil==2.8.2
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   botocore
     #   delorean
     #   pandas
 pytz==2022.5
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   babel
     #   delorean
     #   django
@@ -129,10 +129,10 @@ pytz-deprecation-shim==0.1.0.post0
 rcssmin==1.1.0
     # via django-compressor
 redis==4.3.4
-    # via -r requirements/main.in
+    # via -r main.in
 requests==2.28.1
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   wagtail
     #   wagtail-blog
 rjsmin==1.2.0
@@ -169,23 +169,23 @@ urllib3==1.26.12
     #   requests
 wagtail==2.16.3
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   wagtail-blog
     #   wagtailfontawesome
     #   wagtailnews
 wagtail-blog==2.3.5
-    # via -r requirements/main.in
+    # via -r main.in
 wagtailfontawesome==1.2.1
-    # via -r requirements/main.in
+    # via -r main.in
 wagtailnews==2.7.2
-    # via -r requirements/main.in
+    # via -r main.in
 webencodings==0.5.1
     # via html5lib
 whitenoise==6.2.0
-    # via -r requirements/main.in
+    # via -r main.in
 willow==1.4.1
     # via
-    #   -r requirements/main.in
+    #   -r main.in
     #   wagtail
 wrapt==1.14.1
     # via deprecated
