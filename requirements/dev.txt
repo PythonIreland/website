@@ -6,26 +6,22 @@ async-timeout==4.0.2
     # via
     #   -c requirements/main.txt
     #   redis
-black==22.10.0
+black==22.12.0
     # via -r requirements/dev.in
 click==8.1.3
     # via black
 coverage==6.5.0
     # via -r requirements/dev.in
-deprecated==1.2.13
-    # via
-    #   -c requirements/main.txt
-    #   redis
 django==3.2.16
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
     #   model-mommy
-django-debug-toolbar==3.7.0
+django-debug-toolbar==3.8.1
     # via -r requirements/dev.in
-fakeredis==1.10.0
+fakeredis==2.2.0
     # via -r requirements/dev.in
-flake8==5.0.4
+flake8==6.0.0
     # via -r requirements/dev.in
 isort==5.10.1
     # via -r requirements/dev.in
@@ -35,29 +31,21 @@ model-mommy==2.0.0
     # via -r requirements/dev.in
 mypy-extensions==0.4.3
     # via black
-packaging==21.3
-    # via
-    #   -c requirements/main.txt
-    #   redis
-pathspec==0.10.1
+pathspec==0.10.2
     # via black
-pipdeptree==2.3.1
+pipdeptree==2.3.3
     # via -r requirements/dev.in
-platformdirs==2.5.2
+platformdirs==2.6.0
     # via black
-pycodestyle==2.9.1
+pycodestyle==2.10.0
     # via flake8
-pyflakes==2.5.0
+pyflakes==3.0.1
     # via flake8
-pyparsing==3.0.9
-    # via
-    #   -c requirements/main.txt
-    #   packaging
-pytz==2022.5
+pytz==2022.6
     # via
     #   -c requirements/main.txt
     #   django
-redis==4.3.4
+redis==4.4.0
     # via
     #   -c requirements/main.txt
     #   fakeredis
@@ -70,7 +58,3 @@ sqlparse==0.4.3
     #   django-debug-toolbar
 tomli==2.0.1
     # via black
-wrapt==1.14.1
-    # via
-    #   -c requirements/main.txt
-    #   deprecated
