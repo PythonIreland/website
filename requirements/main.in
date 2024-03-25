@@ -21,7 +21,8 @@ pytz
 redis
 requests
 wagtail
-wagtail-blog
+# important to pin that version until that dependency is removed
+wagtail-blog==2.3.5
 wagtailfontawesome
 wagtailnews
 whitenoise
