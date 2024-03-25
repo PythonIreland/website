@@ -19,3 +19,4 @@ RUN --mount=type=cache,target=/root/.cache \
 
 FROM compile-stage AS tests-stage
 
+USER nobody

@@ -17,7 +17,8 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-     <script type="text/javascript" src="//use.typekit.net/qgj1xay.js"></script>
+     <script type="text/javascript" src="//use.typekit.net/qgj1xay.js"
+     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"></script>
      <script type="text/javascript">try{Typekit.load({async: false});}catch(e){}</script>
 
 
@@ -56,7 +57,10 @@
 {% endcompress %}
 
 {% block basejs %}
-    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"
+            integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+            crossorigin="anonymous"></script>
+
     <script src="{% static 'js/jquery.smartmenus.js' %}"></script>
     <script src="{% static 'js/jquery.smartmenus.bootstrap.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
