@@ -1,5 +1,5 @@
 # syntax = docker/dockerfile:1.4
-FROM python:3.10 AS compile-stage
+FROM python:3.13.0a4-slim AS compile-stage
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
     apt install -y --no-install-recommends \
