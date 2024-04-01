@@ -4,7 +4,6 @@ import logging
 import numpy as np
 import pandas as pd
 from django.core.management.base import BaseCommand, CommandParser
-from django.utils.text import slugify
 from wagtail.core.models import Page
 
 from speakers.models import Speaker, Room, Session
