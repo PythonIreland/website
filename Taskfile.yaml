@@ -68,7 +68,7 @@ tasks:
       - docker compose run --rm web python pythonie/manage.py migrate
 
   django:collect-static:
-    desc: Make migrations
+    desc: Make static resources
     cmds:
       - docker compose run --rm web python pythonie/manage.py collectstatic
 

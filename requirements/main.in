@@ -13,7 +13,7 @@ django-libsass
 django-modelcluster
 django-storages
 django-taggit
-gunicorn
+gunicorn>=22.0.0
 pandas
 pydantic
 python-dateutil
@@ -21,7 +21,8 @@ pytz
 redis
 requests
 wagtail
-wagtail-blog
+# important to pin that version until that dependency is removed
+wagtail-blog==2.3.5
 wagtailfontawesome
 wagtailnews
 whitenoise

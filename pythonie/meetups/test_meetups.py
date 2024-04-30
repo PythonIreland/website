@@ -10,9 +10,9 @@ from pytz import UTC
 description = (
     "<p>We will be having a meetup in June. More details to follow."
     "</p> <p>If you are interested in speaking, please submit your "
-    'details to\xa0<a href="http://bit.ly/pyie-cfp-2015">'
-    '<a href="http://bit.ly/pyie-cfp-2015" class="linkified">'
-    "http://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please "
+    'details to\xa0<a href="https://bit.ly/pyie-cfp-2015">'
+    '<a href="https://bit.ly/pyie-cfp-2015" class="linkified">'
+    "https://bit.ly/pyie-cfp-2015</a></a>.</p> <p>Enquiries? Please "
     "contact contact@python.ie.</p>"
 )
 
@@ -60,7 +60,7 @@ class UtilsTests(TestCase):
                     "description": description,
                     "name": "Python Ireland meetup",
                     "event_url": (
-                        "http://www.meetup.com/pythonireland/" "events/221078098/"
+                        "https://www.meetup.com/pythonireland/" "events/221078098/"
                     ),
                     "headcount": 0,
                     "time": 1433957400000,
@@ -123,7 +123,7 @@ class UtilsTests(TestCase):
         self.assertEqual(meetup.visibility, "public")
         self.assertEqual(
             meetup.event_url,
-            ("http://www.meetup.com/" "pythonireland/events/221078098/"),
+            ("https://www.meetup.com/" "pythonireland/events/221078098/"),
         )
 
     @patch("meetups.utils.get_content")

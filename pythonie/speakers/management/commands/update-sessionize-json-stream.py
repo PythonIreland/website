@@ -51,7 +51,7 @@ class SessionizeModel(pydantic.BaseModel):
 
 class Command(BaseCommand):
     def handle(self, *args, **kwargs):
-        response = requests.get("https://sessionize.com/api/v2/z66z4kb6/view/All")
+        response = requests.get("https://sessionize.com/api/v2/z66z4kb6/view/All", timeout=500)
         sessionize: SessionizeModel = SessionizeModel.parse_obj(response.json())
 
         rooms = {}

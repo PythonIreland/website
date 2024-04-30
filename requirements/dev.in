@@ -1,10 +1,12 @@
 # dev.in
 -c main.txt
+bandit
 black
 coverage
+django-debug-toolbar
 fakeredis
 flake8
 isort
 model-mommy
+pip-tools
 pipdeptree
-django-debug-toolbar
