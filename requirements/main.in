@@ -13,7 +13,7 @@ django-libsass
 django-modelcluster
 django-storages
 django-taggit
-gunicorn
+gunicorn>=22.0.0
 pandas
 pydantic
 python-dateutil

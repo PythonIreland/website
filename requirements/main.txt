@@ -80,7 +80,7 @@ draftjs-exporter==2.1.7
     # via wagtail
 et-xmlfile==1.1.0
     # via openpyxl
-gunicorn==21.2.0
+gunicorn==22.0.0
     # via -r main.in
 html5lib==1.1
     # via wagtail

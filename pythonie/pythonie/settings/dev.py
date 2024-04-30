@@ -4,7 +4,7 @@ from .base import *  # flake8: noqa
 
 DEBUG = True
 
-SECRET_KEY = "1185a082-7e72-449e-bf43-12d2da59222b"  # Just for dev
+SECRET_KEY = "1185a082-7e72-449e-bf43-12d2da59222b"  # just for dev #nosec B105
 MEETUP_KEY = ""  # Put your own key here.
 # See https://secure.meetup.com/meetup_api/key/
 
