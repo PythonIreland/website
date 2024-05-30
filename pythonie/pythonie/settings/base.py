@@ -54,7 +54,6 @@ INSTALLED_APPS = (
     "wagtail.contrib.styleguide",
     "core",
     "storages",
-    "blog",
     "wagtailfontawesome",
     "meetups",
     "sponsors",

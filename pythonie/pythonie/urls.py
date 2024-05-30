@@ -11,7 +11,6 @@ from wagtail.core import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
 urlpatterns = [
-    url(r"^blog/", include("blog.urls")),
     url(r"^django-admin/", admin.site.urls),
     url(r"^admin/", include(wagtailadmin_urls)),
     #    url(r'^search/', include(wagtailsearch_urls)),
