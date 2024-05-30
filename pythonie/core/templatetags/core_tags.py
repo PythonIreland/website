@@ -1,4 +1,3 @@
-from blog.models import BlogPage
 from django import template
 from meetups.models import Meetup
 from sponsors.models import Sponsor
@@ -48,16 +47,3 @@ def root_page():
 def child_pages(page):
     pages = page.get_children().live().in_menu().all()
     return pages
-
-
-@register.simple_tag(takes_context=False)
-def get_blogs(categories, count=3):
-    """
-    :param categories: Filter by these BlogCategories if specified
-    :param count: The number of blogs to limit by
-    :return: A queryset of BlogPages
-    """
-    blog_pages = BlogPage.objects.filter()
-    if categories:
-        blog_pages = blog_pages.filter(blog_categories__in=categories)
-    return blog_pages.order_by("date")[:count]

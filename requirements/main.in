@@ -21,7 +21,6 @@ pytz
 redis
 requests
 wagtail
-wagtail-blog
 wagtailfontawesome
 wagtailnews
 whitenoise
