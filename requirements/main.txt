@@ -6,7 +6,7 @@ asgiref==3.8.1
     # via django
 babel==2.15.0
     # via delorean
-beautifulsoup4==4.11.2
+beautifulsoup4==4.12.3
     # via wagtail
 boto3==1.34.116
     # via -r requirements/main.in
@@ -30,7 +30,7 @@ dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==4.2.13
+django==5.0.6
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -43,6 +43,7 @@ django==4.2.13
     #   django-taggit
     #   django-treebeard
     #   djangorestframework
+    #   laces
     #   wagtail
 django-appconf==1.0.6
     # via django-compressor
@@ -52,7 +53,7 @@ django-compressor==4.4
     #   django-libsass
 django-extensions==3.2.3
     # via -r requirements/main.in
-django-filter==22.1
+django-filter==24.2
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
@@ -64,7 +65,7 @@ django-permissionedforms==0.1
     # via wagtail
 django-storages==1.14.3
     # via -r requirements/main.in
-django-taggit==3.1.0
+django-taggit==5.0.1
     # via
     #   -r requirements/main.in
     #   wagtail
@@ -72,7 +73,7 @@ django-treebeard==4.7.1
     # via wagtail
 djangorestframework==3.15.1
     # via wagtail
-draftjs-exporter==2.1.7
+draftjs-exporter==5.0.0
     # via wagtail
 et-xmlfile==1.1.0
     # via openpyxl
@@ -80,8 +81,6 @@ filetype==1.2.0
     # via willow
 gunicorn==22.0.0
     # via -r requirements/main.in
-html5lib==1.1
-    # via wagtail
 humanize==4.9.0
     # via delorean
 idna==3.7
@@ -94,6 +93,8 @@ jmespath==1.0.1
     #   botocore
 l18n==2021.3
     # via wagtail
+laces==0.1.1
+    # via wagtail
 libsass==0.23.0
     # via django-libsass
 numpy==1.26.4
@@ -105,7 +106,11 @@ packaging==24.0
 pandas==2.2.2
     # via -r requirements/main.in
 pillow==10.3.0
-    # via wagtail
+    # via
+    #   pillow-heif
+    #   wagtail
+pillow-heif==0.16.0
+    # via willow
 pydantic==2.7.2
     # via -r requirements/main.in
 pydantic-core==2.18.3
@@ -137,7 +142,6 @@ s3transfer==0.10.1
     # via boto3
 six==1.16.0
     # via
-    #   html5lib
     #   l18n
     #   python-dateutil
 soupsieve==2.5
@@ -163,13 +167,11 @@ urllib3==2.2.1
     # via
     #   botocore
     #   requests
-wagtail==5.0.5
+wagtail==6.1.2
     # via -r requirements/main.in
-webencodings==0.5.1
-    # via html5lib
 whitenoise==6.6.0
     # via -r requirements/main.in
-willow==1.6.3
+willow[heif]==1.8.0
     # via
     #   -r requirements/main.in
     #   wagtail

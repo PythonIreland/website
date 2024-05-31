@@ -8,7 +8,7 @@ click==8.1.7
     # via black
 coverage==7.5.3
     # via -r requirements/dev.in
-django==4.2.13
+django==5.0.6
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar

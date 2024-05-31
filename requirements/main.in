@@ -1,6 +1,6 @@
 # main.in
 Delorean
-Django<5.0
+Django
 Willow
 boto3
 colander
@@ -20,5 +20,5 @@ python-dateutil
 pytz
 redis
 requests
-wagtail==5.0.5
+wagtail
 whitenoise
