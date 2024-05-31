@@ -4,11 +4,11 @@ import logging
 
 from django.db import models
 from modelcluster.fields import ParentalKey
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
-from wagtail.core import blocks
-from wagtail.core.blocks import RawHTMLBlock
-from wagtail.core.fields import RichTextField, StreamField
-from wagtail.core.models import Orderable, Page
+from wagtail.admin.panels import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail import blocks
+from wagtail.blocks import RawHTMLBlock
+from wagtail.fields import RichTextField, StreamField
+from wagtail.models import Orderable, Page
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.edit_handlers import SnippetChooserPanel

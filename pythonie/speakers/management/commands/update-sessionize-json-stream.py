@@ -3,7 +3,7 @@ import datetime
 import pydantic
 import requests
 from django.core.management import BaseCommand, CommandParser
-from wagtail.core.models import Page
+from wagtail.models import Page
 
 from speakers.models import Speaker, Session, Room
 
