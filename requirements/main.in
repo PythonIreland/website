@@ -15,7 +15,7 @@ django-storages
 django-taggit
 gunicorn
 pandas
-pydantic==1.10.15
+pydantic
 python-dateutil
 pytz
 redis

@@ -1,3 +1,5 @@
+annotated-types==0.7.0
+    # via pydantic
 anyascii==0.3.2
     # via wagtail
 asgiref==3.8.1
@@ -103,8 +105,10 @@ pandas==2.2.2
     # via -r requirements/main.in
 pillow==9.5.0
     # via wagtail
-pydantic==1.10.15
+pydantic==2.7.2
     # via -r requirements/main.in
+pydantic-core==2.18.3
+    # via pydantic
 python-dateutil==2.9.0.post0
     # via
     #   -r requirements/main.in
@@ -150,6 +154,7 @@ typing-extensions==4.12.0
     #   asgiref
     #   dj-database-url
     #   pydantic
+    #   pydantic-core
 tzdata==2024.1
     # via pandas
 tzlocal==5.2
