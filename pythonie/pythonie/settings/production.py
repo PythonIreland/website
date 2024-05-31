@@ -3,7 +3,7 @@ from pythonie.settings.configure import configure_redis
 from .base import *  # flake8: noqa
 
 # Disable debug mode
-DEBUG = True
+DEBUG = False
 
 DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
