@@ -28,7 +28,7 @@ dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==3.2.25
+django==4.0.10
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -103,7 +103,7 @@ pandas==2.2.2
     # via -r requirements/main.in
 pillow==9.5.0
     # via wagtail
-pydantic==1.10.7
+pydantic==1.10.15
     # via -r requirements/main.in
 python-dateutil==2.9.0.post0
     # via
@@ -115,7 +115,6 @@ pytz==2024.1
     # via
     #   -r requirements/main.in
     #   delorean
-    #   django
     #   django-modelcluster
     #   l18n
     #   pandas

@@ -1,6 +1,6 @@
 # main.in
 Delorean
-Django==3.2.25
+Django==4.0.10
 Willow
 boto3
 colander
@@ -15,7 +15,7 @@ django-storages
 django-taggit
 gunicorn
 pandas
-pydantic==1.10.7
+pydantic==1.10.15
 python-dateutil
 pytz
 redis
