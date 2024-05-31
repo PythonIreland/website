@@ -4,14 +4,13 @@ import logging
 
 from django.db import models
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.panels import FieldPanel, InlinePanel
 from wagtail import blocks
 from wagtail.blocks import RawHTMLBlock
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Orderable, Page
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 
 from sponsors.models import Sponsor, SponsorshipLevel
@@ -82,7 +81,7 @@ class HomePageSegment(Orderable, models.Model):
         verbose_name_plural = "Homepage Segments"
 
     panels = [
-        SnippetChooserPanel("segment"),
+        FieldPanel("segment"),
     ]
 
     def __str__(self):
@@ -120,7 +119,8 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
             ("image", ImageChooserBlock(icon="image")),
             ("slide", EmbedBlock(icon="media")),
             ("html", RawHTMLBlock(icon="code")),
-        ]
+        ],
+        use_json_field=True,
     )
 
     sponsors = models.ManyToManyField(
@@ -131,7 +131,7 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
         return self.title
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     settings_panels = (
@@ -156,11 +156,12 @@ class SimplePage(Page, MeetupMixin, SponsorMixin):
             ("image", ImageChooserBlock(icon="image")),
             ("slide", EmbedBlock(icon="media")),
             ("html", RawHTMLBlock(icon="code")),
-        ]
+        ],
+        use_json_field=True,
     )
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel("body"),
+        FieldPanel("body"),
     ]
 
     settings_panels = (
