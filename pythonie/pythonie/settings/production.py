@@ -17,6 +17,7 @@ AWS_DEFAULT_ACL = "public-read"
 # http://django-compressor.readthedocs.org/en/latest/settings/#django.conf.settings.COMPRESS_OFFLINE
 
 COMPRESS_OFFLINE = False
+CSRF_TRUSTED_ORIGINS = ["https://python.ie"]
 
 REDIS_URL = os.environ.get("REDISCLOUD_URL")
 REDIS = configure_redis(REDIS_URL)
