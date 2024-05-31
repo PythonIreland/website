@@ -13,8 +13,6 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
-from wagtailnews.decorators import newsindex
-from wagtailnews.models import AbstractNewsItem, NewsIndexMixin
 
 from sponsors.models import Sponsor, SponsorshipLevel
 
@@ -172,26 +170,3 @@ class SimplePage(Page, MeetupMixin, SponsorMixin):
     )
 
 
-@newsindex
-class NewsIndex(NewsIndexMixin, Page):
-    # Add extra fields here, as in a normal Wagtail Page class, if required
-    newsitem_model = "NewsItem"
-
-
-class NewsItem(AbstractNewsItem):
-    """
-    NewsItem is a normal Django model, *not* a Wagtail Page.
-    Add any fields required for your page.
-    It already has ``date`` field, and a link to its parent ``NewsIndex`` Page
-    """
-
-    title = models.CharField(max_length=255)
-    body = RichTextField()
-
-    panels = [
-        FieldPanel("title", classname="full title"),
-        FieldPanel("body", classname="full"),
-    ] + AbstractNewsItem.panels
-
-    def __unicode__(self):
-        return self.title

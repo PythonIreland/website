@@ -50,7 +50,6 @@ INSTALLED_APPS = (
     "wagtail.search",
     "wagtail.contrib.redirects",
     "wagtail.contrib.forms",
-    "wagtailnews",
     "wagtail.contrib.styleguide",
     "core",
     "storages",
@@ -135,6 +134,8 @@ MEETUP_KEY = os.getenv("MEETUP_KEY")
 
 
 DATABASES = {"default": dj_database_url.config()}
+
+print(DATABASES)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/

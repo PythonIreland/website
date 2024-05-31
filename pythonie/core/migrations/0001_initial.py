@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 import django.utils.timezone
 import modelcluster.fields
 import wagtail.fields
-import wagtailnews.models
 from django.db import migrations, models
 
 
@@ -61,55 +60,6 @@ class Migration(migrations.Migration):
             options={
                 "verbose_name": "Homepage Segment",
                 "verbose_name_plural": "Homepage Segments",
-            },
-            bases=(models.Model,),
-        ),
-        migrations.CreateModel(
-            name="NewsIndex",
-            fields=[
-                (
-                    "page_ptr",
-                    models.OneToOneField(
-                        auto_created=True,
-                        serialize=False,
-                        to="wagtailcore.Page",
-                        primary_key=True,
-                        parent_link=True,
-                        on_delete=models.CASCADE,
-                    ),
-                ),
-            ],
-            options={},
-            bases=(wagtailnews.models.NewsIndexMixin, "wagtailcore.page"),
-        ),
-        migrations.CreateModel(
-            name="NewsItem",
-            fields=[
-                (
-                    "id",
-                    models.AutoField(
-                        auto_created=True,
-                        serialize=False,
-                        verbose_name="ID",
-                        primary_key=True,
-                    ),
-                ),
-                (
-                    "date",
-                    models.DateTimeField(
-                        default=django.utils.timezone.now, verbose_name="Published date"
-                    ),
-                ),
-                ("title", models.CharField(max_length=255)),
-                ("body", wagtail.fields.RichTextField()),
-                (
-                    "newsindex",
-                    models.ForeignKey(to="wagtailcore.Page", on_delete=models.CASCADE),
-                ),
-            ],
-            options={
-                "abstract": False,
-                "ordering": ("-date",),
             },
             bases=(models.Model,),
         ),

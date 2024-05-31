@@ -12,20 +12,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.AddField(
-            model_name="newsitem",
-            name="has_unpublished_changes",
-            field=models.BooleanField(
-                default=False, editable=False, verbose_name="Has unpublished changes"
-            ),
-        ),
-        migrations.AddField(
-            model_name="newsitem",
-            name="live",
-            field=models.BooleanField(
-                default=True, editable=False, verbose_name="Live"
-            ),
-        ),
         migrations.AlterField(
             model_name="homepage",
             name="sponsors",

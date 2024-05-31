@@ -6,7 +6,7 @@ async-timeout==4.0.3
     # via redis
 babel==2.15.0
     # via delorean
-beautifulsoup4==4.9.3
+beautifulsoup4==4.11.2
     # via wagtail
 boto3==1.34.116
     # via -r requirements/main.in
@@ -51,7 +51,7 @@ django-compressor==4.4
     #   django-libsass
 django-extensions==3.2.3
     # via -r requirements/main.in
-django-filter==21.1
+django-filter==22.1
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
@@ -63,7 +63,7 @@ django-permissionedforms==0.1
     # via wagtail
 django-storages==1.14.3
     # via -r requirements/main.in
-django-taggit==2.1.0
+django-taggit==3.1.0
     # via
     #   -r requirements/main.in
     #   wagtail
@@ -161,14 +161,11 @@ urllib3==2.2.1
     # via
     #   botocore
     #   requests
-wagtail==3.0.3
+wagtail==4.0.4
     # via
     #   -r requirements/main.in
     #   wagtailfontawesome
-    #   wagtailnews
 wagtailfontawesome==1.2.1
-    # via -r requirements/main.in
-wagtailnews==2.7.2
     # via -r requirements/main.in
 webencodings==0.5.1
     # via html5lib
