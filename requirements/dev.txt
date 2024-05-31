@@ -1,29 +1,29 @@
-asgiref==3.6.0
+asgiref==3.8.1
     # via
     #   -c requirements/main.txt
     #   django
-async-timeout==4.0.2
+async-timeout==4.0.3
     # via
     #   -c requirements/main.txt
     #   redis
-black==23.3.0
+black==24.4.2
     # via -r requirements/dev.in
-click==8.1.3
+click==8.1.7
     # via black
-coverage==7.2.2
+coverage==7.5.3
     # via -r requirements/dev.in
 django==3.2.18
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
     #   model-mommy
-django-debug-toolbar==3.8.1
+django-debug-toolbar==4.3.0
     # via -r requirements/dev.in
-fakeredis==2.10.2
+fakeredis==2.23.2
     # via -r requirements/dev.in
-flake8==6.0.0
+flake8==7.0.0
     # via -r requirements/dev.in
-isort==5.12.0
+isort==5.13.2
     # via -r requirements/dev.in
 mccabe==0.7.0
     # via flake8
@@ -31,32 +31,44 @@ model-mommy==2.0.0
     # via -r requirements/dev.in
 mypy-extensions==1.0.0
     # via black
-packaging==23.0
+packaging==24.0
+    # via
+    #   -c requirements/main.txt
+    #   black
+    #   pipdeptree
+pathspec==0.12.1
     # via black
-pathspec==0.11.1
-    # via black
-pipdeptree==2.7.0
+pipdeptree==2.21.0
     # via -r requirements/dev.in
-platformdirs==3.2.0
+platformdirs==4.2.2
     # via black
-pycodestyle==2.10.0
+pycodestyle==2.11.1
     # via flake8
-pyflakes==3.0.1
+pyflakes==3.2.0
     # via flake8
-pytz==2023.3
+pytz==2024.1
     # via
     #   -c requirements/main.txt
     #   django
-redis==4.5.4
+redis==5.0.4
     # via
     #   -c requirements/main.txt
     #   fakeredis
 sortedcontainers==2.4.0
     # via fakeredis
-sqlparse==0.4.3
+sqlparse==0.5.0
     # via
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
 tomli==2.0.1
     # via black
+typing-extensions==4.12.0
+    # via
+    #   -c requirements/main.txt
+    #   asgiref
+    #   black
+    #   fakeredis
+
+# The following packages are considered to be unsafe in a requirements file:
+# pip
