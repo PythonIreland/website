@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 import django.utils.timezone
 import modelcluster.fields
-import wagtail.core.fields
+import wagtail.fields
 import wagtailnews.models
 from django.db import migrations, models
 
@@ -101,7 +101,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("title", models.CharField(max_length=255)),
-                ("body", wagtail.core.fields.RichTextField()),
+                ("body", wagtail.fields.RichTextField()),
                 (
                     "newsindex",
                     models.ForeignKey(to="wagtailcore.Page", on_delete=models.CASCADE),
@@ -126,7 +126,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
                 ("title", models.CharField(max_length=255)),
-                ("body", wagtail.core.fields.RichTextField()),
+                ("body", wagtail.fields.RichTextField()),
                 (
                     "location",
                     models.CharField(

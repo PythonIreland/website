@@ -35,6 +35,8 @@ django==3.2.18
     #   django-appconf
     #   django-extensions
     #   django-filter
+    #   django-modelcluster
+    #   django-permissionedforms
     #   django-storages
     #   django-taggit
     #   django-treebeard
@@ -53,10 +55,12 @@ django-filter==21.1
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
-django-modelcluster==5.3
+django-modelcluster==6.3
     # via
     #   -r requirements/main.in
     #   wagtail
+django-permissionedforms==0.1
+    # via wagtail
 django-storages==1.14.3
     # via -r requirements/main.in
 django-taggit==2.1.0
@@ -157,7 +161,7 @@ urllib3==2.2.1
     # via
     #   botocore
     #   requests
-wagtail==2.16.3
+wagtail==3.0.3
     # via
     #   -r requirements/main.in
     #   wagtailfontawesome

@@ -20,7 +20,7 @@ python-dateutil
 pytz
 redis
 requests
-wagtail==2.16.3
+wagtail==3.0.3
 wagtailfontawesome
 wagtailnews
 whitenoise

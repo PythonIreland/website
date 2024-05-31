@@ -1,7 +1,7 @@
 from django import template
 from meetups.models import Meetup
 from sponsors.models import Sponsor
-from wagtail.core.models import Page, Site
+from wagtail.models import Page, Site
 
 register = template.Library()
 
