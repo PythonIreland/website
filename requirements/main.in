@@ -20,6 +20,6 @@ python-dateutil
 pytz
 redis
 requests
-wagtail==4.0.4
+wagtail==4.2.4
 wagtailfontawesome
 whitenoise
