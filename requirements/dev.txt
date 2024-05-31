@@ -2,22 +2,18 @@ asgiref==3.8.1
     # via
     #   -c requirements/main.txt
     #   django
-async-timeout==4.0.3
-    # via
-    #   -c requirements/main.txt
-    #   redis
 black==24.4.2
     # via -r requirements/dev.in
 click==8.1.7
     # via black
 coverage==7.5.3
     # via -r requirements/dev.in
-django==4.1.13
+django==4.2.13
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
     #   model-mommy
-django-debug-toolbar==4.3.0
+django-debug-toolbar==4.4.2
     # via -r requirements/dev.in
 fakeredis==2.23.2
     # via -r requirements/dev.in
@@ -57,14 +53,6 @@ sqlparse==0.5.0
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-tomli==2.0.1
-    # via black
-typing-extensions==4.12.0
-    # via
-    #   -c requirements/main.txt
-    #   asgiref
-    #   black
-    #   fakeredis
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

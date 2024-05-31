@@ -4,8 +4,6 @@ anyascii==0.3.2
     # via wagtail
 asgiref==3.8.1
     # via django
-async-timeout==4.0.3
-    # via redis
 babel==2.15.0
     # via delorean
 beautifulsoup4==4.11.2
@@ -23,14 +21,16 @@ charset-normalizer==3.3.2
 colander==2.0
     # via -r requirements/main.in
 defusedxml==0.7.1
-    # via -r requirements/main.in
+    # via
+    #   -r requirements/main.in
+    #   willow
 delorean==1.0.0
     # via -r requirements/main.in
 dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==4.1.13
+django==4.2.13
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -44,7 +44,6 @@ django==4.1.13
     #   django-treebeard
     #   djangorestframework
     #   wagtail
-    #   wagtailfontawesome
 django-appconf==1.0.6
     # via django-compressor
 django-compressor==4.4
@@ -77,6 +76,8 @@ draftjs-exporter==2.1.7
     # via wagtail
 et-xmlfile==1.1.0
     # via openpyxl
+filetype==1.2.0
+    # via willow
 gunicorn==22.0.0
     # via -r requirements/main.in
 html5lib==1.1
@@ -103,7 +104,7 @@ packaging==24.0
     # via gunicorn
 pandas==2.2.2
     # via -r requirements/main.in
-pillow==9.5.0
+pillow==10.3.0
     # via wagtail
 pydantic==2.7.2
     # via -r requirements/main.in
@@ -151,7 +152,6 @@ translationstring==1.4
     # via colander
 typing-extensions==4.12.0
     # via
-    #   asgiref
     #   dj-database-url
     #   pydantic
     #   pydantic-core
@@ -163,17 +163,13 @@ urllib3==2.2.1
     # via
     #   botocore
     #   requests
-wagtail==4.2.4
-    # via
-    #   -r requirements/main.in
-    #   wagtailfontawesome
-wagtailfontawesome==1.2.1
+wagtail==5.0.5
     # via -r requirements/main.in
 webencodings==0.5.1
     # via html5lib
 whitenoise==6.6.0
     # via -r requirements/main.in
-willow==1.4.1
+willow==1.6.3
     # via
     #   -r requirements/main.in
     #   wagtail
