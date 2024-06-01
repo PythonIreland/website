@@ -104,6 +104,7 @@ class HomePageSponsorRelationship(models.Model):
 
 
 class HomePage(Page, MeetupMixin, SponsorMixin):
+    exclude_fields_in_copy = ['sponsors']
     subpage_types = [
         "HomePage",
         "SimplePage",
