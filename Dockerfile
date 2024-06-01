@@ -1,4 +1,4 @@
-# syntax = docker/dockerfile:1.4
+# syntax = docker/dockerfile:1.7
 FROM python:3.12 AS compile-stage
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
@@ -10,12 +10,11 @@ ADD requirements/main.txt \
     requirements/production.txt \
     ./requirements/
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -U pip setuptools wheel pip-tools && \
-    pip install \
+    pip install -U pip uv ruff && \
+    python -m uv pip install \
       -r requirements/main.txt \
       -r requirements/dev.txt \
-      -r requirements/production.txt && \
-    pip install aws
+      -r requirements/production.txt aws
 
 FROM compile-stage AS tests-stage
 
