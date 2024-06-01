@@ -7,14 +7,14 @@ tasks:
       - .:/app
     location: /app
     command: |
-      pip-compile --build-isolation --no-header --output-file requirements/main.txt requirements/main.in
-      pip-compile --build-isolation --no-header --output-file requirements/dev.txt requirements/dev.in
-      pip-compile --build-isolation --no-header --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --output-file requirements/production.txt requirements/production.in
 
   deps:outdated:
     description: Show the outdated dependencies
     cache: false
-    command: pip list -o
+    command: python -m pip list -o
 
   deps:upgrade:
     description: Upgrade the dependencies
@@ -23,9 +23,9 @@ tasks:
       - .:/app
     location: /app
     command: |
-      pip-compile --upgrade --build-isolation --no-header --output-file requirements/main.txt requirements/main.in
-      pip-compile --upgrade --build-isolation --no-header --output-file requirements/dev.txt requirements/dev.in
-      pip-compile --upgrade --build-isolation --no-header --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --upgrade --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --upgrade --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --upgrade --output-file requirements/production.txt requirements/production.in
 
   deps:tree:
     description: Show the dependencies tree
@@ -39,7 +39,7 @@ tasks:
       - .:/app
     location: /app
     command: |
-      black pythonie
+      python -m ruff format pythonie
 
   fish:
     description: Run a Shell

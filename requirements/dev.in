@@ -1,10 +1,9 @@
 # dev.in
 -c main.txt
-black
 coverage
+django-debug-toolbar
 fakeredis
-flake8
 isort
 model-mommy
 pipdeptree
-django-debug-toolbar
+ruff
