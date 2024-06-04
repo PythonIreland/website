@@ -25,7 +25,7 @@ packaging==24.0
     #   pipdeptree
 pip==24.0
     # via pipdeptree
-pipdeptree==2.21.0
+pipdeptree==2.22.0
     # via -r requirements/dev.in
 redis==5.0.4
     # via
