@@ -10,9 +10,9 @@ babel==2.15.0
     # via delorean
 beautifulsoup4==4.12.3
     # via wagtail
-boto3==1.34.118
+boto3==1.34.121
     # via -r requirements/main.in
-botocore==1.34.118
+botocore==1.34.121
     # via
     #   boto3
     #   s3transfer
@@ -132,7 +132,7 @@ pytz==2024.1
     #   pandas
 rcssmin==1.1.1
     # via django-compressor
-redis==5.0.4
+redis==5.0.5
     # via -r requirements/main.in
 requests==2.32.3
     # via

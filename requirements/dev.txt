@@ -27,11 +27,11 @@ pip==24.0
     # via pipdeptree
 pipdeptree==2.22.0
     # via -r requirements/dev.in
-redis==5.0.4
+redis==5.0.5
     # via
     #   -c requirements/main.txt
     #   fakeredis
-ruff==0.4.7
+ruff==0.4.8
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via fakeredis
