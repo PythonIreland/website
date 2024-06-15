@@ -7,3 +7,4 @@ isort
 model-mommy
 pipdeptree
 ruff
+uv

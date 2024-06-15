@@ -4,7 +4,7 @@ psycopg==3.1.19
     # via -r requirements/production.in
 psycopg-binary==3.1.19
     # via psycopg
-typing-extensions==4.12.1
+typing-extensions==4.12.2
     # via
     #   -c requirements/main.txt
     #   psycopg
