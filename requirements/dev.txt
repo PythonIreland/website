@@ -11,9 +11,9 @@ django==5.0.6
     #   -c requirements/main.txt
     #   django-debug-toolbar
     #   model-mommy
-django-debug-toolbar==4.4.2
+django-debug-toolbar==4.4.5
     # via -r requirements/dev.in
-fakeredis==2.23.2
+fakeredis==2.23.3
     # via -r requirements/dev.in
 isort==5.13.2
     # via -r requirements/dev.in
@@ -23,15 +23,15 @@ packaging==24.1
     # via
     #   -c requirements/main.txt
     #   pipdeptree
-pip==24.1
+pip==24.1.2
     # via pipdeptree
 pipdeptree==2.23.0
     # via -r requirements/dev.in
-redis==5.0.6
+redis==5.0.7
     # via
     #   -c requirements/main.txt
     #   fakeredis
-ruff==0.4.10
+ruff==0.5.1
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via fakeredis
@@ -40,5 +40,5 @@ sqlparse==0.5.0
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-uv==0.2.15
+uv==0.2.23
     # via -r requirements/dev.in
