@@ -10,9 +10,9 @@ babel==2.15.0
     # via delorean
 beautifulsoup4==4.12.3
     # via wagtail
-boto3==1.34.151
+boto3==1.34.154
     # via -r requirements/main.in
-botocore==1.34.151
+botocore==1.34.154
     # via
     #   boto3
     #   s3transfer
@@ -32,7 +32,7 @@ dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==5.0.7
+django==5.0.8
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -56,7 +56,7 @@ django-compressor==4.5.1
     #   django-libsass
 django-extensions==3.2.3
     # via -r requirements/main.in
-django-filter==24.2
+django-filter==24.3
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
@@ -170,7 +170,7 @@ urllib3==2.2.2
     # via
     #   botocore
     #   requests
-wagtail==6.1.3
+wagtail==6.2
     # via -r requirements/main.in
 whitenoise==6.7.0
     # via -r requirements/main.in
