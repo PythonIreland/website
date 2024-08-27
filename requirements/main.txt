@@ -6,13 +6,13 @@ anyascii==0.3.2
     # via wagtail
 asgiref==3.8.1
     # via django
-babel==2.15.0
+babel==2.16.0
     # via delorean
 beautifulsoup4==4.12.3
     # via wagtail
-boto3==1.34.154
+boto3==1.35.6
     # via -r requirements/main.in
-botocore==1.34.154
+botocore==1.35.6
     # via
     #   boto3
     #   s3transfer
@@ -32,7 +32,7 @@ dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==5.0.8
+django==5.1
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -82,11 +82,11 @@ et-xmlfile==1.1.0
     # via openpyxl
 filetype==1.2.0
     # via willow
-gunicorn==22.0.0
+gunicorn==23.0.0
     # via -r requirements/main.in
 humanize==4.10.0
     # via delorean
-idna==3.7
+idna==3.8
     # via requests
 iso8601==2.1.0
     # via colander
@@ -100,7 +100,7 @@ laces==0.1.1
     # via wagtail
 libsass==0.23.0
     # via django-libsass
-numpy==2.0.1
+numpy==2.1.0
     # via pandas
 openpyxl==3.1.5
     # via wagtail
@@ -147,7 +147,7 @@ six==1.16.0
     # via
     #   l18n
     #   python-dateutil
-soupsieve==2.5
+soupsieve==2.6
     # via beautifulsoup4
 sqlparse==0.5.1
     # via django
@@ -170,7 +170,7 @@ urllib3==2.2.2
     # via
     #   botocore
     #   requests
-wagtail==6.2
+wagtail==6.2.1
     # via -r requirements/main.in
 whitenoise==6.7.0
     # via -r requirements/main.in
