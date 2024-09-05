@@ -1,6 +1,6 @@
 # main.in
 Delorean
-Django
+Django==5.0.9
 Willow
 boto3
 colander

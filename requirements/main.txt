@@ -10,13 +10,13 @@ babel==2.16.0
     # via delorean
 beautifulsoup4==4.12.3
     # via wagtail
-boto3==1.35.6
+boto3==1.35.12
     # via -r requirements/main.in
-botocore==1.35.6
+botocore==1.35.12
     # via
     #   boto3
     #   s3transfer
-certifi==2024.7.4
+certifi==2024.8.30
     # via requests
 charset-normalizer==3.3.2
     # via requests
@@ -32,7 +32,7 @@ dj-database-url==2.2.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==5.1
+django==5.0.9
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -100,7 +100,7 @@ laces==0.1.1
     # via wagtail
 libsass==0.23.0
     # via django-libsass
-numpy==2.1.0
+numpy==2.1.1
     # via pandas
 openpyxl==3.1.5
     # via wagtail
