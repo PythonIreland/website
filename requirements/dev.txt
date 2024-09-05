@@ -6,7 +6,7 @@ asgiref==3.8.1
     #   django
 coverage==7.6.1
     # via -r requirements/dev.in
-django==5.1
+django==5.0.9
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
@@ -31,7 +31,7 @@ redis==5.0.8
     # via
     #   -c requirements/main.txt
     #   fakeredis
-ruff==0.6.2
+ruff==0.6.3
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via fakeredis
@@ -40,5 +40,5 @@ sqlparse==0.5.1
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-uv==0.3.4
+uv==0.4.5
     # via -r requirements/dev.in
