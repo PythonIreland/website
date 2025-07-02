@@ -170,7 +170,7 @@ urllib3==2.2.2
     # via
     #   botocore
     #   requests
-wagtail==6.2.1
+wagtail==6.2.4
     # via -r requirements/main.in
 whitenoise==6.7.0
     # via -r requirements/main.in

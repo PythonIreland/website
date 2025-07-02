@@ -20,5 +20,5 @@ python-dateutil
 pytz
 redis
 requests
-wagtail
+wagtail~=6.2.0
 whitenoise
