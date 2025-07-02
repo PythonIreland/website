@@ -126,6 +126,11 @@ tasks:
     desc: Format the code
     cmds:
       - toast code:format
+  upgrade:package:
+    cmds:
+      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/main.txt requirements/main.in
+      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/dev.txt requirements/dev.in
+      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/production.txt requirements/production.in
 
   tests:
     env:
