@@ -18,3 +18,13 @@
 
 # Running Tests
  - pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+
+# Project Management Tools
+We use several tools to manage and streamline development:
+
+- [Task](https://taskfile.dev/): Task runner for automating common development workflows. See `Taskfile.yaml` for available tasks.
+- [Toast](https://github.com/stepchowfun/toast): Containerized project automation. See `toast.yml` for configuration and available commands.
+- [asdf](https://asdf-vm.com/): Tool version manager to ensure consistent versions of Python and other tools. Refer to `.tool-versions` if present, and see the asdf documentation for setup.
+- [uv](https://github.com/astral-sh/uv): Fast Python package manager, used for installing and managing dependencies. You can use `uv pip install -r requirements.txt` as a drop-in replacement for pip.
+
+Make sure to install these tools to ensure a smooth development experience.
