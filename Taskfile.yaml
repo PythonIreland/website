@@ -42,6 +42,11 @@ tasks:
     cmds:
       - heroku pg:backups:capture
 
+  run:postgres:
+    desc: Only run the PostgreSQL server, for example, if you want to restore the database from Heroku
+    cmds:
+      - docker compose run --remove-orphans --detach --service-ports postgres
+
   run:
     desc: Run a local version of PythonIE (works)
     cmds:
