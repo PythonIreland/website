@@ -1,6 +1,7 @@
 # main.in
 Delorean
 Django==5.0.9
+django-debug-toolbar
 Willow
 boto3
 colander

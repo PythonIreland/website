@@ -4,7 +4,7 @@ asgiref==3.8.1
     # via
     #   -c requirements/main.txt
     #   django
-coverage==7.6.1
+coverage==7.6.3
     # via -r requirements/dev.in
 django==5.0.9
     # via
@@ -12,8 +12,10 @@ django==5.0.9
     #   django-debug-toolbar
     #   model-mommy
 django-debug-toolbar==4.4.6
-    # via -r requirements/dev.in
-fakeredis==2.24.1
+    # via
+    #   -c requirements/main.txt
+    #   -r requirements/dev.in
+fakeredis==2.25.1
     # via -r requirements/dev.in
 isort==5.13.2
     # via -r requirements/dev.in
@@ -25,13 +27,13 @@ packaging==24.1
     #   pipdeptree
 pip==24.2
     # via pipdeptree
-pipdeptree==2.23.1
+pipdeptree==2.23.4
     # via -r requirements/dev.in
-redis==5.0.8
+redis==5.1.1
     # via
     #   -c requirements/main.txt
     #   fakeredis
-ruff==0.6.3
+ruff==0.6.9
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via fakeredis
@@ -40,5 +42,5 @@ sqlparse==0.5.1
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-uv==0.4.5
+uv==0.4.21
     # via -r requirements/dev.in
