@@ -31,7 +31,7 @@ redis==5.0.8
     # via
     #   -c requirements/main.txt
     #   fakeredis
-ruff==0.6.3
+ruff==0.12.1
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via fakeredis
@@ -40,5 +40,5 @@ sqlparse==0.5.1
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-uv==0.4.5
+uv==0.7.18
     # via -r requirements/dev.in
