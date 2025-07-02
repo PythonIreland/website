@@ -92,6 +92,11 @@ tasks:
     cmds:
       - toast deps:upgrade
 
+  dependencies:upgrade:wagtail:
+    desc: Upgrade the dependencies
+    cmds:
+      - toast deps:upgrade:wagtail
+
   docker:build:
     desc: Build the docker image
     cmds:
