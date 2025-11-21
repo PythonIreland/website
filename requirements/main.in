@@ -19,6 +19,6 @@ pydantic
 python-dateutil
 pytz
 redis
-requests
+requests>=2.32.5
 wagtail~=6.3.0
 whitenoise
