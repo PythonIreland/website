@@ -1,12 +1,14 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 import colander
-from delorean import Delorean
+import pytz
 
 
 def int_to_datetime(value):
-    time = datetime.utcfromtimestamp(value / 1000)
-    return Delorean(time, timezone="UTC").shift("Europe/Dublin").datetime
+    """Convert Unix timestamp in milliseconds to timezone-aware datetime."""
+    utc_dt = datetime.fromtimestamp(value / 1000, tz=timezone.utc)
+    dublin_tz = pytz.timezone("Europe/Dublin")
+    return utc_dt.astimezone(dublin_tz)
 
 
 class Meetups(colander.MappingSchema):
