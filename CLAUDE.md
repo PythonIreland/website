@@ -35,8 +35,10 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 ### Database
 
 - Development (default): SQLite at `pythonie/db.sqlite3`
-- Docker/Tests: PostgreSQL 13 in docker-compose
-- Production: PostgreSQL on Heroku via `DATABASE_URL` environment variable
+- Docker/Tests: PostgreSQL 17 in docker-compose
+- Production: PostgreSQL 17 on Heroku via `DATABASE_URL` environment variable
+
+**Important**: When using Heroku CLI tools locally (e.g., `task database:reset`), ensure you have PostgreSQL 17 installed locally. This simplifies database reset operations and ensures compatibility with production.
 
 ### Key Dependencies
 
