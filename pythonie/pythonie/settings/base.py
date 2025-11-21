@@ -27,6 +27,7 @@ ALLOWED_HOSTS = [
     ".pycon.ie",
     "next.python.ie",
     "127.0.0.1",
+    "localhost",
 ]
 
 # Base URL to use when referring to full URLs within the Wagtail admin backend-
