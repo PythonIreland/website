@@ -22,10 +22,10 @@
 
 ### Tech Stack
 
-- **Framework**: Django 5.0.14
-- **CMS**: Wagtail 6.2.x
+- **Framework**: Django 5.2.8
+- **CMS**: Wagtail 7.2
 - **Python**: 3.12 (required)
-- **Database**: PostgreSQL 13 (prod), SQLite (dev)
+- **Database**: PostgreSQL 17 (prod), SQLite (dev)
 - **Cache**: Redis 6.2
 - **Storage**: AWS S3 (prod), Local (dev)
 - **Server**: Gunicorn (prod), Runserver (dev)
@@ -609,11 +609,21 @@ email = f"{speaker.id}@sessionize.com"
 ### 3. AWS S3 (Production)
 
 **Configuration** (`pythonie/pythonie/settings/production.py`):
+
+Django 5.1+ uses the `STORAGES` API instead of `DEFAULT_FILE_STORAGE`:
 ```python
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 AWS_STORAGE_BUCKET_NAME = os.environ.get("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_CUSTOM_DOMAIN = "s3.python.ie"
 AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "max-age=86400"}
+MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/"
 ```
 
 **Required env variables**:
@@ -657,7 +667,13 @@ task dependencies:upgrade
 task dependencies:upgrade:wagtail
 
 # Upgrade specific package
-task upgrade:package PACKAGE=django
+task dependencies:upgrade:package PACKAGE=django
+
+# Check for security vulnerabilities
+task dependencies:security
+
+# Show dependencies tree
+task dependencies:tree
 ```
 
 **Manual process**:
@@ -1238,8 +1254,11 @@ task run
 ### 3. Test Before Commit
 
 ```bash
-task tests           # Full tests
-task code:format     # Format code with ruff
+task tests                  # Full tests
+task code:format            # Format code with ruff
+task code:lint              # Lint code and fix issues
+task code:check             # Check without changes
+task dependencies:security  # Check for security vulnerabilities
 ```
 
 ### 4. Create Atomic Migrations
@@ -1344,14 +1363,18 @@ task database:pull             # Pull Heroku DB
 task database:push             # Push to Heroku (danger)
 task database:reset            # Reset local DB
 
-# Tests
+# Tests & Code Quality
 task tests                     # Run all tests
 task code:format               # Format with ruff
+task code:lint                 # Lint and fix issues
+task code:check                # Check without changes
 
 # Dependencies
 task dependencies:compute      # Recompile requirements
 task dependencies:outdated     # Check outdated
 task dependencies:upgrade      # Upgrade all
+task dependencies:security     # Check for security vulnerabilities
+task dependencies:tree         # Show dependencies tree
 
 # Imports
 task pycon:import:sessionize       # Import Sessionize Excel
@@ -1406,7 +1429,7 @@ pythonie/pythonie/wsgi.py     # WSGI application
 
 ---
 
-**Last updated**: 2024
-**Django Version**: 5.0.14
-**Wagtail Version**: 6.2.x
+**Last updated**: 2025
+**Django Version**: 5.2.8
+**Wagtail Version**: 7.2
 **Python Version**: 3.12

@@ -116,8 +116,14 @@ task code:format
 # or: toast code:format
 # or: python -m ruff format pythonie
 
-# Lint (legacy, may still be used)
-flake8 pythonie/
+# Lint code and fix issues
+task code:lint
+# or: toast code:lint
+# or: python -m ruff check --fix pythonie
+
+# Check code formatting and linting without changes
+task code:check
+# or: toast code:check
 ```
 
 ### Dependency Management
@@ -139,7 +145,13 @@ task dependencies:upgrade
 task dependencies:upgrade:wagtail
 
 # Upgrade specific package
-task upgrade:package PACKAGE=django
+task dependencies:upgrade:package PACKAGE=django
+
+# Check for security vulnerabilities
+task dependencies:security
+
+# Show dependencies tree
+task dependencies:tree
 ```
 
 ### Database Operations (Heroku)

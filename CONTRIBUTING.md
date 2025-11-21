@@ -170,8 +170,12 @@ refactor/simplify-sponsor-model
 task code:format
 # or: python -m ruff format pythonie
 
-# Check for issues without fixing
-python -m ruff check pythonie
+# Lint code and fix issues
+task code:lint
+# or: python -m ruff check --fix pythonie
+
+# Check code formatting and linting without changes
+task code:check
 ```
 
 ### Django/Wagtail Conventions
