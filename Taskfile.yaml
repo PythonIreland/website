@@ -138,7 +138,6 @@ tasks:
       - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/production.txt requirements/production.in
 
   tests:
-    env:
-      DJANGO_SETTINGS_MODULE: pythonie.settings.tests
+    desc: Run all tests
     cmds:
-      - docker run --rm -p 8000:8000 --env-file development.env -e DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE -v $PWD:/app -w /app -it $DOCKER_IMAGE python pythonie/manage.py test pythonie --verbosity=3
+      - docker compose run --rm -e DJANGO_SETTINGS_MODULE=pythonie.settings.tests web python pythonie/manage.py test pythonie --verbosity=3
