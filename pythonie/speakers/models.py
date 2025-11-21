@@ -87,7 +87,7 @@ class Session(Page):
         default=StateChoices.DRAFT,
         db_index=True,
     )
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
+    room = models.ForeignKey(Room, on_delete=models.PROTECT)
     # speaker = models.ForeignKey(Speaker, on_delete=models.CASCADE)
     speakers = models.ManyToManyField(Speaker, related_name="sessions")
 
