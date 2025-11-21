@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Python Ireland (python.ie / pycon.ie) website, built with Django 5.0 and Wagtail CMS 6.2. It manages content for the Python Ireland community including meetups, sponsors, speakers, and PyCon talks/sessions.
+This is the Python Ireland (python.ie / pycon.ie) website, built with Django 5.2 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups, sponsors, speakers, and PyCon talks/sessions.
 
 ### Python Version
 
@@ -42,8 +42,8 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 
 ### Key Dependencies
 
-- Django ~5.1.0
-- Wagtail ~6.3.0 (CMS framework)
+- Django ~5.2.0
+- Wagtail ~7.2.0 (CMS framework)
 - Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
