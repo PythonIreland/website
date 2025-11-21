@@ -5,9 +5,11 @@ version: '3'
 
 env:
   DOCKER_IMAGE: python.ie/website-dev
+  PGDATABASE: pythonie
   PGPASSWORD: pythonie
   PGUSER: postgres
   PGHOST: 127.0.0.1
+  HEROKU_APP: pythonie
 
 dotenv: ['production.env']
 
@@ -15,17 +17,17 @@ tasks:
   database:drop:
     desc: Drop the local PostgreSQL database
     cmds:
-      - docker compose exec -u postgres postgres dropdb --if-exists pythonie
+      - docker compose exec -u postgres postgres dropdb --if-exists $PGDATABASE
 
   database:pull:
     desc: Pull the database from Heroku and store it into a localhost PostgreSQL
     cmds:
-      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER pythonie
+      - heroku pg:pull $HEROKU_POSTGRESQL_IDENTIFIER $PGDATABASE
 
   database:push:
     desc: Push the database from local PostgreSQL to Heroku
     cmds:
-      - heroku pg:push pythonie $HEROKU_POSTGRESQL_IDENTIFIER
+      - heroku pg:push $PGDATABASE $HEROKU_POSTGRESQL_IDENTIFIER
 
   database:reset:
     desc: Reset the database with a fresh copy of the official database
@@ -42,6 +44,61 @@ tasks:
     desc: Run a remote backup
     cmds:
       - heroku pg:backups:capture
+
+  heroku:logs:
+    desc: View application logs in real-time
+    cmds:
+      - heroku logs --tail
+
+  heroku:restart:
+    desc: Restart the Heroku application
+    cmds:
+      - heroku restart
+
+  heroku:shell:
+    desc: Run Django shell on Heroku
+    cmds:
+      - heroku run python pythonie/manage.py shell --settings=pythonie.settings.production
+
+  heroku:bash:
+    desc: Run bash shell on Heroku
+    cmds:
+      - heroku run bash
+
+  heroku:migrate:
+    desc: Run database migrations on Heroku
+    cmds:
+      - heroku run python pythonie/manage.py migrate --settings=pythonie.settings.production
+
+  heroku:config:
+    desc: Show Heroku environment variables
+    cmds:
+      - heroku config
+
+  heroku:ps:
+    desc: Show dyno status
+    cmds:
+      - heroku ps
+
+  heroku:releases:
+    desc: Show deployment history
+    cmds:
+      - heroku releases
+
+  heroku:rollback:
+    desc: Rollback to previous release
+    cmds:
+      - heroku rollback
+
+  heroku:maintenance:on:
+    desc: Enable maintenance mode
+    cmds:
+      - heroku maintenance:on
+
+  heroku:maintenance:off:
+    desc: Disable maintenance mode
+    cmds:
+      - heroku maintenance:off
 
   run:postgres:
     desc: Only run the PostgreSQL server, for example, if you want to restore the database from Heroku
