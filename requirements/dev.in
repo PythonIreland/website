@@ -5,6 +5,7 @@ django-debug-toolbar
 fakeredis
 isort
 model-mommy
+pip-audit
 pipdeptree
 ruff
 uv

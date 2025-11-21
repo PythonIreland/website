@@ -13,6 +13,7 @@ dotenv: ['production.env']
 
 tasks:
   database:drop:
+    desc: Drop the local PostgreSQL database
     cmds:
       - docker compose exec -u postgres postgres dropdb --if-exists pythonie
 
@@ -48,12 +49,12 @@ tasks:
       - docker compose run --remove-orphans --detach --service-ports postgres
 
   run:
-    desc: Run a local version of PythonIE (works)
+    desc: Run a local version of PythonIE
     cmds:
       - docker compose run --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
 
   django:shell-plus:
-    desc: Run a local version of PythonIE
+    desc: Run Django shell_plus
     cmds:
       - docker compose run --rm web python pythonie/manage.py shell_plus
 
@@ -68,12 +69,12 @@ tasks:
       - docker compose run --rm web python pythonie/manage.py makemigrations
 
   django:migrate:
-    desc: Make migrations
+    desc: Run database migrations
     cmds:
       - docker compose run --rm web python pythonie/manage.py migrate
 
   django:collect-static:
-    desc: Make migrations
+    desc: Collect static files
     cmds:
       - docker compose run --rm web python pythonie/manage.py collectstatic
 
@@ -93,14 +94,24 @@ tasks:
       - toast deps:upgrade
 
   dependencies:upgrade:django:
-    desc: Upgrade the dependencies
+    desc: Upgrade Django to the latest compatible version
     cmds:
       - toast deps:upgrade:django
 
   dependencies:upgrade:wagtail:
-    desc: Upgrade the dependencies
+    desc: Upgrade Wagtail to the latest compatible version
     cmds:
       - toast deps:upgrade:wagtail
+
+  dependencies:security:
+    desc: Check dependencies for known security vulnerabilities
+    cmds:
+      - toast deps:security
+
+  dependencies:tree:
+    desc: Show the dependencies tree
+    cmds:
+      - toast deps:tree
 
   docker:build:
     desc: Build the docker image
@@ -131,7 +142,19 @@ tasks:
     desc: Format the code
     cmds:
       - toast code:format
-  upgrade:package:
+
+  code:lint:
+    desc: Lint the code and fix issues
+    cmds:
+      - toast code:lint
+
+  code:check:
+    desc: Check code formatting and linting without changes
+    cmds:
+      - toast code:check
+
+  dependencies:upgrade:package:
+    desc: "Upgrade a specific package (usage: task dependencies:upgrade:package PACKAGE=django)"
     cmds:
       - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/main.txt requirements/main.in
       - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/dev.txt requirements/dev.in
