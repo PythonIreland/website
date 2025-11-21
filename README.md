@@ -4,7 +4,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5
 
 ## Prerequisites
 
-- Python 3.12 (see `.tool-versions`)
+- Python 3.13 (see `.tool-versions`)
 - Docker & Docker Compose (for containerized development - recommended)
 - [Task](https://taskfile.dev/) (optional but recommended)
 - Redis (only for local non-Docker development)
@@ -47,7 +47,7 @@ If you prefer to develop without Docker:
 
 1. Fork the repository into your own personal GitHub account
 2. Clone your fork: `git clone git@github.com:YourGitHubName/website.git`
-3. Ensure you are running Python 3.12: `python -V` should output `Python 3.12.x`
+3. Ensure you are running Python 3.13: `python -V` should output `Python 3.13.x`
 4. Create a virtualenv: `python3 -m venv pythonie-venv`
 5. Activate the virtualenv: `source pythonie-venv/bin/activate`
 6. Install dependencies: `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`)

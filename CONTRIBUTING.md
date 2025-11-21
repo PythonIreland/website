@@ -25,7 +25,7 @@ This project follows the [Python Community Code of Conduct](https://www.python.o
 
 ### Prerequisites
 
-- **Python 3.12** (required - do not use other versions)
+- **Python 3.13** (required)
 - **Docker** and **docker-compose** (recommended)
 - **Git**
 - **Task** (optional, for running predefined commands)
@@ -77,11 +77,11 @@ task run
 ### Option 2: Local Development
 
 ```bash
-# Ensure Python 3.12 is installed
-python3 --version  # Should show 3.12.x
+# Ensure Python 3.13 is installed
+python3 --version  # Should show 3.13.x
 
 # Create virtual environment
-python3.12 -m venv pythonie-venv
+python3.13 -m venv pythonie-venv
 source pythonie-venv/bin/activate
 
 # Install dependencies
@@ -158,7 +158,7 @@ refactor/simplify-sponsor-model
 
 ### Python
 
-- **Python version**: 3.12 (strict requirement)
+- **Python version**: 3.13 (strict requirement)
 - **Formatter**: Ruff
 - **Line length**: 88 characters (Ruff default)
 - **Imports**: Sorted automatically by Ruff
@@ -356,7 +356,7 @@ feat: Add speaker bio character limit validation
 
 fix: Resolve meetup sync timezone issue
 
-docs: Update installation instructions for Python 3.12
+docs: Update installation instructions for Python 3.13
 
 refactor: Simplify sponsor level ordering logic
 ```

@@ -8,7 +8,7 @@ This is the Python Ireland (python.ie / pycon.ie) website, built with Django 5.2
 
 ### Python Version
 
-This project requires **Python 3.12**. All code must be compatible with Python 3.12 and should not use features from newer versions. When developing locally without Docker, ensure you are using Python 3.12.x.
+This project requires **Python 3.13**. All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
 
 ## Architecture
 

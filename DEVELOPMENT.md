@@ -24,7 +24,7 @@
 
 - **Framework**: Django 5.2.8
 - **CMS**: Wagtail 7.2
-- **Python**: 3.12 (required)
+- **Python**: 3.13 (required)
 - **Database**: PostgreSQL 17 (prod and dev via Docker)
 - **Cache**: Redis 6.2
 - **Storage**: AWS S3 (prod), Local (dev)
@@ -105,7 +105,7 @@ pythonie/
 
 ### Prerequisites
 
-- Python 3.12 (required)
+- Python 3.13 (required)
 - Docker + docker-compose
 - Task (or Make)
 - Git
@@ -163,8 +163,8 @@ task run
 ### Local Setup (without Docker)
 
 ```bash
-# 1. Create virtualenv (ensure Python 3.12)
-python3.12 -m venv pythonie-venv
+# 1. Create virtualenv (ensure Python 3.13)
+python3.13 -m venv pythonie-venv
 source pythonie-venv/bin/activate
 
 # 2. Install dependencies
@@ -1412,7 +1412,7 @@ http://localhost:8000/documents/          # Document downloads
 development.env               # Dev env template
 production.env                # Prod env template (gitignored)
 docker-compose.yml            # Docker services
-Dockerfile                    # Python 3.12 image
+Dockerfile                    # Python 3.13 image
 Taskfile.yaml                 # Task automation
 Procfile                      # Heroku processes
 requirements/                 # Dependency management
@@ -1443,4 +1443,4 @@ pythonie/pythonie/wsgi.py     # WSGI application
 **Last updated**: 2025
 **Django Version**: 5.2.8
 **Wagtail Version**: 7.2
-**Python Version**: 3.12
+**Python Version**: 3.13
