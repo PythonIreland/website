@@ -92,6 +92,11 @@ tasks:
     cmds:
       - toast deps:upgrade
 
+  dependencies:upgrade:django:
+    desc: Upgrade the dependencies
+    cmds:
+      - toast deps:upgrade:django
+
   dependencies:upgrade:wagtail:
     desc: Upgrade the dependencies
     cmds:

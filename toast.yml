@@ -27,6 +27,17 @@ tasks:
       python -m uv pip compile --upgrade --output-file requirements/dev.txt requirements/dev.in
       python -m uv pip compile --upgrade --output-file requirements/production.txt requirements/production.in
 
+  deps:upgrade:django:
+    description: Upgrade the Django dependencies
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: |
+      python -m uv pip compile --upgrade-package django --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --upgrade-package django --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --upgrade-package django --output-file requirements/production.txt requirements/production.in
+
   deps:upgrade:wagtail:
     description: Upgrade the Wagtail dependencies
     cache: false
