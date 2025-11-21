@@ -2,23 +2,23 @@
 #    uv pip compile --output-file requirements/main.txt requirements/main.in
 annotated-types==0.7.0
     # via pydantic
-anyascii==0.3.2
+anyascii==0.3.3
     # via wagtail
-asgiref==3.8.1
+asgiref==3.11.0
     # via django
-babel==2.16.0
+babel==2.17.0
     # via delorean
 beautifulsoup4==4.12.3
     # via wagtail
-boto3==1.35.12
+boto3==1.41.1
     # via -r requirements/main.in
-botocore==1.35.12
+botocore==1.41.1
     # via
     #   boto3
     #   s3transfer
-certifi==2024.8.30
+certifi==2025.11.12
     # via requests
-charset-normalizer==3.3.2
+charset-normalizer==3.4.4
     # via requests
 colander==2.0
     # via -r requirements/main.in
@@ -28,7 +28,7 @@ defusedxml==0.7.1
     #   willow
 delorean==1.0.0
     # via -r requirements/main.in
-dj-database-url==2.2.0
+dj-database-url==3.0.1
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
@@ -48,45 +48,45 @@ django==5.1.14
     #   djangorestframework
     #   laces
     #   wagtail
-django-appconf==1.0.6
+django-appconf==1.2.0
     # via django-compressor
-django-compressor==4.5.1
+django-compressor==4.6.0
     # via
     #   -r requirements/main.in
     #   django-libsass
-django-extensions==3.2.3
+django-extensions==4.1
     # via -r requirements/main.in
-django-filter==24.3
+django-filter==25.1
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
-django-modelcluster==6.3
+django-modelcluster==6.4
     # via
     #   -r requirements/main.in
     #   wagtail
 django-permissionedforms==0.1
     # via wagtail
-django-storages==1.14.4
+django-storages==1.14.6
     # via -r requirements/main.in
-django-taggit==5.0.1
+django-taggit==6.1.0
     # via
     #   -r requirements/main.in
     #   wagtail
 django-treebeard==4.7.1
     # via wagtail
-djangorestframework==3.15.2
+djangorestframework==3.16.1
     # via wagtail
-draftjs-exporter==5.0.0
+draftjs-exporter==5.1.0
     # via wagtail
-et-xmlfile==1.1.0
+et-xmlfile==2.0.0
     # via openpyxl
 filetype==1.2.0
     # via willow
 gunicorn==23.0.0
     # via -r requirements/main.in
-humanize==4.10.0
+humanize==4.14.0
     # via delorean
-idna==3.8
+idna==3.11
     # via requests
 iso8601==2.1.0
     # via colander
@@ -96,27 +96,27 @@ jmespath==1.0.1
     #   botocore
 l18n==2021.3
     # via wagtail
-laces==0.1.1
+laces==0.1.2
     # via wagtail
 libsass==0.23.0
     # via django-libsass
-numpy==2.1.1
+numpy==2.3.5
     # via pandas
 openpyxl==3.1.5
     # via wagtail
-packaging==24.1
+packaging==25.0
     # via gunicorn
-pandas==2.2.2
+pandas==2.3.3
     # via -r requirements/main.in
-pillow==10.4.0
+pillow==11.3.0
     # via
     #   pillow-heif
     #   wagtail
-pillow-heif==0.18.0
+pillow-heif==1.1.1
     # via willow
-pydantic==2.8.2
+pydantic==2.12.4
     # via -r requirements/main.in
-pydantic-core==2.20.1
+pydantic-core==2.41.5
     # via pydantic
 python-dateutil==2.9.0.post0
     # via
@@ -124,32 +124,31 @@ python-dateutil==2.9.0.post0
     #   botocore
     #   delorean
     #   pandas
-pytz==2024.1
+pytz==2025.2
     # via
     #   -r requirements/main.in
     #   delorean
-    #   django-modelcluster
     #   l18n
     #   pandas
-rcssmin==1.1.2
+rcssmin==1.2.2
     # via django-compressor
-redis==5.0.8
+redis==7.1.0
     # via -r requirements/main.in
 requests==2.32.5
     # via
     #   -r requirements/main.in
     #   wagtail
-rjsmin==1.2.2
+rjsmin==1.2.5
     # via django-compressor
-s3transfer==0.10.2
+s3transfer==0.15.0
     # via boto3
-six==1.16.0
+six==1.17.0
     # via
     #   l18n
     #   python-dateutil
-soupsieve==2.6
+soupsieve==2.8
     # via beautifulsoup4
-sqlparse==0.5.1
+sqlparse==0.5.3
     # via django
 static3==0.7.0
     # via dj-static
@@ -157,24 +156,26 @@ telepath==0.3.1
     # via wagtail
 translationstring==1.4
     # via colander
-typing-extensions==4.12.2
+typing-extensions==4.15.0
     # via
-    #   dj-database-url
     #   pydantic
     #   pydantic-core
-tzdata==2024.1
+    #   typing-inspection
+typing-inspection==0.4.2
+    # via pydantic
+tzdata==2025.2
     # via pandas
-tzlocal==5.2
+tzlocal==5.3.1
     # via delorean
-urllib3==2.2.2
+urllib3==2.5.0
     # via
     #   botocore
     #   requests
-wagtail==6.3.4
+wagtail==6.3.5
     # via -r requirements/main.in
-whitenoise==6.7.0
+whitenoise==6.11.0
     # via -r requirements/main.in
-willow==1.8.0
+willow==1.12.0
     # via
     #   -r requirements/main.in
     #   wagtail
