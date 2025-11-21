@@ -173,6 +173,41 @@ task heroku:database:backups
 task heroku:database:run-backup
 ```
 
+### Heroku Management
+
+```bash
+# View logs in real-time
+task heroku:logs
+
+# Restart the application
+task heroku:restart
+
+# Django shell on Heroku
+task heroku:shell
+
+# Bash shell on Heroku
+task heroku:bash
+
+# Run migrations on Heroku
+task heroku:migrate
+
+# Show environment variables
+task heroku:config
+
+# Show dyno status
+task heroku:ps
+
+# Show deployment history
+task heroku:releases
+
+# Rollback to previous release
+task heroku:rollback
+
+# Maintenance mode
+task heroku:maintenance:on
+task heroku:maintenance:off
+```
+
 ### Conference Management
 
 ```bash
@@ -213,6 +248,7 @@ Key variables (see `development.env` / `production.env`):
 - `REDISCLOUD_URL`: Redis connection
 - `MEETUP_KEY`: Meetup.com API key
 - `PGDATABASE`, `PGUSER`, `PGPASSWORD`, `PGHOST`: PostgreSQL credentials for Docker
+- `HEROKU_APP`: Heroku application name (set in Taskfile.yaml)
 
 ### Static Files
 

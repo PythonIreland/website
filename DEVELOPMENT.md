@@ -1384,6 +1384,17 @@ task meetup:update                 # Update meetups
 # Heroku
 task heroku:database:backups       # List backups
 task heroku:database:run-backup    # Create backup
+task heroku:logs                   # View logs in real-time
+task heroku:restart                # Restart application
+task heroku:shell                  # Django shell on Heroku
+task heroku:bash                   # Bash on Heroku
+task heroku:migrate                # Run migrations on Heroku
+task heroku:config                 # Show environment variables
+task heroku:ps                     # Show dyno status
+task heroku:releases               # Show deployment history
+task heroku:rollback               # Rollback to previous release
+task heroku:maintenance:on         # Enable maintenance mode
+task heroku:maintenance:off        # Disable maintenance mode
 ```
 
 ### B. Admin URLs

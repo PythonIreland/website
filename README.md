@@ -1,6 +1,6 @@
 # Python Ireland Website
 
-Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5.0 and Wagtail CMS 6.2. Manages meetups, sponsors, speakers, and conference sessions.
+Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5.2 and Wagtail CMS 7.2. Manages meetups, sponsors, speakers, and conference sessions.
 
 ## Prerequisites
 
@@ -93,18 +93,36 @@ make docker-tests             # Alternative test command
 
 # Code Quality
 task code:format              # Format code with ruff
+task code:lint                # Lint and fix issues
+task code:check               # Check without changes
 
 # Dependencies
 task dependencies:compute     # Recompile dependency files
 task dependencies:outdated    # List outdated packages
 task dependencies:upgrade     # Upgrade all dependencies
-task upgrade:package PACKAGE=django  # Upgrade specific package
+task dependencies:upgrade:package PACKAGE=django  # Upgrade specific package
+task dependencies:security    # Check for security vulnerabilities
+task dependencies:tree        # Show dependencies tree
 
 # Database Operations (Heroku)
 task database:pull            # Pull production database to local
 task database:push            # Push local database to production
 task database:reset           # Reset local DB with production copy
 task heroku:database:backups  # View Heroku backups
+task heroku:database:run-backup  # Create a new backup
+
+# Heroku Management
+task heroku:logs              # View logs in real-time
+task heroku:restart           # Restart the application
+task heroku:shell             # Django shell on Heroku
+task heroku:bash              # Bash shell on Heroku
+task heroku:migrate           # Run migrations on Heroku
+task heroku:config            # Show environment variables
+task heroku:ps                # Show dyno status
+task heroku:releases          # Show deployment history
+task heroku:rollback          # Rollback to previous release
+task heroku:maintenance:on    # Enable maintenance mode
+task heroku:maintenance:off   # Disable maintenance mode
 
 # Conference Management
 task pycon:import:sessionize      # Import from Sessionize Excel
@@ -154,8 +172,12 @@ python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --ver
 ```bash
 # Format code with ruff
 task code:format
-# or: toast code:format
-# or: python -m ruff format pythonie
+
+# Lint and fix issues
+task code:lint
+
+# Check without changes
+task code:check
 ```
 
 ## Environment Variables
