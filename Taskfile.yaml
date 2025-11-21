@@ -108,7 +108,7 @@ tasks:
   run:
     desc: Run a local version of PythonIE
     cmds:
-      - docker compose run --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
+      - docker compose run --remove-orphans --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
 
   django:shell-plus:
     desc: Run Django shell_plus
@@ -183,7 +183,12 @@ tasks:
   stack:pull:
     desc: Pull the docker images for the stack
     cmds:
-      - docker compose pull postgres minio mc
+      - docker compose pull postgres minio mc redis
+
+  stack:services:
+    desc: List the services from the docker compose file
+    cmds:
+      - docker compose config --services
 
   pycon:import:sessionize:
     desc: Import the information from Sessionize
@@ -221,3 +226,8 @@ tasks:
     desc: Run all tests
     cmds:
       - docker compose run --rm -e DJANGO_SETTINGS_MODULE=pythonie.settings.tests web python pythonie/manage.py test pythonie --verbosity=3
+
+  down:
+    desc: Stop the docker compose stack
+    cmds:
+      - docker compose down

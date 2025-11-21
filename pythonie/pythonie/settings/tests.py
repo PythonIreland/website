@@ -37,10 +37,6 @@ LOGGING.update(
                 "handlers": ["console"],
                 "level": os.getenv("DJANGO_LOG_LEVEL", "ERROR"),
             },
-            "speakers": {
-                "handlers": ["console"],
-                "level": os.getenv("DJANGO_LOG_LEVEL", "ERROR"),
-            },
             "core": {
                 "handlers": ["console"],
                 "level": os.getenv("DJANGO_LOG_LEVEL", "ERROR"),
