@@ -42,8 +42,8 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 
 ### Key Dependencies
 
-- Django ~5.0.0
-- Wagtail ~6.2.0 (CMS framework)
+- Django ~5.1.0
+- Wagtail ~6.3.0 (CMS framework)
 - Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
@@ -213,6 +213,15 @@ Tests use `pythonie.settings.tests` which configures SQLite and mock Redis. Run 
 ### Deployment
 
 The project is hosted on Heroku.
+
+### Upgrading Wagtail
+
+After upgrading Wagtail to a new version, you must:
+
+1. Rebuild the Docker image: `task docker:build`
+2. Run migrations: `task django:migrate`
+3. Clear and recollect static files: `docker compose run --rm web python pythonie/manage.py collectstatic --clear --noinput`
+4. **Clear your browser cache** (Ctrl+Shift+R or Cmd+Shift+R) - this is critical as Wagtail admin JavaScript files are cached and stale cache can cause the admin sidebar menu to disappear with errors like `wagtailConfig is undefined`.
 
 ### Documentation Language
 

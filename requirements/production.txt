@@ -3,8 +3,8 @@
 psycopg==3.2.1
     # via -r requirements/production.in
 psycopg-binary==3.2.1
-    # via psycopg
+    # via -r requirements/production.in
 typing-extensions==4.12.2
     # via
-    #   -c requirements/main.txt
+    #   -r requirements/production.in
     #   psycopg
