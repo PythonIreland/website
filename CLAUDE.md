@@ -223,6 +223,15 @@ After upgrading Wagtail to a new version, you must:
 3. Clear and recollect static files: `docker compose run --rm web python pythonie/manage.py collectstatic --clear --noinput`
 4. **Clear your browser cache** (Ctrl+Shift+R or Cmd+Shift+R) - this is critical as Wagtail admin JavaScript files are cached and stale cache can cause the admin sidebar menu to disappear with errors like `wagtailConfig is undefined`.
 
+### Storage Configuration (Django 5.1+)
+
+Django 5.1 removed `DEFAULT_FILE_STORAGE` and `STATICFILES_STORAGE` settings. The project now uses the `STORAGES` API:
+
+- **base.py**: Defines default storage (FileSystemStorage) and staticfiles (WhiteNoise)
+- **production.py**: Overrides default storage to use S3 (`storages.backends.s3boto3.S3Boto3Storage`)
+
+If you see 404 errors for images after upgrading Django, ensure `STORAGES` is properly configured instead of the deprecated settings.
+
 ### Documentation Language
 
 All documentation and code comments must be written in English to ensure all contributors can collaborate effectively.
