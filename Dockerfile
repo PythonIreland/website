@@ -1,4 +1,4 @@
-# syntax=docker/dockerfile:1.16.0
+# syntax=docker/dockerfile:1.19.0
 FROM python:3.12 AS compile-stage
 RUN --mount=type=cache,target=/var/cache/apt \
     apt update && \
