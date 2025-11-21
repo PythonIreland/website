@@ -25,7 +25,7 @@
 - **Framework**: Django 5.2.8
 - **CMS**: Wagtail 7.2
 - **Python**: 3.12 (required)
-- **Database**: PostgreSQL 17 (prod), SQLite (dev)
+- **Database**: PostgreSQL 17 (prod and dev via Docker)
 - **Cache**: Redis 6.2
 - **Storage**: AWS S3 (prod), Local (dev)
 - **Server**: Gunicorn (prod), Runserver (dev)
