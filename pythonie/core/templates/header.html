@@ -1,12 +1,24 @@
 {% load static %}
 
 <section class="container">
-    <header class="row" id="header">
+    <header class="row header-bar" id="header">
         <!-- Begin grid -->
-        <a href="/">
-            <h1><img src="{% static 'img/pythonie.png' %}"
-                 class="logo img-rounded"/>
-            <span id="pyhead">Python Ireland</span></h1></a>
+        <a class="header-brand" href="/">
+            <h1>
+                <img src="{% static 'img/pythonie.png' %}" class="logo img-rounded"/>
+                <span id="pyhead">Python Ireland</span>
+            </h1>
+        </a>
+        <div class="header-actions">
+            <button type="button"
+                    class="theme-toggle"
+                    data-theme-toggle
+                    aria-pressed="false"
+                    aria-label="Toggle dark mode">
+                <span class="theme-toggle-switch"></span>
+                <span class="theme-toggle-label" data-theme-label>Dark</span>
+            </button>
+        </div>
         <!-- End grid -->
     </header>
     <!-- header -->

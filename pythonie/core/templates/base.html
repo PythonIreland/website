@@ -17,6 +17,29 @@
     <meta name="description" content=""/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    <script>
+        (function () {
+            var storageKey = 'pythonie-theme';
+            var className = 'dark';
+
+            try {
+                var stored = window.localStorage ? localStorage.getItem(storageKey) : null;
+                var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+                var theme = stored || (prefersDark ? 'dark' : 'light');
+
+                if (theme === 'dark') {
+                    document.documentElement.classList.add(className);
+                } else {
+                    document.documentElement.classList.remove(className);
+                }
+                document.documentElement.dataset.theme = theme;
+            } catch (e) {
+                document.documentElement.classList.remove(className);
+                document.documentElement.dataset.theme = 'light';
+            }
+        })();
+    </script>
+
      <script type="text/javascript" src="//use.typekit.net/qgj1xay.js"></script>
      <script type="text/javascript">try{Typekit.load({async: false});}catch(e){}</script>
 
@@ -52,7 +75,7 @@
 {% include "footer.html" %}
 
 {% compress js %}
-    <script type="text/javascript" src="{% static 'js/pythonie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/theme-toggle.js' %}"></script>
 {% endcompress %}
 
 {% block basejs %}
