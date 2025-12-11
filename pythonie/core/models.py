@@ -108,8 +108,6 @@ class HomePage(Page, MeetupMixin, SponsorMixin):
     subpage_types = [
         "HomePage",
         "SimplePage",
-        "speakers.SpeakersPage",
-        "speakers.TalksPage",
     ]
 
     body = StreamField(
