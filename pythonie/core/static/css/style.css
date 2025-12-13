@@ -186,6 +186,14 @@ h1 {
     background-color: var(--nav-hover-bg);
 }
 
+/* Override Bootstrap's .open styles for dark theme support */
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+    color: var(--link-hover-color);
+    background-color: var(--nav-hover-bg);
+}
+
 .navbar-default .navbar-toggle .icon-bar {
     background-color: var(--nav-text);
 }
@@ -284,4 +292,38 @@ footer .well {
 
 .theme-toggle-label {
     font-weight: 500;
+}
+
+/* Dropdown menu - minimal dark theme support */
+.navbar-default .dropdown-menu {
+    background-color: var(--nav-bg);
+    border-color: var(--border-color);
+}
+
+.navbar-default .dropdown-menu > li > a {
+    color: var(--nav-text);
+}
+
+.navbar-default .dropdown-menu > li > a:hover,
+.navbar-default .dropdown-menu > li > a:focus {
+    background-color: var(--nav-hover-bg);
+    color: var(--link-hover-color);
+}
+
+.navbar-default .dropdown-menu .divider {
+    background-color: var(--border-color);
+}
+
+/* Ensure dropdowns work on mobile */
+@media (max-width: 767px) {
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+        color: var(--nav-text);
+        padding: 10px 15px 10px 25px;
+    }
+    
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+        background-color: var(--nav-hover-bg);
+        color: var(--link-hover-color);
+    }
 }
