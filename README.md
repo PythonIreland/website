@@ -27,19 +27,24 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5
    task django:migrate
    ```
 
-4. Create a superuser:
+4. Generate sample data (creates pages, navigation, meetups):
+   ```bash
+   docker compose run --rm web python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
+   ```
+
+5. Create a superuser:
    ```bash
    docker compose run --rm web python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
    ```
 
-5. Start the development server:
+6. Start the development server:
    ```bash
    task run
    # or: docker compose run --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
    ```
 
-6. Visit http://127.0.0.1:8000/ in your browser
-7. Access Wagtail admin at http://127.0.0.1:8000/admin/
+7. Visit http://127.0.0.1:8000/ to see the site with sample content
+8. Access Wagtail admin at http://127.0.0.1:8000/admin/
 
 ## Local Setup (Without Docker)
 
@@ -52,11 +57,13 @@ If you prefer to develop without Docker:
 5. Activate the virtualenv: `source pythonie-venv/bin/activate`
 6. Install dependencies: `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`)
 7. Set up the database: `python pythonie/manage.py migrate --settings=pythonie.settings.dev`
-8. Create a superuser: `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
-9. Install and run Redis server locally: `redis-server`
-10. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
-11. Run the server: `python pythonie/manage.py runserver --settings=pythonie.settings.dev`
-12. Visit http://127.0.0.1:8000/admin/ to log in
+8. Generate sample data: `python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`
+9. Create a superuser: `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
+10. Install and run Redis server locally: `redis-server`
+11. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
+12. Run the server: `python pythonie/manage.py runserver --settings=pythonie.settings.dev`
+13. Visit http://127.0.0.1:8000/ to see the site with sample content
+14. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
 
 ## Project Structure
 
@@ -86,6 +93,9 @@ task django:shell-plus        # Django shell with models pre-loaded
 task django:migrate           # Run migrations
 task django:make-migrations   # Create new migrations
 task django:collect-static    # Collect static files
+
+# Sample Data (for development)
+python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
 
 # Testing
 task tests                    # Run test suite
