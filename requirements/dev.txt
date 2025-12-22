@@ -28,6 +28,7 @@ django==5.2.8
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
+    #   model-mommy
 django-debug-toolbar==6.1.0
     # via -r requirements/dev.in
 factory-boy==3.3.3
@@ -50,6 +51,8 @@ markdown-it-py==4.0.0
     # via rich
 mdurl==0.1.2
     # via markdown-it-py
+model-mommy==2.0.0
+    # via -r requirements/dev.in
 msgpack==1.1.2
     # via cachecontrol
 packageurl-python==0.17.6

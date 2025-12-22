@@ -5,6 +5,7 @@ django-debug-toolbar
 factory-boy
 fakeredis
 isort
+model_mommy
 pip-audit
 pipdeptree
 ruff
