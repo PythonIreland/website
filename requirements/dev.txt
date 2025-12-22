@@ -31,6 +31,10 @@ django==5.2.8
     #   model-mommy
 django-debug-toolbar==6.1.0
     # via -r requirements/dev.in
+factory-boy==3.3.3
+    # via -r requirements/dev.in
+faker==39.0.0
+    # via factory-boy
 fakeredis==2.32.1
     # via -r requirements/dev.in
 filelock==3.20.0
@@ -103,6 +107,10 @@ sqlparse==0.5.4
     #   django-debug-toolbar
 toml==0.10.2
     # via pip-audit
+tzdata==2025.2
+    # via
+    #   -c requirements/main.txt
+    #   faker
 urllib3==2.5.0
     # via
     #   -c requirements/main.txt
