@@ -8,6 +8,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5
 - Docker & Docker Compose (for containerized development - recommended)
 - [Task](https://taskfile.dev/) (optional but recommended)
 - Redis (only for local non-Docker development)
+- Environment variables file as per [the instructions here](#environment-variables)
 
 ## Quick Start (Docker - Recommended)
 
