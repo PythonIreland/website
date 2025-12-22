@@ -2,49 +2,51 @@
 #    uv pip compile --output-file requirements/dev.txt requirements/dev.in
 asgiref==3.11.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
 boolean-py==5.0
     # via license-expression
-cachecontrol==0.14.4
-    # via pip-audit
+cachecontrol[filecache]==0.14.4
+    # via
+    #   cachecontrol
+    #   pip-audit
 certifi==2025.11.12
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 charset-normalizer==3.4.4
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 coverage==7.12.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 cyclonedx-python-lib==9.1.0
     # via pip-audit
 defusedxml==0.7.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   py-serializable
 django==5.2.8
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django-debug-toolbar
     #   model-mommy
 django-debug-toolbar==6.1.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 factory-boy==3.3.3
-    # via -r requirements/dev.in
+    # via -r dev.in
 faker==39.0.0
     # via factory-boy
 fakeredis==2.32.1
-    # via -r requirements/dev.in
-filelock==3.20.0
+    # via -r dev.in
+filelock==3.20.1
     # via cachecontrol
 idna==3.11
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 isort==7.0.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 license-expression==30.4.4
     # via cyclonedx-python-lib
 markdown-it-py==4.0.0
@@ -52,29 +54,25 @@ markdown-it-py==4.0.0
 mdurl==0.1.2
     # via markdown-it-py
 model-mommy==2.0.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 msgpack==1.1.2
     # via cachecontrol
 packageurl-python==0.17.6
     # via cyclonedx-python-lib
 packaging==25.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   pip-audit
     #   pip-requirements-parser
-    #   pipdeptree
-pip==25.3
-    # via
-    #   pip-api
     #   pipdeptree
 pip-api==0.0.34
     # via pip-audit
 pip-audit==2.9.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
 pipdeptree==2.30.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 platformdirs==4.5.0
     # via pip-audit
 py-serializable==2.1.0
@@ -85,35 +83,35 @@ pyparsing==3.2.5
     # via pip-requirements-parser
 redis==7.1.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   fakeredis
 requests==2.32.5
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   cachecontrol
     #   pip-audit
 rich==14.2.0
     # via pip-audit
 ruff==0.14.7
-    # via -r requirements/dev.in
+    # via -r dev.in
 sortedcontainers==2.4.0
     # via
     #   cyclonedx-python-lib
     #   fakeredis
 sqlparse==0.5.4
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
     #   django-debug-toolbar
 toml==0.10.2
     # via pip-audit
 tzdata==2025.2
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   faker
 urllib3==2.5.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 uv==0.9.13
-    # via -r requirements/dev.in
+    # via -r dev.in
