@@ -19,4 +19,4 @@ jobs:
           uv sync
       - name: Run the tests
         run: |
-          python pythonie/manage.py test pythonie --verbosity=2
+          uv run python pythonie/manage.py test pythonie --verbosity=2
