@@ -26,7 +26,7 @@ defusedxml==0.7.1
     # via
     #   -c main.txt
     #   py-serializable
-django==5.2.8
+django==5.2.9
     # via
     #   -c main.txt
     #   django-debug-toolbar
