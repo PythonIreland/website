@@ -57,7 +57,8 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 # Setup
 python3 -m venv pythonie-venv
 source pythonie-venv/bin/activate
-pip install -r requirements.txt
+pip install uv
+uv pip install -r requirements.txt
 
 # Database
 python pythonie/manage.py migrate --settings=pythonie.settings.dev
