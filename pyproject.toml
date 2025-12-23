@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "pythonie"
-version = "2.2.0"
+version = "2025.12.23"
 description = "Python Ireland website - Django/Wagtail CMS for python.ie and pycon.ie"
 readme = "README.md"
 requires-python = ">=3.13.0"
@@ -22,7 +22,7 @@ classifiers = [
 # Main production dependencies (from requirements/main.in)
 dependencies = [
     "Delorean",
-    "Django",
+    "Django>=5.2.0,<5.3",  # Reste sur Django 5.2.x
     "Willow",
     "boto3",
     "colander",
@@ -42,7 +42,7 @@ dependencies = [
     "pytz",
     "redis",
     "requests>=2.32.5",
-    "wagtail",
+    "wagtail>=7.2.0,<7.3",  # Wagtail 7.2.x compatible avec Django 5.2
     "whitenoise",
 ]
 
