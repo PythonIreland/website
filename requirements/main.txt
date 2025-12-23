@@ -11,7 +11,7 @@ babel==2.17.0
 beautifulsoup4==4.14.2
     # via wagtail
 boto3==1.41.5
-    # via -r main.in
+    # via -r requirements/main.in
 botocore==1.41.5
     # via
     #   boto3
@@ -21,20 +21,20 @@ certifi==2025.11.12
 charset-normalizer==3.4.4
     # via requests
 colander==2.0
-    # via -r main.in
+    # via -r requirements/main.in
 defusedxml==0.7.1
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   willow
 delorean==1.0.0
-    # via -r main.in
+    # via -r requirements/main.in
 dj-database-url==3.0.1
-    # via -r main.in
+    # via -r requirements/main.in
 dj-static==0.0.6
-    # via -r main.in
+    # via -r requirements/main.in
 django==5.2.9
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   dj-database-url
     #   django-appconf
     #   django-compressor
@@ -55,27 +55,27 @@ django-appconf==1.2.0
     # via django-compressor
 django-compressor==4.6.0
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   django-libsass
 django-extensions==4.1
-    # via -r main.in
+    # via -r requirements/main.in
 django-filter==25.2
     # via wagtail
 django-libsass==0.9
-    # via -r main.in
+    # via -r requirements/main.in
 django-modelcluster==6.4
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   wagtail
 django-permissionedforms==0.1
     # via wagtail
 django-storages==1.14.6
-    # via -r main.in
+    # via -r requirements/main.in
 django-stubs-ext==5.2.7
     # via django-tasks
 django-taggit==6.1.0
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   wagtail
 django-tasks==0.9.0
     # via
@@ -92,7 +92,7 @@ et-xmlfile==2.0.0
 filetype==1.2.0
     # via willow
 gunicorn==23.0.0
-    # via -r main.in
+    # via -r requirements/main.in
 humanize==4.14.0
     # via delorean
 idna==3.11
@@ -116,7 +116,7 @@ openpyxl==3.1.5
 packaging==25.0
     # via gunicorn
 pandas==2.3.3
-    # via -r main.in
+    # via -r requirements/main.in
 pillow==12.0.0
     # via
     #   pillow-heif
@@ -124,27 +124,27 @@ pillow==12.0.0
 pillow-heif==1.1.1
     # via willow
 pydantic==2.12.5
-    # via -r main.in
+    # via -r requirements/main.in
 pydantic-core==2.41.5
     # via pydantic
 python-dateutil==2.9.0.post0
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   botocore
     #   delorean
     #   pandas
 pytz==2025.2
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   delorean
     #   pandas
 rcssmin==1.2.2
     # via django-compressor
 redis==7.1.0
-    # via -r main.in
+    # via -r requirements/main.in
 requests==2.32.5
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   wagtail
 rjsmin==1.2.5
     # via django-compressor
@@ -176,15 +176,15 @@ tzdata==2025.2
     # via pandas
 tzlocal==5.3.1
     # via delorean
-urllib3==2.5.0
+urllib3==2.6.2
     # via
     #   botocore
     #   requests
 wagtail==7.2.1
-    # via -r main.in
+    # via -r requirements/main.in
 whitenoise==6.11.0
-    # via -r main.in
-willow[heif]==1.12.0
+    # via -r requirements/main.in
+willow==1.12.0
     # via
-    #   -r main.in
+    #   -r requirements/main.in
     #   wagtail
