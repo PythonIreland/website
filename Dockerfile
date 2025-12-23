@@ -7,11 +7,11 @@ RUN --mount=type=cache,target=/var/cache/apt \
         ack
 
 # Copy dependency specification files
-COPY pyproject.toml uv.lock ./
+COPY pyproject.toml uv.lock README.md ./
 
 RUN --mount=type=cache,target=/root/.cache \
     pip install -U pip uv ruff && \
-    uv sync --group production
+    uv sync --group production --no-install-project
 
 FROM compile-stage AS tests-stage
 
