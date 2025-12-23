@@ -9,14 +9,14 @@ jobs:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
     steps:
       - uses: actions/checkout@v2
-      - name: Set Up Python 3.12
+      - name: Set Up Python 3.13
         uses: actions/setup-python@v2
         with:
-          python-version: "3.12"
+          python-version: "3.13"
       - name: Install the dependencies
         run: |
-          python -m pip install --upgrade pip setuptools uv
-          python -m uv pip install -r requirements/main.txt -r requirements/dev.txt
+          python -m pip install --upgrade pip uv
+          uv sync
       - name: Run the tests
         run: |
           python pythonie/manage.py test pythonie --verbosity=2

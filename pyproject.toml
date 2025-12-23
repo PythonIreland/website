@@ -1,0 +1,135 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pythonie"
+version = "2.2.0"
+description = "Python Ireland website - Django/Wagtail CMS for python.ie and pycon.ie"
+readme = "README.md"
+requires-python = ">=3.13.0"
+license = {text = "MIT"}
+authors = [{name = "Python Ireland", email = "info@python.ie"}]
+keywords = ["django", "wagtail", "cms", "python-ireland", "pycon"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Framework :: Django :: 5.2",
+    "Framework :: Wagtail :: 7",
+    "Programming Language :: Python :: 3.13",
+    "License :: OSI Approved :: MIT License",
+]
+
+# Main production dependencies (from requirements/main.in)
+dependencies = [
+    "Delorean",
+    "Django",
+    "Willow",
+    "boto3",
+    "colander",
+    "defusedxml",
+    "dj-database-url",
+    "dj-static",
+    "django-compressor",
+    "django-extensions",
+    "django-libsass",
+    "django-modelcluster",
+    "django-storages",
+    "django-taggit",
+    "gunicorn",
+    "pandas",
+    "pydantic",
+    "python-dateutil",
+    "pytz",
+    "redis",
+    "requests>=2.32.5",
+    "wagtail",
+    "whitenoise",
+]
+
+# PEP 735 Dependency Groups
+[dependency-groups]
+# Development dependencies (from requirements/dev.in)
+dev = [
+    "coverage",
+    "django-debug-toolbar",
+    "factory-boy",
+    "fakeredis",
+    "isort",
+    "model_mommy",
+    "pip-audit",
+    "pipdeptree",
+    "ruff",
+    "uv",
+]
+
+# Production-specific dependencies (from requirements/production.in)
+production = [
+    "psycopg[binary]",
+]
+
+# Tool configurations
+[tool.ruff]
+target-version = "py313"
+line-length = 88
+exclude = [
+    "migrations",
+    ".venv",
+    "venv",
+    "pythonie-venv",
+    ".git",
+    "__pycache__",
+]
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "W",   # pycodestyle warnings
+    "UP",  # pyupgrade
+    "DJ",  # django-specific rules
+]
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["pythonie", "core", "meetups", "speakers", "sponsors"]
+section-order = ["future", "standard-library", "third-party", "django", "wagtail", "first-party", "local-folder"]
+
+[tool.ruff.lint.isort.sections]
+"django" = ["django"]
+"wagtail" = ["wagtail"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+[tool.coverage.run]
+source = ["pythonie"]
+omit = [
+    "*/migrations/*",
+    "*/tests/*",
+    "*/test_*.py",
+    "*/__pycache__/*",
+    "*/venv/*",
+    "*/.venv/*",
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if __name__ == .__main__.:",
+]
+
+[tool.django-stubs]
+django_settings_module = "pythonie.settings.dev"
+
+[tool.hatchling.build.targets.wheel]
+packages = ["pythonie"]

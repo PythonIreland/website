@@ -5,16 +5,13 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt install -y --no-install-recommends \
         build-essential gcc neovim fish less iputils-ping postgresql-client \
         ack
-ADD requirements/main.txt \
-    requirements/dev.txt \
-    requirements/production.txt \
-    ./requirements/
+
+# Copy dependency specification files
+COPY pyproject.toml uv.lock ./
+
 RUN --mount=type=cache,target=/root/.cache \
     pip install -U pip uv ruff && \
-    python -m uv pip install \
-      -r requirements/main.txt \
-      -r requirements/dev.txt \
-      -r requirements/production.txt aws
+    uv sync --group production
 
 FROM compile-stage AS tests-stage
 

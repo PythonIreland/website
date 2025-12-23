@@ -58,7 +58,7 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 python3 -m venv pythonie-venv
 source pythonie-venv/bin/activate
 pip install uv
-uv pip install -r requirements.txt
+uv sync
 
 # Database
 python pythonie/manage.py migrate --settings=pythonie.settings.dev
@@ -129,24 +129,36 @@ task code:check
 
 ### Dependency Management
 
-Uses `uv` for fast Python package management. Dependencies are defined in `.in` files and compiled to `.txt` files:
+Uses `uv` with `pyproject.toml` for dependency management. Dependencies are defined in `pyproject.toml` and locked in `uv.lock`:
+
+**Structure:**
+- `pyproject.toml` - Dependency specifications (edit this to add/remove dependencies)
+- `uv.lock` - Locked versions (auto-generated, commit to git)
+- `requirements.txt` - Auto-generated for Heroku deployment
+
+**Common Commands:**
 
 ```bash
-# Recompile all dependencies
-task dependencies:compute
-# or: toast deps:compute
-
-# Check outdated packages
-task dependencies:outdated
+# Update lock file after changing pyproject.toml
+task dependencies:lock
 
 # Upgrade all dependencies
 task dependencies:upgrade
 
-# Upgrade only Wagtail
-task dependencies:upgrade:wagtail
-
 # Upgrade specific package
 task dependencies:upgrade:package PACKAGE=django
+
+# Install dependencies (development)
+task dependencies:sync
+
+# Install production dependencies only
+task dependencies:sync:production
+
+# Generate requirements.txt for Heroku
+task dependencies:export
+
+# Check outdated packages
+task dependencies:outdated
 
 # Check for security vulnerabilities
 task dependencies:security
@@ -154,6 +166,28 @@ task dependencies:security
 # Show dependencies tree
 task dependencies:tree
 ```
+
+**Adding a New Dependency:**
+
+1. Edit `pyproject.toml` to add the dependency:
+   ```toml
+   dependencies = [
+       "new-package",
+       # ...
+   ]
+   ```
+
+2. Update lock and generate requirements.txt:
+   ```bash
+   task dependencies:lock
+   task dependencies:export
+   ```
+
+3. Commit both files:
+   ```bash
+   git add pyproject.toml uv.lock requirements.txt
+   git commit -m "Add new-package dependency"
+   ```
 
 ### Database Operations (Heroku)
 

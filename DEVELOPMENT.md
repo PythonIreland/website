@@ -169,7 +169,7 @@ source pythonie-venv/bin/activate
 
 # 2. Install dependencies
 pip install uv
-uv pip install -r requirements/dev.txt
+uv sync
 
 # 3. Migrate database
 python pythonie/manage.py migrate --settings=pythonie.settings.dev
@@ -686,7 +686,7 @@ echo "django-debug-toolbar" >> requirements/main.in
 uv pip compile requirements/main.in -o requirements/main.txt
 
 # Install
-uv pip install -r requirements/dev.txt
+uv sync
 ```
 
 ### Database Migrations

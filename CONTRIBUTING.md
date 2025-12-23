@@ -86,7 +86,7 @@ source pythonie-venv/bin/activate
 
 # Install dependencies
 pip install uv
-uv pip install -r requirements/dev.txt
+uv sync
 
 # Run migrations
 python pythonie/manage.py migrate --settings=pythonie.settings.dev

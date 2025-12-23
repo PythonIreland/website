@@ -135,40 +135,49 @@ tasks:
     cmds:
       - docker compose run --rm web python pythonie/manage.py collectstatic
 
-  dependencies:compute:
-    desc: Compute the dependencies
+  dependencies:lock:
+    desc: Update uv.lock file from pyproject.toml
     cmds:
-      - toast deps:compute
+      - uv lock
+
+  dependencies:upgrade:
+    desc: Upgrade all dependencies
+    cmds:
+      - uv lock --upgrade
+
+  dependencies:sync:
+    desc: Install dependencies from lock file (development)
+    cmds:
+      - uv sync
+
+  dependencies:sync:production:
+    desc: Install production dependencies only
+    cmds:
+      - uv sync --no-dev --group production
+
+  dependencies:export:
+    desc: Export uv.lock to requirements.txt for Heroku
+    cmds:
+      - uv export --no-dev --group production -o requirements.txt
+      - uv export --group dev --group production -o requirements-dev.txt
+      - |
+        echo "# AUTO-GENERATED from pyproject.toml - DO NOT EDIT" | cat - requirements.txt > temp && mv temp requirements.txt
+        echo "# AUTO-GENERATED from pyproject.toml - DO NOT EDIT" | cat - requirements-dev.txt > temp && mv temp requirements-dev.txt
 
   dependencies:outdated:
     desc: List the outdated dependencies
     cmds:
       - toast deps:outdated
 
-  dependencies:upgrade:
-    desc: Upgrade the dependencies
-    cmds:
-      - toast deps:upgrade
-
-  dependencies:upgrade:django:
-    desc: Upgrade Django to the latest compatible version
-    cmds:
-      - toast deps:upgrade:django
-
-  dependencies:upgrade:wagtail:
-    desc: Upgrade Wagtail to the latest compatible version
-    cmds:
-      - toast deps:upgrade:wagtail
-
   dependencies:security:
     desc: Check dependencies for known security vulnerabilities
     cmds:
-      - toast deps:security
+      - uv run pip-audit
 
   dependencies:tree:
     desc: Show the dependencies tree
     cmds:
-      - toast deps:tree
+      - uv tree
 
   docker:build:
     desc: Build the docker image
@@ -213,9 +222,7 @@ tasks:
   dependencies:upgrade:package:
     desc: "Upgrade a specific package (usage: task dependencies:upgrade:package PACKAGE=django)"
     cmds:
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/main.txt requirements/main.in
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/dev.txt requirements/dev.in
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/production.txt requirements/production.in
+      - uv lock --upgrade-package {{.PACKAGE}}
 
   tests:
     desc: Run all tests
