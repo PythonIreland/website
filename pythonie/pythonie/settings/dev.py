@@ -10,6 +10,9 @@ MEETUP_KEY = ""  # Put your own key here.
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# Override Wagtail admin base URL for local development
+WAGTAILADMIN_BASE_URL = "http://localhost:8000"
+
 # SQLite (simplest install)
 DATABASES = {
     "default": {
