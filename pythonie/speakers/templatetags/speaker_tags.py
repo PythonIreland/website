@@ -1,4 +1,5 @@
 from django import template
+
 from speakers.models import Speaker
 
 register = template.Library()

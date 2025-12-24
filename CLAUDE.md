@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Python Ireland (python.ie / pycon.ie) website, built with Django 5.2 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups, sponsors, speakers, and PyCon talks/sessions.
+This is the Python Ireland (python.ie / pycon.ie) website, built with Django 6.0 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups, sponsors, speakers, and PyCon talks/sessions.
 
 ### Python Version
 
-This project requires **Python 3.13**. All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
+This project requires **Python 3.13.11** (or any Python 3.13.x). All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
 
 ## Architecture
 
@@ -42,8 +42,8 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 
 ### Key Dependencies
 
-- Django ~5.2.0
-- Wagtail ~7.2.0 (CMS framework)
+- Django 6.0
+- Wagtail 7.2.1 (CMS framework)
 - Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
@@ -260,7 +260,7 @@ Tests use `pythonie.settings.tests` which configures SQLite and mock Redis. Run 
 
 ### Deployment
 
-The project is hosted on Heroku.
+The project is hosted on Heroku using the **heroku-24** stack with PostgreSQL 17.
 
 ### Upgrading Wagtail
 

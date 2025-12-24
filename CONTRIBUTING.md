@@ -158,7 +158,7 @@ refactor/simplify-sponsor-model
 
 ### Python
 
-- **Python version**: 3.13 (strict requirement)
+- **Python version**: 3.13.11 (or any Python 3.13.x - strict requirement)
 - **Formatter**: Ruff
 - **Line length**: 88 characters (Ruff default)
 - **Imports**: Sorted automatically by Ruff

@@ -1,7 +1,12 @@
 from django.core.management.base import BaseCommand
 from wagtail.models import Page, Site
 
-from core.factories import SponsorshipLevelFactory, MeetupFactory, HomePageFactory, SimplePageFactory
+from core.factories import (
+    HomePageFactory,
+    MeetupFactory,
+    SimplePageFactory,
+    SponsorshipLevelFactory,
+)
 from core.models import HomePage, SimplePage
 
 
@@ -84,7 +89,9 @@ class Command(BaseCommand):
             self.stdout.write(f"  {title} already exists")
             return SimplePage.objects.get(slug=slug)
 
-        page = SimplePageFactory.build(title=title, slug=slug, body=body or [], show_in_menus=True)
+        page = SimplePageFactory.build(
+            title=title, slug=slug, body=body or [], show_in_menus=True
+        )
         parent.add_child(instance=page)
         self.stdout.write(self.style.SUCCESS(f"Created {title}"))
         return page
@@ -92,37 +99,52 @@ class Command(BaseCommand):
     def _get_home_content(self):
         return [
             {"type": "heading", "value": "Introduction"},
-            {"type": "paragraph", "value": (
-                "<p>Python Ireland is the Irish organisation representing the various chapters of Python users. "
-                "We organise meet ups and events for software developers, students, academics and anyone who wants "
-                "to learn the language. One of our aims is to help grow and diversify the Python community in Ireland. "
-                "We also develop and foster links with other Python based communities overseas.</p>"
-            )},
+            {
+                "type": "paragraph",
+                "value": (
+                    "<p>Python Ireland is the Irish organisation representing the various chapters of Python users. "
+                    "We organise meet ups and events for software developers, students, academics and anyone who wants "
+                    "to learn the language. One of our aims is to help grow and diversify the Python community in Ireland. "
+                    "We also develop and foster links with other Python based communities overseas.</p>"
+                ),
+            },
             {"type": "heading", "value": "PyCon Ireland 2025"},
-            {"type": "paragraph", "value": (
-                "<p>We are thrilled to announce PyCon Ireland 2025, taking place in Dublin "
-                "on November 15th and 16th! Join us at the UCD O'Reilly Hall for this exciting event.</p>"
-            )},
-            {"type": "paragraph", "value": (
-                "<p>PyCon Ireland 2025 will feature two talk tracks and two workshop tracks on both days. "
-                "Your ticket includes breakfast and lunch. Join us Saturday evening for networking!</p>"
-            )},
-            {"type": "paragraph", "value": (
-                "<p>Please adhere to our <a href='/policies/code-of-conduct/'>Code of Conduct</a>. "
-                "Check <a href='/pycon-2025/'>Terms and conditions</a> for details.</p>"
-            )},
+            {
+                "type": "paragraph",
+                "value": (
+                    "<p>We are thrilled to announce PyCon Ireland 2025, taking place in Dublin "
+                    "on November 15th and 16th! Join us at the UCD O'Reilly Hall for this exciting event.</p>"
+                ),
+            },
+            {
+                "type": "paragraph",
+                "value": (
+                    "<p>PyCon Ireland 2025 will feature two talk tracks and two workshop tracks on both days. "
+                    "Your ticket includes breakfast and lunch. Join us Saturday evening for networking!</p>"
+                ),
+            },
+            {
+                "type": "paragraph",
+                "value": (
+                    "<p>Please adhere to our <a href='/policies/code-of-conduct/'>Code of Conduct</a>. "
+                    "Check <a href='/pycon-2025/'>Terms and conditions</a> for details.</p>"
+                ),
+            },
             {"type": "paragraph", "value": "<p>See you at PyCon Ireland 2025!</p>"},
         ]
 
     def _get_meetups_content(self):
         return [
             {"type": "heading", "value": "Python Ireland Meetups"},
-            {"type": "paragraph", "value": (
-                "<p>Join us at our regular meetups! We hold events every month.</p>"
-                "<ul>"
-                "<li><a href='https://www.meetup.com/pythonireland/events/'>Upcoming Events</a></li>"
-                "<li><a href='https://www.meetup.com/pythonireland/photos/'>Photos</a></li>"
-                "<li><a href='https://www.meetup.com/pythonireland/'>Python Ireland on Meetup.com</a></li>"
-                "</ul>"
-            )},
+            {
+                "type": "paragraph",
+                "value": (
+                    "<p>Join us at our regular meetups! We hold events every month.</p>"
+                    "<ul>"
+                    "<li><a href='https://www.meetup.com/pythonireland/events/'>Upcoming Events</a></li>"
+                    "<li><a href='https://www.meetup.com/pythonireland/photos/'>Photos</a></li>"
+                    "<li><a href='https://www.meetup.com/pythonireland/'>Python Ireland on Meetup.com</a></li>"
+                    "</ul>"
+                ),
+            },
         ]

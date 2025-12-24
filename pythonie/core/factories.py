@@ -1,10 +1,10 @@
 import factory
-from factory.django import DjangoModelFactory
 from django.utils import timezone
-
-from core.models import HomePage, SimplePage
+from factory.django import DjangoModelFactory
 from meetups.models import Meetup
 from sponsors.models import SponsorshipLevel
+
+from core.models import HomePage, SimplePage
 
 
 class SponsorshipLevelFactory(DjangoModelFactory):

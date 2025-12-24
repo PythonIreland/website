@@ -65,6 +65,5 @@ def enable_quotes():
 @hooks.register("insert_editor_css")
 def font_awesome_css():
     return format_html(
-        '<link rel="stylesheet" href="{}css/font-awesome.min.css">',
-        settings.STATIC_URL
+        '<link rel="stylesheet" href="{}css/font-awesome.min.css">', settings.STATIC_URL
     )
