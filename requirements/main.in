@@ -15,6 +15,7 @@ django-storages
 django-taggit
 gunicorn
 pandas
+psycopg[binary]
 pydantic
 python-dateutil
 pytz
