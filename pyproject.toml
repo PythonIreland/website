@@ -14,6 +14,7 @@ keywords = ["django", "wagtail", "cms", "python-ireland", "pycon"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Framework :: Django :: 5.2",
+    "Framework :: Django :: 6.0",
     "Framework :: Wagtail :: 7",
     "Programming Language :: Python :: 3.13",
     "License :: OSI Approved :: MIT License",
@@ -22,7 +23,7 @@ classifiers = [
 # Main production dependencies (from requirements/main.in)
 dependencies = [
     "Delorean",
-    "Django>=5.2.0,<5.3",  # Reste sur Django 5.2.x
+    "Django>=5.2.0,<7",  # Support Django 5.2.x and 6.x
     "Willow",
     "boto3",
     "colander",
@@ -42,7 +43,7 @@ dependencies = [
     "pytz",
     "redis",
     "requests>=2.32.5",
-    "wagtail>=7.2.0,<7.3",  # Wagtail 7.2.x compatible avec Django 5.2
+    "wagtail>=7.2.0,<7.3",  # Wagtail 7.2.x supports Django 5.2 and 6.0
     "whitenoise",
 ]
 
