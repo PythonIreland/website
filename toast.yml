@@ -1,63 +1,53 @@
 image: python.ie/website-dev
 tasks:
-  deps:compute:
-    description: Compute the dependencies
+  deps:lock:
+    description: Update uv.lock file from pyproject.toml
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: uv lock
+
+  deps:upgrade:
+    description: Upgrade all dependencies
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: uv lock --upgrade
+
+  deps:sync:
+    description: Install dependencies from lock file
+    cache: false
+    mount_paths:
+      - .:/app
+    location: /app
+    command: uv sync
+
+  deps:export:
+    description: Export uv.lock to requirements.txt for Heroku
     cache: false
     mount_paths:
       - .:/app
     location: /app
     command: |
-      python -m uv pip compile --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --output-file requirements/production.txt requirements/production.in
+      uv export --no-dev --group production -o requirements.txt
+      echo "# AUTO-GENERATED from pyproject.toml - DO NOT EDIT" | cat - requirements.txt > temp && mv temp requirements.txt
 
   deps:outdated:
     description: Show the outdated dependencies
     cache: false
     command: python -m pip list -o
 
-  deps:upgrade:
-    description: Upgrade the dependencies
-    cache: false
-    mount_paths:
-      - .:/app
-    location: /app
-    command: |
-      python -m uv pip compile --upgrade --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade --output-file requirements/production.txt requirements/production.in
-
-  deps:upgrade:django:
-    description: Upgrade Django to the latest compatible version
-    cache: false
-    mount_paths:
-      - .:/app
-    location: /app
-    command: |
-      python -m uv pip compile --upgrade-package django --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade-package django --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade-package django --output-file requirements/production.txt requirements/production.in
-
-  deps:upgrade:wagtail:
-    description: Upgrade Wagtail to the latest compatible version
-    cache: false
-    mount_paths:
-      - .:/app
-    location: /app
-    command: |
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/production.txt requirements/production.in
-
   deps:security:
     description: Check dependencies for known security vulnerabilities
     cache: false
-    command: pip-audit
+    command: uv run pip-audit
 
   deps:tree:
     description: Show the dependencies tree
     cache: false
-    command: pipdeptree
+    command: uv tree
 
   code:format:
     description: Format the code

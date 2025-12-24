@@ -168,7 +168,8 @@ python3.13 -m venv pythonie-venv
 source pythonie-venv/bin/activate
 
 # 2. Install dependencies
-pip install -r requirements/dev.txt
+pip install uv
+uv sync
 
 # 3. Migrate database
 python pythonie/manage.py migrate --settings=pythonie.settings.dev
@@ -685,7 +686,7 @@ echo "django-debug-toolbar" >> requirements/main.in
 uv pip compile requirements/main.in -o requirements/main.txt
 
 # Install
-pip install -r requirements/dev.txt
+uv sync
 ```
 
 ### Database Migrations

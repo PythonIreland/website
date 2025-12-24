@@ -85,7 +85,8 @@ python3.13 -m venv pythonie-venv
 source pythonie-venv/bin/activate
 
 # Install dependencies
-pip install -r requirements/dev.txt
+pip install uv
+uv sync
 
 # Run migrations
 python pythonie/manage.py migrate --settings=pythonie.settings.dev

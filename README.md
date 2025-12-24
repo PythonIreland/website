@@ -56,7 +56,7 @@ If you prefer to develop without Docker:
 3. Ensure you are running Python 3.13: `python -V` should output `Python 3.13.x`
 4. Create a virtualenv: `python3 -m venv pythonie-venv`
 5. Activate the virtualenv: `source pythonie-venv/bin/activate`
-6. Install dependencies: `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`)
+6. Install uv and dependencies: `pip install uv && uv sync`
 7. Set up the database: `python pythonie/manage.py migrate --settings=pythonie.settings.dev`
 8. Generate sample data: `python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`
 9. Create a superuser: `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
@@ -259,7 +259,7 @@ This project uses several tools to streamline development:
 
 ### Import Errors or Module Not Found
 - Rebuild Docker image: `task docker:build`
-- Reinstall dependencies: `pip install -r requirements.txt`
+- Reinstall dependencies: `uv sync`
 
 ## Contributing
 
