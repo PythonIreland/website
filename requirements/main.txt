@@ -123,6 +123,10 @@ pillow==12.0.0
     #   wagtail
 pillow-heif==1.1.1
     # via willow
+psycopg==3.3.2
+    # via -r requirements/main.in
+psycopg-binary==3.3.2
+    # via psycopg
 pydantic==2.12.5
     # via -r requirements/main.in
 pydantic-core==2.41.5
@@ -167,6 +171,7 @@ typing-extensions==4.15.0
     #   beautifulsoup4
     #   django-stubs-ext
     #   django-tasks
+    #   psycopg
     #   pydantic
     #   pydantic-core
     #   typing-inspection
