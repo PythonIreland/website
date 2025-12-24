@@ -14,6 +14,7 @@ import dj_database_url
 
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
+print(f'{PROJECT_ROOT=}')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
@@ -62,7 +63,6 @@ INSTALLED_APPS = (
     "storages",
     "meetups",
     "sponsors",
-    "speakers",
     # 'debug_toolbar',
     "django_extensions",
 )
@@ -113,11 +113,6 @@ LOGGING = {
             "propagate": True,
         },
         "sponsors": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-            "propagate": True,
-        },
-        "speakers": {
             "handlers": ["console"],
             "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
             "propagate": True,
