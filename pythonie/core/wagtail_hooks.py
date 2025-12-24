@@ -1,12 +1,13 @@
 from django.conf import settings
 from django.utils.html import format_html, format_html_join
+from django.utils.safestring import mark_safe
 from wagtail import hooks
 from wagtail.whitelist import attribute_rule, check_url
 
 
 @hooks.register("insert_editor_js")
 def enable_source():
-    return format_html(
+    return mark_safe(
         """
         <script>
             registerHalloPlugin('hallohtml');
@@ -52,7 +53,7 @@ def enable_quotes():
         ((settings.STATIC_URL, filename) for filename in js_files),
     )
 
-    return js_includes + format_html(
+    return js_includes + mark_safe(
         """
         <script>
             registerHalloPlugin('clicktotweet');
@@ -64,7 +65,6 @@ def enable_quotes():
 @hooks.register("insert_editor_css")
 def font_awesome_css():
     return format_html(
-        '<link rel="stylesheet" href="'
-        + settings.STATIC_URL
-        + 'css/font-awesome.min.css">'
+        '<link rel="stylesheet" href="{}css/font-awesome.min.css">',
+        settings.STATIC_URL
     )
