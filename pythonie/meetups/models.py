@@ -4,9 +4,8 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from delorean import Delorean
 from django.db import models
-from wagtail.snippets.models import register_snippet
-
 from sponsors.models import Sponsor
+from wagtail.snippets.models import register_snippet
 
 log = logging.getLogger("meetups")
 

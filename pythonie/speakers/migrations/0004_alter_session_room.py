@@ -5,15 +5,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('speakers', '0003_auto_20220929_1828'),
+        ("speakers", "0003_auto_20220929_1828"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='session',
-            name='room',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='speakers.room'),
+            model_name="session",
+            name="room",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.PROTECT, to="speakers.room"
+            ),
         ),
     ]

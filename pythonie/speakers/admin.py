@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from speakers.models import Speaker, Session, Room
+from speakers.models import Room, Session, Speaker
 
 
 class RoomAdmin(admin.ModelAdmin):
