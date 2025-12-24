@@ -26,13 +26,13 @@ boolean-py==5.0 \
     --hash=sha256:60cbc4bad079753721d32649545505362c754e121570ada4658b852a3a318d95 \
     --hash=sha256:ef28a70bd43115208441b53a045d1549e2f0ec6e3d08a9d142cbc41c1938e8d9
     # via license-expression
-boto3==1.42.15 \
-    --hash=sha256:94aabb83e3be3e2ea5ffa530cd5e221e8f4eb65f8d126d097e03d1ab80e5c5ce \
-    --hash=sha256:d673c9b6bb9e293e028e354de6701351f1881e3fbeb25d739dd33c4940a30929
+boto3==1.42.16 \
+    --hash=sha256:37a43d42aebd06a8f93ee801ea1b7b5181ac42a30869ef403c9dadc160a748e5 \
+    --hash=sha256:811391611db88c8a061f6e6fabbd7ca784ad9de04490a879f091cbaa9de7de74
     # via pythonie
-botocore==1.42.15 \
-    --hash=sha256:504c548aa333728c99a692908d3e6acb718983585ad7a836d2fab9604518a636 \
-    --hash=sha256:888ec4a817cbc56a93d5945b458621d8a6f580694373f8e93f68984f27523913
+botocore==1.42.16 \
+    --hash=sha256:29ee8555cd5d5023350405387cedcf3fe1c7f02fcb8060bf9e01602487482c25 \
+    --hash=sha256:b1f584a0f8645c12e07bf6ec9c18e05221a789f2a9b2d3c6291deb42f8c1c542
     # via
     #   boto3
     #   s3transfer
@@ -160,9 +160,9 @@ dj-database-url==3.0.1 \
 dj-static==0.0.6 \
     --hash=sha256:032ec1c532617922e6e3e956d504a6fb1acce4fc1c7c94612d0fda21828ce8ef
     # via pythonie
-django==5.2.9 \
-    --hash=sha256:16b5ccfc5e8c27e6c0561af551d2ea32852d7352c67d452ae3e76b4f6b2ca495 \
-    --hash=sha256:3a4ea88a70370557ab1930b332fd2887a9f48654261cdffda663fef5976bb00a
+django==6.0 \
+    --hash=sha256:1cc2c7344303bbfb7ba5070487c17f7fc0b7174bbb0a38cebf03c675f5f19b6d \
+    --hash=sha256:7b0c1f50c0759bbe6331c6a39c89ae022a84672674aeda908784617ef47d8e26
     # via
     #   dj-database-url
     #   django-appconf
