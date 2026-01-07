@@ -10,6 +10,9 @@ MEETUP_KEY = ""  # Put your own key here.
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+# Override Wagtail admin base URL for tests
+WAGTAILADMIN_BASE_URL = "http://testserver"
+
 # Use PostgreSQL if DATABASE_URL is set (for CI), otherwise use SQLite (for local tests)
 if os.getenv("DATABASE_URL"):
     DATABASES = {"default": dj_database_url.config(conn_max_age=500)}

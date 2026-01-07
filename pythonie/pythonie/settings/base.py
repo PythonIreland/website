@@ -35,6 +35,10 @@ ALLOWED_HOSTS = [
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "https://python.ie"
 
+# Wagtail admin base URL for admin URLs outside the admin interface
+# (e.g. notification emails and the user bar)
+WAGTAILADMIN_BASE_URL = BASE_URL
+
 # Application definition
 
 INSTALLED_APPS = (
