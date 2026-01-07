@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+
 import os
 from os.path import abspath, dirname, join
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "compressor",
     "taggit",
     "modelcluster",

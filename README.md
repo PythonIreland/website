@@ -1,6 +1,6 @@
 # Python Ireland Website
 
-Website for Python Ireland (python.ie / pycon.ie) community, built with Django 5.2 and Wagtail CMS 7.2. Manages meetups, sponsors, speakers, and conference sessions.
+Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6.0 and Wagtail CMS 7.2. Manages meetups, sponsors, speakers, and conference sessions.
 
 ## Prerequisites
 
@@ -213,7 +213,7 @@ export MEETUP_KEY=your_meetup_api_key  # Get from https://secure.meetup.com/meet
 
 ## Deployment
 
-The project is deployed on Heroku. Use Task commands for database operations:
+The project is deployed on Heroku using the **heroku-24** stack with PostgreSQL 17. Use Task commands for database operations:
 
 ```bash
 # View backups

@@ -2,10 +2,10 @@ import datetime
 
 import pydantic
 import requests
-from django.core.management import BaseCommand, CommandParser
+from django.core.management import BaseCommand
 from wagtail.models import Page
 
-from speakers.models import Speaker, Session, Room
+from speakers.models import Room, Session, Speaker
 
 
 class SessionModel(pydantic.BaseModel):
@@ -132,7 +132,7 @@ class Command(BaseCommand):
         session.save()
         session.save_revision().publish()
         print(
-            f'{incoming_session.id} {incoming_session.title} {created and "CREATED" or "UPDATED"}'
+            f"{incoming_session.id} {incoming_session.title} {created and 'CREATED' or 'UPDATED'}"
         )
 
     def save_room(self, incoming_room: RoomModel) -> Room:

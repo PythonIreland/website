@@ -22,16 +22,16 @@
 
 ### Tech Stack
 
-- **Framework**: Django 5.2.8
-- **CMS**: Wagtail 7.2
-- **Python**: 3.13 (required)
+- **Framework**: Django 6.0
+- **CMS**: Wagtail 7.2.1
+- **Python**: 3.13.11 (or any Python 3.13.x - required)
 - **Database**: PostgreSQL 17 (prod and dev via Docker)
 - **Cache**: Redis 6.2
 - **Storage**: AWS S3 (prod), Local (dev)
 - **Server**: Gunicorn (prod), Runserver (dev)
 - **Containerization**: Docker + docker-compose
 - **Automation**: Task (Taskfile.yaml)
-- **Deployment**: Heroku
+- **Deployment**: Heroku (heroku-24 stack)
 
 ### Project Statistics
 
@@ -105,7 +105,7 @@ pythonie/
 
 ### Prerequisites
 
-- Python 3.13 (required)
+- Python 3.13.11 (or any Python 3.13.x - required)
 - Docker + docker-compose
 - Task (or Make)
 - Git
@@ -1441,6 +1441,7 @@ pythonie/pythonie/wsgi.py     # WSGI application
 ---
 
 **Last updated**: 2025
-**Django Version**: 5.2.8
-**Wagtail Version**: 7.2
-**Python Version**: 3.13
+**Django Version**: 6.0
+**Wagtail Version**: 7.2.1
+**Python Version**: 3.13.11
+**Heroku Stack**: heroku-24

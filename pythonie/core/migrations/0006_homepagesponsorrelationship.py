@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("sponsors", "0004_auto_20150726_1412"),
         ("core", "0005_auto_20150726_1416"),

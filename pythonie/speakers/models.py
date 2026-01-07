@@ -1,8 +1,5 @@
-import json
 import logging
 
-import requests
-from django.conf import settings
 from django.db import models
 from wagtail.admin.panels import FieldPanel
 from wagtail.models import Page

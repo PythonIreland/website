@@ -4,16 +4,15 @@ import logging
 
 from django.db import models
 from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, InlinePanel
-from wagtail import blocks
-from wagtail.blocks import RawHTMLBlock
-from wagtail.fields import RichTextField, StreamField
-from wagtail.models import Orderable, Page
-from wagtail.embeds.blocks import EmbedBlock
-from wagtail.images.blocks import ImageChooserBlock
-from wagtail.snippets.models import register_snippet
-
 from sponsors.models import Sponsor, SponsorshipLevel
+from wagtail import blocks
+from wagtail.admin.panels import FieldPanel, InlinePanel
+from wagtail.blocks import RawHTMLBlock
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.fields import RichTextField, StreamField
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.models import Orderable, Page
+from wagtail.snippets.models import register_snippet
 
 log = logging.getLogger("pythonie")
 
@@ -104,7 +103,7 @@ class HomePageSponsorRelationship(models.Model):
 
 
 class HomePage(Page, MeetupMixin, SponsorMixin):
-    exclude_fields_in_copy = ['sponsors']
+    exclude_fields_in_copy = ["sponsors"]
     subpage_types = [
         "HomePage",
         "SimplePage",
@@ -170,5 +169,3 @@ class SimplePage(Page, MeetupMixin, SponsorMixin):
         + MeetupMixin.settings_panels
         + SponsorMixin.settings_panels
     )
-
-
