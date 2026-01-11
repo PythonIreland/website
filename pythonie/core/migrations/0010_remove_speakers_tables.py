@@ -15,8 +15,8 @@ def drop_speakers_tables(apps, schema_editor):
     # Instead, we use raw SQL to drop the tables
 
     # Determine if we're using PostgreSQL or SQLite
-    is_postgres = schema_editor.connection.vendor == 'postgresql'
-    cascade = ' CASCADE' if is_postgres else ''
+    is_postgres = schema_editor.connection.vendor == "postgresql"
+    cascade = " CASCADE" if is_postgres else ""
 
     with schema_editor.connection.cursor() as cursor:
         # For SQLite, we need to disable foreign keys temporarily
