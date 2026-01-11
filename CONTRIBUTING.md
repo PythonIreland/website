@@ -37,7 +37,6 @@ website/
 ├── pythonie/           # Main Django project
 │   ├── core/          # Base pages and templates
 │   ├── meetups/       # Meetup.com integration
-│   ├── speakers/      # Conference speakers/sessions
 │   ├── sponsors/      # Sponsor management
 │   └── pythonie/      # Django settings
 ├── requirements/       # Dependency files
@@ -112,7 +111,7 @@ python pythonie/manage.py runserver --settings=pythonie.settings.dev
 Use descriptive branch names with prefixes:
 
 ```
-feature/add-speaker-profile-images
+feature/add-dark-mode-toggle
 bugfix/fix-meetup-sync-error
 docs/update-readme
 refactor/simplify-sponsor-model
@@ -144,7 +143,7 @@ refactor/simplify-sponsor-model
 5. **Commit your changes** with clear messages:
    ```bash
    git add .
-   git commit -m "Add speaker profile image upload feature"
+   git commit -m "Add dark mode toggle feature"
    ```
 
 6. **Push and create a Pull Request**:
@@ -244,7 +243,7 @@ task tests
 # or: python pythonie/manage.py test pythonie --settings=pythonie.settings.tests -v 2
 
 # Specific app
-python pythonie/manage.py test pythonie.speakers --settings=pythonie.settings.tests
+python pythonie/manage.py test pythonie.meetups --settings=pythonie.settings.tests
 
 # Specific test file
 python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie.settings.tests
@@ -261,24 +260,24 @@ Place tests in `test_*.py` files within each app:
 from django.test import TestCase
 from model_mommy import mommy
 
-from pythonie.speakers.models import Speaker
+from pythonie.sponsors.models import Sponsor
 
 
-class SpeakerTestCase(TestCase):
-    """Tests for the Speaker model."""
+class SponsorTestCase(TestCase):
+    """Tests for the Sponsor model."""
 
     def setUp(self):
         """Set up test fixtures."""
-        self.speaker = mommy.make(Speaker, name="Test Speaker")
+        self.sponsor = mommy.make(Sponsor, name="Test Sponsor")
 
-    def test_speaker_str(self):
+    def test_sponsor_str(self):
         """Test string representation."""
-        self.assertEqual(str(self.speaker), "Test Speaker")
+        self.assertEqual(str(self.sponsor), "Test Sponsor")
 
-    def test_speaker_creation(self):
-        """Test speaker can be created."""
-        speaker = mommy.make(Speaker)
-        self.assertIsNotNone(speaker.id)
+    def test_sponsor_creation(self):
+        """Test sponsor can be created."""
+        sponsor = mommy.make(Sponsor)
+        self.assertIsNotNone(sponsor.id)
 ```
 
 ### Test Requirements
@@ -294,7 +293,7 @@ class SpeakerTestCase(TestCase):
 ### Pull Request Guidelines
 
 1. **Title**: Clear, descriptive title
-   - Good: "Add speaker profile image upload"
+   - Good: "Add sponsor logo upload feature"
    - Bad: "Fix stuff" or "Updates"
 
 2. **Description**: Include:
@@ -352,7 +351,7 @@ Types:
 
 Examples:
 ```
-feat: Add speaker bio character limit validation
+feat: Add dark mode toggle to website header
 
 fix: Resolve meetup sync timezone issue
 

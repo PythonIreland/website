@@ -1,6 +1,6 @@
 # Python Ireland Website
 
-Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6.0 and Wagtail CMS 7.2. Manages meetups, sponsors, speakers, and conference sessions.
+Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6.0 and Wagtail CMS 7.2. Manages meetups and sponsors.
 
 ## Prerequisites
 
@@ -73,7 +73,6 @@ pythonie/
 ├── core/          # Base Wagtail pages (HomePage, SimplePage) and mixins
 ├── meetups/       # Meetup.com integration and event management
 ├── sponsors/      # Sponsor management with sponsorship levels
-├── speakers/      # Conference speakers and sessions (Sessionize integration)
 └── pythonie/
     ├── settings/  # Environment-specific settings (base, dev, tests, production)
     ├── urls.py    # URL configuration
@@ -134,10 +133,6 @@ task heroku:releases          # Show deployment history
 task heroku:rollback          # Rollback to previous release
 task heroku:maintenance:on    # Enable maintenance mode
 task heroku:maintenance:off   # Disable maintenance mode
-
-# Conference Management
-task pycon:import:sessionize      # Import from Sessionize Excel
-task pycon:import:sessionize:json # Update from Sessionize JSON stream
 ```
 
 ### Direct Django Commands
