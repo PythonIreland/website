@@ -13,19 +13,32 @@ def drop_speakers_tables(apps, schema_editor):
     """
     # We can't use apps.get_model() here since the speakers app is removed
     # Instead, we use raw SQL to drop the tables
+
+    # Determine if we're using PostgreSQL or SQLite
+    is_postgres = schema_editor.connection.vendor == 'postgresql'
+    cascade = ' CASCADE' if is_postgres else ''
+
     with schema_editor.connection.cursor() as cursor:
+        # For SQLite, we need to disable foreign keys temporarily
+        if not is_postgres:
+            cursor.execute("PRAGMA foreign_keys = OFF")
+
         # Drop tables in reverse dependency order
         # First drop junction tables (M2M relationships)
-        cursor.execute("DROP TABLE IF EXISTS speakers_session_speakers CASCADE")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_session_speakers{cascade}")
 
         # Then drop tables with foreign keys
-        cursor.execute("DROP TABLE IF EXISTS speakers_session CASCADE")
-        cursor.execute("DROP TABLE IF EXISTS speakers_speaker CASCADE")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_session{cascade}")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_speaker{cascade}")
 
         # Drop remaining tables
-        cursor.execute("DROP TABLE IF EXISTS speakers_room CASCADE")
-        cursor.execute("DROP TABLE IF EXISTS speakers_talkspage CASCADE")
-        cursor.execute("DROP TABLE IF EXISTS speakers_speakerspage CASCADE")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_room{cascade}")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_talkspage{cascade}")
+        cursor.execute(f"DROP TABLE IF EXISTS speakers_speakerspage{cascade}")
+
+        # Re-enable foreign keys for SQLite
+        if not is_postgres:
+            cursor.execute("PRAGMA foreign_keys = ON")
 
 
 def reverse_drop_speakers_tables(apps, schema_editor):
