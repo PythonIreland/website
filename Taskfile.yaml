@@ -190,16 +190,6 @@ tasks:
     cmds:
       - docker compose config --services
 
-  pycon:import:sessionize:
-    desc: Import the information from Sessionize
-    cmds:
-      - docker compose run web python pythonie/manage.py import-sessionize --file sessionize.xlsx
-
-  pycon:import:sessionize:json:
-    desc: Import the information from Sessionize
-    cmds:
-      - docker compose run web python pythonie/manage.py update-sessionize-json-stream
-
   code:format:
     desc: Format the code
     cmds:
