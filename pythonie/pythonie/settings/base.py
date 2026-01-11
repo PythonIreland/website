@@ -15,7 +15,7 @@ import dj_database_url
 
 # Absolute filesystem path to the Django project directory:
 PROJECT_ROOT = dirname(dirname(dirname(abspath(__file__))))
-print(f'{PROJECT_ROOT=}')
+print(f"{PROJECT_ROOT=}")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
