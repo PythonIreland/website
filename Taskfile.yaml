@@ -130,6 +130,16 @@ tasks:
     cmds:
       - docker compose run --rm web python pythonie/manage.py migrate
 
+  django:migrate:postgres:
+    desc: Run database migrations on PostgreSQL (docker-compose)
+    cmds:
+      - docker compose run --rm web python pythonie/manage.py migrate --settings=pythonie.settings.pgdev
+
+  django:showmigrations:
+    desc: Show migration status
+    cmds:
+      - docker compose run --rm web python pythonie/manage.py showmigrations --settings=pythonie.settings.pgdev
+
   django:collect-static:
     desc: Collect static files
     cmds:
