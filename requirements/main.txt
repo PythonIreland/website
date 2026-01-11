@@ -10,13 +10,13 @@ babel==2.17.0
     # via delorean
 beautifulsoup4==4.14.3
     # via wagtail
-boto3==1.42.18
+boto3==1.42.25
     # via -r requirements/main.in
-botocore==1.42.18
+botocore==1.42.25
     # via
     #   boto3
     #   s3transfer
-certifi==2025.11.12
+certifi==2026.1.4
     # via requests
 charset-normalizer==3.4.4
     # via requests
@@ -28,11 +28,11 @@ defusedxml==0.7.1
     #   willow
 delorean==1.0.0
     # via -r requirements/main.in
-dj-database-url==3.0.1
+dj-database-url==3.1.0
     # via -r requirements/main.in
 dj-static==0.0.6
     # via -r requirements/main.in
-django==6.0
+django==6.0.1
     # via
     #   -r requirements/main.in
     #   dj-database-url
@@ -85,7 +85,7 @@ django-treebeard==4.8.0
     # via wagtail
 djangorestframework==3.16.1
     # via wagtail
-draftjs-exporter==5.1.0
+draftjs-exporter==5.2.0
     # via wagtail
 et-xmlfile==2.0.0
     # via openpyxl
@@ -109,7 +109,7 @@ libsass==0.23.0
     # via django-libsass
 modelsearch==1.1.1
     # via wagtail
-numpy==2.4.0
+numpy==2.4.1
     # via pandas
 openpyxl==3.1.5
     # via wagtail
@@ -117,7 +117,7 @@ packaging==25.0
     # via gunicorn
 pandas==2.3.3
     # via -r requirements/main.in
-pillow==12.0.0
+pillow==12.1.0
     # via
     #   pillow-heif
     #   wagtail
@@ -180,7 +180,7 @@ tzdata==2025.3
     # via pandas
 tzlocal==5.3.1
     # via delorean
-urllib3==2.6.2
+urllib3==2.6.3
     # via
     #   botocore
     #   requests
