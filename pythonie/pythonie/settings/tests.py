@@ -1,6 +1,8 @@
+# ruff: noqa
+import os
 from pythonie.settings.configure import configure_redis
 
-from .base import *  # flake8: noqa
+from .base import *
 
 DEBUG = True
 
