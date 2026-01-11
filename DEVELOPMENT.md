@@ -36,11 +36,11 @@
 ### Project Statistics
 
 - **~2,749** lines of Python code
-- **4** Django apps (core, meetups, speakers, sponsors)
-- **11** models + 4 pivot tables
-- **5** Wagtail page types
-- **19** HTML templates
-- **3** custom management commands
+- **3** Django apps (core, meetups, sponsors)
+- **7** models + 2 pivot tables
+- **2** Wagtail page types
+- **18** HTML templates
+- **1** custom management command
 
 ---
 
@@ -60,10 +60,6 @@ pythonie/
 │   ├── utils.py            # Meetup.com API client
 │   ├── schema.py           # Colander validation
 │   └── management/         # updatemeetups command
-├── speakers/               # Conference speakers/sessions management
-│   ├── models.py           # Speaker, Session, Room, SpeakersPage, TalksPage
-│   ├── templatetags/       # speaker_picture tag
-│   └── management/         # import-sessionize, update-sessionize-json-stream
 ├── sponsors/               # Sponsor management
 │   ├── models.py           # Sponsor, SponsorshipLevel
 │   └── admin.py            # Admin customizations
@@ -82,12 +78,8 @@ pythonie/
 
 ```
 ┌─────────────────┐
-│  Meetup.com API │──┐
-└─────────────────┘  │
-                     ├──> updatemeetups ──> Meetup model
-┌─────────────────┐  │
-│ Sessionize API  │──┤
-└─────────────────┘  └──> import commands ──> Speaker/Session models
+│  Meetup.com API │──> updatemeetups ──> Meetup model
+└─────────────────┘                            │
                                                │
                                                ├──> Wagtail Page Tree
                                                │
@@ -129,31 +121,10 @@ task django:migrate
 # 5. Create a superuser
 task django:createsuperuser
 
-# 6. Create required parent pages (IMPORTANT)
-task django:shell-plus
-# In the Python shell:
-from pythonie.core.models import HomePage
-from pythonie.speakers.models import SpeakersPage, TalksPage
-from wagtail.models import Site, Page
+# 6. Generate sample data (creates pages, meetups, sponsors)
+docker compose run --rm web python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
 
-root = Page.objects.get(id=1)
-
-# Create SpeakersPage (note the displayed ID)
-speakers_page = SpeakersPage(title="Speakers", slug="speakers")
-root.add_child(instance=speakers_page)
-speakers_page.save_revision().publish()
-print(f"SpeakersPage ID: {speakers_page.id}")  # Note this ID!
-
-# Create TalksPage (note the displayed ID)
-talks_page = TalksPage(title="Talks", slug="talks")
-root.add_child(instance=talks_page)
-talks_page.save_revision().publish()
-print(f"TalksPage ID: {talks_page.id}")  # Note this ID!
-
-# 7. Update hardcoded IDs in import-sessionize.py if different from 144/145
-# See "Hardcoded IDs" section below
-
-# 8. Start the server
+# 7. Start the server
 task run
 
 # 9. Access the admin
@@ -205,9 +176,6 @@ MEETUP_KEY=your-meetup-api-key
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_STORAGE_BUCKET_NAME=
-
-# Sessionize (if different)
-SESSIONIZE_API_URL=https://sessionize.com/api/v2/z66z4kb6/view/All
 ```
 
 ---
@@ -277,44 +245,6 @@ class Meetup(models.Model):
 
 **WARNING**: `id` is a CharField (Meetup.com ID), not an AutoField
 
-#### Speakers App
-
-**Speaker** (`pythonie/speakers/models.py:27`)
-```python
-class Speaker(Page):
-    """Speaker profile (inherits from Page for its own URL)
-
-    Fields:
-    - external_id: Sessionize UUID (unique, for idempotent import)
-    - picture_url: Photo URL (Robohash fallback if empty)
-    - biography: Full bio
-
-    Required parent: SpeakersPage
-    """
-    external_id = models.CharField(max_length=255, unique=True)
-```
-
-**Session** (`pythonie/speakers/models.py:79`)
-```python
-class Session(Page):
-    """Talk or workshop
-
-    States: draft, accepted, confirmed, refused, cancelled
-    Types: talk, workshop
-
-    Fields:
-    - scheduled_at: Session DateTime
-    - duration: Duration in minutes (default 30)
-    - room: ForeignKey to Room
-    - speakers: M2M to Speaker
-
-    Required parent: TalksPage
-    """
-
-    def is_confirmed(self):
-        return self.state == Session.StateChoices.CONFIRMED
-```
-
 #### Sponsors App
 
 **Sponsor** (`pythonie/sponsors/models.py:21`)
@@ -361,15 +291,6 @@ class SponsorshipLevel(models.Model):
 
 {# Returns live and in_menu children of a page #}
 {% child_pages page as children %}
-```
-
-#### speaker_tags.py
-
-```python
-{% load speaker_tags %}
-
-{# Display speaker photo or Robohash fallback #}
-{% speaker_picture speaker size=100 %}
 ```
 
 ### Wagtail Hooks (`pythonie/core/wagtail_hooks.py`)
@@ -424,18 +345,6 @@ def enable_quotes():
     │ SimplePage  │         │   Meetup   │   │MeetupSponsor     │
     │(Wagtail Page│         │ (Snippet)  │   │  Relationship    │
     └─────────────┘         └────────────┘   └──────────────────┘
-
-
-┌──────────────────┐          ┌──────────────────┐
-│  SpeakersPage    │          │   TalksPage      │
-│ (Wagtail Page)   │          │ (Wagtail Page)   │
-└────────┬─────────┘          └────────┬─────────┘
-         │                             │
-         ▼                             ▼
-    ┌─────────┐    ┌─────────┐    ┌─────────┐
-    │ Speaker ├────┤ Session ├────┤  Room   │
-    │ (Page)  │M2M │ (Page)  │ FK │         │
-    └─────────┘    └─────────┘    └─────────┘
 ```
 
 ### M2M Relations with Pivot Tables
@@ -505,106 +414,6 @@ task meetup:update
 ```
 
 **Note**: Meetup.com API v2 is deprecated, migration to GraphQL API recommended
-
-### 2. Sessionize Integration
-
-#### Method A: Excel Import
-
-**File**: `pythonie/speakers/management/commands/import-sessionize.py`
-
-**Prerequisites**:
-- Export Excel from Sessionize (with sheets "Accepted speakers", "Accepted sessions")
-- Existing parent pages: SpeakersPage (ID 144), TalksPage (ID 145)
-
-**Usage**:
-```bash
-# Download sessionize.xlsx from Sessionize
-docker-compose run web python pythonie/manage.py import-sessionize --file sessionize.xlsx
-
-# Or via Task
-task pycon:import:sessionize
-```
-
-**Required Excel columns**:
-
-Speakers:
-- `Speaker Id` (Sessionize UUID)
-- `Full Name`
-- `Email Address`
-- `Profile Picture`
-- `Biography`
-
-Sessions:
-- `Session Id`
-- `Session Title`
-- `Session Description`
-- `Session Type` (talk/workshop)
-- `Speaker Ids` (comma-separated UUIDs)
-- `Scheduled At`
-- `Room`
-- `Duration`
-
-**Hardcoded IDs** (IMPORTANT):
-```python
-# Lines 50-52
-parent_page = Page.objects.get(id=144).specific  # SpeakersPage
-parent_page = Page.objects.get(id=145).specific  # TalksPage
-```
-
-**If your IDs differ**, update these lines or create pages with these exact IDs.
-
-#### Method B: JSON Stream API (Recommended)
-
-**File**: `pythonie/speakers/management/commands/update-sessionize-json-stream.py`
-
-**Advantages**:
-- Automated (no Excel file needed)
-- Can be scheduled via cron
-- Pydantic validation
-
-**Usage**:
-```bash
-docker-compose run web python pythonie/manage.py update-sessionize-json-stream
-
-# Or via Task
-task pycon:import:sessionize:json
-```
-
-**API URL** (line 131):
-```python
-response = requests.get("https://sessionize.com/api/v2/z66z4kb6/view/All")
-```
-
-**To change URL** for another event:
-1. Go to Sessionize > Event > API / Embed
-2. Copy the "All Data (JSON)" URL
-3. Update in the code OR create env variable `SESSIONIZE_API_URL`
-
-**Pydantic Models** (validation):
-```python
-class SessionizeSpeaker(BaseModel):
-    id: str
-    firstName: str
-    lastName: str
-    bio: str | None = None
-    profilePicture: str | None = None
-    sessions: list[int]
-
-class SessionizeSession(BaseModel):
-    id: int
-    title: str
-    description: str | None = None
-    startsAt: str | None = None
-    endsAt: str | None = None
-    roomId: int | None = None
-    speakers: list[str]
-```
-
-**Email Fallback**:
-```python
-# Sessionize API doesn't provide emails
-email = f"{speaker.id}@sessionize.com"
-```
 
 ### 3. AWS S3 (Production)
 
@@ -710,13 +519,13 @@ python pythonie/manage.py migrate --settings=pythonie.settings.dev
 
 **Migrate specific app**:
 ```bash
-python pythonie/manage.py migrate speakers --settings=pythonie.settings.dev
+python pythonie/manage.py migrate meetups --settings=pythonie.settings.dev
 ```
 
 **Rollback migration**:
 ```bash
 # Rollback to migration 0003
-python pythonie/manage.py migrate speakers 0003 --settings=pythonie.settings.dev
+python pythonie/manage.py migrate meetups 0003 --settings=pythonie.settings.dev
 ```
 
 ### Heroku Database Management
@@ -799,9 +608,9 @@ homepage = HomePage.objects.first()
 homepage.sponsors.add(sponsor, through_defaults={"level": gold})
 
 # Publish a page
-from pythonie.speakers.models import Speaker
-speaker = Speaker.objects.get(name="John Doe")
-speaker.save_revision().publish()
+from pythonie.core.models import SimplePage
+page = SimplePage.objects.get(slug="about")
+page.save_revision().publish()
 ```
 
 ---
@@ -814,7 +623,7 @@ speaker.save_revision().publish()
 - `pythonie/meetups/test_meetups.py`
 - `pythonie/sponsors/test_sponsors.py`
 
-**Missing**: Core and Speakers apps lack tests (high priority)
+**Missing**: Core app lacks tests (high priority)
 
 ### Running Tests
 
@@ -895,38 +704,34 @@ LOGGING = {
 ```python
 from django.test import TestCase
 from model_mommy import mommy
-from pythonie.speakers.models import Speaker, Session
+from pythonie.meetups.models import Meetup
 
-class SessionTestCase(TestCase):
+class MeetupTestCase(TestCase):
     def setUp(self):
-        self.speaker = mommy.make(Speaker, name="Jane Doe")
-        self.session = mommy.make(
-            Session,
-            name="Test Talk",
-            state=Session.StateChoices.CONFIRMED
+        self.meetup = mommy.make(
+            Meetup,
+            name="Python Ireland Monthly Meetup",
+            id="test-meetup-1"
         )
-        self.session.speakers.add(self.speaker)
 
-    def test_is_confirmed(self):
-        self.assertTrue(self.session.is_confirmed())
-
-    def test_speaker_names(self):
-        self.assertEqual(self.session.speaker_names, "Jane Doe")
+    def test_meetup_created(self):
+        self.assertIsNotNone(self.meetup)
+        self.assertEqual(self.meetup.name, "Python Ireland Monthly Meetup")
 ```
 
 **View test example**:
 ```python
 from django.test import TestCase, Client
+from pythonie.core.models import HomePage
 
-class SpeakersPageTestCase(TestCase):
+class HomePageTestCase(TestCase):
     def setUp(self):
         self.client = Client()
         # Setup page tree...
 
-    def test_speakers_page_loads(self):
-        response = self.client.get("/speakers/")
+    def test_home_page_loads(self):
+        response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertContains(response, "Speakers")
 ```
 
 ---
@@ -1057,43 +862,6 @@ export DJANGO_SETTINGS_MODULE=pythonie.settings.dev
 python pythonie/manage.py runserver
 ```
 
-### Problem: "Page with id=144 does not exist"
-
-**Error**:
-```
-DoesNotExist: Page matching query does not exist.
-```
-
-**Cause**: Sessionize import looks for SpeakersPage (id=144) and TalksPage (id=145)
-
-**Solution A - Create pages with these IDs**:
-```python
-# Django shell
-from pythonie.speakers.models import SpeakersPage, TalksPage
-from wagtail.models import Page
-
-root = Page.objects.get(id=1)
-
-# Delete existing pages if present
-SpeakersPage.objects.all().delete()
-TalksPage.objects.all().delete()
-
-# Creating with specific ID (tricky with Wagtail, better to recreate DB)
-```
-
-**Solution B - Modify import code**:
-```python
-# pythonie/speakers/management/commands/import-sessionize.py
-
-# Lines 50-52, replace:
-parent_page = Page.objects.get(id=144).specific
-
-# With:
-parent_page = SpeakersPage.objects.first()
-if not parent_page:
-    raise CommandError("SpeakersPage not found. Create it first.")
-```
-
 ### Problem: Redis Connection Error
 
 **Error**:
@@ -1122,25 +890,6 @@ redis-server
 # pythonie/pythonie/settings/dev.py
 REDIS = None
 ```
-
-### Problem: Sessionize import fails silently
-
-**Cause**: Pandas doesn't parse Excel correctly
-
-**Debug**:
-```python
-# Open Django shell
-task django:shell-plus
-
-import pandas as pd
-df = pd.read_excel("sessionize.xlsx", sheet_name="Accepted speakers")
-print(df.head())
-print(df.columns)
-
-# Check exact column names
-```
-
-**Solution**: Rename columns in Excel or modify mapping in `import-sessionize.py`
 
 ### Problem: Meetup update returns nothing
 
@@ -1268,7 +1017,7 @@ task dependencies:security  # Check for security vulnerabilities
 python pythonie/manage.py makemigrations
 
 # Per app
-python pythonie/manage.py makemigrations speakers
+python pythonie/manage.py makemigrations meetups
 python pythonie/manage.py makemigrations sponsors
 ```
 
@@ -1295,16 +1044,16 @@ Django~=5.0.14
 wagtail>=6.2,<7.0
 ```
 
-### 7. Use external_id for Imports
+### 7. Use Unique Identifiers for Imports
 
 ```python
 # Creates duplicates - avoid
-speaker = Speaker.objects.create(name=data["name"])
+sponsor = Sponsor.objects.create(name=data["name"])
 
-# Get or create with external_id - do this
-speaker, created = Speaker.objects.get_or_create(
-    external_id=data["id"],
-    defaults={"name": data["name"], ...}
+# Get or create with unique field - do this
+sponsor, created = Sponsor.objects.get_or_create(
+    name=data["name"],
+    defaults={"url": data["url"], ...}
 )
 ```
 
@@ -1324,23 +1073,23 @@ page.save_revision().publish()
 from django.db import transaction
 
 @transaction.atomic
-def import_speakers(data):
-    for speaker_data in data:
+def import_sponsors(data):
+    for sponsor_data in data:
         # If an error occurs, everything rolls back
-        speaker = create_speaker(speaker_data)
+        sponsor = create_sponsor(sponsor_data)
 ```
 
 ### 10. Log Instead of Print
 
 ```python
 import logging
-logger = logging.getLogger("pythonie.speakers")
+logger = logging.getLogger("pythonie.sponsors")
 
 # Avoid
-print(f"Created speaker: {speaker.name}")
+print(f"Created sponsor: {sponsor.name}")
 
 # Do this
-logger.info(f"Created speaker: {speaker.name}")
+logger.info(f"Created sponsor: {sponsor.name}")
 ```
 
 ---
@@ -1377,8 +1126,6 @@ task dependencies:security     # Check for security vulnerabilities
 task dependencies:tree         # Show dependencies tree
 
 # Imports
-task pycon:import:sessionize       # Import Sessionize Excel
-task pycon:import:sessionize:json  # Import Sessionize JSON
 task meetup:update                 # Update meetups
 
 # Heroku
@@ -1427,7 +1174,6 @@ pythonie/pythonie/wsgi.py     # WSGI application
 - **Production**: https://python.ie
 - **Wagtail Docs**: https://docs.wagtail.org/
 - **Django Docs**: https://docs.djangoproject.com/
-- **Sessionize API**: https://sessionize.com/playbook/api
 - **Meetup API**: https://www.meetup.com/api/ (deprecated, GraphQL recommended)
 
 ---

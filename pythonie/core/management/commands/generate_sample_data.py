@@ -64,7 +64,6 @@ class Command(BaseCommand):
     def _create_navigation_pages(self, home):
         pycon = self._create_page(home, "PyCon 2025", "pycon-2025")
         self._create_page(pycon, "Schedule", "schedule")
-        self._create_page(pycon, "Speakers", "pycon-speakers")
         self._create_page(pycon, "Sponsors", "pycon-sponsors")
         self._create_page(pycon, "Venue", "venue")
         self._create_page(pycon, "Tickets", "tickets")

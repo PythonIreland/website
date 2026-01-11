@@ -65,12 +65,12 @@ When analyzing the diff, consider splitting commits based on these criteria:
 ## Examples
 
 **Good commit messages for this Django/Wagtail project:**
-- ✨ feat: add speaker bio field to Speaker model
+- ✨ feat: add dark mode toggle to website header
 - ✨ feat: implement new StreamField block for video embeds
 - 🐛 fix: correct sponsor logo display on homepage
 - 🐛 fix: resolve meetup sync timezone issue
 - 📝 docs: update CLAUDE.md with new task commands
-- ♻️ refactor: simplify SpeakersPage queryset logic
+- ♻️ refactor: simplify HomePage queryset logic
 - ♻️ refactor: extract common page mixins to core app
 - 🎨 style: improve Wagtail admin panel layout
 - 🔥 chore: remove deprecated Meetup API v2 code
@@ -82,17 +82,17 @@ When analyzing the diff, consider splitting commits based on these criteria:
 - 💚 fix: resolve failing Docker build
 - 🔒️ fix: patch Django security vulnerability
 - ♿️ feat: improve navigation accessibility for screen readers
-- 🗃️ chore: add migration for new Session fields
+- 🗃️ chore: add migration for new Meetup fields
 - 🌐 feat: add French translation for sponsor pages
 
 **Example of splitting commits:**
 
 If you modify both a Wagtail page model AND update a management command, split into:
-1. ✨ feat: add session_type field to Session model
-2. ♻️ refactor: update import-sessionize command to handle new field
+1. ✨ feat: add url field to Sponsor model
+2. ♻️ refactor: update sponsor display logic to include links
 
 If you fix multiple unrelated issues, split into:
-1. 🐛 fix: correct speaker ordering on TalksPage
+1. 🐛 fix: correct meetup ordering on HomePage
 2. 🐛 fix: resolve Redis connection timeout in dev settings
 3. 🗃️ chore: add missing migration for sponsors app
 
