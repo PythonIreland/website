@@ -8,7 +8,7 @@ boolean-py==5.0
     # via license-expression
 cachecontrol==0.14.4
     # via pip-audit
-certifi==2025.11.12
+certifi==2026.1.4
     # via
     #   -c requirements/main.txt
     #   requests
@@ -24,7 +24,7 @@ defusedxml==0.7.1
     # via
     #   -c requirements/main.txt
     #   py-serializable
-django==6.0
+django==6.0.1
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
@@ -37,7 +37,7 @@ faker==40.1.0
     # via factory-boy
 fakeredis==2.33.0
     # via -r requirements/dev.in
-filelock==3.20.1
+filelock==3.20.3
     # via cachecontrol
 idna==3.11
     # via
@@ -94,7 +94,7 @@ requests==2.32.5
     #   pip-audit
 rich==14.2.0
     # via pip-audit
-ruff==0.14.10
+ruff==0.14.11
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via
@@ -113,9 +113,9 @@ tzdata==2025.3
     # via
     #   -c requirements/main.txt
     #   faker
-urllib3==2.6.2
+urllib3==2.6.3
     # via
     #   -c requirements/main.txt
     #   requests
-uv==0.9.20
+uv==0.9.24
     # via -r requirements/dev.in
