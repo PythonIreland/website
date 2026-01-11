@@ -2,8 +2,8 @@ name: Test packages
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  build:
-    name: Execute tests
+  test:
+    name: Run code quality checks and tests
     runs-on: ubuntu-latest
 
     services:
@@ -25,15 +25,35 @@ jobs:
       DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_db
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Set Up Python 3.12
-        uses: actions/setup-python@v2
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
-      - name: Install the dependencies
+          python-version: "3.13"
+          cache: 'pip'
+          cache-dependency-path: |
+            requirements/main.txt
+            requirements/dev.txt
+            requirements/production.txt
+
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip setuptools uv
           python -m uv pip install -r requirements/main.txt -r requirements/dev.txt -r requirements/production.txt
-      - name: Run the tests
+
+      - name: Check code formatting with Ruff
+        run: |
+          python -m ruff format --check pythonie
+
+      - name: Lint code with Ruff
+        run: |
+          python -m ruff check pythonie
+
+      - name: Check for security vulnerabilities
+        run: |
+          python -m pip_audit
+
+      - name: Run Django tests
         run: |
           python pythonie/manage.py test pythonie --verbosity=2
