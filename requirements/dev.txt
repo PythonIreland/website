@@ -8,7 +8,7 @@ boolean-py==5.0
     # via license-expression
 cachecontrol==0.14.4
     # via pip-audit
-certifi==2025.11.12
+certifi==2026.1.4
     # via
     #   -c requirements/main.txt
     #   requests
@@ -16,24 +16,28 @@ charset-normalizer==3.4.4
     # via
     #   -c requirements/main.txt
     #   requests
-coverage==7.12.0
+coverage==7.13.1
     # via -r requirements/dev.in
-cyclonedx-python-lib==9.1.0
+cyclonedx-python-lib==11.6.0
     # via pip-audit
 defusedxml==0.7.1
     # via
     #   -c requirements/main.txt
     #   py-serializable
-django==5.2.8
+django==6.0.1
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
     #   model-mommy
 django-debug-toolbar==6.1.0
     # via -r requirements/dev.in
-fakeredis==2.32.1
+factory-boy==3.3.3
     # via -r requirements/dev.in
-filelock==3.20.0
+faker==40.1.0
+    # via factory-boy
+fakeredis==2.33.0
+    # via -r requirements/dev.in
+filelock==3.20.3
     # via cachecontrol
 idna==3.11
     # via
@@ -51,7 +55,7 @@ model-mommy==2.0.0
     # via -r requirements/dev.in
 msgpack==1.1.2
     # via cachecontrol
-packageurl-python==0.17.5
+packageurl-python==0.17.6
     # via cyclonedx-python-lib
 packaging==25.0
     # via
@@ -65,19 +69,19 @@ pip==25.3
     #   pipdeptree
 pip-api==0.0.34
     # via pip-audit
-pip-audit==2.9.0
+pip-audit==2.10.0
     # via -r requirements/dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
 pipdeptree==2.30.0
     # via -r requirements/dev.in
-platformdirs==4.5.0
+platformdirs==4.5.1
     # via pip-audit
 py-serializable==2.1.0
     # via cyclonedx-python-lib
 pygments==2.19.2
     # via rich
-pyparsing==3.2.5
+pyparsing==3.3.1
     # via pip-requirements-parser
 redis==7.1.0
     # via
@@ -90,22 +94,28 @@ requests==2.32.5
     #   pip-audit
 rich==14.2.0
     # via pip-audit
-ruff==0.14.5
+ruff==0.14.11
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via
     #   cyclonedx-python-lib
     #   fakeredis
-sqlparse==0.5.3
+sqlparse==0.5.5
     # via
     #   -c requirements/main.txt
     #   django
     #   django-debug-toolbar
-toml==0.10.2
+tomli==2.3.0
     # via pip-audit
-urllib3==2.5.0
+tomli-w==1.2.0
+    # via pip-audit
+tzdata==2025.3
+    # via
+    #   -c requirements/main.txt
+    #   faker
+urllib3==2.6.3
     # via
     #   -c requirements/main.txt
     #   requests
-uv==0.9.11
+uv==0.9.24
     # via -r requirements/dev.in

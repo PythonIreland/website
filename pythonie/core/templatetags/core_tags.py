@@ -1,7 +1,7 @@
 from django import template
 from meetups.models import Meetup
 from sponsors.models import Sponsor
-from wagtail.models import Page, Site
+from wagtail.models import Site
 
 register = template.Library()
 
@@ -40,7 +40,7 @@ def sponsors(context):
 @register.simple_tag(takes_context=False)
 def root_page():
     site = Site.objects.get(is_default_site=True)
-    return Page.objects.page(site.root_page).first()
+    return site.root_page
 
 
 @register.simple_tag(takes_context=False)

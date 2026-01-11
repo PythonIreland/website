@@ -2,9 +2,10 @@
 -c main.txt
 coverage
 django-debug-toolbar
+factory-boy
 fakeredis
 isort
-model-mommy
+model_mommy
 pip-audit
 pipdeptree
 ruff

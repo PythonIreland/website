@@ -3,10 +3,11 @@ from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
-from meetups import utils
-from meetups.models import Meetup, next_n_months
 from model_mommy import mommy
 from pytz import UTC
+
+from meetups import utils
+from meetups.models import Meetup, next_n_months
 
 description = (
     "<p>We will be having a meetup in June. More details to follow."
@@ -62,7 +63,7 @@ class UtilsTests(TestCase):
                     "description": description,
                     "name": "Python Ireland meetup",
                     "event_url": (
-                        "http://www.meetup.com/pythonireland/" "events/221078098/"
+                        "http://www.meetup.com/pythonireland/events/221078098/"
                     ),
                     "headcount": 0,
                     "time": 1433957400000,
@@ -125,7 +126,7 @@ class UtilsTests(TestCase):
         self.assertEqual(meetup.visibility, "public")
         self.assertEqual(
             meetup.event_url,
-            ("http://www.meetup.com/" "pythonireland/events/221078098/"),
+            ("http://www.meetup.com/pythonireland/events/221078098/"),
         )
 
     @patch("meetups.utils.get_content")

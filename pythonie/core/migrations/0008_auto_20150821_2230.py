@@ -2,14 +2,13 @@
 from __future__ import unicode_literals
 
 import wagtail.blocks
-import wagtail.fields
 import wagtail.embeds.blocks
+import wagtail.fields
 import wagtail.images.blocks
-from django.db import migrations, models
+from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("core", "0007_homepage_sponsors"),
     ]
@@ -22,9 +21,7 @@ class Migration(migrations.Migration):
                 (
                     (
                         "heading",
-                        wagtail.blocks.CharBlock(
-                            icon="home", classname="full title"
-                        ),
+                        wagtail.blocks.CharBlock(icon="home", classname="full title"),
                     ),
                     ("paragraph", wagtail.blocks.RichTextBlock(icon="edit")),
                     ("video", wagtail.embeds.blocks.EmbedBlock(icon="media")),
@@ -42,9 +39,7 @@ class Migration(migrations.Migration):
                 (
                     (
                         "heading",
-                        wagtail.blocks.CharBlock(
-                            icon="home", classname="full title"
-                        ),
+                        wagtail.blocks.CharBlock(icon="home", classname="full title"),
                     ),
                     ("paragraph", wagtail.blocks.RichTextBlock(icon="edit")),
                     ("video", wagtail.embeds.blocks.EmbedBlock(icon="media")),

@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Python Ireland (python.ie / pycon.ie) website, built with Django 5.2 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups, sponsors, speakers, and PyCon talks/sessions.
+This is the Python Ireland (python.ie / pycon.ie) website, built with Django 6.0 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups and sponsors.
 
 ### Python Version
 
-This project requires **Python 3.13**. All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
+This project requires **Python 3.13.11** (or any Python 3.13.x). All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
 
 ## Architecture
 
@@ -19,7 +19,6 @@ The project follows a modular Django app structure within the `pythonie/` direct
 - **core**: Base Wagtail pages (HomePage, SimplePage) with StreamField content blocks. Implements PageSegment snippets and mixins (MeetupMixin, SponsorMixin) for common functionality.
 - **meetups**: Manages Meetup.com integration for Python Ireland meetups. Includes a management command `updatemeetups` to sync with Meetup API.
 - **sponsors**: Sponsor management with SponsorshipLevel relationships.
-- **speakers**: Speaker and Session (talk/workshop) management for conferences. Includes Sessionize integration via management commands (`import-sessionize`, `update-sessionize-json-stream`).
 
 ### Settings Configuration
 
@@ -42,8 +41,8 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 
 ### Key Dependencies
 
-- Django ~5.2.0
-- Wagtail ~7.2.0 (CMS framework)
+- Django 6.0
+- Wagtail 7.2.1 (CMS framework)
 - Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
@@ -208,17 +207,6 @@ task heroku:maintenance:on
 task heroku:maintenance:off
 ```
 
-### Conference Management
-
-```bash
-# Import speakers/sessions from Sessionize
-task pycon:import:sessionize
-# or: docker compose run web python pythonie/manage.py import-sessionize --file sessionize.xlsx
-
-# Update from Sessionize JSON stream
-task pycon:import:sessionize:json
-```
-
 ## Important Implementation Notes
 
 ### Wagtail Page Models
@@ -226,8 +214,6 @@ task pycon:import:sessionize:json
 All page types inherit from `wagtail.models.Page`. The page tree structure:
 - HomePage (root, can have child HomePage or SimplePage)
 - SimplePage
-- SpeakersPage → Speaker pages
-- TalksPage → Session pages
 
 Pages use StreamFields for flexible content blocks (heading, paragraph, video, image, slide, html).
 
@@ -260,7 +246,7 @@ Tests use `pythonie.settings.tests` which configures SQLite and mock Redis. Run 
 
 ### Deployment
 
-The project is hosted on Heroku.
+The project is hosted on Heroku using the **heroku-24** stack with PostgreSQL 17.
 
 ### Upgrading Wagtail
 

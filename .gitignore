@@ -64,3 +64,20 @@ project.db
 # Virtualenv folders
 *venv/
 
+# Environment files with sensitive credentials
+.envrc
+development.env
+production.env
+
+# Database dumps and local databases
+*.dump
+*.duckdb
+
+# Local settings
+pythonie/pythonie/settings/pgdev.py
+
+# MinIO data directory
+mc/
+
+# Personal notes
+TODO.md

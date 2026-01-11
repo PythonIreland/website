@@ -1,6 +1,8 @@
+# ruff: noqa
+import os
 from pythonie.settings.configure import configure_redis
 
-from .base import *  # flake8: noqa
+from .base import *
 
 DEBUG = True
 
@@ -10,13 +12,20 @@ MEETUP_KEY = ""  # Put your own key here.
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# SQLite (simplest install)
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": join(PROJECT_ROOT, "db.sqlite3"),
+# Override Wagtail admin base URL for tests
+WAGTAILADMIN_BASE_URL = "http://testserver"
+
+# Use PostgreSQL if DATABASE_URL is set (for CI), otherwise use SQLite (for local tests)
+if os.getenv("DATABASE_URL"):
+    DATABASES = {"default": dj_database_url.config(conn_max_age=500)}
+else:
+    # SQLite (simplest install for local development)
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": join(PROJECT_ROOT, "db.sqlite3"),
+        }
     }
-}
 
 LOGGING.update(
     {

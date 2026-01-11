@@ -7,6 +7,7 @@ https://docs.djangoproject.com/en/1.7/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.7/ref/settings/
 """
+
 import os
 from os.path import abspath, dirname, join
 
@@ -35,6 +36,10 @@ ALLOWED_HOSTS = [
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 BASE_URL = "https://python.ie"
 
+# Wagtail admin base URL for admin URLs outside the admin interface
+# (e.g. notification emails and the user bar)
+WAGTAILADMIN_BASE_URL = BASE_URL
+
 # Application definition
 
 INSTALLED_APPS = (
@@ -44,6 +49,7 @@ INSTALLED_APPS = (
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.postgres",
     "compressor",
     "taggit",
     "modelcluster",
