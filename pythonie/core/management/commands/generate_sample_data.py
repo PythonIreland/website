@@ -45,6 +45,7 @@ class Command(BaseCommand):
             wagtail_root = Page.objects.get(depth=1)
         except Page.DoesNotExist:
             from wagtail.models import Locale
+
             locale, _ = Locale.objects.get_or_create(language_code="en")
             wagtail_root = Page.add_root(
                 instance=Page(title="Root", slug="root", locale=locale)
@@ -73,7 +74,7 @@ class Command(BaseCommand):
                 "port": 8000,
                 "site_name": "Python Ireland",
                 "root_page": home,
-            }
+            },
         )
         if not created:
             site.root_page = home

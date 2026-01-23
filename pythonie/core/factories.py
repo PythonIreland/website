@@ -5,18 +5,29 @@ from core.models import HomePage, SimplePage
 from meetups.models import Meetup
 from sponsors.models import SponsorshipLevel
 
+
 def create_sponsorship_level(name="Bronze", level=100):
-    return SponsorshipLevel.objects.get_or_create(name=name, defaults={"level": level})[0]
+    return SponsorshipLevel.objects.get_or_create(name=name, defaults={"level": level})[
+        0
+    ]
 
 
-def create_meetup(id, name="Python Ireland Meetup", description="Monthly Python meetup in Dublin",
-                  event_url="https://meetup.com/pythonireland/", time=None, created=None,
-                  rsvps=50, status="upcoming", visibility="public"):
+def create_meetup(
+    id,
+    name="Python Ireland Meetup",
+    description="Monthly Python meetup in Dublin",
+    event_url="https://meetup.com/pythonireland/",
+    time=None,
+    created=None,
+    rsvps=50,
+    status="upcoming",
+    visibility="public",
+):
     if time is None:
         time = timezone.now() + timezone.timedelta(days=30)
     if created is None:
         created = timezone.now()
-    
+
     return Meetup.objects.get_or_create(
         id=id,
         defaults={
@@ -28,7 +39,7 @@ def create_meetup(id, name="Python Ireland Meetup", description="Monthly Python 
             "rsvps": rsvps,
             "status": status,
             "visibility": visibility,
-        }
+        },
     )[0]
 
 
