@@ -2,7 +2,7 @@
 -c main.txt
 coverage
 django-debug-toolbar
-factory-boy
+wagtail-factories
 fakeredis
 isort
 model_mommy
