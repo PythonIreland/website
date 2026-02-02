@@ -41,23 +41,47 @@ class Command(BaseCommand):
             self.stdout.write("Home page already exists")
             return home
 
-        wagtail_root = Page.objects.get(depth=1)
+        try:
+            wagtail_root = Page.objects.get(depth=1)
+        except Page.DoesNotExist:
+            from wagtail.models import Locale
+
+            locale, _ = Locale.objects.get_or_create(language_code="en")
+            wagtail_root = Page.add_root(
+                instance=Page(title="Root", slug="root", locale=locale)
+            )
+            self.stdout.write("Created Wagtail root page")
+
         default_home_exists = Page.objects.filter(slug="home", depth=2).exists()
         slug = "python-ireland" if default_home_exists else "home"
 
-        home = HomePageFactory.build(
+        home = HomePageFactory(
+            parent=wagtail_root,
             slug=slug,
             show_in_menus=True,
             body=self._get_home_content(),
         )
-        wagtail_root.add_child(instance=home)
-        self.stdout.write(self.style.SUCCESS("Created home page"))
+        # Publish the home page
+        revision = home.save_revision()
+        revision.publish()
+        self.stdout.write(self.style.SUCCESS("Created and published home page"))
 
-        site = Site.objects.filter(is_default_site=True).first()
-        if site:
+        # Create or update the default site
+        site, created = Site.objects.get_or_create(
+            is_default_site=True,
+            defaults={
+                "hostname": "localhost",
+                "port": 8000,
+                "site_name": "Python Ireland",
+                "root_page": home,
+            },
+        )
+        if not created:
             site.root_page = home
             site.save()
             self.stdout.write(self.style.SUCCESS("Updated site root page"))
+        else:
+            self.stdout.write(self.style.SUCCESS("Created default site"))
 
         return home
 
@@ -88,10 +112,13 @@ class Command(BaseCommand):
             self.stdout.write(f"  {title} already exists")
             return SimplePage.objects.get(slug=slug)
 
-        page = SimplePageFactory.build(
-            title=title, slug=slug, body=body or [], show_in_menus=True
+        page = SimplePageFactory(
+            parent=parent,
+            title=title,
+            slug=slug,
+            body=body or [],
+            show_in_menus=True,
         )
-        parent.add_child(instance=page)
         self.stdout.write(self.style.SUCCESS(f"Created {title}"))
         return page
 

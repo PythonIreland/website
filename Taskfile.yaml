@@ -145,6 +145,16 @@ tasks:
     cmds:
       - docker compose run --rm web python pythonie/manage.py collectstatic
 
+  django:generate-sample-data:
+    desc: Generate sample data for development
+    cmds:
+      - |
+        if command -v docker >/dev/null 2>&1 && docker ps >/dev/null 2>&1; then
+          docker compose run --rm web python pythonie/manage.py generate_sample_data
+        else
+          python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
+        fi
+
   dependencies:compute:
     desc: Compute the dependencies
     cmds:

@@ -30,7 +30,8 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 4. Generate sample data (creates pages, navigation, meetups):
    ```bash
-   docker compose run --rm web python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
+   task django:generate-sample-data
+   # or: docker compose run --rm web python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
    ```
 
 5. Create a superuser:
@@ -58,7 +59,7 @@ If you prefer to develop without Docker:
 5. Activate the virtualenv: `source pythonie-venv/bin/activate`
 6. Install dependencies: `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`)
 7. Set up the database: `python pythonie/manage.py migrate --settings=pythonie.settings.dev`
-8. Generate sample data: `python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`
+8. Generate sample data: `task django:generate-sample-data` (or `python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
 9. Create a superuser: `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
 10. Install and run Redis server locally: `redis-server`
 11. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
@@ -95,7 +96,7 @@ task django:make-migrations   # Create new migrations
 task django:collect-static    # Collect static files
 
 # Sample Data (for development)
-python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
+task django:generate-sample-data
 
 # Testing
 task tests                    # Run test suite

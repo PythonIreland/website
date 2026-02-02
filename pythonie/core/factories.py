@@ -1,10 +1,11 @@
 import factory
 from django.utils import timezone
 from factory.django import DjangoModelFactory
-from meetups.models import Meetup
-from sponsors.models import SponsorshipLevel
+import wagtail_factories
 
 from core.models import HomePage, SimplePage
+from meetups.models import Meetup
+from sponsors.models import SponsorshipLevel
 
 
 class SponsorshipLevelFactory(DjangoModelFactory):
@@ -32,7 +33,7 @@ class MeetupFactory(DjangoModelFactory):
     visibility = "public"
 
 
-class HomePageFactory(DjangoModelFactory):
+class HomePageFactory(wagtail_factories.PageFactory):
     class Meta:
         model = HomePage
 
@@ -42,7 +43,7 @@ class HomePageFactory(DjangoModelFactory):
     body = []
 
 
-class SimplePageFactory(DjangoModelFactory):
+class SimplePageFactory(wagtail_factories.PageFactory):
     class Meta:
         model = SimplePage
 
