@@ -7,9 +7,9 @@ tasks:
       - .:/app
     location: /app
     command: |
-      python -m uv pip compile --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --quiet --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --quiet --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --quiet --output-file requirements/production.txt requirements/production.in
 
   deps:outdated:
     description: Show the outdated dependencies
@@ -23,9 +23,9 @@ tasks:
       - .:/app
     location: /app
     command: |
-      python -m uv pip compile --upgrade --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --quiet --upgrade --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --quiet --upgrade --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --quiet --upgrade --output-file requirements/production.txt requirements/production.in
 
   deps:upgrade:django:
     description: Upgrade Django to the latest compatible version
@@ -34,9 +34,9 @@ tasks:
       - .:/app
     location: /app
     command: |
-      python -m uv pip compile --upgrade-package django --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade-package django --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade-package django --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --quiet --upgrade-package django --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --quiet --upgrade-package django --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --quiet --upgrade-package django --output-file requirements/production.txt requirements/production.in
 
   deps:upgrade:wagtail:
     description: Upgrade Wagtail to the latest compatible version
@@ -45,9 +45,9 @@ tasks:
       - .:/app
     location: /app
     command: |
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/main.txt requirements/main.in
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/dev.txt requirements/dev.in
-      python -m uv pip compile --upgrade-package wagtail --output-file requirements/production.txt requirements/production.in
+      python -m uv pip compile --quiet --upgrade-package wagtail --output-file requirements/main.txt requirements/main.in
+      python -m uv pip compile --quiet --upgrade-package wagtail --output-file requirements/dev.txt requirements/dev.in
+      python -m uv pip compile --quiet --upgrade-package wagtail --output-file requirements/production.txt requirements/production.in
 
   deps:security:
     description: Check dependencies for known security vulnerabilities
