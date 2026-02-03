@@ -320,10 +320,28 @@ footer .well {
         color: var(--nav-text);
         padding: 10px 15px 10px 25px;
     }
-    
+
     .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
     .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
         background-color: var(--nav-hover-bg);
         color: var(--link-hover-color);
     }
+}
+
+/* Sessionize widget dark mode support */
+html.dark .sz-tabs__link,
+html.dark .sz-tabs__link:link,
+html.dark .sz-tabs__link:visited {
+    color: var(--text-color) !important;
+}
+
+html.dark .sz-tabs__item--active .sz-tabs__link,
+html.dark .sz-tabs__item--active .sz-tabs__link:link,
+html.dark .sz-tabs__item--active .sz-tabs__link:visited {
+    color: #fff !important;
+}
+
+html.dark .sz-tabs__link:hover,
+html.dark .sz-tabs__link:focus {
+    color: var(--link-hover-color) !important;
 }
