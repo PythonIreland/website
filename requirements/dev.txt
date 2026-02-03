@@ -24,7 +24,7 @@ charset-normalizer==3.4.4
     # via
     #   -c requirements/main.txt
     #   requests
-coverage==7.13.1
+coverage==7.13.2
     # via -r requirements/dev.in
 cyclonedx-python-lib==11.6.0
     # via pip-audit
@@ -49,7 +49,7 @@ django==6.0.1
     #   model-mommy
     #   modelsearch
     #   wagtail
-django-debug-toolbar==6.1.0
+django-debug-toolbar==6.2.0
     # via -r requirements/dev.in
 django-filter==25.2
     # via
@@ -63,7 +63,7 @@ django-permissionedforms==0.1
     # via
     #   -c requirements/main.txt
     #   wagtail
-django-stubs-ext==5.2.8
+django-stubs-ext==5.2.9
     # via
     #   -c requirements/main.txt
     #   django-tasks
@@ -94,7 +94,7 @@ et-xmlfile==2.0.0
     #   openpyxl
 factory-boy==3.3.3
     # via wagtail-factories
-faker==40.1.0
+faker==40.1.2
     # via factory-boy
 fakeredis==2.33.0
     # via -r requirements/dev.in
@@ -134,7 +134,7 @@ openpyxl==3.1.5
     #   wagtail
 packageurl-python==0.17.6
     # via cyclonedx-python-lib
-packaging==25.0
+packaging==26.0
     # via
     #   -c requirements/main.txt
     #   pip-audit
@@ -145,11 +145,11 @@ pillow==12.1.0
     #   -c requirements/main.txt
     #   pillow-heif
     #   wagtail
-pillow-heif==1.1.1
+pillow-heif==1.2.0
     # via
     #   -c requirements/main.txt
     #   willow
-pip==25.3
+pip==26.0
     # via
     #   pip-api
     #   pipdeptree
@@ -167,7 +167,7 @@ py-serializable==2.1.0
     # via cyclonedx-python-lib
 pygments==2.19.2
     # via rich
-pyparsing==3.3.1
+pyparsing==3.3.2
     # via pip-requirements-parser
 redis==7.1.0
     # via
@@ -179,15 +179,15 @@ requests==2.32.5
     #   cachecontrol
     #   pip-audit
     #   wagtail
-rich==14.2.0
+rich==14.3.2
     # via pip-audit
-ruff==0.14.11
+ruff==0.14.14
     # via -r requirements/dev.in
 sortedcontainers==2.4.0
     # via
     #   cyclonedx-python-lib
     #   fakeredis
-soupsieve==2.8.1
+soupsieve==2.8.3
     # via
     #   -c requirements/main.txt
     #   beautifulsoup4
@@ -200,7 +200,7 @@ telepath==0.3.1
     # via
     #   -c requirements/main.txt
     #   wagtail
-tomli==2.3.0
+tomli==2.4.0
     # via pip-audit
 tomli-w==1.2.0
     # via pip-audit
@@ -210,15 +210,11 @@ typing-extensions==4.15.0
     #   beautifulsoup4
     #   django-stubs-ext
     #   django-tasks
-tzdata==2025.3
-    # via
-    #   -c requirements/main.txt
-    #   faker
 urllib3==2.6.3
     # via
     #   -c requirements/main.txt
     #   requests
-uv==0.9.24
+uv==0.9.28
     # via -r requirements/dev.in
 wagtail==7.2.1
     # via
