@@ -1,0 +1,84 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "description": "Renovate configuration for Python Ireland website - pip-compile workflow with Heroku deployment",
+  "pip-compile": {
+    "managerFilePatterns": [
+      "^requirements/main\\.txt$",
+      "^requirements/dev\\.txt$",
+      "^requirements/production\\.txt$"
+    ]
+  },
+  "pip_requirements": {
+    "enabled": false
+  },
+  "pip_setup": {
+    "enabled": false
+  },
+  "constraints": {
+    "python": "3.13"
+  },
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    "**/vendor/**",
+    "**/.venv/**",
+    "**/pythonie-venv/**"
+  ],
+  "packageRules": [
+    {
+      "description": "Group Django ecosystem updates together",
+      "groupName": "Django ecosystem",
+      "matchPackagePatterns": ["^[Dd]jango", "^[Ww]agtail"],
+      "matchManagers": ["pip-compile"],
+      "schedule": ["before 9am on monday"]
+    },
+    {
+      "description": "Separate PR for security updates - always prioritize",
+      "groupName": "Security updates",
+      "matchUpdateTypes": ["patch"],
+      "matchCurrentVersion": "!/^0/",
+      "vulnerabilityAlerts": {
+        "enabled": true
+      },
+      "prPriority": 10
+    },
+    {
+      "description": "Automerge only dev dependencies patches (safer for production)",
+      "matchManagers": ["pip-compile"],
+      "matchFiles": ["requirements/dev.txt"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Never automerge production dependencies - require manual review",
+      "matchManagers": ["pip-compile"],
+      "matchFiles": ["requirements/main.txt", "requirements/production.txt"],
+      "automerge": false
+    },
+    {
+      "description": "Group all minor and patch updates together (except Django/Wagtail)",
+      "groupName": "All non-major dependencies",
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackagePatterns": ["*"],
+      "excludePackagePatterns": ["^[Dd]jango", "^[Ww]agtail"],
+      "schedule": ["before 9am on monday"]
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 9am on the first day of the month"],
+    "commitMessageAction": "Refresh pip-compile lock files",
+    "branchTopic": "pip-compile-refresh"
+  },
+  "prConcurrentLimit": 3,
+  "prCreation": "not-pending",
+  "prHourlyLimit": 2,
+  "semanticCommits": "enabled",
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  "vulnerabilityAlerts": {
+    "enabled": true
+  }
+}
