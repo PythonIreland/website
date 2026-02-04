@@ -2,40 +2,42 @@
 #    uv pip compile --output-file requirements/dev.txt requirements/dev.in
 anyascii==0.3.3
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 asgiref==3.11.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
 beautifulsoup4==4.14.3
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 boolean-py==5.0
     # via license-expression
-cachecontrol==0.14.4
-    # via pip-audit
+cachecontrol[filecache]==0.14.4
+    # via
+    #   cachecontrol
+    #   pip-audit
 certifi==2026.1.4
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 charset-normalizer==3.4.4
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 coverage==7.13.2
-    # via -r requirements/dev.in
+    # via -r dev.in
 cyclonedx-python-lib==11.6.0
     # via pip-audit
 defusedxml==0.7.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   py-serializable
     #   willow
 django==6.0.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django-debug-toolbar
     #   django-filter
     #   django-modelcluster
@@ -50,69 +52,69 @@ django==6.0.1
     #   modelsearch
     #   wagtail
 django-debug-toolbar==6.2.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 django-filter==25.2
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 django-modelcluster==6.4.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 django-permissionedforms==0.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 django-stubs-ext==5.2.9
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django-tasks
 django-taggit==6.1.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 django-tasks==0.9.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   modelsearch
     #   wagtail
 django-treebeard==4.8.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 djangorestframework==3.16.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 draftjs-exporter==5.2.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 et-xmlfile==2.0.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   openpyxl
 factory-boy==3.3.3
     # via wagtail-factories
 faker==40.1.2
     # via factory-boy
 fakeredis==2.33.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 filelock==3.20.3
     # via cachecontrol
 filetype==1.2.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   willow
 idna==3.11
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 isort==7.0.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 laces==0.1.2
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 license-expression==30.4.4
     # via cyclonedx-python-lib
@@ -121,46 +123,42 @@ markdown-it-py==4.0.0
 mdurl==0.1.2
     # via markdown-it-py
 model-mommy==2.0.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 modelsearch==1.1.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 msgpack==1.1.2
     # via cachecontrol
 openpyxl==3.1.5
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 packageurl-python==0.17.6
     # via cyclonedx-python-lib
 packaging==26.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   pip-audit
     #   pip-requirements-parser
     #   pipdeptree
 pillow==12.1.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   pillow-heif
     #   wagtail
 pillow-heif==1.2.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   willow
-pip==26.0
-    # via
-    #   pip-api
-    #   pipdeptree
 pip-api==0.0.34
     # via pip-audit
 pip-audit==2.10.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 pip-requirements-parser==32.0.1
     # via pip-audit
 pipdeptree==2.30.0
-    # via -r requirements/dev.in
+    # via -r dev.in
 platformdirs==4.5.1
     # via pip-audit
 py-serializable==2.1.0
@@ -171,34 +169,34 @@ pyparsing==3.3.2
     # via pip-requirements-parser
 redis==7.1.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   fakeredis
 requests==2.32.5
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   cachecontrol
     #   pip-audit
     #   wagtail
 rich==14.3.2
     # via pip-audit
 ruff==0.14.14
-    # via -r requirements/dev.in
+    # via -r dev.in
 sortedcontainers==2.4.0
     # via
     #   cyclonedx-python-lib
     #   fakeredis
 soupsieve==2.8.3
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   beautifulsoup4
 sqlparse==0.5.5
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   django
     #   django-debug-toolbar
 telepath==0.3.1
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
 tomli==2.4.0
     # via pip-audit
@@ -206,23 +204,24 @@ tomli-w==1.2.0
     # via pip-audit
 typing-extensions==4.15.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   beautifulsoup4
     #   django-stubs-ext
     #   django-tasks
 urllib3==2.6.3
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   requests
 uv==0.9.28
-    # via -r requirements/dev.in
-wagtail==7.2.1
+    # via -r dev.in
+wagtail==7.2.2
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail-factories
 wagtail-factories==4.3.0
-    # via -r requirements/dev.in
-willow==1.12.0
+    # via -r dev.in
+willow[heif]==1.12.0
     # via
-    #   -c requirements/main.txt
+    #   -c main.txt
     #   wagtail
+    #   willow
