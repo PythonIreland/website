@@ -302,3 +302,16 @@ tasks:
       - docker volume rm pythonie-postgres-data-{{.GIT_BRANCH}} 2>/dev/null || echo "Postgres volume not found"
       - docker volume rm pythonie-redis-data-{{.GIT_BRANCH}} 2>/dev/null || echo "Redis volume not found"
       - echo "Volumes cleaned for branch {{.GIT_BRANCH}}"
+
+  branch:verify:
+    desc: Verify database configuration for current branch
+    cmds:
+      - echo "=== Branch Configuration ==="
+      - echo "Git branch → {{.GIT_BRANCH}}"
+      - echo "Expected database → pythonie_{{.GIT_BRANCH}}"
+      - echo ""
+      - echo "=== Docker Environment ==="
+      - cat .env 2>/dev/null || echo ".env file not found (run any docker compose task to generate)"
+      - echo ""
+      - echo "=== PostgreSQL Databases ==="
+      - docker exec pythonie-postgres-{{.GIT_BRANCH}} psql -U postgres -c "\l" 2>/dev/null | grep pythonie || echo "PostgreSQL container not running"

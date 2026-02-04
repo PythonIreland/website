@@ -20,6 +20,7 @@ The system automatically:
 Each branch gets:
 - ✅ Its own Docker image
 - ✅ Its own PostgreSQL database (isolated data)
+- ✅ Its own SQLite database for local dev: `pythonie/db-{branch}.sqlite3`
 - ✅ Its own Redis instance (isolated cache)
 - ✅ Its own Docker volumes (persistent storage)
 - ✅ Unique container names (no conflicts)

@@ -12,6 +12,8 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 ## Quick Start (Docker - Recommended)
 
+**Note**: Each git branch automatically gets its own isolated database and Docker environment. See [Docker Branch Isolation](#docker-branch-isolation) below.
+
 1. Build the Docker image:
    ```bash
    task docker:build
@@ -20,7 +22,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 2. Start supporting services:
    ```bash
-   docker compose up -d postgres redis minio
+   docker compose up -d postgres redis
    ```
 
 3. Run database migrations:
@@ -48,9 +50,78 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 7. Visit http://127.0.0.1:8000/ to see the site with sample content
 8. Access Wagtail admin at http://127.0.0.1:8000/admin/
 
+## Docker Branch Isolation
+
+The project automatically isolates Docker environments by git branch, allowing you to work on multiple branches simultaneously without conflicts.
+
+### How It Works
+
+Each git branch gets:
+- **Separate Docker image**: `python.ie/website:{branch-name}`
+- **Isolated PostgreSQL database**: `pythonie_{branch-name}` (for docker-compose with pgdev settings)
+- **Isolated SQLite database**: `pythonie/db-{branch-name}.sqlite3` (for local dev)
+- **Dedicated volumes**: `pythonie-postgres-data-{branch}`, `pythonie-redis-data-{branch}`
+- **Unique containers**: `pythonie-web-{branch}`, `pythonie-postgres-{branch}`, `pythonie-redis-{branch}`
+
+### Branch Commands
+
+```bash
+# Check your current branch environment
+task branch:info
+
+# Verify database configuration
+task branch:verify
+
+# List all Docker volumes (all branches)
+task branch:volumes
+
+# Clean up volumes for current branch (DESTRUCTIVE!)
+task branch:clean
+```
+
+### Working on Multiple Branches
+
+**Scenario**: Work on `main` and `feature/new-auth` simultaneously.
+
+```bash
+# Terminal 1: Main branch on default ports
+git checkout main
+task run  # Uses pythonie_main database on port 8000
+
+# Terminal 2: Feature branch on custom ports
+git checkout feature/new-auth
+WEB_PORT=8001 PG_PORT=5433 task run  # Uses pythonie_feature-new-auth on port 8001
+```
+
+### Switching Branches
+
+When you switch branches, the system automatically uses the correct environment:
+
+```bash
+git checkout main
+task run  # Automatically uses main database
+
+git checkout feature/xyz
+task run  # Automatically uses feature-xyz database (isolated from main)
+```
+
+**Note**: Rebuild the Docker image after switching branches if dependencies changed:
+```bash
+git checkout feature/new-dependencies
+task docker:build
+task run
+```
+
+For detailed documentation, see [DOCKER-BRANCHES.md](DOCKER-BRANCHES.md).
+
 ## Local Setup (Without Docker)
 
 If you prefer to develop without Docker:
+
+**Note**: When developing locally, each git branch automatically uses its own SQLite database (`db-{branch}.sqlite3`). Export `GIT_BRANCH` for automatic isolation:
+```bash
+export GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD | sed 's/[^a-zA-Z0-9._-]/-/g' | tr '[:upper:]' '[:lower:]')
+```
 
 1. Fork the repository into your own personal GitHub account
 2. Clone your fork: `git clone git@github.com:YourGitHubName/website.git`
@@ -134,6 +205,12 @@ task heroku:releases          # Show deployment history
 task heroku:rollback          # Rollback to previous release
 task heroku:maintenance:on    # Enable maintenance mode
 task heroku:maintenance:off   # Disable maintenance mode
+
+# Branch Isolation (Docker)
+task branch:info              # Show current branch and environment info
+task branch:verify            # Verify database configuration
+task branch:volumes           # List all Docker volumes (all branches)
+task branch:clean             # Remove volumes for current branch (CAUTION!)
 ```
 
 ### Direct Django Commands
@@ -256,6 +333,12 @@ This project uses several tools to streamline development:
 ### Import Errors or Module Not Found
 - Rebuild Docker image: `task docker:build`
 - Reinstall dependencies: `pip install -r requirements.txt`
+
+### Wrong Database Being Used
+- Check current branch: `git branch`
+- Verify environment: `task branch:info`
+- Check database configuration: `task branch:verify`
+- Ensure .env file is up to date: `task env:write`
 
 ## Contributing
 
