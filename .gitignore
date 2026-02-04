@@ -66,6 +66,7 @@ project.db
 
 # Environment files with sensitive credentials
 .envrc
+.env
 development.env
 production.env
 
