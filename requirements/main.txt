@@ -32,7 +32,7 @@ dj-database-url==3.1.0
     # via -r main.in
 dj-static==0.0.6
     # via -r main.in
-django==6.0.2
+django==6.0.3
     # via
     #   -r main.in
     #   dj-database-url
