@@ -142,7 +142,7 @@ packaging==26.0
     #   pip-audit
     #   pip-requirements-parser
     #   pipdeptree
-pillow==12.1.1
+pillow==12.2.0
     # via
     #   -c main.txt
     #   pillow-heif
@@ -212,7 +212,7 @@ urllib3==2.6.3
     # via
     #   -c main.txt
     #   requests
-uv==0.11.6
+uv==0.11.7
     # via -r dev.in
 wagtail==7.2.3
     # via
