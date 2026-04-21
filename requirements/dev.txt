@@ -35,7 +35,7 @@ defusedxml==0.7.1
     #   -c main.txt
     #   py-serializable
     #   willow
-django==6.0.3
+django==6.0.4
     # via
     #   -c main.txt
     #   django-debug-toolbar
@@ -212,7 +212,7 @@ urllib3==2.6.3
     # via
     #   -c main.txt
     #   requests
-uv==0.10.8
+uv==0.11.7
     # via -r dev.in
 wagtail==7.2.3
     # via
