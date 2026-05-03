@@ -3,13 +3,26 @@
 
 version: '3'
 
+vars:
+  # Detect current git branch and normalize the name
+  # (replace / with - and remove special characters)
+  GIT_BRANCH:
+    sh: git rev-parse --abbrev-ref HEAD 2>/dev/null | sed 's/[^a-zA-Z0-9._-]/-/g' | tr '[:upper:]' '[:lower:]' || echo "dev"
+
 env:
-  DOCKER_IMAGE: python.ie/website-dev
-  PGDATABASE: pythonie
+  # Pass branch name to docker-compose
+  GIT_BRANCH: "{{.GIT_BRANCH}}"
+  # Docker image tagged by branch
+  DOCKER_IMAGE: "python.ie/website:{{.GIT_BRANCH}}"
+  # Database isolated by branch
+  PGDATABASE: "pythonie_{{.GIT_BRANCH}}"
   PGPASSWORD: pythonie
   PGUSER: postgres
   PGHOST: 127.0.0.1
   HEROKU_APP: pythonie
+  # Dynamic ports (optional - can stay fixed if running only one instance at a time)
+  WEB_PORT: 8000
+  PG_PORT: 5432
 
 dotenv: ['production.env']
 
@@ -100,48 +113,68 @@ tasks:
     cmds:
       - heroku maintenance:off
 
+  env:write:
+    desc: Write environment variables to .env file for docker-compose
+    cmds:
+      - |
+        cat > .env <<EOF
+        GIT_BRANCH={{.GIT_BRANCH}}
+        WEB_PORT=${WEB_PORT:-8000}
+        PG_PORT=${PG_PORT:-5432}
+        EOF
+    silent: true
+
   run:postgres:
     desc: Only run the PostgreSQL server, for example, if you want to restore the database from Heroku
+    deps: [env:write]
     cmds:
       - docker compose run --remove-orphans --detach --service-ports postgres
 
   run:
     desc: Run a local version of PythonIE
+    deps: [env:write]
     cmds:
       - docker compose run --remove-orphans --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
 
   django:shell-plus:
     desc: Run Django shell_plus
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py shell_plus
 
   shell:
     desc: Run a shell
+    deps: [env:write]
     cmds:
       - docker compose run --rm web /bin/bash
 
   django:make-migrations:
     desc: Make migrations
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py makemigrations
 
   django:migrate:
     desc: Run database migrations
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py migrate
 
   django:migrate:postgres:
     desc: Run database migrations on PostgreSQL (docker-compose)
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py migrate --settings=pythonie.settings.pgdev
 
   django:showmigrations:
     desc: Show migration status
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py showmigrations --settings=pythonie.settings.pgdev
 
   django:collect-static:
     desc: Collect static files
+    deps: [env:write]
     cmds:
       - docker compose run --rm web python pythonie/manage.py collectstatic
 
@@ -191,22 +224,26 @@ tasks:
       - toast deps:tree
 
   docker:build:
-    desc: Build the docker image
+    desc: Build the docker image for the current branch
     cmds:
+      - echo "Building image for branch {{.GIT_BRANCH}}..."
       - docker build --no-cache -t $DOCKER_IMAGE .
 
   docker:run:
     desc: Run a shell into the docker container
+    deps: [env:write]
     cmds:
       - docker compose run web /bin/bash
 
   stack:pull:
     desc: Pull the docker images for the stack
+    deps: [env:write]
     cmds:
-      - docker compose pull postgres minio mc redis
+      - docker compose pull postgres redis
 
   stack:services:
     desc: List the services from the docker compose file
+    deps: [env:write]
     cmds:
       - docker compose config --services
 
@@ -234,10 +271,47 @@ tasks:
 
   tests:
     desc: Run all tests
+    deps: [env:write]
     cmds:
       - docker compose run --rm -e DJANGO_SETTINGS_MODULE=pythonie.settings.tests web python pythonie/manage.py test pythonie --verbosity=3
 
   down:
     desc: Stop the docker compose stack
+    deps: [env:write]
     cmds:
       - docker compose down
+
+  branch:info:
+    desc: Show current branch and environment info
+    cmds:
+      - echo "Current branch → {{.GIT_BRANCH}}"
+      - echo "Docker image → $DOCKER_IMAGE"
+      - echo "Database → $PGDATABASE"
+      - echo "Web port → $WEB_PORT"
+      - echo "Postgres port → $PG_PORT"
+
+  branch:volumes:
+    desc: List all Docker volumes for this project (all branches)
+    cmds:
+      - docker volume ls | grep -E "(postgres-data|redis-data)" || echo "No volumes found"
+
+  branch:clean:
+    desc: Remove volumes for the current branch (CAUTION - data will be lost!)
+    prompt: This will delete all data for branch {{.GIT_BRANCH}}. Continue?
+    cmds:
+      - docker volume rm pythonie-postgres-data-{{.GIT_BRANCH}} 2>/dev/null || echo "Postgres volume not found"
+      - docker volume rm pythonie-redis-data-{{.GIT_BRANCH}} 2>/dev/null || echo "Redis volume not found"
+      - echo "Volumes cleaned for branch {{.GIT_BRANCH}}"
+
+  branch:verify:
+    desc: Verify database configuration for current branch
+    cmds:
+      - echo "=== Branch Configuration ==="
+      - echo "Git branch → {{.GIT_BRANCH}}"
+      - echo "Expected database → pythonie_{{.GIT_BRANCH}}"
+      - echo ""
+      - echo "=== Docker Environment ==="
+      - cat .env 2>/dev/null || echo ".env file not found (run any docker compose task to generate)"
+      - echo ""
+      - echo "=== PostgreSQL Databases ==="
+      - docker exec pythonie-postgres-{{.GIT_BRANCH}} psql -U postgres -c "\l" 2>/dev/null | grep pythonie || echo "PostgreSQL container not running"
