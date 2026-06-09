@@ -95,7 +95,7 @@ gunicorn==25.3.0
     # via -r main.in
 humanize==4.15.0
     # via delorean
-idna==3.13
+idna==3.15
     # via requests
 iso8601==2.1.0
     # via colander

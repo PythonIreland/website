@@ -106,7 +106,7 @@ filetype==1.2.0
     # via
     #   -c main.txt
     #   willow
-idna==3.13
+idna==3.15
     # via
     #   -c main.txt
     #   requests
