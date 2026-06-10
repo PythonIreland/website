@@ -55,7 +55,7 @@ django-filter==25.2
     # via
     #   -c requirements/main.txt
     #   wagtail
-django-modelcluster==6.4.1
+django-modelcluster==6.5
     # via
     #   -c requirements/main.txt
     #   wagtail
