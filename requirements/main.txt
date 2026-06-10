@@ -91,7 +91,7 @@ et-xmlfile==2.0.0
     # via openpyxl
 filetype==1.2.0
     # via willow
-gunicorn==25.3.0
+gunicorn==26.0.0
     # via -r requirements/main.in
 humanize==4.15.0
     # via delorean
@@ -145,7 +145,7 @@ rcssmin==1.2.2
     # via django-compressor
 redis==7.4.0
     # via -r requirements/main.in
-requests==2.33.1
+requests==2.34.2
     # via
     #   -r requirements/main.in
     #   wagtail
