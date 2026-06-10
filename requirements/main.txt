@@ -127,9 +127,9 @@ psycopg==3.3.3
     # via -r requirements/main.in
 psycopg-binary==3.3.3
     # via psycopg
-pydantic==2.13.3
+pydantic==2.13.4
     # via -r requirements/main.in
-pydantic-core==2.46.3
+pydantic-core==2.46.4
     # via pydantic
 python-dateutil==2.9.0.post0
     # via
