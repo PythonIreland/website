@@ -96,7 +96,7 @@ factory-boy==3.3.3
     # via wagtail-factories
 faker==40.15.0
     # via factory-boy
-fakeredis==2.35.1
+fakeredis==2.36.1
     # via -r requirements/dev.in
 filelock==3.29.0
     # via cachecontrol
@@ -167,7 +167,7 @@ pygments==2.20.0
     # via rich
 pyparsing==3.3.2
     # via pip-requirements-parser
-redis==7.4.0
+redis==8.0.0
     # via
     #   -c requirements/main.txt
     #   fakeredis
