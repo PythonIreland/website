@@ -1,0 +1,40 @@
+# Version control
+.git
+.gitignore
+
+# Python caches and virtualenvs
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+pythonie-venv/
+.venv/
+venv/
+
+# Local databases and media
+*.sqlite3
+pythonie/db.sqlite3
+media/
+
+# Secrets and local env
+.env
+.envrc
+*.env
+
+# Editor / OS noise
+.vscode/
+.idea/
+.DS_Store
+
+# Worktrees and tooling output
+.claude/
+graphify-out/
+
+# Docs and CI not needed in the build context
+*.md
+.github/
