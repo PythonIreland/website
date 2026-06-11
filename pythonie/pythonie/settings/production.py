@@ -1,11 +1,36 @@
 # ruff: noqa
 import os
+
+import dj_database_url
+
 from pythonie.settings.configure import configure_redis
 
 from .base import *
 
 # Disable debug mode
 DEBUG = False
+
+# Security / HTTPS hardening
+# Heroku terminates TLS at the router and forwards plain HTTP to the dyno,
+# so Django must trust the X-Forwarded-Proto header to detect HTTPS.
+# Without this, SECURE_SSL_REDIRECT would cause an infinite redirect loop.
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+# Persistent database connections with TLS for Heroku Postgres.
+# Avoids opening a new TCP+TLS connection on every request.
+DATABASES = {
+    "default": dj_database_url.config(
+        conn_max_age=600,
+        conn_health_checks=True,
+        ssl_require=True,
+    )
+}
 
 # AWS S3 Storage Configuration
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
@@ -14,6 +39,9 @@ AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_CUSTOM_DOMAIN = "s3.python.ie"
 AWS_HOST = "s3-eu-west-1.amazonaws.com"
 AWS_DEFAULT_ACL = "public-read"
+# Don't silently overwrite/delete user-uploaded files that share a name
+# (Wagtail recommends False; see wagtailadmin.W004).
+AWS_S3_FILE_OVERWRITE = False
 
 # Use S3 for media files (Django 5.1+ STORAGES API)
 STORAGES = {
