@@ -63,7 +63,7 @@ django-filter==25.2
     # via wagtail
 django-libsass==0.9
     # via -r requirements/main.in
-django-modelcluster==6.4.1
+django-modelcluster==6.5
     # via
     #   -r requirements/main.in
     #   wagtail
