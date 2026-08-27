@@ -1,6 +1,6 @@
 # Development Guide - Python Ireland Website
 
-> Complete documentation for developers working on python.ie / pycon.ie
+> Complete documentation for developers working on python.ie
 
 ## Table of Contents
 
