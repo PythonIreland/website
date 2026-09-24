@@ -33,7 +33,7 @@ defusedxml==0.7.1
     #   -c requirements/main.txt
     #   py-serializable
     #   willow
-django==6.0.6
+django==6.0.8
     # via
     #   -c requirements/main.txt
     #   django-debug-toolbar
