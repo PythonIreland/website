@@ -140,7 +140,7 @@ packaging==26.2
     #   pip-audit
     #   pip-requirements-parser
     #   pipdeptree
-pillow==12.2.0
+pillow==12.3.0
     # via
     #   -c requirements/main.txt
     #   pillow-heif
