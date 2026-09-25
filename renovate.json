@@ -2,6 +2,9 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "description": "Renovate configuration for Python Ireland website - pyproject.toml + uv.lock (pep621 manager) with Heroku deployment",
+  "pre-commit": {
+    "enabled": true
+  },
   "constraints": {
     "python": "3.13"
   },
@@ -42,9 +45,16 @@
       "automergeType": "pr"
     },
     {
-      "description": "Keep uv in sync: one PR for the dev dependency (pep621), the Docker image (Dockerfile) and the mise tool",
+      "description": "Keep uv in sync: one PR for the dev dependency (pep621), the Docker image (Dockerfile), the mise tool and the uv-lock hook (pre-commit)",
       "groupName": "uv",
-      "matchPackageNames": ["uv", "ghcr.io/astral-sh/uv", "astral-sh/uv"]
+      "matchPackageNames": ["uv", "ghcr.io/astral-sh/uv", "astral-sh/uv", "astral-sh/uv-pre-commit"]
+    },
+    {
+      "description": "Group prek hook revisions (.pre-commit-config.yaml) together",
+      "groupName": "pre-commit hooks",
+      "matchManagers": ["pre-commit"],
+      "matchPackageNames": ["!astral-sh/uv-pre-commit"],
+      "schedule": ["before 9am on monday"]
     },
     {
       "description": "Python is pinned to 3.13.x: only allow 3.13 for the Docker base image, mise and .python-version",
