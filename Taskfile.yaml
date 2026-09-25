@@ -190,6 +190,11 @@ tasks:
     cmds:
       - toast deps:tree
 
+  dependencies:export:
+    desc: Export the uv.lock to requirements.txt for Heroku deployment
+    cmds:
+      - toast deps:export
+
   docker:build:
     desc: Build the docker image
     cmds:
@@ -228,9 +233,7 @@ tasks:
   dependencies:upgrade:package:
     desc: "Upgrade a specific package (usage: task dependencies:upgrade:package PACKAGE=django)"
     cmds:
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/main.txt requirements/main.in
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/dev.txt requirements/dev.in
-      - python -m uv pip compile --upgrade-package $PACKAGE --output-file requirements/production.txt requirements/production.in
+      - uv lock --upgrade-package $PACKAGE
 
   tests:
     desc: Run all tests
