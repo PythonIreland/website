@@ -195,6 +195,11 @@ tasks:
     cmds:
       - docker build --no-cache -t $DOCKER_IMAGE .
 
+  docker:build:cached:
+    desc: Build the docker image reusing the build cache (faster rebuilds)
+    cmds:
+      - docker build -t $DOCKER_IMAGE .
+
   docker:run:
     desc: Run a shell into the docker container
     cmds:
