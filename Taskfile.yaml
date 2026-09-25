@@ -208,7 +208,7 @@ tasks:
   stack:pull:
     desc: Pull the docker images for the stack
     cmds:
-      - docker compose pull postgres minio mc redis
+      - docker compose pull postgres redis
 
   stack:services:
     desc: List the services from the docker compose file

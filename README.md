@@ -20,7 +20,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 2. Start supporting services:
    ```bash
-   docker compose up -d postgres redis minio
+   docker compose up -d postgres redis
    ```
 
 3. Run database migrations:

@@ -76,8 +76,5 @@ production.env
 # Local settings
 pythonie/pythonie/settings/pgdev.py
 
-# MinIO data directory
-mc/
-
 # Personal notes
 TODO.md

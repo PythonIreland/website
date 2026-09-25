@@ -68,7 +68,7 @@ uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 
 ### Docker Development (preferred)
 
-Uses Task for most operations. Requires docker-compose with services: web, postgres, redis, minio.
+Uses Task for most operations. Requires docker-compose with services: web, postgres, redis.
 
 ```bash
 # Build docker image
