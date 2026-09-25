@@ -137,6 +137,9 @@ task run
 # 1. Install dependencies (ensure Python 3.13; creates and populates a .venv automatically)
 uv sync --all-groups
 
+# Install the prek git hooks (ruff, django-upgrade, missing migrations, ...)
+uv run prek install
+
 # 2. Migrate database
 uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
 
@@ -1004,7 +1007,13 @@ task code:format            # Format code with ruff
 task code:lint              # Lint code and fix issues
 task code:check             # Check without changes
 task dependencies:security  # Check for security vulnerabilities
+uv run prek run --all-files # Run every git hook (same as the CI prek job)
 ```
+
+The prek git hooks (`uv run prek install`, see CONTRIBUTING.md) run ruff,
+django-upgrade, the Django system checks and the missing migrations check on
+every commit. Use `SKIP=<hook-id> git commit` or `git commit --no-verify` only
+in an emergency: CI runs the same hooks.
 
 ### 4. Create Atomic Migrations
 

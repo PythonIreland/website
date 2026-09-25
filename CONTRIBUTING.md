@@ -83,6 +83,9 @@ python3 --version  # Should show 3.13.x
 # Install dependencies (creates and populates a .venv automatically)
 uv sync --all-groups
 
+# Install the git hooks (see "Git Hooks (prek)" below)
+uv run prek install
+
 # Run migrations
 uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
 
@@ -137,7 +140,8 @@ refactor/simplify-sponsor-model
    # or: python -m ruff format pythonie
    ```
 
-5. **Commit your changes** with clear messages:
+5. **Commit your changes** with clear messages (the prek git hooks run
+   automatically on the staged files, see [Git Hooks (prek)](#git-hooks-prek)):
    ```bash
    git add .
    git commit -m "Add dark mode toggle feature"
@@ -172,6 +176,52 @@ task code:lint
 
 # Check code formatting and linting without changes
 task code:check
+```
+
+### Git Hooks (prek)
+
+The repository uses [prek](https://github.com/j178/prek), a fast drop-in
+replacement for [pre-commit](https://pre-commit.com/) that reads the same
+`.pre-commit-config.yaml`. prek is part of the `dev` dependency group, so
+`uv sync --all-groups` installs it in the project `.venv` at the version locked
+in `uv.lock`.
+
+```bash
+# Install the git hook once per clone
+uv run prek install
+
+# Run every hook on the whole repository
+uv run prek run --all-files
+
+# Run a single hook
+uv run prek run ruff-check --all-files
+```
+
+The hooks run on every `git commit`, on the staged files only:
+
+- **Generic checks** (pre-commit-hooks): trailing whitespace, end of file
+  newline, line endings, YAML/TOML/JSON syntax, merge conflict markers, large
+  files, leftover debugger imports, private keys
+- **uv-lock**: keeps `uv.lock` in sync with `pyproject.toml`
+- **django-upgrade**: rewrites deprecated Django idioms (target: Django 6.0)
+- **ruff check / ruff format**: run through `uv run`, with the same ruff version
+  as CI
+- **Django system checks and missing migrations**: `manage.py check` and
+  `manage.py makemigrations --check --dry-run`, always against the local SQLite
+  database (`DATABASE_URL` is ignored)
+
+When a hook fixes files, the commit is aborted: review the changes, `git add`
+them and commit again. CI runs `prek run --all-files` on every push and pull
+request.
+
+To bypass the hooks in an emergency (CI will still run them):
+
+```bash
+# Skip one or more hooks by id
+SKIP=django-missing-migrations git commit -m "..."
+
+# Skip all hooks
+git commit --no-verify -m "..."
 ```
 
 ### Django/Wagtail Conventions
