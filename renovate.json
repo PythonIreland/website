@@ -42,6 +42,21 @@
       "automergeType": "pr"
     },
     {
+      "description": "Keep uv in sync: one PR for the dev dependency (pep621), the Docker image (Dockerfile) and the mise tool",
+      "groupName": "uv",
+      "matchPackageNames": ["uv", "ghcr.io/astral-sh/uv", "astral-sh/uv"]
+    },
+    {
+      "description": "Python is pinned to 3.13.x: only allow 3.13 for the Docker base image, mise and .python-version",
+      "matchDepNames": ["python"],
+      "allowedVersions": "/^3\\.13([.-]|$)/"
+    },
+    {
+      "description": "Production (Heroku) runs PostgreSQL 17: keep CI and docker-compose on the same major",
+      "matchDepNames": ["postgres"],
+      "allowedVersions": "/^17([.-]|$)/"
+    },
+    {
       "description": "Never automerge production dependencies ([project.dependencies]) - require manual review",
       "matchManagers": ["pep621"],
       "matchDepTypes": ["project.dependencies"],
