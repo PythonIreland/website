@@ -29,6 +29,7 @@ This project follows the [Python Community Code of Conduct](https://www.python.o
 - **Docker** and **docker-compose** (recommended)
 - **Git**
 - **Task** (optional, for running predefined commands)
+- **uv** and **prek** (git hooks), pinned in `mise.toml` (`mise install`), see [Git Hooks (prek)](#git-hooks-prek)
 
 ### Repository Structure
 
@@ -56,6 +57,11 @@ website/
 # Clone the repository
 git clone <repository-url>
 cd website
+
+# Install the git hooks (requires uv and prek, see "Git Hooks (prek)" below;
+# the ruff and Django hooks run on the host through `uv run`)
+uv sync --all-groups
+prek install
 
 # Build Docker image
 task docker:build
@@ -194,6 +200,8 @@ uv tool install prek    # uv
 
 The ruff and Django hooks run through `uv run`, so they also need the project
 environment (`uv sync --all-groups`).
+
+Then enable the hooks, once per clone (whether you develop with Docker or not):
 
 ```bash
 # Install the git hook once per clone
