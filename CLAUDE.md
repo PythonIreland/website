@@ -125,7 +125,7 @@ task code:check
 
 ### Git Hooks (prek)
 
-[prek](https://github.com/j178/prek) (a Rust drop-in replacement for pre-commit) runs the hooks defined in `.pre-commit-config.yaml`. It is **not** a project dependency: it must already be installed on the machine (`mise use -g prek`, `brew install prek` or `uv tool install prek`). CI installs it with `j178/prek-action`.
+[prek](https://github.com/j178/prek) (a Rust drop-in replacement for pre-commit) runs the hooks defined in `.pre-commit-config.yaml`. It is **not** a project dependency: like uv, it must already be installed on the machine. It is pinned in `mise.toml` (`mise install`); without mise, use `brew install prek` or `uv tool install prek`. CI installs it with `j178/prek-action`.
 
 ```bash
 # Install the git hook (once per clone)

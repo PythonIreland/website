@@ -182,11 +182,12 @@ task code:check
 
 The repository uses [prek](https://github.com/j178/prek), a fast drop-in
 replacement for [pre-commit](https://pre-commit.com/) that reads the same
-`.pre-commit-config.yaml`. prek is not a project dependency: install it once
-on your machine, with one of:
+`.pre-commit-config.yaml`. Like uv, prek is not a project dependency: it must
+be installed on your machine. It is pinned in `mise.toml`, or install it
+another way:
 
 ```bash
-mise use -g prek        # mise
+mise install            # mise: installs the versions pinned in mise.toml
 brew install prek       # Homebrew
 uv tool install prek    # uv
 ```
