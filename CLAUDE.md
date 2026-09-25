@@ -123,6 +123,24 @@ task code:check
 # or: toast code:check
 ```
 
+### Git Hooks (prek)
+
+[prek](https://github.com/j178/prek) (a Rust drop-in replacement for pre-commit) runs the hooks defined in `.pre-commit-config.yaml`. It is part of the `dev` dependency group, so its version comes from `uv.lock`.
+
+```bash
+# Install the git hook (once per clone)
+uv run prek install
+
+# Run every hook on the whole repository (also run by the CI prek job)
+uv run prek run --all-files
+
+# Emergency bypass: skip one hook, or all of them
+SKIP=django-missing-migrations git commit -m "..."
+git commit --no-verify -m "..."
+```
+
+Hooks: pre-commit-hooks (whitespace, EOF, YAML/TOML/JSON, merge conflicts, large files, debug statements, private keys), uv-lock, django-upgrade (`--target-version 6.0`), and local hooks for ruff check/format, `manage.py check` and missing migrations. The ruff and Django hooks are `local` hooks running `uv run --frozen`, so ruff is pinned in one place only (`pyproject.toml`); there is no `ruff-pre-commit` rev to keep aligned. The Django hooks unset `DATABASE_URL` so they never reach a remote database. Vendored assets under `pythonie/core/static/{css,fonts,js}` are excluded. Renovate updates the hook revisions (`pre-commit` manager, enabled in `renovate.json`).
+
 ### Dependency Management
 
 Uses `uv` for fast Python package management. Dependencies are declared in `pyproject.toml` (`[project.dependencies]` + `[dependency-groups]`) and locked in `uv.lock` (committed). Heroku's Python buildpack detects `uv.lock` and installs natively via `uv sync` against the slug's system Python — **never add a `requirements.txt` at the repo root**, the buildpack aborts the build if it finds more than one package-manager file (`requirements.txt`, `poetry.lock`, `uv.lock`) at once. `.python-version` (not `runtime.txt`, which is deprecated) pins the Python version for the buildpack.
