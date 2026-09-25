@@ -35,11 +35,16 @@ deps = "uv sync --all-groups"
 
 # Background, after the worktree is gone (runs from the primary worktree).
 # DESTRUCTIVE: removes the containers, network and volumes (Postgres and Redis
-# data) of this worktree's compose project, then its per-branch image. `-p`
-# restricts it to that single project; other worktrees and the primary
-# checkout use different project names and are never touched.
+# data) of this worktree's compose project, then its per-branch image. The
+# label filter and `-p` restrict it to that single project; other worktrees
+# and the primary checkout use different project names and are never touched.
+# The first step is needed because `down` skips running one-off containers
+# started by `docker compose run` (e.g. a `task run` left open), which would
+# keep the network and the image in use.
 [post-remove]
 docker = """
+ids=$(docker ps -aq --filter label=com.docker.compose.project=pythonie-{{ branch | sanitize_db }})
+[ -z "$ids" ] || docker rm -f $ids
 docker compose -p pythonie-{{ branch | sanitize_db }} down --volumes --remove-orphans
 docker image rm python.ie/website-dev:{{ branch | sanitize_db }} 2>/dev/null || true
 """
