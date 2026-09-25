@@ -3,6 +3,7 @@ from django.contrib import admin
 from sponsors.models import Sponsor, SponsorshipLevel
 
 
+@admin.register(SponsorshipLevel)
 class SponsorshipLevelAdmin(admin.ModelAdmin):
     list_display = (
         "name",
@@ -10,14 +11,9 @@ class SponsorshipLevelAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(SponsorshipLevel, SponsorshipLevelAdmin)
-
-
+@admin.register(Sponsor)
 class SponsorAdmin(admin.ModelAdmin):
     list_display = (
         "name",
         "logo",
     )
-
-
-admin.site.register(Sponsor, SponsorAdmin)
