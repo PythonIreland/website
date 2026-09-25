@@ -1,0 +1,55 @@
+[project]
+name = "pythonie"
+version = "0.1.0"
+description = "Python Ireland website (python.ie / pycon.ie), built with Django and Wagtail CMS"
+requires-python = "==3.13.*"
+dependencies = [
+    "boto3",
+    "colander",
+    "defusedxml",
+    "delorean",
+    "dj-database-url",
+    "dj-static",
+    "django<6.1", # pinned to the 6.0.x branch, matches the currently deployed version
+    "django-compressor",
+    "django-extensions",
+    "django-libsass",
+    "django-modelcluster",
+    "django-storages",
+    "django-taggit",
+    "gunicorn",
+    "pandas",
+    "psycopg[binary]",
+    "pydantic",
+    "python-dateutil",
+    "pytz",
+    "redis",
+    "requests>=2.32.5",
+    "wagtail>=7.3.2,<7.4",
+    "whitenoise",
+    "willow",
+]
+
+[dependency-groups]
+dev = [
+    "coverage",
+    "django-debug-toolbar",
+    "fakeredis",
+    "isort",
+    "model_mommy",
+    "pip-audit",
+    "pipdeptree",
+    "ruff==0.15.16", # pinned: 0.16 changes the default lint rule set
+    "uv",
+    "wagtail-factories",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.coverage.run]
+branch = true
+source = ["pythonie"]
