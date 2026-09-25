@@ -1,72 +1,43 @@
 services:
   web:
     build: .
-    image: "python.ie/website:${GIT_BRANCH:-dev}"
-    container_name: "pythonie-web-${GIT_BRANCH:-dev}"
+    # Image, host ports and the compose project name can be overridden from a
+    # `.env` file next to this one (worktrunk writes it for every worktree, see
+    # .config/wt.toml). The defaults below apply when there is no `.env`.
+    image: ${DOCKER_IMAGE:-python.ie/website-dev}
     ports:
       - "${WEB_PORT:-8000}:8000"
     command: /usr/bin/fish
     depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
+      - postgres
+      - redis
     env_file:
       - development.env
     environment:
-      PGDATABASE: "pythonie_${GIT_BRANCH:-dev}"
+#       DJANGO_SETTINGS_MODULE: pythonie.settings.dev
+      PGDATABASE: pythonie
       PGUSER: postgres
       PGPASSWORD: pythonie
-      GIT_BRANCH: "${GIT_BRANCH:-dev}"
     volumes:
       - .:/app
     working_dir: /app
 
+
   postgres:
     image: postgres:17
-    container_name: "pythonie-postgres-${GIT_BRANCH:-dev}"
-    # ports:
-    #   - "${PG_PORT:-5432}:5432"
+    ports:
+      - "${PGPORT:-5432}:5432"
     environment:
       POSTGRES_PASSWORD: pythonie
-      POSTGRES_DB: "pythonie_${GIT_BRANCH:-dev}"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
 
   redis:
-    restart: unless-stopped
-    image: redis:7-alpine
-    container_name: "pythonie-redis-${GIT_BRANCH:-dev}"
-    volumes:
-      - redis-data:/data
-    command: redis-server --appendonly yes
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 10s
-      timeout: 3s
-      retries: 3
+    image: redis:6.2
 
   test:
-    image: "python.ie/website:${GIT_BRANCH:-dev}"
+    image: ${DOCKER_IMAGE:-python.ie/website-dev}
     environment:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
-      PGDATABASE: "pythonie_${GIT_BRANCH:-dev}"
-    depends_on:
-      postgres:
-        condition: service_healthy
     volumes:
       - .:/app
     working_dir: /app
     command: python pythonie/manage.py test pythonie --verbosity=3
-
-volumes:
-  postgres-data:
-    name: "pythonie-postgres-data-${GIT_BRANCH:-dev}"
-  redis-data:
-    name: "pythonie-redis-data-${GIT_BRANCH:-dev}"
