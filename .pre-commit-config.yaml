@@ -1,9 +1,12 @@
 # Git hooks, run with prek (https://github.com/j178/prek), a drop-in
 # replacement for pre-commit that reads this same file.
 #
-#   uv sync --all-groups        # prek is part of the dev dependency group
-#   uv run prek install         # install the git hook for this clone
-#   uv run prek run --all-files # run every hook on the whole repository
+# prek must be installed on the machine (e.g. `mise use -g prek`,
+# `brew install prek` or `uv tool install prek`); the local hooks also need
+# the project environment (`uv sync --all-groups`).
+#
+#   prek install         # install the git hook for this clone
+#   prek run --all-files # run every hook on the whole repository
 #
 # Revisions are pinned to tags and kept up to date by Renovate.
 
