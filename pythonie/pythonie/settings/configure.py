@@ -16,7 +16,7 @@ def configure_redis(redis_url, test=False):
         import redis
 
         url = urlparse(redis_url)
-        log.info("Redis configured with redis_url: %s" % redis_url)
+        log.info("Redis configured with redis_url: %s", redis_url)
         return redis.Redis(host=url.hostname, port=url.port, password=url.password)
 
-    log.warn("Redis not configured")
+    log.warning("Redis not configured")

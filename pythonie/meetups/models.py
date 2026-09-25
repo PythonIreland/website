@@ -1,9 +1,9 @@
 import logging
-from datetime import datetime
+from datetime import UTC, datetime
 
 from dateutil.relativedelta import relativedelta
-from delorean import Delorean
 from django.db import models
+from django.utils import timezone
 from sponsors.models import Sponsor
 from wagtail.snippets.models import register_snippet
 
@@ -38,9 +38,7 @@ class Meetup(models.Model):
     )
     time = models.DateTimeField()
     created = models.DateTimeField()
-    updated = models.DateTimeField(
-        default=Delorean(datetime(1970, 1, 1), timezone="UTC").datetime
-    )
+    updated = models.DateTimeField(default=datetime(1970, 1, 1, tzinfo=UTC))
 
     rsvps = models.IntegerField(default=0)
     maybe_rsvps = models.IntegerField(default=0)
@@ -57,7 +55,7 @@ class Meetup(models.Model):
 
     @classmethod
     def future_events(cls):
-        today = datetime.now()
+        today = timezone.now()
         return cls.objects.filter(time__gt=today).filter(
             time__lt=next_n_months(today, 3)
         )
