@@ -1,68 +1,72 @@
 services:
   web:
-    image: python.ie/website-dev
+    build: .
+    image: "python.ie/website:${GIT_BRANCH:-dev}"
+    container_name: "pythonie-web-${GIT_BRANCH:-dev}"
     ports:
-      - "8000:8000"
+      - "${WEB_PORT:-8000}:8000"
     command: /usr/bin/fish
     depends_on:
-      - postgres
-      - minio
-      - redis
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
     env_file:
       - development.env
     environment:
-#       DJANGO_SETTINGS_MODULE: pythonie.settings.dev
-      PGDATABASE: pythonie
+      PGDATABASE: "pythonie_${GIT_BRANCH:-dev}"
       PGUSER: postgres
       PGPASSWORD: pythonie
+      GIT_BRANCH: "${GIT_BRANCH:-dev}"
     volumes:
       - .:/app
     working_dir: /app
 
-
   postgres:
     image: postgres:17
-    ports:
-      - "5432:5432"
+    container_name: "pythonie-postgres-${GIT_BRANCH:-dev}"
+    # ports:
+    #   - "${PG_PORT:-5432}:5432"
     environment:
       POSTGRES_PASSWORD: pythonie
+      POSTGRES_DB: "pythonie_${GIT_BRANCH:-dev}"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
 
   redis:
-    image: redis:6.2
-
-  minio:
-    image: quay.io/minio/minio
-    ports:
-      - "9000:9000"
-      - "9001:9001"
-    command: server --console-address ":9001" /data
-    environment:
-      MINIO_ROOT_USER: pythonie
-      MINIO_ROOT_PASSWORD: pythonie
+    restart: unless-stopped
+    image: redis:7-alpine
+    container_name: "pythonie-redis-${GIT_BRANCH:-dev}"
     volumes:
-      - minio-data:/data
+      - redis-data:/data
+    command: redis-server --appendonly yes
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
-      interval: 30s
-      timeout: 20s
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
       retries: 3
 
-  mc:
-    image: quay.io/minio/mc
-    links:
-      - minio
-    volumes:
-      - ./mc:/root/.mc
-      - ../s3:/s3
-
   test:
-    image: python.ie/website-dev
+    image: "python.ie/website:${GIT_BRANCH:-dev}"
     environment:
       DJANGO_SETTINGS_MODULE: pythonie.settings.tests
+      PGDATABASE: "pythonie_${GIT_BRANCH:-dev}"
+    depends_on:
+      postgres:
+        condition: service_healthy
     volumes:
       - .:/app
     working_dir: /app
     command: python pythonie/manage.py test pythonie --verbosity=3
 
 volumes:
-  minio-data:
+  postgres-data:
+    name: "pythonie-postgres-data-${GIT_BRANCH:-dev}"
+  redis-data:
+    name: "pythonie-redis-data-${GIT_BRANCH:-dev}"

@@ -66,12 +66,14 @@ project.db
 
 # Environment files with sensitive credentials
 .envrc
+.env
 development.env
 production.env
 
 # Database dumps and local databases
 *.dump
 *.duckdb
+*.sqlite3
 
 # Local settings
 pythonie/pythonie/settings/pgdev.py

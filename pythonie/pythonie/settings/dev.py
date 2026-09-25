@@ -16,10 +16,12 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 WAGTAILADMIN_BASE_URL = "http://localhost:8000"
 
 # SQLite (simplest install)
+# Database name includes git branch for isolation between branches
+GIT_BRANCH = os.environ.get("GIT_BRANCH", "dev")
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": join(PROJECT_ROOT, "db.sqlite3"),
+        "NAME": join(PROJECT_ROOT, f"db-{GIT_BRANCH}.sqlite3"),
     }
 }
 
