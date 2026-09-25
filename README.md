@@ -1,10 +1,10 @@
 # Python Ireland Website
 
-Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6.0 and Wagtail CMS 7.2. Manages meetups and sponsors.
+Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6.0 and Wagtail CMS 7.3. Manages meetups and sponsors.
 
 ## Prerequisites
 
-- Python 3.13 (see `.tool-versions`)
+- Python 3.13 (see `mise.toml`)
 - Docker & Docker Compose (for containerized development - recommended)
 - [Task](https://taskfile.dev/) (optional but recommended)
 - Redis (only for local non-Docker development)
@@ -55,17 +55,15 @@ If you prefer to develop without Docker:
 1. Fork the repository into your own personal GitHub account
 2. Clone your fork: `git clone git@github.com:YourGitHubName/website.git`
 3. Ensure you are running Python 3.13: `python -V` should output `Python 3.13.x`
-4. Create a virtualenv: `python3 -m venv pythonie-venv`
-5. Activate the virtualenv: `source pythonie-venv/bin/activate`
-6. Install dependencies: `pip install -r requirements.txt` (or `uv pip install -r requirements.txt`)
-7. Set up the database: `python pythonie/manage.py migrate --settings=pythonie.settings.dev`
-8. Generate sample data: `task django:generate-sample-data` (or `python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
-9. Create a superuser: `python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
-10. Install and run Redis server locally: `redis-server`
-11. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
-12. Run the server: `python pythonie/manage.py runserver --settings=pythonie.settings.dev`
-13. Visit http://127.0.0.1:8000/ to see the site with sample content
-14. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
+4. Install dependencies: `uv sync --all-groups` (creates and populates a `.venv` automatically)
+5. Set up the database: `uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev`
+6. Generate sample data: `task django:generate-sample-data` (or `uv run python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
+7. Create a superuser: `uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
+8. Install and run Redis server locally: `redis-server`
+9. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
+10. Run the server: `uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev`
+11. Visit http://127.0.0.1:8000/ to see the site with sample content
+12. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
 
 ## Project Structure
 
@@ -231,8 +229,8 @@ This project uses several tools to streamline development:
 
 - **[Task](https://taskfile.dev/)**: Task runner for common workflows. See `Taskfile.yaml` for all available tasks.
 - **[Toast](https://github.com/stepchowfun/toast)**: Containerized automation for dependency management. See `toast.yml`.
-- **[asdf](https://asdf-vm.com/)**: Tool version manager for consistent Python versions. See `.tool-versions`.
-- **[uv](https://github.com/astral-sh/uv)**: Fast Python package manager for dependency installation.
+- **[mise](https://mise.jdx.dev/)**: Tool version manager for consistent Python/uv/Task versions. See `mise.toml`.
+- **[uv](https://github.com/astral-sh/uv)**: Fast Python package manager for dependency installation. See `pyproject.toml` and `uv.lock`.
 
 ## Troubleshooting
 
@@ -255,7 +253,7 @@ This project uses several tools to streamline development:
 
 ### Import Errors or Module Not Found
 - Rebuild Docker image: `task docker:build`
-- Reinstall dependencies: `pip install -r requirements.txt`
+- Reinstall dependencies: `uv sync --all-groups`
 
 ## Contributing
 
