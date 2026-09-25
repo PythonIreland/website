@@ -1,76 +1,53 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "description": "Renovate configuration for Python Ireland website - pip-compile workflow with Heroku deployment",
-  "pip-compile": {
-    "managerFilePatterns": [
-      "^requirements/main\\.txt$",
-      "^requirements/dev\\.txt$",
-      "^requirements/production\\.txt$"
-    ]
-  },
-  "pip_requirements": {
-    "enabled": false
-  },
-  "pip_setup": {
-    "enabled": false
-  },
+  "description": "Renovate configuration for Python Ireland website - pyproject.toml + uv.lock (pep621 manager) with Heroku deployment",
   "constraints": {
     "python": "3.13"
   },
-  "ignorePaths": [
-    "**/node_modules/**",
-    "**/bower_components/**",
-    "**/vendor/**",
-    "**/.venv/**",
-    "**/pythonie-venv/**"
-  ],
   "packageRules": [
+    {
+      "description": "Python is pinned to 3.13.x (Heroku, Docker, mise): never bump requires-python",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["requires-python"],
+      "enabled": false
+    },
     {
       "description": "Group Django ecosystem updates together",
       "groupName": "Django ecosystem",
-      "matchPackagePatterns": ["^[Dd]jango", "^[Ww]agtail"],
-      "matchManagers": ["pip-compile"],
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["/^django/i", "/^wagtail/i"],
       "schedule": ["before 9am on monday"]
     },
     {
-      "description": "Separate PR for security updates - always prioritize",
-      "groupName": "Security updates",
-      "matchUpdateTypes": ["patch"],
-      "matchCurrentVersion": "!/^0/",
-      "vulnerabilityAlerts": {
-        "enabled": true
-      },
-      "prPriority": 10
+      "description": "Group all minor and patch Python updates together (except Django/Wagtail). Restricted to pep621 so Dockerfile and GitHub Actions bumps are not mixed in",
+      "groupName": "All non-major dependencies",
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["!/^django/i", "!/^wagtail/i"],
+      "schedule": ["before 9am on monday"]
     },
     {
-      "description": "Automerge only dev dependencies patches (safer for production)",
-      "matchManagers": ["pip-compile"],
-      "matchFiles": ["requirements/dev.txt"],
+      "description": "Automerge only patches of the PEP 735 dev group (safer for production). The pep621 manager reports every [dependency-groups] entry with depType 'dependency-groups' (the group name is not matchable); 'dev' is the only group in pyproject.toml. Own group so automerge is not blocked by production deps sharing the branch",
+      "groupName": "Dev dependencies (patch)",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["dependency-groups"],
       "matchUpdateTypes": ["patch"],
       "automerge": true,
       "automergeType": "pr"
     },
     {
-      "description": "Never automerge production dependencies - require manual review",
-      "matchManagers": ["pip-compile"],
-      "matchFiles": ["requirements/main.txt", "requirements/production.txt"],
+      "description": "Never automerge production dependencies ([project.dependencies]) - require manual review",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["project.dependencies"],
       "automerge": false
-    },
-    {
-      "description": "Group all minor and patch updates together (except Django/Wagtail)",
-      "groupName": "All non-major dependencies",
-      "matchUpdateTypes": ["minor", "patch"],
-      "matchPackagePatterns": ["*"],
-      "excludePackagePatterns": ["^[Dd]jango", "^[Ww]agtail"],
-      "schedule": ["before 9am on monday"]
     }
   ],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": ["before 9am on the first day of the month"],
-    "commitMessageAction": "Refresh pip-compile lock files",
-    "branchTopic": "pip-compile-refresh"
+    "schedule": ["before 9am on monday"],
+    "commitMessageAction": "Refresh uv.lock",
+    "branchTopic": "uv-lock-refresh"
   },
   "prConcurrentLimit": 3,
   "prCreation": "not-pending",
@@ -79,6 +56,8 @@
   "separateMajorMinor": true,
   "separateMinorPatch": false,
   "vulnerabilityAlerts": {
-    "enabled": true
+    "enabled": true,
+    "groupName": "Security updates",
+    "labels": ["security"]
   }
 }
