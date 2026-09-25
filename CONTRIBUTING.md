@@ -39,7 +39,8 @@ website/
 │   ├── meetups/       # Meetup.com integration
 │   ├── sponsors/      # Sponsor management
 │   └── pythonie/      # Django settings
-├── requirements/       # Dependency files
+├── pyproject.toml      # Dependency declarations (uv)
+├── uv.lock             # Locked dependency versions
 ├── CLAUDE.md          # AI assistant instructions
 ├── DEVELOPMENT.md     # Detailed development guide
 └── CONTRIBUTING.md    # This file
@@ -79,21 +80,17 @@ task run
 # Ensure Python 3.13 is installed
 python3 --version  # Should show 3.13.x
 
-# Create virtual environment
-python3.13 -m venv pythonie-venv
-source pythonie-venv/bin/activate
-
-# Install dependencies
-pip install -r requirements/dev.txt
+# Install dependencies (creates and populates a .venv automatically)
+uv sync --all-groups
 
 # Run migrations
-python pythonie/manage.py migrate --settings=pythonie.settings.dev
+uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
 
 # Create superuser
-python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
+uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
 
 # Start server
-python pythonie/manage.py runserver --settings=pythonie.settings.dev
+uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 ```
 
 ### Verify Setup
@@ -240,16 +237,16 @@ class MyModel(models.Model):
 ```bash
 # All tests
 task tests
-# or: python pythonie/manage.py test pythonie --settings=pythonie.settings.tests -v 2
+# or: uv run python pythonie/manage.py test pythonie --settings=pythonie.settings.tests -v 2
 
 # Specific app
-python pythonie/manage.py test pythonie.meetups --settings=pythonie.settings.tests
+uv run python pythonie/manage.py test pythonie.meetups --settings=pythonie.settings.tests
 
 # Specific test file
-python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie.settings.tests
+uv run python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie.settings.tests
 
 # Specific test method
-python pythonie/manage.py test pythonie.meetups.test_meetups.TestCase.test_method
+uv run python pythonie/manage.py test pythonie.meetups.test_meetups.TestCase.test_method
 ```
 
 ### Writing Tests
@@ -394,7 +391,7 @@ refactor: Simplify sponsor level ordering logic
 ```bash
 # Create app
 cd pythonie
-python ../pythonie/manage.py startapp myapp --settings=pythonie.settings.dev
+uv run python ../pythonie/manage.py startapp myapp --settings=pythonie.settings.dev
 
 # Add to INSTALLED_APPS in pythonie/pythonie/settings/base.py
 INSTALLED_APPS = [
@@ -403,8 +400,8 @@ INSTALLED_APPS = [
 ]
 
 # Create migrations
-python pythonie/manage.py makemigrations myapp --settings=pythonie.settings.dev
-python pythonie/manage.py migrate --settings=pythonie.settings.dev
+uv run python pythonie/manage.py makemigrations myapp --settings=pythonie.settings.dev
+uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
 ```
 
 ### Adding a New Wagtail Page Type

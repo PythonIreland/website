@@ -4,11 +4,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Python Ireland (python.ie / pycon.ie) website, built with Django 6.0 and Wagtail CMS 7.2. It manages content for the Python Ireland community including meetups and sponsors.
+This is the Python Ireland (python.ie / pycon.ie) website, built with Django 6.0 and Wagtail CMS 7.3. It manages content for the Python Ireland community including meetups and sponsors.
 
 ### Python Version
 
-This project requires **Python 3.13.11** (or any Python 3.13.x). All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x.
+This project requires **Python 3.13.11** (or any Python 3.13.x). All code must be compatible with Python 3.13. When developing locally without Docker, ensure you are using Python 3.13.x. Tool versions (Python, uv, Task) are pinned in `mise.toml` for [mise](https://mise.jdx.dev/) users.
 
 ## Architecture
 
@@ -42,7 +42,7 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 ### Key Dependencies
 
 - Django 6.0
-- Wagtail 7.2.1 (CMS framework)
+- Wagtail 7.3 (CMS framework)
 - Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
@@ -53,17 +53,15 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 ### Local Development (without Docker)
 
 ```bash
-# Setup
-python3 -m venv pythonie-venv
-source pythonie-venv/bin/activate
-pip install -r requirements.txt
+# Setup (creates and populates a .venv automatically)
+uv sync --all-groups
 
 # Database
-python pythonie/manage.py migrate --settings=pythonie.settings.dev
-python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
+uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
+uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
 
 # Run server
-python pythonie/manage.py runserver --settings=pythonie.settings.dev
+uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 
 # Access admin at http://127.0.0.1:8000/admin/
 ```
@@ -97,14 +95,14 @@ task django:migrate
 
 ```bash
 # Run all tests (local)
-python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
+uv run python pythonie/manage.py test pythonie --settings=pythonie.settings.tests --verbosity=2
 
 # Run all tests (docker)
 make docker-tests
 # or: task tests
 
 # Run single test
-python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie.settings.tests
+uv run python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie.settings.tests
 ```
 
 ### Code Quality
@@ -113,12 +111,12 @@ python pythonie/manage.py test pythonie.meetups.test_meetups --settings=pythonie
 # Format code with ruff
 task code:format
 # or: toast code:format
-# or: python -m ruff format pythonie
+# or: uv run ruff format pythonie
 
 # Lint code and fix issues
 task code:lint
 # or: toast code:lint
-# or: python -m ruff check --fix pythonie
+# or: uv run ruff check --fix pythonie
 
 # Check code formatting and linting without changes
 task code:check
@@ -127,10 +125,10 @@ task code:check
 
 ### Dependency Management
 
-Uses `uv` for fast Python package management. Dependencies are defined in `.in` files and compiled to `.txt` files:
+Uses `uv` for fast Python package management. Dependencies are declared in `pyproject.toml` (`[project.dependencies]` + `[dependency-groups]`) and locked in `uv.lock` (committed). A `requirements.txt` is generated at the repo root purely for Heroku's buildpack — it is never edited by hand.
 
 ```bash
-# Recompile all dependencies
+# Recompute the lock file
 task dependencies:compute
 # or: toast deps:compute
 
@@ -151,6 +149,9 @@ task dependencies:security
 
 # Show dependencies tree
 task dependencies:tree
+
+# Regenerate requirements.txt for Heroku
+task dependencies:export
 ```
 
 ### Database Operations (Heroku)
