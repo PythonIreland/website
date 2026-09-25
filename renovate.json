@@ -7,6 +7,11 @@
   },
   "packageRules": [
     {
+      "description": "Bump the '>=' lower bounds in pyproject.toml together with uv.lock. With the default 'replace' strategy a '>=' range already satisfied by the new version produces no update at all",
+      "matchManagers": ["pep621"],
+      "rangeStrategy": "bump"
+    },
+    {
       "description": "Python is pinned to 3.13.x (Heroku, Docker, mise): never bump requires-python",
       "matchManagers": ["pep621"],
       "matchDepTypes": ["requires-python"],
