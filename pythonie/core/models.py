@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import logging
 
 from django.db import models
@@ -62,7 +60,7 @@ class PageSegment(models.Model):
     ]
 
     def __str__(self):
-        return "{!s} on {!s}".format(self.title, self.homepage_segments.first())
+        return f"{self.title!s} on {self.homepage_segments.first()!s}"
 
 
 class HomePageSegment(Orderable, models.Model):
@@ -84,7 +82,7 @@ class HomePageSegment(Orderable, models.Model):
     ]
 
     def __str__(self):
-        return "{!s} Segment".format(self.homepage)
+        return f"{self.homepage!s} Segment"
 
 
 class HomePageSponsorRelationship(models.Model):
@@ -97,9 +95,7 @@ class HomePageSponsorRelationship(models.Model):
     level = models.ForeignKey(SponsorshipLevel, on_delete=models.CASCADE)
 
     def __repr__(self):
-        return "{} {} {}".format(
-            self.sponsor.name, self.homepage.title, self.level.name
-        )
+        return f"{self.sponsor.name} {self.homepage.title} {self.level.name}"
 
 
 class HomePage(Page, MeetupMixin, SponsorMixin):

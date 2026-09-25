@@ -9,10 +9,10 @@ log = logging.getLogger(__name__)
 
 def get_content(url, params=None):
     response = requests.get(url, params=params, timeout=3)
-    log.info("Response from meetups request: {0}".format(response))
+    log.info(f"Response from meetups request: {response}")
     if not response:
         return []
-    log.debug("Retrieved {} from {}".format(response.json(), url))
+    log.debug(f"Retrieved {response.json()} from {url}")
     return response.json()
 
 
@@ -24,7 +24,7 @@ def update():
         params={"group_urlname": "pythonireland", "text_format": "html", "time": ",3m"},
     )
     if not meetup_data:
-        log.warn("No meetup data returned from API")
+        log.warning("No meetup data returned from API")
         return
     log.info(meetup_data)
     meetups = schema.Meetups()
@@ -40,7 +40,7 @@ def update():
         meetup.waitlist_count = result.get("waitlist_count")
 
         if result["updated"] <= meetup.updated:
-            log.info("Existing meetup:{!r} RSVPs updated".format(meetup))
+            log.info(f"Existing meetup:{meetup!r} RSVPs updated")
             meetup.save()
             continue
 
@@ -55,4 +55,4 @@ def update():
         meetup.status = result.get("status")
         meetup.visibility = result.get("visibility")
         meetup.save()
-        log.info("Existing meetup:{!r} fully updated".format(meetup))
+        log.info(f"Existing meetup:{meetup!r} fully updated")

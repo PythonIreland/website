@@ -1,11 +1,11 @@
 import factory
+import wagtail_factories
 from django.utils import timezone
 from factory.django import DjangoModelFactory
-import wagtail_factories
-
-from core.models import HomePage, SimplePage
 from meetups.models import Meetup
 from sponsors.models import SponsorshipLevel
+
+from core.models import HomePage, SimplePage
 
 
 class SponsorshipLevelFactory(DjangoModelFactory):

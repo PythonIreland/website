@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
 import datetime
 
 from django.db import migrations, models
@@ -16,9 +13,7 @@ class Migration(migrations.Migration):
             model_name="meetup",
             name="updated",
             field=models.DateTimeField(
-                default=datetime.datetime(
-                    1970, 1, 1, 0, 0, tzinfo=datetime.timezone.utc
-                )
+                default=datetime.datetime(1970, 1, 1, 0, 0, tzinfo=datetime.UTC)
             ),
             preserve_default=True,
         ),

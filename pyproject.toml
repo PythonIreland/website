@@ -39,7 +39,7 @@ dev = [
     "model_mommy>=2.0.0",
     "pip-audit>=2.10.1",
     "pipdeptree>=4.2.5",
-    "ruff==0.15.16", # pinned: 0.16 changes the default lint rule set
+    "ruff==0.16.9", # pinned: ruff minor releases change the default lint rule set
     "uv>=0.12.19",
     "wagtail-factories>=4.5.0",
 ]
@@ -49,6 +49,11 @@ package = false
 
 [tool.ruff]
 target-version = "py313"
+
+[tool.ruff.lint]
+# RUF012 flags the Django/Wagtail class-attribute idioms (Meta, migrations
+# operations/dependencies, content_panels) that are never mutated.
+extend-ignore = ["RUF012"]
 
 [tool.coverage.run]
 branch = true

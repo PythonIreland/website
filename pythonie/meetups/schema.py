@@ -1,12 +1,12 @@
-from datetime import datetime
+from datetime import UTC, datetime
 
 import colander
 from delorean import Delorean
 
 
 def int_to_datetime(value):
-    time = datetime.utcfromtimestamp(value / 1000)
-    return Delorean(time, timezone="UTC").shift("Europe/Dublin").datetime
+    time = datetime.fromtimestamp(value / 1000, tz=UTC)
+    return Delorean(time).shift("Europe/Dublin").datetime
 
 
 class Meetups(colander.MappingSchema):

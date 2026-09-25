@@ -37,12 +37,12 @@ class MeetupModelTests(TestCase):
         self.assertIsNotNone(meetup.visibility)
 
     def test_next_n_months(self):
-        september = datetime(year=2015, month=9, day=1, hour=1, minute=00)
-        expected = datetime(year=2015, month=12, day=1, hour=1, minute=00)
+        september = datetime(year=2015, month=9, day=1, hour=1, minute=00, tzinfo=UTC)
+        expected = datetime(year=2015, month=12, day=1, hour=1, minute=00, tzinfo=UTC)
         actual = next_n_months(september, 3)
         self.assertEqual(expected, actual)
-        november = datetime(year=2015, month=10, day=1, hour=1, minute=00)
-        expected = datetime(year=2016, month=1, day=1, hour=1, minute=00)
+        november = datetime(year=2015, month=10, day=1, hour=1, minute=00, tzinfo=UTC)
+        expected = datetime(year=2016, month=1, day=1, hour=1, minute=00, tzinfo=UTC)
         actual = next_n_months(november, 3)
         self.assertEqual(expected, actual)
 
