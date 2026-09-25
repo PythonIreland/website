@@ -1,0 +1,79 @@
+# Git hooks, run with prek (https://github.com/j178/prek), a drop-in
+# replacement for pre-commit that reads this same file.
+#
+#   uv sync --all-groups        # prek is part of the dev dependency group
+#   uv run prek install         # install the git hook for this clone
+#   uv run prek run --all-files # run every hook on the whole repository
+#
+# Revisions are pinned to tags and kept up to date by Renovate.
+
+# Vendored third-party assets (Bootstrap, Font Awesome, SmartMenus) are kept
+# byte-for-byte identical to upstream.
+exclude: |
+  (?x)^(
+    pythonie/core/static/(css|fonts|js)/.*
+  )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+        args: [--fix=lf]
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-added-large-files
+        args: [--maxkb=500]
+      - id: debug-statements
+      - id: detect-private-key
+
+  # Keeps uv.lock in sync with pyproject.toml. The rev tracks the uv version
+  # pinned in mise.toml and the dev dependency group (Renovate "uv" group).
+  - repo: https://github.com/astral-sh/uv-pre-commit
+    rev: 0.12.19
+    hooks:
+      - id: uv-lock
+
+  - repo: https://github.com/adamchainz/django-upgrade
+    rev: 1.32.0
+    hooks:
+      - id: django-upgrade
+        args: [--target-version, "6.0"]
+
+  # Ruff and Django checks run through `uv run` so they use the exact versions
+  # locked in uv.lock (the same ones CI uses): there is no second ruff version
+  # to keep in sync with pyproject.toml.
+  # The Django hooks unset DATABASE_URL so they always run against the local
+  # SQLite database, never against a remote one exported in the shell.
+  - repo: local
+    hooks:
+      - id: ruff-check
+        name: ruff check
+        entry: uv run --frozen ruff check --fix --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+      - id: ruff-format
+        name: ruff format
+        entry: uv run --frozen ruff format --force-exclude
+        language: system
+        types_or: [python, pyi]
+        require_serial: true
+      - id: django-check
+        name: django system checks
+        entry: env -u DATABASE_URL uv run --frozen python pythonie/manage.py check --settings=pythonie.settings.tests
+        language: system
+        files: ^pythonie/.*\.py$
+        pass_filenames: false
+      - id: django-missing-migrations
+        name: django missing migrations
+        entry: env -u DATABASE_URL uv run --frozen python pythonie/manage.py makemigrations --check --dry-run --settings=pythonie.settings.tests
+        language: system
+        files: ^pythonie/.*\.py$
+        pass_filenames: false
