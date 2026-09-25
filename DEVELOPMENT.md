@@ -450,8 +450,15 @@ AWS_STORAGE_BUCKET_NAME=your-bucket-name
 ```
 pyproject.toml         # [project.dependencies] + [dependency-groups] (dev)
 uv.lock                # Locked, resolved versions (committed)
-requirements.txt       # Generated via `task dependencies:export`, for Heroku only
+.python-version        # Pins the Python version for Heroku's buildpack
 ```
+
+Heroku's Python buildpack detects `uv.lock` and installs dependencies
+natively via `uv sync --locked --no-default-groups` against the slug's
+system Python — there is no separate `requirements.txt` to keep in
+sync. Do **not** add a `requirements.txt` at the repo root: the
+buildpack refuses to build if it finds more than one package-manager
+file (`requirements.txt`, `poetry.lock`, `uv.lock`) at once.
 
 **Commands**:
 ```bash
@@ -475,9 +482,6 @@ task dependencies:security
 
 # Show dependencies tree
 task dependencies:tree
-
-# Regenerate requirements.txt for Heroku
-task dependencies:export
 ```
 
 **Manual process**:

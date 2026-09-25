@@ -125,7 +125,7 @@ task code:check
 
 ### Dependency Management
 
-Uses `uv` for fast Python package management. Dependencies are declared in `pyproject.toml` (`[project.dependencies]` + `[dependency-groups]`) and locked in `uv.lock` (committed). A `requirements.txt` is generated at the repo root purely for Heroku's buildpack — it is never edited by hand.
+Uses `uv` for fast Python package management. Dependencies are declared in `pyproject.toml` (`[project.dependencies]` + `[dependency-groups]`) and locked in `uv.lock` (committed). Heroku's Python buildpack detects `uv.lock` and installs natively via `uv sync` against the slug's system Python — **never add a `requirements.txt` at the repo root**, the buildpack aborts the build if it finds more than one package-manager file (`requirements.txt`, `poetry.lock`, `uv.lock`) at once. `.python-version` (not `runtime.txt`, which is deprecated) pins the Python version for the buildpack.
 
 ```bash
 # Recompute the lock file
@@ -149,9 +149,6 @@ task dependencies:security
 
 # Show dependencies tree
 task dependencies:tree
-
-# Regenerate requirements.txt for Heroku
-task dependencies:export
 ```
 
 ### Database Operations (Heroku)

@@ -50,14 +50,6 @@ tasks:
     cache: false
     command: uv tree
 
-  deps:export:
-    description: Export the uv.lock to requirements.txt for Heroku deployment
-    cache: false
-    mount_paths:
-      - .:/app
-    location: /app
-    command: uv export --no-dev --no-hashes --format requirements.txt -o requirements.txt
-
   code:format:
     description: Format the code
     cache: false

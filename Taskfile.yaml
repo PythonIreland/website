@@ -190,11 +190,6 @@ tasks:
     cmds:
       - toast deps:tree
 
-  dependencies:export:
-    desc: Export the uv.lock to requirements.txt for Heroku deployment
-    cmds:
-      - toast deps:export
-
   docker:build:
     desc: Build the docker image
     cmds:
