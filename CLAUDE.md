@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is the Python Ireland (python.ie / pycon.ie) website, built with Django 6.0 and Wagtail CMS 7.3. It manages content for the Python Ireland community including meetups and sponsors.
+This is the Python Ireland (https://python.ie) website, built with Django 6.0 and Wagtail CMS 7.3. It manages content for the Python Ireland community including meetups and sponsors. The PyCon Ireland 2026 website is in a [separate repository](https://github.com/PythonIreland/2026.pycon.ie).
 
 ### Python Version
 
