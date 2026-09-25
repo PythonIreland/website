@@ -125,14 +125,14 @@ task code:check
 
 ### Git Hooks (prek)
 
-[prek](https://github.com/j178/prek) (a Rust drop-in replacement for pre-commit) runs the hooks defined in `.pre-commit-config.yaml`. It is part of the `dev` dependency group, so its version comes from `uv.lock`.
+[prek](https://github.com/j178/prek) (a Rust drop-in replacement for pre-commit) runs the hooks defined in `.pre-commit-config.yaml`. It is **not** a project dependency: it must already be installed on the machine (`mise use -g prek`, `brew install prek` or `uv tool install prek`). CI installs it with `j178/prek-action`.
 
 ```bash
 # Install the git hook (once per clone)
-uv run prek install
+prek install
 
 # Run every hook on the whole repository (also run by the CI prek job)
-uv run prek run --all-files
+prek run --all-files
 
 # Emergency bypass: skip one hook, or all of them
 SKIP=django-missing-migrations git commit -m "..."

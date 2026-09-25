@@ -83,8 +83,8 @@ python3 --version  # Should show 3.13.x
 # Install dependencies (creates and populates a .venv automatically)
 uv sync --all-groups
 
-# Install the git hooks (see "Git Hooks (prek)" below)
-uv run prek install
+# Install the git hooks (requires prek, see "Git Hooks (prek)" below)
+prek install
 
 # Run migrations
 uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev
@@ -182,19 +182,27 @@ task code:check
 
 The repository uses [prek](https://github.com/j178/prek), a fast drop-in
 replacement for [pre-commit](https://pre-commit.com/) that reads the same
-`.pre-commit-config.yaml`. prek is part of the `dev` dependency group, so
-`uv sync --all-groups` installs it in the project `.venv` at the version locked
-in `uv.lock`.
+`.pre-commit-config.yaml`. prek is not a project dependency: install it once
+on your machine, with one of:
+
+```bash
+mise use -g prek        # mise
+brew install prek       # Homebrew
+uv tool install prek    # uv
+```
+
+The ruff and Django hooks run through `uv run`, so they also need the project
+environment (`uv sync --all-groups`).
 
 ```bash
 # Install the git hook once per clone
-uv run prek install
+prek install
 
 # Run every hook on the whole repository
-uv run prek run --all-files
+prek run --all-files
 
 # Run a single hook
-uv run prek run ruff-check --all-files
+prek run ruff-check --all-files
 ```
 
 The hooks run on every `git commit`, on the staged files only:

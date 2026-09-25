@@ -16,19 +16,15 @@ jobs:
           enable-cache: true
           cache-dependency-glob: "uv.lock"
 
-      # prek, ruff and Django come from the dev group: the hooks run with the
+      # The local hooks (ruff, Django checks) run through `uv run`, with the
       # versions locked in uv.lock, exactly as on a developer machine.
       - name: Install dependencies
         run: uv sync --all-groups
 
-      - name: Cache prek hook environments
-        uses: actions/cache@v6.1.0
-        with:
-          path: ~/.cache/prek
-          key: prek-${{ runner.os }}-${{ hashFiles('.pre-commit-config.yaml') }}
-
+      # Installs prek, caches the hook environments and runs
+      # `prek run --show-diff-on-failure --all-files`.
       - name: Run prek on all files
-        run: uv run prek run --all-files --show-diff-on-failure
+        uses: j178/prek-action@v3.0.0
 
   test:
     name: Run code quality checks and tests
