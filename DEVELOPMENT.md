@@ -101,6 +101,7 @@ pythonie/
 - Docker + docker-compose
 - Task (or Make)
 - Git
+- uv and prek (git hooks), pinned in `mise.toml` (`mise install`); see CONTRIBUTING.md for other ways to install prek
 
 ### Initial Setup (Docker - Recommended)
 
@@ -108,6 +109,11 @@ pythonie/
 # 1. Clone the repository
 git clone <repo-url>
 cd website
+
+# Install the prek git hooks (they run on the host: the ruff and Django hooks
+# use `uv run`, so the host environment is needed too)
+uv sync --all-groups
+prek install
 
 # 2. Build Docker image
 task docker:build

@@ -4,7 +4,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 ## Prerequisites
 
-- Python 3.13 (see `mise.toml`)
+- Python 3.13, [uv](https://docs.astral.sh/uv/) and [prek](https://github.com/j178/prek) (git hooks), all pinned in `mise.toml`: run `mise install`, or see [Git Hooks](#git-hooks-prek) for other ways to install prek
 - Docker & Docker Compose (for containerized development - recommended)
 - [Task](https://taskfile.dev/) (optional but recommended)
 - Redis (only for local non-Docker development)
@@ -12,41 +12,47 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 ## Quick Start (Docker - Recommended)
 
-1. Build the Docker image:
+1. Install the git hooks (the ruff and Django hooks run on the host through `uv run`):
+   ```bash
+   uv sync --all-groups
+   prek install
+   ```
+
+2. Build the Docker image:
    ```bash
    task docker:build
    # or: make docker-build
    ```
 
-2. Start supporting services:
+3. Start supporting services:
    ```bash
    docker compose up -d postgres redis
    ```
 
-3. Run database migrations:
+4. Run database migrations:
    ```bash
    task django:migrate
    ```
 
-4. Generate sample data (creates pages, navigation, meetups):
+5. Generate sample data (creates pages, navigation, meetups):
    ```bash
    task django:generate-sample-data
    # or: docker compose run --rm web python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev
    ```
 
-5. Create a superuser:
+6. Create a superuser:
    ```bash
    docker compose run --rm web python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev
    ```
 
-6. Start the development server:
+7. Start the development server:
    ```bash
    task run
    # or: docker compose run --rm --service-ports web python pythonie/manage.py runserver 0.0.0.0:8000
    ```
 
-7. Visit http://127.0.0.1:8000/ to see the site with sample content
-8. Access Wagtail admin at http://127.0.0.1:8000/admin/
+8. Visit http://127.0.0.1:8000/ to see the site with sample content
+9. Access Wagtail admin at http://127.0.0.1:8000/admin/
 
 ## Local Setup (Without Docker)
 
@@ -56,14 +62,15 @@ If you prefer to develop without Docker:
 2. Clone your fork: `git clone git@github.com:YourGitHubName/website.git`
 3. Ensure you are running Python 3.13: `python -V` should output `Python 3.13.x`
 4. Install dependencies: `uv sync --all-groups` (creates and populates a `.venv` automatically)
-5. Set up the database: `uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev`
-6. Generate sample data: `task django:generate-sample-data` (or `uv run python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
-7. Create a superuser: `uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
-8. Install and run Redis server locally: `redis-server`
-9. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
-10. Run the server: `uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev`
-11. Visit http://127.0.0.1:8000/ to see the site with sample content
-12. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
+5. Install the git hooks: `prek install` (see [Git Hooks](#git-hooks-prek))
+6. Set up the database: `uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev`
+7. Generate sample data: `task django:generate-sample-data` (or `uv run python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
+8. Create a superuser: `uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
+9. Install and run Redis server locally: `redis-server`
+10. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
+11. Run the server: `uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev`
+12. Visit http://127.0.0.1:8000/ to see the site with sample content
+13. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
 
 ## Project Structure
 
@@ -184,6 +191,26 @@ task code:lint
 # Check without changes
 task code:check
 ```
+
+### Git Hooks (prek)
+
+The repository uses [prek](https://github.com/j178/prek), a fast drop-in replacement for pre-commit, to run ruff, django-upgrade, the Django system checks, the missing migrations check and generic file checks on every commit. Like uv, prek is not a project dependency: install it on your machine, then enable the hooks in your clone.
+
+```bash
+# 1. Install prek (once per machine), with one of:
+mise install            # installs the versions pinned in mise.toml
+brew install prek
+uv tool install prek
+
+# 2. Enable the git hooks (once per clone)
+uv sync --all-groups    # the ruff and Django hooks run through `uv run`
+prek install
+
+# Run every hook on the whole repository (same as CI)
+prek run --all-files
+```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md#git-hooks-prek) for the list of hooks and how to skip one in an emergency.
 
 ## Environment Variables
 
