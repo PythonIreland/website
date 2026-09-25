@@ -1,0 +1,83 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "description": "Renovate configuration for Python Ireland website - pyproject.toml + uv.lock (pep621 manager) with Heroku deployment",
+  "constraints": {
+    "python": "3.13"
+  },
+  "packageRules": [
+    {
+      "description": "Bump the '>=' lower bounds in pyproject.toml together with uv.lock. With the default 'replace' strategy a '>=' range already satisfied by the new version produces no update at all",
+      "matchManagers": ["pep621"],
+      "rangeStrategy": "bump"
+    },
+    {
+      "description": "Python is pinned to 3.13.x (Heroku, Docker, mise): never bump requires-python",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["requires-python"],
+      "enabled": false
+    },
+    {
+      "description": "Group Django ecosystem updates together",
+      "groupName": "Django ecosystem",
+      "matchManagers": ["pep621"],
+      "matchPackageNames": ["/^django/i", "/^wagtail/i"],
+      "schedule": ["before 9am on monday"]
+    },
+    {
+      "description": "Group all minor and patch Python updates together (except Django/Wagtail). Restricted to pep621 so Dockerfile and GitHub Actions bumps are not mixed in",
+      "groupName": "All non-major dependencies",
+      "matchManagers": ["pep621"],
+      "matchUpdateTypes": ["minor", "patch"],
+      "matchPackageNames": ["!/^django/i", "!/^wagtail/i"],
+      "schedule": ["before 9am on monday"]
+    },
+    {
+      "description": "Automerge only patches of the PEP 735 dev group (safer for production). The pep621 manager reports every [dependency-groups] entry with depType 'dependency-groups' (the group name is not matchable); 'dev' is the only group in pyproject.toml. Own group so automerge is not blocked by production deps sharing the branch",
+      "groupName": "Dev dependencies (patch)",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["dependency-groups"],
+      "matchUpdateTypes": ["patch"],
+      "automerge": true,
+      "automergeType": "pr"
+    },
+    {
+      "description": "Keep uv in sync: one PR for the dev dependency (pep621), the Docker image (Dockerfile) and the mise tool",
+      "groupName": "uv",
+      "matchPackageNames": ["uv", "ghcr.io/astral-sh/uv", "astral-sh/uv"]
+    },
+    {
+      "description": "Python is pinned to 3.13.x: only allow 3.13 for the Docker base image, mise and .python-version",
+      "matchDepNames": ["python"],
+      "allowedVersions": "/^3\\.13([.-]|$)/"
+    },
+    {
+      "description": "Production (Heroku) runs PostgreSQL 17: keep CI and docker-compose on the same major",
+      "matchDepNames": ["postgres"],
+      "allowedVersions": "/^17([.-]|$)/"
+    },
+    {
+      "description": "Never automerge production dependencies ([project.dependencies]) - require manual review",
+      "matchManagers": ["pep621"],
+      "matchDepTypes": ["project.dependencies"],
+      "automerge": false
+    }
+  ],
+  "lockFileMaintenance": {
+    "enabled": true,
+    "schedule": ["before 9am on monday"],
+    "commitMessageAction": "Refresh uv.lock",
+    "branchTopic": "uv-lock-refresh"
+  },
+  "prConcurrentLimit": 3,
+  "prCreation": "not-pending",
+  "prHourlyLimit": 2,
+  "semanticCommits": "enabled",
+  "separateMajorMinor": true,
+  "separateMinorPatch": false,
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "groupName": "Security updates",
+    "labels": ["security"]
+  }
+}
