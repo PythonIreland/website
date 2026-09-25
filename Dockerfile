@@ -5,16 +5,11 @@ RUN --mount=type=cache,target=/var/cache/apt \
     apt install -y --no-install-recommends \
         build-essential gcc neovim fish less iputils-ping postgresql-client \
         ack
-ADD requirements/main.txt \
-    requirements/dev.txt \
-    requirements/production.txt \
-    ./requirements/
+ADD pyproject.toml uv.lock ./
 RUN --mount=type=cache,target=/root/.cache \
-    pip install -U pip uv ruff && \
-    python -m uv pip install \
-      -r requirements/main.txt \
-      -r requirements/dev.txt \
-      -r requirements/production.txt aws
+    pip install -U pip uv && \
+    uv sync --frozen --all-groups
+ENV PATH="/.venv/bin:$PATH"
 
 FROM compile-stage AS tests-stage
 
