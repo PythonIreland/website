@@ -147,6 +147,42 @@ uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.de
 uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 ```
 
+### Parallel Worktrees with worktrunk (optional)
+
+[worktrunk](https://worktrunk.dev) (`wt`) manages one git worktree per branch. The project hooks in `.config/wt.toml` give every worktree its own Docker Compose environment, so several branches can run `task run` or `task tests` at the same time without sharing a database, an image or a port.
+
+```bash
+# Create a worktree for a new branch (runs the hooks below)
+wt switch --create my-feature
+
+# Inside it, the usual commands work unchanged
+task docker:build
+task django:migrate
+task run
+
+# Show every worktree with its dev server URL
+wt list
+
+# Remove the worktree AND its Docker resources (see below)
+wt remove my-feature
+```
+
+The first time, worktrunk asks you to approve the project hooks. Review them and approve with `wt config approvals add`.
+
+What the hooks do:
+
+| Hook | What it does |
+|------|--------------|
+| `pre-start` | Writes a `.env` in the new worktree with `COMPOSE_PROJECT_NAME`, `DOCKER_IMAGE`, `WEB_PORT` and `PGPORT`, all derived from the branch name |
+| `post-start` | Runs `uv sync --all-groups` in the background to create the worktree's `.venv` |
+| `post-remove` | Runs `docker compose -p <project> down --volumes --remove-orphans` and deletes the branch image |
+
+Docker Compose reads `.env` automatically, so each worktree gets its own containers, network and volumes (including the PostgreSQL data), its own image tag (`python.ie/website-dev:<branch>`) and deterministic host ports. Check them with `cat .env`; the web server is at `http://localhost:$WEB_PORT/`. The Taskfile also loads `.env`, so host tools such as `psql` or `task database:pull` talk to the worktree's PostgreSQL on `PGPORT`.
+
+**Removing a worktree deletes its database.** `wt remove` (and `wt merge`, which removes the worktree) destroys the Docker volumes of that worktree's compose project. Other worktrees and the main checkout use different project names and are not affected. Dump anything you want to keep first.
+
+Without worktrunk, or in a worktree created before these hooks existed, there is no `.env` and the defaults apply: port 8000 for the web server, 5432 for PostgreSQL, image `python.ie/website-dev`, and a compose project named after the directory. To add the per-worktree `.env` to an existing worktree, run `wt hook pre-start` inside it.
+
 ### Environment Variables
 
 Create `development.env` at the root (copy from `development.env.example` if it exists):

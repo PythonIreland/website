@@ -68,7 +68,7 @@ uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 
 ### Docker Development (preferred)
 
-Uses Task for most operations. Requires docker-compose with services: web, postgres, redis, minio.
+Uses Task for most operations. Requires docker-compose with services: web, postgres, redis. With worktrunk (`wt`), `.config/wt.toml` writes a per-worktree `.env` (compose project name, image tag, ports) and cleans up the worktree's containers and volumes on `wt remove`; see DEVELOPMENT.md.
 
 ```bash
 # Build docker image

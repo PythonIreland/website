@@ -20,7 +20,7 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 2. Start supporting services:
    ```bash
-   docker compose up -d postgres redis minio
+   docker compose up -d postgres redis
    ```
 
 3. Run database migrations:
@@ -47,6 +47,8 @@ Website for Python Ireland (python.ie / pycon.ie) community, built with Django 6
 
 7. Visit http://127.0.0.1:8000/ to see the site with sample content
 8. Access Wagtail admin at http://127.0.0.1:8000/admin/
+
+Working on several branches at once? See [Parallel Worktrees with worktrunk](DEVELOPMENT.md#parallel-worktrees-with-worktrunk-optional) to give each worktree its own database, image and ports.
 
 ## Local Setup (Without Docker)
 
