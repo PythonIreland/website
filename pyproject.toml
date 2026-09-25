@@ -39,6 +39,7 @@ dev = [
     "model_mommy>=2.0.0",
     "pip-audit>=2.10.1",
     "pipdeptree>=4.2.5",
+    "prek>=0.5.3",
     "ruff==0.16.9", # pinned: ruff minor releases change the default lint rule set
     "uv>=0.12.19",
     "wagtail-factories>=4.5.0",
