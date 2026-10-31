@@ -40,12 +40,14 @@ dev = [
     "pip-audit>=2.10.1",
     "pipdeptree>=4.2.5",
     "ruff==0.16.9", # pinned: ruff minor releases change the default lint rule set
-    "uv>=0.12.19",
+    "uv>=0.13.6",
     "wagtail-factories>=4.5.0",
 ]
 
 [tool.uv]
 package = false
+# Refuse uv releases older than the GHSA-hq85-5cpj-mr62 fix (compromised CA).
+required-version = ">=0.13.6"
 
 [tool.ruff]
 target-version = "py313"
