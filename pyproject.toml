@@ -25,7 +25,7 @@ dependencies = [
     "pytz>=2026.4",
     "redis>=8.1.0",
     "requests>=2.34.2",
-    "wagtail>=7.3.4,<7.4",
+    "wagtail>=8.1,<8.2",
     "whitenoise>=6.12.0",
     "willow>=1.12.0",
 ]

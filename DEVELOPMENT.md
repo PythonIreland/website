@@ -23,7 +23,7 @@
 ### Tech Stack
 
 - **Framework**: Django 6.0
-- **CMS**: Wagtail 7.2.1
+- **CMS**: Wagtail 8.1
 - **Python**: 3.13.11 (or any Python 3.13.x - required)
 - **Database**: PostgreSQL 17 (prod and dev via Docker)
 - **Cache**: Redis 6.2
