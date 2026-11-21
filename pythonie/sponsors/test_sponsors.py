@@ -1,12 +1,12 @@
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 
 from sponsors.models import Sponsor, SponsorshipLevel
 
 
 class SponsorModelTests(TestCase):
     def test_create_sponsor(self):
-        sponsor = mommy.make(Sponsor)
+        sponsor = baker.make(Sponsor)
         self.assertIsNotNone(sponsor.id)
         self.assertIsNotNone(sponsor.description)
         self.assertIsNotNone(sponsor.name)
@@ -16,7 +16,7 @@ class SponsorModelTests(TestCase):
 
 class SponsorshipLevelModelTests(TestCase):
     def test_create_sponsorshiplevel(self):
-        sponsorship = mommy.make(SponsorshipLevel)
+        sponsorship = baker.make(SponsorshipLevel)
         self.assertIsNotNone(sponsorship.id)
         self.assertIsNotNone(sponsorship.name)
         self.assertIsNotNone(sponsorship.level)

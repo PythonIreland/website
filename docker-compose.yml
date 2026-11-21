@@ -6,7 +6,6 @@ services:
     command: /usr/bin/fish
     depends_on:
       - postgres
-      - redis
     env_file:
       - development.env
     environment:
@@ -25,9 +24,6 @@ services:
       - "5432:5432"
     environment:
       POSTGRES_PASSWORD: pythonie
-
-  redis:
-    image: redis:6.2
 
   test:
     image: python.ie/website-dev

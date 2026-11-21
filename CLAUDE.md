@@ -24,8 +24,8 @@ The project follows a modular Django app structure within the `pythonie/` direct
 
 Multiple settings files in `pythonie/pythonie/settings/`:
 - `base.py`: Shared settings, uses `dj_database_url` for database configuration
-- `dev.py`: SQLite database, local Redis, DEBUG=True
-- `tests.py`: Test-specific settings with SQLite and mock Redis
+- `dev.py`: SQLite database, DEBUG=True
+- `tests.py`: Test-specific settings with SQLite
 - `production.py`: Heroku production settings
 - `pgdev.py`: PostgreSQL development settings
 
@@ -43,7 +43,6 @@ Always specify settings module: `--settings=pythonie.settings.dev` (or `tests`, 
 
 - Django 6.0
 - Wagtail 8.1 (CMS framework)
-- Redis (caching, configured via `REDISCLOUD_URL`)
 - WhiteNoise (static file serving)
 - boto3/django-storages (S3 integration)
 - Delorean/python-dateutil (date handling)
@@ -68,7 +67,7 @@ uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev
 
 ### Docker Development (preferred)
 
-Uses Task for most operations. Requires docker-compose with services: web, postgres, redis.
+Uses Task for most operations. Requires docker-compose with services: web, postgres.
 
 ```bash
 # Build docker image
@@ -237,17 +236,12 @@ Pages use StreamFields for flexible content blocks (heading, paragraph, video, i
 
 Django commands MUST include `--settings=pythonie.settings.<module>`. The default in `manage.py` is `pythonie.settings` which won't work without proper environment setup.
 
-### Redis Configuration
-
-Development expects Redis at `127.0.0.1:6379` or via `REDISCLOUD_URL` environment variable. Configure via `pythonie.settings.configure.configure_redis()`.
-
 ### Environment Variables
 
 Key variables (see `development.env` / `production.env`):
 - `DJANGO_SECRET_KEY`: Required for production
 - `DJANGO_SETTINGS_MODULE`: Settings module path
 - `DATABASE_URL`: PostgreSQL connection (Heroku format)
-- `REDISCLOUD_URL`: Redis connection
 - `MEETUP_KEY`: Meetup.com API key
 - `PGDATABASE`, `PGUSER`, `PGPASSWORD`, `PGHOST`: PostgreSQL credentials for Docker
 - `HEROKU_APP`: Heroku application name (set in Taskfile.yaml)
@@ -258,7 +252,7 @@ Static files collected via WhiteNoise with `CompressedManifestStaticFilesStorage
 
 ### Testing Strategy
 
-Tests use `pythonie.settings.tests` which configures SQLite and mock Redis. Run with `--verbosity=2` or `--verbosity=3` for detailed output.
+Tests use `pythonie.settings.tests` which configures SQLite. Test data is generated with `model_bakery`. Run with `--verbosity=2` or `--verbosity=3` for detailed output.
 
 ### Deployment
 

@@ -7,7 +7,6 @@ This is the Python Ireland (https://python.ie) website, built with Django 6.0 an
 - Python 3.13, [uv](https://docs.astral.sh/uv/) and [prek](https://github.com/j178/prek) (git hooks), all pinned in `mise.toml`: run `mise install`, or see [Git Hooks](#git-hooks-prek) for other ways to install prek
 - Docker & Docker Compose (for containerized development - recommended)
 - [Task](https://taskfile.dev/) (optional but recommended)
-- Redis (only for local non-Docker development)
 - Environment variables file as per [the instructions here](#environment-variables)
 
 ## Quick Start (Docker - Recommended)
@@ -26,7 +25,7 @@ This is the Python Ireland (https://python.ie) website, built with Django 6.0 an
 
 3. Start supporting services:
    ```bash
-   docker compose up -d postgres redis
+   docker compose up -d postgres
    ```
 
 4. Run database migrations:
@@ -66,11 +65,9 @@ If you prefer to develop without Docker:
 6. Set up the database: `uv run python pythonie/manage.py migrate --settings=pythonie.settings.dev`
 7. Generate sample data: `task django:generate-sample-data` (or `uv run python pythonie/manage.py generate_sample_data --settings=pythonie.settings.dev`)
 8. Create a superuser: `uv run python pythonie/manage.py createsuperuser --settings=pythonie.settings.dev`
-9. Install and run Redis server locally: `redis-server`
-10. Set Redis environment variable: `export REDISCLOUD_URL=127.0.0.1:6379`
-11. Run the server: `uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev`
-12. Visit http://127.0.0.1:8000/ to see the site with sample content
-13. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
+9. Run the server: `uv run python pythonie/manage.py runserver --settings=pythonie.settings.dev`
+10. Visit http://127.0.0.1:8000/ to see the site with sample content
+11. Visit http://127.0.0.1:8000/admin/ to log in to Wagtail admin
 
 ## Project Structure
 
@@ -222,13 +219,11 @@ PGDATABASE=pythonie
 PGUSER=postgres
 PGPASSWORD=pythonie
 PGHOST=postgres
-REDISCLOUD_URL=redis://redis:6379     # Optional, for Redis integration
 MEETUP_KEY=your_meetup_api_key        # Optional, for Meetup.com sync
 ```
 
 For local development without Docker:
 ```bash
-export REDISCLOUD_URL=127.0.0.1:6379
 export MEETUP_KEY=your_meetup_api_key  # Get from https://secure.meetup.com/meetup_api/key/
 ```
 
@@ -260,10 +255,6 @@ This project uses several tools to streamline development:
 - **[uv](https://github.com/astral-sh/uv)**: Fast Python package manager for dependency installation. See `pyproject.toml` and `uv.lock`.
 
 ## Troubleshooting
-
-### Redis Connection Errors
-- **Docker**: Redis should work automatically via `docker compose`
-- **Local**: Ensure Redis is running (`redis-server`) and set `REDISCLOUD_URL=127.0.0.1:6379`
 
 ### Database Issues
 - Reset with production data: `task database:reset`

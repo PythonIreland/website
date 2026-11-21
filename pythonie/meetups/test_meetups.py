@@ -1,10 +1,9 @@
-from datetime import datetime
+from datetime import UTC, datetime
 from unittest.mock import patch
 
 from django.test import TestCase
 from django.utils import timezone
-from model_mommy import mommy
-from pytz import UTC
+from model_bakery import baker
 
 from meetups import utils
 from meetups.models import Meetup, next_n_months
@@ -22,7 +21,7 @@ description = (
 class MeetupModelTests(TestCase):
     def test_create_meetup(self):
         now = timezone.now()
-        meetup = mommy.make(Meetup, time=now, created=now, updated=now)
+        meetup = baker.make(Meetup, time=now, created=now, updated=now)
         self.assertIsNotNone(meetup.id)
         self.assertIsNotNone(meetup.name)
         self.assertIsNotNone(meetup.description)

@@ -26,7 +26,6 @@
 - **CMS**: Wagtail 8.1
 - **Python**: 3.13.11 (or any Python 3.13.x - required)
 - **Database**: PostgreSQL 17 (prod and dev via Docker)
-- **Cache**: Redis 6.2
 - **Storage**: AWS S3 (prod), Local (dev)
 - **Server**: Gunicorn (prod), Runserver (dev)
 - **Containerization**: Docker + docker-compose
@@ -70,7 +69,6 @@ pythonie/
     │   ├── production.py  # Heroku, S3, PostgreSQL
     │   ├── tests.py       # Tests with in-memory SQLite
     │   └── pgdev.py       # Local PostgreSQL
-    ├── configure.py        # Helpers (configure_redis)
     └── patches.py          # Third-party patches (SlideShare OEmbed)
 ```
 
@@ -118,8 +116,8 @@ prek install
 # 2. Build Docker image
 task docker:build
 
-# 3. Start PostgreSQL and Redis
-docker-compose up -d postgres redis
+# 3. Start PostgreSQL
+docker-compose up -d postgres
 
 # 4. Create/migrate the database
 task django:migrate
@@ -171,9 +169,6 @@ PGDATABASE=pythonie
 PGUSER=postgres
 PGPASSWORD=postgres
 PGHOST=postgres
-
-# Redis
-REDISCLOUD_URL=redis://redis:6379/0
 
 # Meetup.com (optional)
 MEETUP_KEY=your-meetup-api-key
@@ -660,15 +655,15 @@ uv run python pythonie/manage.py test pythonie.meetups.test_meetups.MeetupTestCa
 
 ### Test Tools
 
-**model_mommy**: Test data generation
+**model_bakery**: Test data generation
 ```python
-from model_mommy import mommy
+from model_bakery import baker
 
 # Create Meetup with random data
-meetup = mommy.make(Meetup)
+meetup = baker.make(Meetup)
 
 # With specific values
-meetup = mommy.make(Meetup, name="Test Meetup", rsvps=10)
+meetup = baker.make(Meetup, name="Test Meetup", rsvps=10)
 ```
 
 **unittest.mock**: Mock external APIs
@@ -684,19 +679,12 @@ def test_update_meetups(self, mock_get):
     update()  # Call function with mock
 ```
 
-**fakeredis**: Mock Redis
-```python
-# Automatically configured in pythonie.settings.tests
-REDIS = configure_redis(None, test=True)  # Returns FakeStrictRedis
-```
-
 ### Test Configuration
 
 **Settings** (`pythonie/pythonie/settings/tests.py`):
 ```python
 DEBUG = True
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": ":memory:"}}
-REDIS = configure_redis(None, test=True)  # FakeRedis
 LOGGING = {
     "loggers": {
         "pythonie": {"level": "ERROR"}  # Less verbose
@@ -709,12 +697,12 @@ LOGGING = {
 **Model test example**:
 ```python
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 from pythonie.meetups.models import Meetup
 
 class MeetupTestCase(TestCase):
     def setUp(self):
-        self.meetup = mommy.make(
+        self.meetup = baker.make(
             Meetup,
             name="Python Ireland Monthly Meetup",
             id="test-meetup-1"
@@ -752,7 +740,6 @@ class HomePageTestCase(TestCase):
 
 **Addons**:
 - **Heroku Postgres**: Main database
-- **RedisCloud**: Redis cache
 - **AWS S3**: Media storage (external)
 
 **Buildpacks**:
@@ -773,7 +760,6 @@ web: gunicorn --chdir pythonie pythonie.wsgi --log-file -
 ```bash
 # Heroku sets these automatically:
 DATABASE_URL
-REDISCLOUD_URL
 
 # Configure manually:
 heroku config:set DJANGO_SECRET_KEY=$(python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())")
@@ -866,35 +852,6 @@ Or set env variable:
 ```bash
 export DJANGO_SETTINGS_MODULE=pythonie.settings.dev
 uv run python pythonie/manage.py runserver
-```
-
-### Problem: Redis Connection Error
-
-**Error**:
-```
-ConnectionError: Error 111 connecting to 127.0.0.1:6379. Connection refused.
-```
-
-**Solution Docker**:
-```bash
-# Check if Redis is running
-docker-compose ps redis
-
-# Start Redis
-docker-compose up -d redis
-```
-
-**Solution Local**:
-```bash
-# Install Redis
-brew install redis  # macOS
-
-# Start Redis
-redis-server
-
-# Or disable Redis in dev:
-# pythonie/pythonie/settings/dev.py
-REDIS = None
 ```
 
 ### Problem: Meetup update returns nothing

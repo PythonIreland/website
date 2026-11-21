@@ -68,7 +68,7 @@ task docker:build
 # or: make docker-build
 
 # Start services
-docker-compose up -d postgres redis
+docker-compose up -d postgres
 
 # Run migrations
 task django:migrate
@@ -322,7 +322,7 @@ Place tests in `test_*.py` files within each app:
 
 ```python
 from django.test import TestCase
-from model_mommy import mommy
+from model_bakery import baker
 
 from pythonie.sponsors.models import Sponsor
 
@@ -332,7 +332,7 @@ class SponsorTestCase(TestCase):
 
     def setUp(self):
         """Set up test fixtures."""
-        self.sponsor = mommy.make(Sponsor, name="Test Sponsor")
+        self.sponsor = baker.make(Sponsor, name="Test Sponsor")
 
     def test_sponsor_str(self):
         """Test string representation."""
@@ -340,7 +340,7 @@ class SponsorTestCase(TestCase):
 
     def test_sponsor_creation(self):
         """Test sponsor can be created."""
-        sponsor = mommy.make(Sponsor)
+        sponsor = baker.make(Sponsor)
         self.assertIsNotNone(sponsor.id)
 ```
 
