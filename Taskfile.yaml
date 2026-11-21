@@ -235,6 +235,11 @@ tasks:
     cmds:
       - uv lock --upgrade-package $PACKAGE
 
+  upgrade:check:
+    desc: "End-to-end check of a dependency upgrade against a base ref (usage: task upgrade:check BASE=master -- --docker)"
+    cmds:
+      - scripts/upgrade-check/run.sh --base {{.BASE | default "master"}} {{.CLI_ARGS}}
+
   tests:
     desc: Run all tests
     cmds:
