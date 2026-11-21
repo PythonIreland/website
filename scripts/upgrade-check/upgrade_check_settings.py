@@ -6,7 +6,6 @@ started by run.sh and keeps media/static files inside the run directory.
 
 import os
 
-import fakeredis
 from pythonie.settings.dev import *
 
 RUN_DIR = os.environ["UPGRADE_CHECK_DIR"]
@@ -25,7 +24,6 @@ DATABASES = {
         "PORT": os.environ.get("UPGRADE_CHECK_PG_PORT", "15432"),
     }
 }
-REDIS = fakeredis.FakeStrictRedis()
 MEDIA_ROOT = os.path.join(RUN_DIR, "media")
 STATIC_ROOT = os.path.join(RUN_DIR, "static")
 ROOT_URLCONF = "upgrade_check_urls"
