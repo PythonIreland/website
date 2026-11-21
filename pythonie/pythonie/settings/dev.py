@@ -1,7 +1,4 @@
 # ruff: noqa
-import os
-from pythonie.settings.configure import configure_redis
-
 from .base import *
 
 DEBUG = True
@@ -22,10 +19,6 @@ DATABASES = {
         "NAME": join(PROJECT_ROOT, "db.sqlite3"),
     }
 }
-
-# assumes no DEV:REDISCLOUD_URL available but that redis-server running locally
-REDIS_URL = os.environ.get("REDISCLOUD_URL", "//127.0.0.1:6379")
-REDIS = configure_redis(REDIS_URL)
 
 # CACHES = {
 #     'default': {

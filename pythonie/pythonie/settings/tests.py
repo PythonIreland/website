@@ -1,6 +1,5 @@
 # ruff: noqa
 import os
-from pythonie.settings.configure import configure_redis
 
 from .base import *
 
@@ -53,5 +52,3 @@ LOGGING.update(
         }
     }
 )
-
-REDIS = configure_redis(None, test=True)

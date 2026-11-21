@@ -25,8 +25,6 @@ chmod a+x $PROJECT_DIR/manage.py
 su - vagrant -c "$PYTHON $PROJECT_DIR/manage.py migrate --noinput && \
                  $PYTHON $PROJECT_DIR/manage.py update_index"
 
-apt-get install redis-server
-
 # Add a couple of aliases to manage.py into .bashrc
 cat << EOF >> /home/vagrant/.bashrc
 alias dj="$PYTHON $PROJECT_DIR/manage.py"
